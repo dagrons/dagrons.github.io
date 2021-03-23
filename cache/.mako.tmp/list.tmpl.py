@@ -5,10 +5,10 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1616469645.7158387
+_modified_time = 1616469645.7252665
 _enable_loop = True
-_template_filename = '/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/base/templates/list_post.tmpl'
-_template_uri = 'list_post.tmpl'
+_template_filename = '/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/base/templates/list.tmpl'
+_template_uri = 'list.tmpl'
 _source_encoding = 'utf-8'
 _exports = ['extra_head', 'content']
 
@@ -38,15 +38,15 @@ def render_body(context,**pageargs):
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         def content():
             return render_content(context._locals(__M_locals))
-        date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
+        items = _import_ns.get('items', context.get('items', UNDEFINED))
         def extra_head():
             return render_extra_head(context._locals(__M_locals))
-        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
         messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         title = _import_ns.get('title', context.get('title', UNDEFINED))
         archive_nav = _mako_get_namespace(context, 'archive_nav')
         feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        has_no_feeds = _import_ns.get('has_no_feeds', context.get('has_no_feeds', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -76,9 +76,10 @@ def render_extra_head(context,**pageargs):
             return render_extra_head(context)
         feeds_translations = _mako_get_namespace(context, 'feeds_translations')
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        has_no_feeds = _import_ns.get('has_no_feeds', context.get('has_no_feeds', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n    ')
-        __M_writer(str(feeds_translations.head(kind=kind, rss_override=False)))
+        __M_writer(str(feeds_translations.head(kind=kind, rss_override=False, has_no_feeds=has_no_feeds)))
         __M_writer('\n')
         return ''
     finally:
@@ -93,8 +94,7 @@ def render_content(context,**pageargs):
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         def content():
             return render_content(context)
-        date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
-        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
+        items = _import_ns.get('items', context.get('items', UNDEFINED))
         messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         title = _import_ns.get('title', context.get('title', UNDEFINED))
@@ -108,24 +108,22 @@ def render_content(context,**pageargs):
         __M_writer('\n    ')
         __M_writer(str(feeds_translations.translation_link(kind)))
         __M_writer('\n')
-        if posts:
+        if items:
             __M_writer('    <ul class="postlist">\n')
-            for post in posts:
-                __M_writer('        <li><time class="listdate" datetime="')
-                __M_writer(str(post.formatted_date('webiso')))
-                __M_writer('" title="')
-                __M_writer(filters.html_escape(str(post.formatted_date(date_format))))
+            for text, link, count in items:
+                __M_writer('        <li><a href="')
+                __M_writer(str(link))
                 __M_writer('">')
-                __M_writer(filters.html_escape(str(post.formatted_date(date_format))))
-                __M_writer('</time> <a href="')
-                __M_writer(str(post.permalink()))
-                __M_writer('" class="listtitle">')
-                __M_writer(filters.html_escape(str(post.title())))
-                __M_writer('</a></li>\n')
+                __M_writer(filters.html_escape(str(text)))
+                __M_writer('</a>\n')
+                if count:
+                    __M_writer('            (')
+                    __M_writer(str(count))
+                    __M_writer(')\n')
             __M_writer('    </ul>\n')
         else:
             __M_writer('    <p>')
-            __M_writer(str(messages("No posts found.")))
+            __M_writer(str(messages("Nothing found.")))
             __M_writer('</p>\n')
         __M_writer('</article>\n')
         return ''
@@ -135,6 +133,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/base/templates/list_post.tmpl", "uri": "list_post.tmpl", "source_encoding": "utf-8", "line_map": {"23": 3, "26": 4, "32": 0, "51": 2, "52": 3, "53": 4, "58": 8, "63": 27, "69": 6, "80": 6, "81": 7, "82": 7, "88": 10, "104": 10, "105": 13, "106": 13, "107": 15, "108": 15, "109": 16, "110": 16, "111": 17, "112": 18, "113": 19, "114": 20, "115": 20, "116": 20, "117": 20, "118": 20, "119": 20, "120": 20, "121": 20, "122": 20, "123": 20, "124": 20, "125": 22, "126": 23, "127": 24, "128": 24, "129": 24, "130": 26, "136": 130}}
+{"filename": "/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/base/templates/list.tmpl", "uri": "list.tmpl", "source_encoding": "utf-8", "line_map": {"23": 3, "26": 4, "32": 0, "51": 2, "52": 3, "53": 4, "58": 8, "63": 30, "69": 6, "81": 6, "82": 7, "83": 7, "89": 10, "104": 10, "105": 13, "106": 13, "107": 15, "108": 15, "109": 16, "110": 16, "111": 17, "112": 18, "113": 19, "114": 20, "115": 20, "116": 20, "117": 20, "118": 20, "119": 21, "120": 22, "121": 22, "122": 22, "123": 25, "124": 26, "125": 27, "126": 27, "127": 27, "128": 29, "134": 128}}
 __M_END_METADATA
 """

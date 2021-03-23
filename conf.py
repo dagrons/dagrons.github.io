@@ -327,7 +327,7 @@ COMPILERS = {
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
     # with many of the others.
-    "pandoc": ['.md', '.txt'],
+    # "pandoc": ['.md', '.txt'],
 }
 
 # Enable reST directives that insert the contents of external files such

@@ -10,8 +10,12 @@
   <lastmod>2021-03-23T01:08:00Z</lastmod>
  </url>
  <url>
+  <loc>https://dagrons.github.io/2021/</loc>
+  <lastmod>2021-03-23T03:19:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://dagrons.github.io/archive.html</loc>
-  <lastmod>2021-03-23T01:21:00Z</lastmod>
+  <lastmod>2021-03-23T03:19:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/</loc>
@@ -24,5 +28,9 @@
  <url>
   <loc>https://dagrons.github.io/listings/</loc>
   <lastmod>2021-03-23T01:08:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</loc>
+  <lastmod>2021-03-23T03:19:00Z</lastmod>
  </url>
 </urlset>
