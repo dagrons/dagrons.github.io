@@ -2,18 +2,25 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="zh_cn">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="NuLL">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NuLL</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<title>js中的promise机制 | NuLL</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
-<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
-<link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/jszhong-de-promiseji-zhi/" type="text/html">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../rss.xml">
+<link rel="canonical" href="https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="dagrons">
+<meta property="og:site_name" content="NuLL">
+<meta property="og:title" content="js中的promise机制">
+<meta property="og:url" content="https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/">
+<meta property="og:description" content="Js中的核心机制-Promise
+“在异步中实现同步”
+如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-03-23T11:18:42+08:00">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -30,25 +37,32 @@
             </div>
         </div>
           <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
-            <a class="navbar-brand blog-header-logo text-dark" href=".">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
 
             <span id="blog-title">NuLL</span>
         </a>
           </div>
             <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
-            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav"></ul></nav>
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">源文件</a>
+    </li>
+
+
+                    
+            </ul></nav>
 </div>
     </div>
 </header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
             <ul class="navbar-nav nav-fill d-flex w-100">
 <li class="nav-item">
-<a href="archive.html" class="nav-link">文章归档</a>
+<a href="../../archive.html" class="nav-link">文章归档</a>
                 </li>
 <li class="nav-item">
-<a href="categories/" class="nav-link">标签</a>
+<a href="../../categories/" class="nav-link">标签</a>
                 </li>
 <li class="nav-item">
-<a href="rss.xml" class="nav-link">RSS 源</a>
+<a href="../../rss.xml" class="nav-link">RSS 源</a>
 
                 
             </li>
@@ -64,24 +78,24 @@
         
         
         
-    
-        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">js中的promise机制</a></h1>
 
-    
-        
-    <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/jszhong-de-promiseji-zhi/" class="u-url">js中的promise机制</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    dagrons
+            </span></p>
             <p class="dateline">
-            <a href="posts/jszhong-de-promiseji-zhi/" rel="bookmark">
+            <a href="." rel="bookmark">
             <time class="published dt-published" datetime="2021-03-23T11:18:42+08:00" itemprop="datePublished" title="2021-03-23 11:18">2021-03-23 11:18</time></a>
             </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <div>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
 <h2>Js中的核心机制-Promise</h2>
 <p>“在异步中实现同步”</p>
 <p>如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。</p>
@@ -166,19 +180,8 @@
 <h3>注意事项</h3>
 <p>注意，Promise如果不进行异常捕获，如果执行过程出错，是不会造成程序终止的。</p>
 </div>
-                </div>
-            </article>
-</div>
-    
-
-    
-
-    
-
-
-        <!--End of body content-->
-
-        <footer id="footer">
+    </div>
+    <aside class="postpromonav"><nav></nav></aside></article><!--End of body content--><footer id="footer">
             Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
@@ -187,7 +190,7 @@
 </div>
 
 
-        <script src="assets/js/all-nocdn.js"></script><script>
+        <script src="../../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
