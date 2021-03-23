@@ -238,12 +238,14 @@ POSTS = (
     ("posts/*.md", "posts", "post.tmpl"),
     ("posts/*.txt", "posts", "post.tmpl"),
     ("posts/*.html", "posts", "post.tmpl"),
+    ("posts/*.ipynb", "posts", "post.tmpl"),
 )
 PAGES = (
     ("pages/*.rst", "pages", "page.tmpl"),
     ("pages/*.md", "pages", "page.tmpl"),
     ("pages/*.txt", "pages", "page.tmpl"),
     ("pages/*.html", "pages", "page.tmpl"),
+    ("pages/*.ipynb", "pages", "page.tmpl"),
 )
 
 
@@ -325,7 +327,7 @@ COMPILERS = {
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
     # with many of the others.
-    # "pandoc": ['.rst', '.md', '.txt'],
+    "pandoc": ['.md', '.txt'],
 }
 
 # Enable reST directives that insert the contents of external files such
@@ -1121,7 +1123,7 @@ PRETTY_URLS = True
 #       with the MarkdownExtension class and should not be added here.
 # Defaults are markdown.extensions.(fenced_code|codehilite|extra)
 # markdown.extensions.meta is required for Markdown metadata.
-MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.extra']
+MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.extra', 'markdown.extensions.meta']
 
 # Options to be passed to markdown extensions (See https://python-markdown.github.io/reference/)
 # Default is {} (no config at all)
@@ -1134,11 +1136,9 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # PANDOC_OPTIONS = ['-F', 'pandoc-citeproc', '--bibliography=/Users/foo/references.bib']
 # Example for a dict, where the keys are the extensions in COMPILERS['pandoc']:
 # COMPILERS['pandoc'] = ['.rst', '.md', '.txt']
-# PANDOC_OPTIONS = {
-#     '.rst': ['-t', 'rst'],
-#     '.md': ['-t', 'markdown'],
-#     '.txt': ['-t', 'markdown-raw_html'],
-# }
+PANDOC_OPTIONS = {
+    '.md': ['-t', 'gfm', '--toc', '-s'],
+}
 # Pandoc does not demote headers by default.  To enable this, you can use, for example
 # ['--base-header-level=2']
 # PANDOC_OPTIONS = []
@@ -1404,3 +1404,4 @@ GLOBAL_CONTEXT = {}
 # GLOBAL_CONTEXT as parameter when the template is about to be
 # rendered
 GLOBAL_CONTEXT_FILLER = []
+
