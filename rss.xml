@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 01 Apr 2021 06:24:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 01 Apr 2021 06:28:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;用git管理项，，追溯代码的变，，一方面可以回，，一方面可以检查bug是如何产生的 &lt;/li&gt;
-&lt;li&gt;层次，，结构，，流程清，，注释详尽&lt;/li&gt;
+&lt;li&gt;用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 &lt;/li&gt;
+&lt;li&gt;层次感，结构感，流程清晰，注释详尽&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;S端&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;后端开发对于简单事务的路由封装很容，，但涉及到并，，同，，IP，，任务队，，负载均，，数据库同，，横向扩展就会变得十分麻烦&lt;/li&gt;
-&lt;li&gt;尽量把数据，，虚拟，，docker放在服务，，不然个人PC很快就会变得十分卡，，尤其是涉及到文件读写和HTTP请求时&lt;/li&gt;
+&lt;li&gt;后端开发对于简单事务的路由封装很容易，但涉及到并发，同步，IPC，任务队列，负载均衡，数据库同步，横向扩展就会变得十分麻烦&lt;/li&gt;
+&lt;li&gt;尽量把数据库，虚拟机，docker放在服务器，不然把本地很快就会变得十分卡顿，尤其是涉及到文件读写和HTTP请求时&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;C端&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;对于SPA而，，多用development server + proxy代理进行测，，没必要部署到server，，费时费，，而且修改麻烦&lt;/li&gt;
-&lt;li&gt;前端的模型是一棵树结，，不同的组件挂载到不同的节，，重点是处理，路，，通，，以及节点本身的状态，模，&lt;/li&gt;
-&lt;li&gt;对于j，，应该尽量避免this和class&lt;/li&gt;
+&lt;li&gt;对于SPA而，，多用development server + proxy代理进行测，，没必要部署到server，费时费力，而且修改麻烦&lt;/li&gt;
+&lt;li&gt;前端的模型是一棵树，不同的组件挂载到不同的节点，重点是处理路由，组件通信，以及节点本身的状态机模型&lt;/li&gt;
+&lt;li&gt;对于js，应该尽量避免this和class&lt;/li&gt;
 &lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item><item><title>js中的promise机制</title><link>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Js中的核心机制-Promise&lt;/h2&gt;
 &lt;p&gt;“在异步中实现同步”&lt;/p&gt;
 &lt;p&gt;如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。&lt;/p&gt;
