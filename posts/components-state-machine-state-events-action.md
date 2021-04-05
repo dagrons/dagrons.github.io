@@ -58,7 +58,9 @@ Children -> parent: parent pass function to children as props/args, be careful t
 
 Parent -> children: props/args
 
-The third approach is less approved.
+Child <-> Child: shared context/state
+
+The third approach is not recommended
 
 # React
 
