@@ -46,6 +46,20 @@ event = new Event(typeArg, eventInit);
 
 some important APIs for events are stopPropagation and preventDefault 
 
+# ICC (Inter Component Communication)
+
+Shared state: If A and B share some same state, it's ok to operate on the state directly
+
+Function as args: A can pass a encapsulated function for B to call, executed immediately
+
+Emit a event: A can emit a event to B to trigger B's event listener, not executed immediately
+
+Children -> parent: parent pass function to children as props/args, be careful to bind "this"!
+
+Parent -> children: props/args
+
+The third approach is less approved.
+
 # React
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
