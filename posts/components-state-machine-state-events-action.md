@@ -27,5 +27,9 @@ in real world, all components runs on different thread, however it's not true in
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
 
+in react, components are organized in a tree structure, each components is a node on the tree.
+
+in react, each components have at least one action called render, which listen on render events.
+
 ![事件，状态，动作](/images/QQ截图20210405212650.png)
 ![共享状态-组件通信](/images/QQ截图20210405213404.png)
