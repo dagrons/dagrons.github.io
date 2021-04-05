@@ -8,6 +8,7 @@
 .. description: 
 .. type: text
 -->
+> 用最小代价方案解决问题，“杀鸡焉用宰牛刀”
 
 #  Intro
 
@@ -102,6 +103,8 @@ function Inverter() {
 }
 ```
 the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.
+
+Do not useReducer if useState works.
 
 in react, useEffect defined what to execute after first render when or react "state" changes.
 
