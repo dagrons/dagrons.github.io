@@ -63,9 +63,50 @@ Child <-> Child: shared context/state
 The third approach is not recommended
 
 # React
+```
+useState, useEffect, useReducer, when and why?
+```
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
 in other words, react "state" is what render action conditions on.
+
+react "state" are not recommended when the next value depends on the previous value.
+```
+suppose A, B component share the same state binary (0/1), if the only actions the two components do to the state is to invert it, 
+A : 
+Invert => if binary == 1: setBinary (0) else setBinary (1)
+B : 
+Invert => if binary == 0: setBinary (1) else set Binary (0)
+
+As we already know, setBinary are not executed immediately, instead, they are pushed to the queue in order
+If A and B want to invert Binary when binary==1, what we expected finally is bianry == 1
+However, if B invert binary before the setState of A excited. Then the binary would be 0 in the end, not as we expected.
+```
+To solve the above problem, we should useReducer.
+```
+const binary = {value: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'invert':
+      return {count: state.value^1};
+    default:
+      throw new Error();
+  }
+}
+
+function Inverter() {
+  const [state, dispatch] = useReducer(reducer, 1);
+  return (
+    <>
+      binary: {state.value}
+      <button onClick={() => dispatch({type: 'invert'})}>-</button>
+      <button onClick={() => dispatch({type: 'invert'})}>+</button>
+    </>
+  );
+}
+```
+the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.
 
 in react, useEffect defined what to execute after first render when or react "state" changes.
 
