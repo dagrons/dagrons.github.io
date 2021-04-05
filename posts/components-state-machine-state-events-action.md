@@ -23,9 +23,16 @@ some components share on some state while some do not
 
 the actions of one components may affect the states of other components
 
+the actions of one component can emit events to others.
+
+It's always a bad practice for one component to emit events to itself.
+
 in real world, all components runs on different thread, however it's not true in programming
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
+in other words, react "state" is what render action conditions on.
+
+in react, useEffect defined what to execute after first render when or react "state" changes.
 
 in react, components are organized in a tree structure, each components is a node on the tree.
 
