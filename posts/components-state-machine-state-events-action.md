@@ -63,9 +63,7 @@ Child <-> Child: shared context/state
 The third approach is not recommended
 
 # React
-```
-useState, useEffect, useReducer, when and why?
-```
+>useState, useEffect, useReducer, when and why?
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
 in other words, react "state" is what render action conditions on.
