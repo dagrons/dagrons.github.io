@@ -21,6 +21,8 @@ different components cares only about events they listen on
 
 state are what the actions condition on
 
+Event handlers are actions registered on a event
+
 some components share on some state while some do not
 
 the actions of one components may affect the states of other components
@@ -32,8 +34,6 @@ It's always a bad practice for one component to emit events to itself.
 in real world, all components runs on different thread, however it's not true in programming
 
 # Event
-
-Event handlers are actions registered on a event
 
 Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)
 
