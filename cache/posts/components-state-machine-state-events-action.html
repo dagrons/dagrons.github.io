@@ -1,0 +1,10 @@
+<p>The world is a state machine driven by events</p>
+<p>events are what components listening on</p>
+<p>components responds to different events with different actions</p>
+<p>different components cares only about events they listen on</p>
+<p>state are what the actions condition on</p>
+<p>some components share on some state while some do not</p>
+<p>the actions of one components may affect the states of other components</p>
+<p>in real world, all components runs on different thread, however it's not true in programming</p>
+<p>in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)</p>
+<p><img alt="事件，状态，动作" src="/images/QQ截图20210405212650.png"></p>
