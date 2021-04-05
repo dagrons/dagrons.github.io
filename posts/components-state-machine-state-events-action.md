@@ -31,5 +31,6 @@ in react, components are organized in a tree structure, each components is a nod
 
 in react, each components have at least one action called render, which listen on render events.
 
-![事件，状态，动作](/images/QQ截图20210405212650.png)
+![事件，状态，动作](/images/QQ截图20210405222133.png)
 ![共享状态-组件通信](/images/QQ截图20210405213404.png)
+![React树形结构](/images/QQ截图20210405222359.png)
