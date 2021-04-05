@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 05 Apr 2021 10:59:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 05 Apr 2021 11:02:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 &lt;/li&gt;
 &lt;li&gt;层次感，结构感，流程清晰，注释详尽&lt;/li&gt;
@@ -28,10 +28,6 @@
 &lt;ol&gt;
 &lt;li&gt;Convention over configuration，除非用户指定，否则使用默认的配置，让组件使用者只关心它关心的接口参数&lt;/li&gt;
 &lt;li&gt;框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;PLT&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;常见的语言特性包括：结构化编程，OOP编程，函数式编程，元编程（反射）&lt;/li&gt;
 &lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item><item><title>js中的promise机制</title><link>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Js中的核心机制-Promise&lt;/h2&gt;
 &lt;p&gt;“在异步中实现同步”&lt;/p&gt;
 &lt;p&gt;如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。&lt;/p&gt;
