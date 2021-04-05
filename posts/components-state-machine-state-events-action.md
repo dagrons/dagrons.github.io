@@ -70,15 +70,13 @@ in other words, react "state" is what render action conditions on.
 
 react "state" are not recommended when the next value depends on the previous value.
 ```
-suppose A, B component share the same state binary (0/1), if the only actions the two components do to the state is to invert it, 
+suppose A component has a state binary (0/1), if the only actions the component do to the state is to invert it, 
 A : 
 Invert => if binary == 1: setBinary (0) else setBinary (1)
-B : 
-Invert => if binary == 0: setBinary (1) else set Binary (0)
 
 As we already know, setBinary are not executed immediately, instead, they are pushed to the queue in order
-If A and B want to invert Binary when binary==1, what we expected finally is bianry == 1
-However, if B invert binary before the setState of A excited. Then the binary would be 0 in the end, not as we expected.
+If A invert Binary twice when binary==1, what we expected finally is bianry == 1
+However, if the second invert happens before the setState of the first invert been executed. Then the binary would be 0 in the end, not as we expected.
 ```
 To solve the above problem, we should useReducer.
 ```
@@ -98,8 +96,7 @@ function Inverter() {
   return (
     <>
       binary: {state.value}
-      <button onClick={() => dispatch({type: 'invert'})}>-</button>
-      <button onClick={() => dispatch({type: 'invert'})}>+</button>
+      <button onClick={() => dispatch({type: 'invert'})}>invert</button>
     </>
   );
 }
