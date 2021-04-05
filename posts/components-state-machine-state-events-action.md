@@ -9,6 +9,8 @@
 .. type: text
 -->
 
+#  Intro
+
 The world is a state machine driven by events
 
 events are what components listening on
@@ -28,6 +30,23 @@ the actions of one component can emit events to others.
 It's always a bad practice for one component to emit events to itself.
 
 in real world, all components runs on different thread, however it's not true in programming
+
+# Event
+
+Event handlers are actions registered on a event
+
+Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)
+
+We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.
+
+event can be created with 
+```javascript
+event = new Event(typeArg, eventInit);
+```
+
+some important APIs for events are stopPropagation and preventDefault 
+
+# React
 
 in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
 in other words, react "state" is what render action conditions on.
