@@ -82,15 +82,73 @@
                 </div>
             </header><div class="e-content entry-content">
                     <div>
+<h2>Intro</h2>
 <p>The world is a state machine driven by events</p>
 <p>events are what components listening on</p>
 <p>components responds to different events with different actions</p>
 <p>different components cares only about events they listen on</p>
 <p>state are what the actions condition on</p>
+<p>Event handlers are actions registered on a event</p>
 <p>some components share on some state while some do not</p>
 <p>the actions of one components may affect the states of other components</p>
+<p>the actions of one component can emit events to others.</p>
+<p>It's always a bad practice for one component to emit events to itself.</p>
 <p>in real world, all components runs on different thread, however it's not true in programming</p>
-<p>in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)</p>
+<h2>Event</h2>
+<p>Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)</p>
+<p>We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.</p>
+<p>event can be created with </p>
+<pre class="code literal-block"><span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">(</span><span class="nx">typeArg</span><span class="p">,</span> <span class="nx">eventInit</span><span class="p">);</span>
+</pre>
+<p>some important APIs for events are stopPropagation and preventDefault </p>
+<h2>ICC (Inter Component Communication)</h2>
+<p>Shared state: If A and B share some same state, it's ok to operate on the state directly</p>
+<p>Function as args: A can pass a encapsulated function for B to call, executed immediately</p>
+<p>Emit a event: A can emit a event to B to trigger B's event listener, not executed immediately</p>
+<p>Children -&gt; parent: parent pass function to children as props/args, be careful to bind "this"!</p>
+<p>Parent -&gt; children: props/args</p>
+<p>Child &lt;-&gt; Child: shared context/state</p>
+<p>The third approach is not recommended</p>
+<h2>React</h2>
+<blockquote>
+<p>useState, useEffect, useReducer, when and why?</p>
+</blockquote>
+<p>in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which will not be executed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
+in other words, react "state" is what render action conditions on.</p>
+<p>react "state" are not recommended when the next value depends on the previous value.</p>
+<pre class="code literal-block"><span class="nv">suppose</span> <span class="nv">A</span> <span class="nv">component</span> <span class="nv">has</span> <span class="nv">a</span> <span class="nv">state</span> <span class="nv">binary</span> <span class="ss">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="ss">)</span>, <span class="k">if</span> <span class="nv">the</span> <span class="nv">only</span> <span class="nv">actions</span> <span class="nv">the</span> <span class="nv">component</span> <span class="k">do</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">state</span> <span class="nv">is</span> <span class="nv">to</span> <span class="nv">invert</span> <span class="nv">it</span>, 
+<span class="nv">A</span> : 
+<span class="nv">Invert</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="nv">binary</span> <span class="o">==</span> <span class="mi">1</span>: <span class="nv">setBinary</span> <span class="ss">(</span><span class="mi">0</span><span class="ss">)</span> <span class="k">else</span> <span class="nv">setBinary</span> <span class="ss">(</span><span class="mi">1</span><span class="ss">)</span>
+
+<span class="nv">As</span> <span class="nv">we</span> <span class="nv">already</span> <span class="nv">know</span>, <span class="nv">setBinary</span> <span class="nv">are</span> <span class="nv">not</span> <span class="nv">executed</span> <span class="nv">immediately</span>, <span class="nv">instead</span>, <span class="nv">they</span> <span class="nv">are</span> <span class="nv">pushed</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">queue</span> <span class="nv">in</span> <span class="nv">order</span>
+<span class="k">If</span> <span class="nv">A</span> <span class="nv">invert</span> <span class="nv">Binary</span> <span class="nv">twice</span> <span class="nv">when</span> <span class="nv">binary</span><span class="o">==</span><span class="mi">1</span>, <span class="nv">what</span> <span class="nv">we</span> <span class="nv">expected</span> <span class="nv">finally</span> <span class="nv">is</span> <span class="nv">bianry</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="nv">However</span>, <span class="k">if</span> <span class="nv">the</span> <span class="nv">second</span> <span class="nv">invert</span> <span class="nv">happens</span> <span class="nv">before</span> <span class="nv">the</span> <span class="nv">setState</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">first</span> <span class="nv">invert</span> <span class="nv">been</span> <span class="nv">executed</span>. <span class="k">Then</span> <span class="nv">the</span> <span class="nv">binary</span> <span class="nv">would</span> <span class="nv">be</span> <span class="mi">0</span> <span class="nv">in</span> <span class="nv">the</span> <span class="k">end</span>, <span class="nv">not</span> <span class="nv">as</span> <span class="nv">we</span> <span class="nv">expected</span>.
+</pre>
+<p>To solve the above problem, we should useReducer.</p>
+<pre class="code literal-block">const binary = {value: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'invert':
+      return {count: state.value^1};
+    default:
+      throw new Error();
+  }
+}
+
+function Inverter() {
+  const [state, dispatch] = useReducer(reducer, 1);
+  return (
+    <span class="err">&lt;</span>&gt;
+      binary: {state.value}
+      <span class="nt">&lt;button</span> <span class="na">onClick=</span><span class="s">{()</span> <span class="err">=</span><span class="nt">&gt;</span> dispatch({type: 'invert'})}&gt;invert<span class="nt">&lt;/button&gt;</span>
+    <span class="err">&lt;</span>/&gt;
+  );
+}
+</pre>
+<p>the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.</p>
+<p>Do not useReducer if useState works.</p>
+<p>in react, useEffect defined what to execute after first render when or react "state" changes.</p>
 <p>in react, components are organized in a tree structure, each components is a node on the tree.</p>
 <p>in react, each components have at least one action called render, which listen on render events.</p>
 <p><img alt="事件，状态，动作" src="images/QQ%E6%88%AA%E5%9B%BE20210405222133.png"><img alt="共享状态-组件通信" src="images/QQ%E6%88%AA%E5%9B%BE20210405213404.png"><img alt="React树形结构" src="images/QQ%E6%88%AA%E5%9B%BE20210405222359.png"></p>
