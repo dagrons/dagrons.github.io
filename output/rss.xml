@@ -1,13 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 05 Apr 2021 14:25:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Components, State machine, state, events, action</title><link>https://dagrons.github.io/posts/components-state-machine-state-events-action/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;The world is a state machine driven by events&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 06 Apr 2021 02:59:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Components, State machine, state, events, action</title><link>https://dagrons.github.io/posts/components-state-machine-state-events-action/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;The world is a state machine driven by events&lt;/p&gt;
 &lt;p&gt;events are what components listening on&lt;/p&gt;
 &lt;p&gt;components responds to different events with different actions&lt;/p&gt;
 &lt;p&gt;different components cares only about events they listen on&lt;/p&gt;
 &lt;p&gt;state are what the actions condition on&lt;/p&gt;
+&lt;p&gt;Event handlers are actions registered on a event&lt;/p&gt;
 &lt;p&gt;some components share on some state while some do not&lt;/p&gt;
 &lt;p&gt;the actions of one components may affect the states of other components&lt;/p&gt;
+&lt;p&gt;the actions of one component can emit events to others.&lt;/p&gt;
+&lt;p&gt;It's always a bad practice for one component to emit events to itself.&lt;/p&gt;
 &lt;p&gt;in real world, all components runs on different thread, however it's not true in programming&lt;/p&gt;
-&lt;p&gt;in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which can be changed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)&lt;/p&gt;
+&lt;h2&gt;Event&lt;/h2&gt;
+&lt;p&gt;Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)&lt;/p&gt;
+&lt;p&gt;We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.&lt;/p&gt;
+&lt;p&gt;event can be created with &lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nx"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;typeArg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;eventInit&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;some important APIs for events are stopPropagation and preventDefault &lt;/p&gt;
+&lt;h2&gt;ICC (Inter Component Communication)&lt;/h2&gt;
+&lt;p&gt;Shared state: If A and B share some same state, it's ok to operate on the state directly&lt;/p&gt;
+&lt;p&gt;Function as args: A can pass a encapsulated function for B to call, executed immediately&lt;/p&gt;
+&lt;p&gt;Emit a event: A can emit a event to B to trigger B's event listener, not executed immediately&lt;/p&gt;
+&lt;p&gt;Children -&amp;gt; parent: parent pass function to children as props/args, be careful to bind "this"!&lt;/p&gt;
+&lt;p&gt;Parent -&amp;gt; children: props/args&lt;/p&gt;
+&lt;p&gt;Child &amp;lt;-&amp;gt; Child: shared context/state&lt;/p&gt;
+&lt;p&gt;The third approach is not recommended&lt;/p&gt;
+&lt;h2&gt;React&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;useState, useEffect, useReducer, when and why?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which will not be executed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
+in other words, react "state" is what render action conditions on.&lt;/p&gt;
+&lt;p&gt;react "state" are not recommended when the next value depends on the previous value.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;suppose&lt;/span&gt; &lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt; &lt;span class="nv"&gt;has&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;state&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;, &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;only&lt;/span&gt; &lt;span class="nv"&gt;actions&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;state&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;it&lt;/span&gt;, 
+&lt;span class="nv"&gt;A&lt;/span&gt; : 
+&lt;span class="nv"&gt;Invert&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;: &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+&lt;span class="nv"&gt;As&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;already&lt;/span&gt; &lt;span class="nv"&gt;know&lt;/span&gt;, &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;executed&lt;/span&gt; &lt;span class="nv"&gt;immediately&lt;/span&gt;, &lt;span class="nv"&gt;instead&lt;/span&gt;, &lt;span class="nv"&gt;they&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;pushed&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;queue&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;order&lt;/span&gt;
+&lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;Binary&lt;/span&gt; &lt;span class="nv"&gt;twice&lt;/span&gt; &lt;span class="nv"&gt;when&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="nv"&gt;what&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;expected&lt;/span&gt; &lt;span class="nv"&gt;finally&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;bianry&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;However&lt;/span&gt;, &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;second&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;happens&lt;/span&gt; &lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;setState&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;first&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;been&lt;/span&gt; &lt;span class="nv"&gt;executed&lt;/span&gt;. &lt;span class="k"&gt;Then&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="nv"&gt;would&lt;/span&gt; &lt;span class="nv"&gt;be&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;, &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;expected&lt;/span&gt;.
+&lt;/pre&gt;
+&lt;p&gt;To solve the above problem, we should useReducer.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;const binary = {value: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'invert':
+      return {count: state.value^1};
+    default:
+      throw new Error();
+  }
+}
+
+function Inverter() {
+  const [state, dispatch] = useReducer(reducer, 1);
+  return (
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&amp;gt;
+      binary: {state.value}
+      &lt;span class="nt"&gt;&amp;lt;button&lt;/span&gt; &lt;span class="na"&gt;onClick=&lt;/span&gt;&lt;span class="s"&gt;{()&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; dispatch({type: 'invert'})}&amp;gt;invert&lt;span class="nt"&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;/&amp;gt;
+  );
+}
+&lt;/pre&gt;
+&lt;p&gt;the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.&lt;/p&gt;
+&lt;p&gt;Do not useReducer if useState works.&lt;/p&gt;
+&lt;p&gt;in react, useEffect defined what to execute after first render when or react "state" changes.&lt;/p&gt;
 &lt;p&gt;in react, components are organized in a tree structure, each components is a node on the tree.&lt;/p&gt;
 &lt;p&gt;in react, each components have at least one action called render, which listen on render events.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="事件，状态，动作" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222133.png"&gt;
