@@ -1,0 +1,104 @@
+<p><strong>前言：我为什么要学线段树</strong></p>
+<blockquote>
+<p>老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！唉，莫听穿林打叶声，何妨吟啸且徐行</p>
+</blockquote>
+<p><strong>一些基础知识</strong></p>
+<ol>
+<li>常见的树结构存储方式：堆式存储（建立存储位置和逻辑位置的关系/多用于满二叉树或 可以满二叉树的情况），链式存储（这个就不说了）</li>
+<li>树结构的根节点存储位置常从1开始，用0表示非法值</li>
+<li>对于堆结构的树，s和s^1互为兄弟节点，可以用s^t^1判断两个节点是否是兄弟节点</li>
+<li>一个节点的左儿子是s&gt;&gt;1，右节点是s&gt;&gt;1|1</li>
+<li>左儿子存储位置为偶数，右儿子存储位置为奇数，因此~s^1可以判断是左节点，s^1判断右节点</li>
+</ol>
+<p><strong>线段树？</strong></p>
+<p>解决区间查询，区间修改问题</p>
+<p><strong>思想？</strong></p>
+<p>二分，将区间信息组织成树状形式，父节点维护的信息就是子节点的合并</p>
+<p><strong>那？zwk线段树？</strong></p>
+<p>传统线段树常数较大，实现复杂，而且是Top-down Approach，zwk使用Bottom-up的方式，利用堆式结构进行存储，常数更小</p>
+<p><strong>How?</strong></p>
+<pre class="code literal-block"><span class="c1">// .data</span>
+<span class="kt">int</span> <span class="n">q</span><span class="p">[</span><span class="n">N</span><span class="p">];</span> <span class="c1">// 根节点为1</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="c1">// M为维护的区间大小</span>
+
+<span class="c1">// build</span>
+<span class="kt">void</span> <span class="nf">build</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">M</span><span class="mi">-1</span><span class="p">;</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span> 
+<span class="p">}</span>
+
+<span class="c1">// query：查询[s, t]</span>
+<span class="c1">// 只能查询[1, 2^n-2]的区间</span>
+<span class="c1">// s和s^1互为兄弟节点</span>
+<span class="c1">// s^t^1判断s和t是否是兄弟节点，s^t^1 == 0 &lt;=&gt; s^1 == t，注意，异或具有交换律</span>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">M</span><span class="mi">-1</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">s</span><span class="o">^</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">;</span> <span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">~</span><span class="n">s</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// modify: 单点修改</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">+=</span><span class="n">m</span><span class="p">]</span><span class="o">=</span><span class="n">val</span><span class="p">;</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+</pre>
+<p><strong>完了吗？</strong></p>
+<p>没有，还有区间修改呢！</p>
+<p><strong>How？</strong></p>
+<p>懒标记！不知道？先去看https://oi-wiki.org/ds/seg/吧</p>
+<p>懒标记成功地减少了pushdown的次数，只在需要的时候才pushdown，复杂度为O(logn)</p>
+<p><strong>等等，我们不是Bottom-up吗？</strong></p>
+<p>是的，但我们依然可以使用懒标记和Top-down来更新懒标记啊！</p>
+<p><strong>但是！我们有更好的方法</strong></p>
+<p>Bottom-up就要Bottom-up到底！</p>
+<p>其实区间修改和区间查询的过程是差不多的，都是对区间相应节点的遍历</p>
+<p>我们考虑标记，标记是什么，标记是父节点对子节点的相对值！</p>
+<p><strong>等等，有了相对值，我们还需要绝对值干嘛</strong></p>
+<p>如果我们让所有节点的值从0开始，那不就不需要绝对值了嘛，那我们在每个节点还存绝对值干嘛，只存一个标记就行了嘛！</p>
+<p>嗯，标记是父节点对子节点的相对值，这对Top-down的过程很好，那对Bottom-up呢？</p>
+<p>那我们就存子节点对父节点的相对值？</p>
+<p><strong>好了， 我们来捋一捋</strong></p>
+<p>假设我们有三个节点：f, l, r，其中f为父节点，l和r为子节点，假设他们的标签值为x, y, z，即l的最大值比f大y，r的最大值比f大z，f比他父亲大x</p>
+<p>那我们如何知道f的最大值究竟是多少呢，应该是(T[f] + T[f&gt;&gt;1] + ... T[1]) + 所有子节点区间相对于f的最大值，对于前者，我们只需要向上遍历即可求出，那对于后者？我们不可能去遍历所有的可能路径吧。。。。</p>
+<p><strong>除非？？？我们在每一次向上修改时，都保证每个节点存储的是子树区间的相对最大值？</strong></p>
+<p><strong>什么意思？</strong></p>
+<pre class="code literal-block"><span class="n">A</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">A</span><span class="p">;</span>
+</pre>
+<p>在向上修改的过程中，通过上述操作，我们保证了每一个节点的值都是所有构成子区间的相对最大值！更细的也不好解释了，建议多画画图去体会。。。</p>
+<p><strong>好了，我们来看一下完整的代码</strong></p>
+<pre class="code literal-block"><span class="c1">// 区间修改</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">A</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">M</span><span class="mi">-1</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">s</span><span class="o">^</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">;</span> <span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">~</span><span class="n">s</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">A</span><span class="p">;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">A</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">A</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 区间查询</span>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">lans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="n">M</span><span class="p">;</span> <span class="n">s</span><span class="o">^</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">;</span> <span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">rans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">~</span><span class="n">s</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">lans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">lans</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="n">rans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">rans</span><span class="p">,</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">lans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">rans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">lans</span><span class="p">,</span> <span class="n">rans</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p><strong>OK, 完了？</strong>*</p>
+<p>完了...</p>
+<p><strong>参考</strong></p>
+<p>zwk-《the power of statistics》</p>
