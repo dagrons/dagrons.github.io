@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 11 Apr 2021 07:39:59 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>zwk线段树折磨日记</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 11 Apr 2021 07:42:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>zwk线段树折磨日记</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -201,6 +201,7 @@ function Inverter() {
 &lt;/pre&gt;
 &lt;ol&gt;
 &lt;li&gt;Convention over configuration，除非用户指定，否则使用默认的配置，让组件使用者只关心它关心的接口参数&lt;/li&gt;
+&lt;li&gt;使用树形结构或嵌套结构增强层次感和结构感，隐藏细节&lt;/li&gt;
 &lt;li&gt;框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现&lt;/li&gt;
 &lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item><item><title>js中的promise机制</title><link>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Js中的核心机制-Promise&lt;/h2&gt;
 &lt;p&gt;“在异步中实现同步”&lt;/p&gt;
