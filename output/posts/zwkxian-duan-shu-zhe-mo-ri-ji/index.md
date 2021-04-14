@@ -2,7 +2,7 @@
 .. title: zwk线段树折磨日记
 .. slug: zwkxian-duan-shu-zhe-mo-ri-ji
 .. date: 2021-04-11 14:42:47 UTC+08:00
-.. tags: 算法，数据结构, acwing
+.. tags: 算法，数据结构
 .. category: 数据结构
 .. link: 
 .. description: 
