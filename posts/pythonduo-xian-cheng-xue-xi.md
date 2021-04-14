@@ -2,10 +2,10 @@
 .. title: Python多线程学习
 .. slug: pythonduo-xian-cheng-xue-xi
 .. date: 2021-04-13 21:43:08 UTC+08:00
-.. tags: 
-.. category: 
+.. tags: python, 并发
+.. category: python
 .. link: 
-.. description: 
+.. description: 记录在python并发上的笔记
 .. type: text
 -->
 

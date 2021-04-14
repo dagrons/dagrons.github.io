@@ -2,8 +2,8 @@
 .. title: Components, State machine, state, events, action
 .. slug: components-state-machine-state-events-action
 .. date: 2021-04-05 20:37:29 UTC+08:00
-.. tags: 
-.. category: 
+.. tags: js 
+.. category: js 
 .. link: 
 .. description: 
 .. type: text
