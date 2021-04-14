@@ -13,7 +13,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/pythonduo-xian-cheng-xue-xi/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -70,7 +70,95 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">zwk线段树折磨日记</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/pythonduo-xian-cheng-xue-xi/" class="u-url">Python多线程学习</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/pythonduo-xian-cheng-xue-xi/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-04-13T21:43:08+08:00" itemprop="datePublished" title="2021-04-13 21:43">2021-04-13 21:43</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<blockquote>
+<p>理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架</p>
+</blockquote>
+<h3>Intro</h3>
+<p>The concurrent.futures module provides a high-level interface for asynchronously executing callables</p>
+<p>keyword: callables, high-level</p>
+<h3>基本框架</h3>
+<pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">future_to_url</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">future_to_url</span><span class="p">[</span><span class="n">future</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%r</span><span class="s1"> generated an exception: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%r</span><span class="s1"> page is </span><span class="si">%d</span><span class="s1"> bytes'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+</pre>
+<h3>提交任务</h3>
+<pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="c1"># 创建并提交一个任务</span>
+<span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">iterables</span><span class="p">)</span> <span class="c1"># 对iterables中每个值都创建并提交一个任务</span>
+<span class="n">等价于</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">iterables</span><span class="p">:</span>
+    <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</pre>
+<h3>查询任务本身状态？</h3>
+<pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="p">[</span><span class="n">cancel</span><span class="p">(),</span> <span class="n">cancelled</span><span class="p">(),</span> <span class="n">running</span><span class="p">(),</span> <span class="n">done</span><span class="p">(),</span> <span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">exception</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)]</span>
+</pre>
+<h3>下班</h3>
+<pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 下班了!</span>
+<span class="n">wait</span><span class="o">=</span><span class="n">True会等待所有工作做完</span><span class="err">，</span><span class="n">才下班</span>
+</pre>
+<p>有趣的方法！</p>
+<pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span> <span class="n">fn的唯一参数为future</span>
+</pre>
+<blockquote>
+<p>怀念js，怀念functional</p>
+</blockquote>
+<h3>Executor Objects</h3>
+<p>abstract class: concurrent.futures.Executor(need to be implemented!)
+继承关系：</p>
+<blockquote>
+<p>继承包含实现继承和接口继承</p>
+</blockquote>
+<pre class="code literal-block"><span class="n">Executor</span><span class="o">[</span><span class="n">abstract</span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threadpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
+<span class="w">           </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Processpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
+</pre>
+<h3>Module Functions</h3>
+<ol>
+<li>等待所有任务完成？（注意：这会阻塞当前线程）</li>
+</ol>
+<pre class="code literal-block"><span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_when</span><span class="o">=</span><span class="n">ALL_COMPLETED</span><span class="p">)</span>
+<span class="sd">"""</span>
+<span class="sd">return_when =&gt; </span>
+<span class="sd">FIRST_COMPLETED: any future finishes or is cancelled</span>
+<span class="sd">FIRST_EXCEPTION: any future finishes by raising an exception or all completed</span>
+<span class="sd">ALL_COMPLETED: when all future finishes or cancelled</span>
+<span class="sd">"""</span>
+</pre>
+<ol>
+<li>获取所有已经完成的任务（或者已经被取消的任务）</li>
+</ol>
+<pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre>
+<h3>Exception Classes</h3>
+<blockquote>
+<p>异常是程序无法语料之事，已经无法继续运行，当异常出现时，可以通过两种方式修补，一是提前预防(pre-process)，一种是通过适当的逻辑进行修补，提前判断和过滤，第二种是亡羊补牢(post-process)，在异常发生后，通过try...except进行捕获与处理.</p>
+</blockquote>
+<pre class="code literal-block"><span class="mf">1.</span> <span class="n">CancelledError</span><span class="p">:</span> <span class="n">Raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">future</span> <span class="n">is</span> <span class="n">cancelled</span>
+<span class="mf">2.</span> <span class="n">TimeoutError</span><span class="p">:</span> <span class="n">Raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">future</span> <span class="n">operation</span> <span class="n">exceeds</span> <span class="n">the</span> <span class="n">given</span> <span class="n">timeout</span>
+<span class="mf">3.</span> <span class="n">BrokenError</span><span class="p">:</span> <span class="n">Derived</span> <span class="n">from</span> <span class="kr">Run</span><span class="n">timeError</span><span class="p">,</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">executor</span> <span class="n">is</span> <span class="n">broken</span> <span class="kr">for</span> <span class="n">some</span> <span class="n">reason</span>
+<span class="mf">4.</span> <span class="n">InvalidStateError</span><span class="p">:</span> <span class="n">an</span> <span class="n">operation</span> <span class="n">is</span> <span class="n">performed</span> <span class="kr">on</span> <span class="n">future</span> <span class="n">that</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">allowed</span> <span class="n">in</span> <span class="n">the</span> <span class="n">curren</span> <span class="n">state</span>
+<span class="mf">5.</span> <span class="n">BrokenThreadPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">a</span> <span class="n">ThreadPoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
+<span class="mf">6.</span> <span class="n">BrokenProcessPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">Processpoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">zwk线段树折磨日记</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
