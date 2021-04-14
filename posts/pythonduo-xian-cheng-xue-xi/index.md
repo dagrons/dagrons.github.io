@@ -49,7 +49,7 @@ executor.shutdown(wait=True) # 下班了!
 wait=True会等待所有工作做完，才下班
 ```
 
-有趣的方法！
+## 有趣的方法！
 ```python
 future.add_done_callback(fn): fn的唯一参数为future
 ```
