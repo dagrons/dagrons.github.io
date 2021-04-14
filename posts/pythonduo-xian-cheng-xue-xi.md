@@ -102,5 +102,6 @@ for future in concurrent.futures.as_completed(fs, timeout=None):
 
 ## FAQ
 1. concurrent.futures vs multiprocessing, why concurrent.futures are preferred?
+
 concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
 (见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]
