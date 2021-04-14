@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 14 Apr 2021 04:43:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python多线程学习</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 14 Apr 2021 04:45:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python多线程学习</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
 &lt;p&gt;理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;Intro&lt;/h3&gt;
@@ -81,7 +81,7 @@
 &lt;li&gt;concurrent.futures vs multiprocessing, why concurrent.futures are preferred?&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
-(见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</guid><pubDate>Tue, 13 Apr 2021 13:43:08 GMT</pubDate></item><item><title>zwk线段树折磨日记</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
+(见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]&lt;/p&gt;&lt;/div&gt;</description><category>python</category><category>并发</category><guid>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</guid><pubDate>Tue, 13 Apr 2021 13:43:08 GMT</pubDate></item><item><title>zwk线段树折磨日记</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -184,7 +184,7 @@
 &lt;p&gt;&lt;strong&gt;OK, 完了？&lt;/strong&gt;*&lt;/p&gt;
 &lt;p&gt;完了...&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item><item><title>torch</title><link>https://dagrons.github.io/posts/torch/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;在这里书写你的文章。&lt;/p&gt;</description><guid>https://dagrons.github.io/posts/torch/</guid><pubDate>Thu, 08 Apr 2021 14:58:49 GMT</pubDate></item><item><title>Components, State machine, state, events, action</title><link>https://dagrons.github.io/posts/components-state-machine-state-events-action/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><category>acwing</category><category>算法，数据结构</category><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item><item><title>torch</title><link>https://dagrons.github.io/posts/torch/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;在这里书写你的文章。&lt;/p&gt;</description><guid>https://dagrons.github.io/posts/torch/</guid><pubDate>Thu, 08 Apr 2021 14:58:49 GMT</pubDate></item><item><title>Components, State machine, state, events, action</title><link>https://dagrons.github.io/posts/components-state-machine-state-events-action/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Intro&lt;/h2&gt;
 &lt;p&gt;The world is a state machine driven by events&lt;/p&gt;
 &lt;p&gt;events are what components listening on&lt;/p&gt;
 &lt;p&gt;components responds to different events with different actions&lt;/p&gt;
@@ -255,7 +255,7 @@ function Inverter() {
 &lt;p&gt;in react, each components have at least one action called render, which listen on render events.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="事件，状态，动作" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222133.png"&gt;
 &lt;img alt="共享状态-组件通信" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405213404.png"&gt;
-&lt;img alt="React树形结构" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222359.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/components-state-machine-state-events-action/</guid><pubDate>Mon, 05 Apr 2021 12:37:29 GMT</pubDate></item><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
+&lt;img alt="React树形结构" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222359.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>js</category><guid>https://dagrons.github.io/posts/components-state-machine-state-events-action/</guid><pubDate>Mon, 05 Apr 2021 12:37:29 GMT</pubDate></item><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 &lt;/li&gt;
 &lt;li&gt;层次感，结构感，流程清晰，注释详尽&lt;/li&gt;
@@ -367,4 +367,4 @@ function Inverter() {
 &lt;p&gt;从而创建了一个setTimeout的wrapper.&lt;/p&gt;
 &lt;p&gt;总的来说，Promise的主要贡献在于优化了异步回调中臃肿不堪的语法&lt;/p&gt;
 &lt;h3&gt;注意事项&lt;/h3&gt;
-&lt;p&gt;注意，Promise如果不进行异常捕获，如果执行过程出错，是不会造成程序终止的。&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</guid><pubDate>Tue, 23 Mar 2021 03:18:42 GMT</pubDate></item></channel></rss>
+&lt;p&gt;注意，Promise如果不进行异常捕获，如果执行过程出错，是不会造成程序终止的。&lt;/p&gt;&lt;/div&gt;</description><category>js</category><guid>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</guid><pubDate>Tue, 23 Mar 2021 03:18:42 GMT</pubDate></item></channel></rss>
