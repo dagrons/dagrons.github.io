@@ -64,6 +64,11 @@ Executor[abstract] -> Threadpoolexecutor(max_workers=1)[concrete]
 		   -> Processpoolexecutor(max_workers=1)[concrete]
 ```
 
+## ThreadPool or ProcessPool?
+CPU bottleneck? => ProcessPool（亲测，如果是CPU bottleneck，要比ThreadPool快很多）
+
+I/O bottleneck? => ThreadPool（如果bottleneck不在CPU上，就没必要用ProcessPool了，ThreadPool开销更小）
+
 ## Module Functions
 
 1. 等待所有任务完成？（注意：这会阻塞当前线程）

@@ -43,6 +43,9 @@
 <pre class="code literal-block"><span class="n">Executor</span><span class="o">[</span><span class="n">abstract</span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threadpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
 <span class="w">           </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Processpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
 </pre>
+<h2>ThreadPool or ProcessPool?</h2>
+<p>CPU bottleneck? =&gt; ProcessPool（亲测，如果是CPU bottleneck，要比ThreadPool快很多）</p>
+<p>I/O bottleneck? =&gt; ThreadPool（如果bottleneck不在CPU上，就没必要用ProcessPool了，ThreadPool开销更小）</p>
 <h2>Module Functions</h2>
 <ol>
 <li>等待所有任务完成？（注意：这会阻塞当前线程）</li>
