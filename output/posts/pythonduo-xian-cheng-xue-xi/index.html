@@ -175,6 +175,12 @@ The concurrent.futures module provides a high-level interface for as">
 <span class="mf">5.</span> <span class="n">BrokenThreadPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">a</span> <span class="n">ThreadPoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
 <span class="mf">6.</span> <span class="n">BrokenProcessPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">Processpoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
 </pre>
+<h3>FAQ</h3>
+<ol>
+<li>concurrent.futures vs multiprocessing, why concurrent.futures are preferred?
+concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
+(见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]</li>
+</ol>
 </div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
