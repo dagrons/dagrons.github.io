@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Go学习第一天 - GoTooling | NuLL</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../rss.xml">
+<link rel="canonical" href="https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="dagrons">
+<link rel="prev" href="../pythonduo-xian-cheng-xue-xi/" title="Python多线程学习" type="text/html">
+<meta property="og:site_name" content="NuLL">
+<meta property="og:title" content="Go学习第一天 - GoTooling">
+<meta property="og:url" content="https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/">
+<meta property="og:description" content="Go学习第一天, GoTooling
+GOPATH vs GOROOT
+
+The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated st">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-08-20T22:38:06+08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
+
+            <span id="blog-title">NuLL</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">源文件</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../archive.html" class="nav-link">文章归档</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">标签</a>
+                </li>
+<li class="nav-item">
+<a href="../../rss.xml" class="nav-link">RSS 源</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Go学习第一天 - GoTooling</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    dagrons
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2021-08-20T22:38:06+08:00" itemprop="datePublished" title="2021-08-20 22:38">2021-08-20 22:38</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<h2>Go学习第一天, GoTooling</h2>
+<h3>GOPATH vs GOROOT</h3>
+<blockquote>
+<p>The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
+GOPATH must be set to get, build and install packages outside the standard Go Tree(即GO SDK)</p>
+<p>GOROOT is where the go SDK being installed</p>
+</blockquote>
+<p>GOPATH就是Go安装第三方库的位置, 通过改变这个，我们可以自由切换依赖环境, 实现类似于python中virtualenv的功能</p>
+<p>GOROOT就是Go SDK的安装位置</p>
+<h3>创建第一个GO可执行程序</h3>
+<p>在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:</p>
+<pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
+</pre>
+<p>在编译go项目后, 可以通过go install进行安装, 会将项目安装在"$GOPATH/bin/"下:</p>
+<pre class="code literal-block"><span class="k">go</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">binary</span><span class="w"></span>
+<span class="err">$</span><span class="n">GOPATH</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">it</span><span class="w"></span>
+</pre>
+<p>如果将GOPATH加入到了PATH中, 可以直接运行</p>
+<pre class="code literal-block">hello
+</pre>
+<h3>创建第一个GO module</h3>
+<p>大致流程和创建GO程序差不多, 但和GO程序的区别在于GO包编译并不会生成可执行文件, 因此我们并不需要使用"go install"命令进行安装, 
+在完成后, 使用"go build"测试一下包能够通过编译即可</p>
+<pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
+go build github.com/goo/stringutil
+</pre>
+<h3>更先进的项目环境管理方式</h3>
+<p>在go1.2后, 通过go.mod, 我们不再需要在$GOPATH/src/下进行项目开发了, 相应的, 我们可以通过定义go.mod来创建module</p>
+<p>首先执行go init生成用于管理的go.mod和go.sum文件</p>
+<pre class="code literal-block">go mod init github.com/foo 
+</pre>
+<p>一个典型的go.mod如下, </p>
+<pre class="code literal-block"><span class="k">module</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">dagrons</span><span class="o">/</span><span class="n">godw</span><span class="w"></span>
+
+<span class="k">go</span><span class="w"> </span><span class="mf">1.16</span><span class="w"></span>
+
+<span class="n">require</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gin</span><span class="o">-</span><span class="n">gonic</span><span class="o">/</span><span class="n">gin</span><span class="w"> </span><span class="n">v1</span><span class="mf">.7.2</span><span class="w"></span>
+</pre>
+<p>指定了module名, go SDK版本, 以及依赖的第三方库及版本, </p>
+<p>这种项目依赖管理方式和package.json和Gemfile类似, 更加好用</p>
+<p>在go.mod编写完成后, 需要通过"go tidy mod"进行依赖解析, 会下载并解析好所有的依赖关系</p>
+<pre class="code literal-block">go mod tidy
+</pre>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../pythonduo-xian-cheng-xue-xi/" rel="prev" title="Python多线程学习">上一篇文章</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

@@ -5,9 +5,9 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1618375593.588091
+_modified_time = 1629472432.1538372
 _enable_loop = True
-_template_filename = '/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/bootblog4/templates/index.tmpl'
+_template_filename = '/root/Envs/nikola/local/lib/python3.6/site-packages/nikola/data/themes/bootblog4/templates/index.tmpl'
 _template_uri = 'index.tmpl'
 _source_encoding = 'utf-8'
 _exports = ['extra_head', 'content', 'content_header', 'before_content']
@@ -44,42 +44,42 @@ def render_body(context,**pageargs):
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         _import_ns = {}
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
-        comments = _mako_get_namespace(context, 'comments')
-        pagination = _mako_get_namespace(context, 'pagination')
-        def content():
-            return render_content(context._locals(__M_locals))
-        site_has_comments = _import_ns.get('site_has_comments', context.get('site_has_comments', UNDEFINED))
-        def before_content():
-            return render_before_content(context._locals(__M_locals))
-        parent = _import_ns.get('parent', context.get('parent', UNDEFINED))
-        is_frontmost_index = _import_ns.get('is_frontmost_index', context.get('is_frontmost_index', UNDEFINED))
-        featured = _import_ns.get('featured', context.get('featured', UNDEFINED))
-        prevlink = _import_ns.get('prevlink', context.get('prevlink', UNDEFINED))
-        index_file = _import_ns.get('index_file', context.get('index_file', UNDEFINED))
-        len = _import_ns.get('len', context.get('len', UNDEFINED))
-        current_page = _import_ns.get('current_page', context.get('current_page', UNDEFINED))
-        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
-        _link = _import_ns.get('_link', context.get('_link', UNDEFINED))
         date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
         pagekind = _import_ns.get('pagekind', context.get('pagekind', UNDEFINED))
-        page_links = _import_ns.get('page_links', context.get('page_links', UNDEFINED))
+        multiple_authors_per_post = _import_ns.get('multiple_authors_per_post', context.get('multiple_authors_per_post', UNDEFINED))
         helper = _mako_get_namespace(context, 'helper')
-        front_index_header = _import_ns.get('front_index_header', context.get('front_index_header', UNDEFINED))
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
+        nextlink = _import_ns.get('nextlink', context.get('nextlink', UNDEFINED))
+        is_frontmost_index = _import_ns.get('is_frontmost_index', context.get('is_frontmost_index', UNDEFINED))
+        index_teasers = _import_ns.get('index_teasers', context.get('index_teasers', UNDEFINED))
+        author_pages_generated = _import_ns.get('author_pages_generated', context.get('author_pages_generated', UNDEFINED))
+        comments = _mako_get_namespace(context, 'comments')
         def content_header():
             return render_content_header(context._locals(__M_locals))
-        author_pages_generated = _import_ns.get('author_pages_generated', context.get('author_pages_generated', UNDEFINED))
-        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        prevlink = _import_ns.get('prevlink', context.get('prevlink', UNDEFINED))
+        current_page = _import_ns.get('current_page', context.get('current_page', UNDEFINED))
+        page_links = _import_ns.get('page_links', context.get('page_links', UNDEFINED))
+        pagination = _mako_get_namespace(context, 'pagination')
         theme_config = _import_ns.get('theme_config', context.get('theme_config', UNDEFINED))
-        prev_next_links_reversed = _import_ns.get('prev_next_links_reversed', context.get('prev_next_links_reversed', UNDEFINED))
-        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
+        featured = _import_ns.get('featured', context.get('featured', UNDEFINED))
         permalink = _import_ns.get('permalink', context.get('permalink', UNDEFINED))
         feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        nextlink = _import_ns.get('nextlink', context.get('nextlink', UNDEFINED))
-        index_teasers = _import_ns.get('index_teasers', context.get('index_teasers', UNDEFINED))
-        multiple_authors_per_post = _import_ns.get('multiple_authors_per_post', context.get('multiple_authors_per_post', UNDEFINED))
+        front_index_header = _import_ns.get('front_index_header', context.get('front_index_header', UNDEFINED))
+        def before_content():
+            return render_before_content(context._locals(__M_locals))
+        index_file = _import_ns.get('index_file', context.get('index_file', UNDEFINED))
+        parent = _import_ns.get('parent', context.get('parent', UNDEFINED))
+        site_has_comments = _import_ns.get('site_has_comments', context.get('site_has_comments', UNDEFINED))
+        _link = _import_ns.get('_link', context.get('_link', UNDEFINED))
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
+        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        prev_next_links_reversed = _import_ns.get('prev_next_links_reversed', context.get('prev_next_links_reversed', UNDEFINED))
         math = _mako_get_namespace(context, 'math')
+        len = _import_ns.get('len', context.get('len', UNDEFINED))
+        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
+        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -112,13 +112,13 @@ def render_extra_head(context,**pageargs):
     try:
         _import_ns = {}
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
+        math = _mako_get_namespace(context, 'math')
         posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
         permalink = _import_ns.get('permalink', context.get('permalink', UNDEFINED))
-        parent = _import_ns.get('parent', context.get('parent', UNDEFINED))
-        math = _mako_get_namespace(context, 'math')
         def extra_head():
             return render_extra_head(context)
         index_file = _import_ns.get('index_file', context.get('index_file', UNDEFINED))
+        parent = _import_ns.get('parent', context.get('parent', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -140,31 +140,31 @@ def render_content(context,**pageargs):
     try:
         _import_ns = {}
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
-        comments = _mako_get_namespace(context, 'comments')
-        pagination = _mako_get_namespace(context, 'pagination')
+        date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        pagekind = _import_ns.get('pagekind', context.get('pagekind', UNDEFINED))
+        multiple_authors_per_post = _import_ns.get('multiple_authors_per_post', context.get('multiple_authors_per_post', UNDEFINED))
+        front_index_header = _import_ns.get('front_index_header', context.get('front_index_header', UNDEFINED))
+        helper = _mako_get_namespace(context, 'helper')
+        nextlink = _import_ns.get('nextlink', context.get('nextlink', UNDEFINED))
+        index_teasers = _import_ns.get('index_teasers', context.get('index_teasers', UNDEFINED))
+        site_has_comments = _import_ns.get('site_has_comments', context.get('site_has_comments', UNDEFINED))
+        author_pages_generated = _import_ns.get('author_pages_generated', context.get('author_pages_generated', UNDEFINED))
+        _link = _import_ns.get('_link', context.get('_link', UNDEFINED))
         def content():
             return render_content(context)
-        site_has_comments = _import_ns.get('site_has_comments', context.get('site_has_comments', UNDEFINED))
-        front_index_header = _import_ns.get('front_index_header', context.get('front_index_header', UNDEFINED))
+        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        comments = _mako_get_namespace(context, 'comments')
         def content_header():
             return render_content_header(context)
-        author_pages_generated = _import_ns.get('author_pages_generated', context.get('author_pages_generated', UNDEFINED))
-        prevlink = _import_ns.get('prevlink', context.get('prevlink', UNDEFINED))
-        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
-        current_page = _import_ns.get('current_page', context.get('current_page', UNDEFINED))
         prev_next_links_reversed = _import_ns.get('prev_next_links_reversed', context.get('prev_next_links_reversed', UNDEFINED))
-        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
-        _link = _import_ns.get('_link', context.get('_link', UNDEFINED))
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
-        nextlink = _import_ns.get('nextlink', context.get('nextlink', UNDEFINED))
-        date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
-        pagekind = _import_ns.get('pagekind', context.get('pagekind', UNDEFINED))
-        page_links = _import_ns.get('page_links', context.get('page_links', UNDEFINED))
-        index_teasers = _import_ns.get('index_teasers', context.get('index_teasers', UNDEFINED))
-        multiple_authors_per_post = _import_ns.get('multiple_authors_per_post', context.get('multiple_authors_per_post', UNDEFINED))
         math = _mako_get_namespace(context, 'math')
-        helper = _mako_get_namespace(context, 'helper')
+        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
+        prevlink = _import_ns.get('prevlink', context.get('prevlink', UNDEFINED))
+        current_page = _import_ns.get('current_page', context.get('current_page', UNDEFINED))
+        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
+        page_links = _import_ns.get('page_links', context.get('page_links', UNDEFINED))
+        pagination = _mako_get_namespace(context, 'pagination')
         __M_writer = context.writer()
         __M_writer('\n    ')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content_header'):
@@ -258,9 +258,9 @@ def render_content_header(context,**pageargs):
         _import_ns = {}
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         def content_header():
             return render_content_header(context)
-        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n        ')
         __M_writer(str(feeds_translations.translation_link(kind)))
@@ -275,13 +275,13 @@ def render_before_content(context,**pageargs):
     try:
         _import_ns = {}
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
+        pagekind = _import_ns.get('pagekind', context.get('pagekind', UNDEFINED))
+        len = _import_ns.get('len', context.get('len', UNDEFINED))
+        theme_config = _import_ns.get('theme_config', context.get('theme_config', UNDEFINED))
+        featured = _import_ns.get('featured', context.get('featured', UNDEFINED))
         def before_content():
             return render_before_content(context)
-        featured = _import_ns.get('featured', context.get('featured', UNDEFINED))
-        theme_config = _import_ns.get('theme_config', context.get('theme_config', UNDEFINED))
-        pagekind = _import_ns.get('pagekind', context.get('pagekind', UNDEFINED))
         is_frontmost_index = _import_ns.get('is_frontmost_index', context.get('is_frontmost_index', UNDEFINED))
-        len = _import_ns.get('len', context.get('len', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n')
         if 'main_index' in pagekind and is_frontmost_index and featured and (theme_config.get('featured_large') or theme_config.get('featured_small')):
@@ -366,6 +366,6 @@ def render_before_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/home/heyuehui/envs/blog/lib/python3.8/site-packages/nikola/data/themes/bootblog4/templates/index.tmpl", "uri": "index.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "84": 2, "85": 3, "86": 4, "87": 5, "88": 6, "89": 7, "94": 15, "99": 73, "104": 150, "110": 9, "123": 9, "124": 10, "125": 10, "126": 11, "127": 12, "128": 12, "129": 12, "130": 14, "131": 14, "132": 14, "138": 17, "169": 17, "174": 20, "175": 21, "176": 22, "177": 22, "178": 22, "179": 24, "180": 25, "181": 25, "182": 25, "183": 27, "184": 28, "185": 29, "186": 29, "187": 29, "188": 31, "189": 31, "190": 31, "191": 31, "192": 34, "193": 35, "194": 36, "195": 36, "196": 36, "197": 36, "198": 36, "199": 38, "200": 39, "201": 39, "202": 39, "203": 39, "204": 39, "205": 40, "206": 41, "207": 41, "208": 41, "209": 43, "210": 45, "211": 45, "212": 46, "213": 46, "214": 46, "215": 46, "216": 46, "217": 46, "218": 47, "219": 48, "220": 48, "221": 48, "222": 49, "223": 49, "224": 49, "225": 49, "226": 49, "227": 49, "228": 51, "229": 53, "230": 54, "231": 54, "232": 54, "233": 56, "234": 58, "235": 59, "236": 60, "237": 60, "238": 62, "239": 63, "240": 64, "241": 64, "242": 67, "243": 69, "244": 70, "245": 70, "246": 71, "247": 71, "248": 72, "249": 72, "255": 18, "265": 18, "266": 19, "267": 19, "273": 75, "286": 75, "287": 76, "288": 77, "289": 78, "290": 79, "291": 80, "292": 82, "293": 83, "294": 86, "295": 86, "296": 86, "297": 86, "298": 87, "299": 88, "300": 88, "301": 88, "302": 90, "303": 91, "304": 92, "305": 93, "306": 95, "307": 95, "308": 95, "309": 95, "310": 95, "311": 97, "312": 98, "313": 98, "314": 98, "315": 101, "316": 104, "317": 105, "318": 106, "319": 107, "320": 108, "321": 109, "322": 110, "323": 112, "324": 115, "325": 115, "326": 115, "327": 115, "328": 117, "329": 118, "330": 118, "331": 118, "332": 120, "333": 120, "334": 120, "335": 120, "336": 121, "337": 122, "338": 122, "339": 122, "340": 125, "341": 128, "342": 129, "343": 133, "344": 133, "345": 133, "346": 133, "347": 135, "348": 136, "349": 136, "350": 136, "351": 138, "352": 138, "353": 138, "354": 138, "355": 139, "356": 140, "357": 140, "358": 140, "359": 143, "360": 146, "361": 148, "367": 361}}
+{"filename": "/root/Envs/nikola/local/lib/python3.6/site-packages/nikola/data/themes/bootblog4/templates/index.tmpl", "uri": "index.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "84": 2, "85": 3, "86": 4, "87": 5, "88": 6, "89": 7, "94": 15, "99": 73, "104": 150, "110": 9, "123": 9, "124": 10, "125": 10, "126": 11, "127": 12, "128": 12, "129": 12, "130": 14, "131": 14, "132": 14, "138": 17, "169": 17, "174": 20, "175": 21, "176": 22, "177": 22, "178": 22, "179": 24, "180": 25, "181": 25, "182": 25, "183": 27, "184": 28, "185": 29, "186": 29, "187": 29, "188": 31, "189": 31, "190": 31, "191": 31, "192": 34, "193": 35, "194": 36, "195": 36, "196": 36, "197": 36, "198": 36, "199": 38, "200": 39, "201": 39, "202": 39, "203": 39, "204": 39, "205": 40, "206": 41, "207": 41, "208": 41, "209": 43, "210": 45, "211": 45, "212": 46, "213": 46, "214": 46, "215": 46, "216": 46, "217": 46, "218": 47, "219": 48, "220": 48, "221": 48, "222": 49, "223": 49, "224": 49, "225": 49, "226": 49, "227": 49, "228": 51, "229": 53, "230": 54, "231": 54, "232": 54, "233": 56, "234": 58, "235": 59, "236": 60, "237": 60, "238": 62, "239": 63, "240": 64, "241": 64, "242": 67, "243": 69, "244": 70, "245": 70, "246": 71, "247": 71, "248": 72, "249": 72, "255": 18, "265": 18, "266": 19, "267": 19, "273": 75, "286": 75, "287": 76, "288": 77, "289": 78, "290": 79, "291": 80, "292": 82, "293": 83, "294": 86, "295": 86, "296": 86, "297": 86, "298": 87, "299": 88, "300": 88, "301": 88, "302": 90, "303": 91, "304": 92, "305": 93, "306": 95, "307": 95, "308": 95, "309": 95, "310": 95, "311": 97, "312": 98, "313": 98, "314": 98, "315": 101, "316": 104, "317": 105, "318": 106, "319": 107, "320": 108, "321": 109, "322": 110, "323": 112, "324": 115, "325": 115, "326": 115, "327": 115, "328": 117, "329": 118, "330": 118, "331": 118, "332": 120, "333": 120, "334": 120, "335": 120, "336": 121, "337": 122, "338": 122, "339": 122, "340": 125, "341": 128, "342": 129, "343": 133, "344": 133, "345": 133, "346": 133, "347": 135, "348": 136, "349": 136, "350": 136, "351": 138, "352": 138, "353": 138, "354": 138, "355": 139, "356": 140, "357": 140, "358": 140, "359": 143, "360": 146, "361": 148, "367": 361}}
 __M_END_METADATA
 """

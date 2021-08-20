@@ -46,7 +46,7 @@
     <span class="nx">val</span> <span class="o">=</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
 <span class="p">})</span>
-<span class="nx">所以</span><span class="err">：</span><span class="k">return</span> <span class="nx">val</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span>
+<span class="nx">所以</span><span class="err">：</span><span class="k">return</span> <span class="nx">val</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span>
 </pre>
 <p>在ECMAScript 2017中，提供了更简洁的写法：（本质上是对上述写法的语法糖）</p>
 <pre class="code literal-block"><span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
@@ -71,11 +71,11 @@
 </pre>
 <h3>那我们如何创建Promise呢</h3>
 <p>例如：</p>
-<pre class="code literal-block"><span class="kd">const</span> <span class="nx">wait</span> <span class="o">=</span> <span class="nx">ms</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+<pre class="code literal-block"><span class="kd">const</span> <span class="nx">wait</span> <span class="o">=</span> <span class="nx">ms</span> <span class="p">=&gt;</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
 </pre>
 <p>上述定义了一个wait的函数，该函数接受一个ms参数，返回一个Promise对象，其中Promise维护了操作"resolve =&gt; setTimeout(resolve, ms)"的执行情况，</p>
 <p>当我们使用wait时，即</p>
-<pre class="code literal-block"><span class="nx">wait</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">,</span> <span class="nx">ms</span><span class="p">))</span>
+<pre class="code literal-block"><span class="nx">wait</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">,</span> <span class="nx">ms</span><span class="p">))</span>
 </pre>
 <p>从而创建了一个setTimeout的wrapper.</p>
 <p>总的来说，Promise的主要贡献在于优化了异步回调中臃肿不堪的语法</p>
