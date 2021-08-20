@@ -117,7 +117,7 @@ different components cares only about events ">
 <p>Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)</p>
 <p>We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.</p>
 <p>event can be created with </p>
-<pre class="code literal-block"><span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">(</span><span class="nx">typeArg</span><span class="p">,</span> <span class="nx">eventInit</span><span class="p">);</span>
+<pre class="code literal-block"><span class="nx">event</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Event</span><span class="p">(</span><span class="nx">typeArg</span><span class="p">,</span> <span class="nx">eventInit</span><span class="p">);</span>
 </pre>
 <p>some important APIs for events are stopPropagation and preventDefault </p>
 <h2>ICC (Inter Component Communication)</h2>
