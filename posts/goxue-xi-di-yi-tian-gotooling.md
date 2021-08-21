@@ -142,3 +142,8 @@ GOOS=linux GOARCH=amd64 go build -o=/tmp/linux_amd64/foo . # cross-platform comp
 GOOS=windows GOARCH=amd64 go build -o=/tmp/windows_amd64/foo.exe 
 ```
 
+## 必备VSCode插件
+
+1. Go # All in One
+2. code runner # single file execution
+3. git && git history
