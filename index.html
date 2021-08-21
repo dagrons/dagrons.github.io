@@ -82,7 +82,7 @@
                 </div>
             </header><div class="e-content entry-content">
                     <div>
-<h2>Go学习第一天, GoTooling</h2>
+<h2>Go学习第一天, 从GO安装到GoTooling使用</h2>
 <h3>GOPATH vs GOROOT</h3>
 <blockquote>
 <p>The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
@@ -91,6 +91,16 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 </blockquote>
 <p>GOPATH就是Go安装第三方库的位置, 通过改变这个，我们可以自由切换依赖环境, 实现类似于python中virtualenv的功能</p>
 <p>GOROOT就是Go SDK的安装位置</p>
+<h3>安装GO SDK</h3>
+<ol>
+<li>下载安装包</li>
+<li>如下
+   <code>bash
+   rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+   echo "export PATH=$PATH:/usr/local/go/bin" &gt;&gt; ~/.bashrc 
+   go version # check if installed</code>
+</li>
+</ol>
 <h3>创建第一个GO可执行程序</h3>
 <p>在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:</p>
 <pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
@@ -108,7 +118,7 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 <pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
 go build github.com/goo/stringutil
 </pre>
-<h3>更先进的项目环境管理方式</h3>
+<h3>更好的go module创建方式</h3>
 <p>在go1.2后, 通过go.mod, 我们不再需要在$GOPATH/src/下进行项目开发了, 相应的, 我们可以通过定义go.mod来创建module</p>
 <p>首先执行go init生成用于管理的go.mod和go.sum文件</p>
 <pre class="code literal-block">go mod init github.com/foo 
@@ -124,6 +134,44 @@ go build github.com/goo/stringutil
 <p>这种项目依赖管理方式和package.json和Gemfile类似, 更加好用</p>
 <p>在go.mod编写完成后, 需要通过"go tidy mod"进行依赖解析, 会下载并解析好所有的依赖关系</p>
 <pre class="code literal-block">go mod tidy
+</pre>
+<h3>其他常见的GO Tooling命令</h3>
+<p>GO环境变量</p>
+<pre class="code literal-block">go env <span class="c1"># list all go envs</span>
+<span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>&lt;XXXX&gt; <span class="c1"># go env 会读取环境变量, 因此我们在环境变量中设置相应的变量即可, 上一种方法可能会失效</span>
+<span class="nb">export</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+</pre>
+<p>执行GO程序</p>
+<pre class="code literal-block">go run ./acwing/qsort 
+go run github.com/dagrons/god/acwing/qsort <span class="c1"># the two are equivalent</span>
+</pre>
+<p>依赖解析</p>
+<pre class="code literal-block">go get -u golang.org/x/tools/... <span class="c1"># 获取某个依赖</span>
+go mod tidy <span class="c1"># 项目整体依赖解析</span>
+go mod edit -replace<span class="o">=</span>github.com/axe/argonid<span class="o">=</span>/home/axe/argonid <span class="c1"># create the replace rule # 会将远程依赖代理到本地依赖</span>
+go mod edit -dropreplace<span class="o">=</span>github.com/axe/argonid <span class="c1"># 取消代理规则</span>
+go list -m all <span class="c1"># list all dependencies</span>
+go clean -modcache <span class="c1"># clean module cache</span>
+</pre>
+<p>测试</p>
+<pre class="code literal-block">go <span class="nb">test</span> all <span class="c1"># test all dependencies including SDK libraries</span>
+go <span class="nb">test</span> ./acwing/qsort <span class="c1"># test a single file</span>
+go <span class="nb">test</span> ./... <span class="c1"># test all # ./...表示所有文件</span>
+go <span class="nb">test</span> -cover ./... <span class="c1"># cover展示测试覆盖情况, 因为有的函数不一定有测试</span>
+</pre>
+<p>文档</p>
+<pre class="code literal-block">go doc leetcode/l51 <span class="c1"># 展示文档部分</span>
+go doc -all leetcode/l52 <span class="c1"># 优化显示</span>
+go doc -all leetcode/l52.SolveNQueens <span class="c1"># 函数文档</span>
+go doc -src leetcode/l52.SolveNQueens <span class="c1"># 显示源码</span>
+</pre>
+<p>构建与部署</p>
+<pre class="code literal-block">go build -o<span class="o">=</span>/tmp/foo <span class="c1"># compile current package into /tmp/foo</span>
+go build -o<span class="o">=</span>/tmp/foo ./cmd/foo <span class="c1"># compile ./cmd/foo into /tmp/foo</span>
+go build -a -o<span class="o">=</span>/tmp/foo . <span class="c1"># force all packages to be rebuilt</span>
+go clean -cache <span class="c1"># clear build cache </span>
+<span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/linux_amd64/foo . <span class="c1"># cross-platform compilation specified with GOOS and GOARCH</span>
+<span class="nv">GOOS</span><span class="o">=</span>windows <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/windows_amd64/foo.exe 
 </pre>
 </div>
                 </div>
