@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1629513152.75156
+_modified_time = 1629513236.0635598
 _enable_loop = True
 _template_filename = '/root/Envs/nikola/local/lib/python3.6/site-packages/nikola/data/themes/base/templates/comments_helper_isso.tmpl'
 _template_uri = 'comments_helper_isso.tmpl'
@@ -78,8 +78,8 @@ def render_comment_link(context,link,identifier):
 def render_comment_link_script(context):
     __M_caller = context.caller_stack._push_frame()
     try:
-        comment_system_id = context.get('comment_system_id', UNDEFINED)
         pagekind = context.get('pagekind', UNDEFINED)
+        comment_system_id = context.get('comment_system_id', UNDEFINED)
         lang = context.get('lang', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
