@@ -25,11 +25,12 @@ GOROOT就是Go SDK的安装位置
 ## 安装GO SDK
 1. 下载安装包
 2. 如下
-   ```bash
-   rm -rf /usr/local/go && tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
-   echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc 
-   go version # check if installed 
-   ```
+   
+```bash
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc 
+go version # check if installed 
+```
 
 
 ## 创建第一个GO可执行程序

@@ -110,13 +110,12 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 <h3>安装GO SDK</h3>
 <ol>
 <li>下载安装包</li>
-<li>如下
-   <code>bash
-   rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
-   echo "export PATH=$PATH:/usr/local/go/bin" &gt;&gt; ~/.bashrc 
-   go version # check if installed</code>
-</li>
+<li>如下</li>
 </ol>
+<pre class="code literal-block">rm -rf /usr/local/go <span class="o">&amp;&amp;</span> tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+<span class="nb">echo</span> <span class="s2">"export PATH=</span><span class="nv">$PATH</span><span class="s2">:/usr/local/go/bin"</span> &gt;&gt; ~/.bashrc 
+go version <span class="c1"># check if installed </span>
+</pre>
 <h3>创建第一个GO可执行程序</h3>
 <p>在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:</p>
 <pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
