@@ -2,7 +2,7 @@
 .. title: Go学习第一天 - GoTooling
 .. slug: goxue-xi-di-yi-tian-gotooling
 .. date: 2021-08-20 22:38:06 UTC+08:00
-.. tags: 
+.. tags: go
 .. category: 
 .. link: 
 .. description: 
