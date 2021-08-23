@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sat, 21 Aug 2021 02:44:00 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Go学习第一天 - GoTooling</title><link>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Go学习第一天, 从GO安装到GoTooling使用&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 23 Aug 2021 06:38:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3&gt;简介&lt;/h3&gt;
+&lt;p&gt;In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated &lt;em&gt;training sessions&lt;/em&gt; during which data from a single task is available for learning.
+After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在增量学习场景下, 每一轮训练针对一个任务进行训练, 在训练结束后, 要求模型能对前面训练过的所有任务进行完成&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The main challenge in incremental learning is to learn from data from the current task in a way that prevents forgetting of previously learned tasks.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;增量学习的主要问题就是避免当前训练对以前任务的遗忘&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这一点和迁移学习类似但也有所不同, 迁移学习不要求对以前训练任务的知识实现保留&lt;/p&gt;
+&lt;p&gt;They aim to exploit knowledge from previous classes to improve learning of new ones(&lt;em&gt;forward transfer&lt;/em&gt;), as well as exploiting new data to improve performance on previous tasks(&lt;em&gt;backward transfer&lt;/em&gt;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;一些常见概念&lt;/h3&gt;
+&lt;h4&gt;task-IL vs class-IL&lt;/h4&gt;
+&lt;p&gt;task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID&lt;/p&gt;
+&lt;p&gt;class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID&lt;/p&gt;
+&lt;p&gt;这里还是有些不清楚&lt;/p&gt;
+&lt;h4&gt;SIL vs CIL vs FIL&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;SIL&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;问题：由于新数据的各种原因，样本的特征值可能会改变，每个类别的比例也会改变。这些都会影响分类的准确率。&lt;/p&gt;
+&lt;p&gt;任务：因此，需要确保在现有知识的情况下，通过新样本的增量学习来提取新知识，融合新旧知识以提高分类的准确性。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;CIL
+任务：识别新类，并将其加入现有类别的集合中，提升分类的准确性和智能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FIL
+一些新的属性特征能够将分类提升到一个很大的程度，并提升分类准确率。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。&lt;/p&gt;
+&lt;h3&gt;问题&lt;/h3&gt;
+&lt;p&gt;catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即&lt;strong&gt;稳定性-可塑性困境&lt;/strong&gt;(stability-plasticity dilemma)&lt;/p&gt;
+&lt;p&gt;增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点&lt;/p&gt;
+&lt;h3&gt;方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;正则(regularization)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回放(rehearsal)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;参数隔离(parameter isolation)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</guid><pubDate>Sat, 21 Aug 2021 05:28:23 GMT</pubDate></item><item><title>Go学习第一天 - GoTooling</title><link>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Go学习第一天, 从GO安装到GoTooling使用&lt;/h2&gt;
 &lt;h3&gt;GOPATH vs GOROOT&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
@@ -94,7 +145,7 @@ go clean -cache &lt;span class="c1"&gt;# clear build cache &lt;/span&gt;
 &lt;li&gt;Go # All in One&lt;/li&gt;
 &lt;li&gt;code runner # single file execution&lt;/li&gt;
 &lt;li&gt;git &amp;amp;&amp;amp; git history&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</guid><pubDate>Fri, 20 Aug 2021 14:38:06 GMT</pubDate></item><item><title>Python多线程学习</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</guid><pubDate>Fri, 20 Aug 2021 14:38:06 GMT</pubDate></item><item><title>Python学习-多线程神器concurrent.futures</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
 &lt;p&gt;理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3&gt;Intro&lt;/h3&gt;
@@ -176,7 +227,7 @@ go clean -cache &lt;span class="c1"&gt;# clear build cache &lt;/span&gt;
 &lt;li&gt;concurrent.futures vs multiprocessing, why concurrent.futures are preferred?&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
-(见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]&lt;/p&gt;&lt;/div&gt;</description><category>python</category><category>并发</category><guid>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</guid><pubDate>Tue, 13 Apr 2021 13:43:08 GMT</pubDate></item><item><title>zwk线段树折磨日记</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
+(见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]&lt;/p&gt;&lt;/div&gt;</description><category>python</category><category>并发</category><guid>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</guid><pubDate>Tue, 13 Apr 2021 13:43:08 GMT</pubDate></item><item><title>算法学习-zwk线段树</title><link>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;前言：我为什么要学线段树&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -279,78 +330,7 @@ go clean -cache &lt;span class="c1"&gt;# clear build cache &lt;/span&gt;
 &lt;p&gt;&lt;strong&gt;OK, 完了？&lt;/strong&gt;*&lt;/p&gt;
 &lt;p&gt;完了...&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><category>算法，数据结构</category><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item><item><title>torch</title><link>https://dagrons.github.io/posts/torch/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;在这里书写你的文章。&lt;/p&gt;</description><guid>https://dagrons.github.io/posts/torch/</guid><pubDate>Thu, 08 Apr 2021 14:58:49 GMT</pubDate></item><item><title>Components, State machine, state, events, action</title><link>https://dagrons.github.io/posts/components-state-machine-state-events-action/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Intro&lt;/h2&gt;
-&lt;p&gt;The world is a state machine driven by events&lt;/p&gt;
-&lt;p&gt;events are what components listening on&lt;/p&gt;
-&lt;p&gt;components responds to different events with different actions&lt;/p&gt;
-&lt;p&gt;different components cares only about events they listen on&lt;/p&gt;
-&lt;p&gt;state are what the actions condition on&lt;/p&gt;
-&lt;p&gt;Event handlers are actions registered on a event&lt;/p&gt;
-&lt;p&gt;some components share on some state while some do not&lt;/p&gt;
-&lt;p&gt;the actions of one components may affect the states of other components&lt;/p&gt;
-&lt;p&gt;the actions of one component can emit events to others.&lt;/p&gt;
-&lt;p&gt;It's always a bad practice for one component to emit events to itself.&lt;/p&gt;
-&lt;p&gt;in real world, all components runs on different thread, however it's not true in programming&lt;/p&gt;
-&lt;h2&gt;Event&lt;/h2&gt;
-&lt;p&gt;Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)&lt;/p&gt;
-&lt;p&gt;We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.&lt;/p&gt;
-&lt;p&gt;event can be created with &lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nx"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;typeArg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;eventInit&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;some important APIs for events are stopPropagation and preventDefault &lt;/p&gt;
-&lt;h2&gt;ICC (Inter Component Communication)&lt;/h2&gt;
-&lt;p&gt;Shared state: If A and B share some same state, it's ok to operate on the state directly&lt;/p&gt;
-&lt;p&gt;Function as args: A can pass a encapsulated function for B to call, executed immediately&lt;/p&gt;
-&lt;p&gt;Emit a event: A can emit a event to B to trigger B's event listener, not executed immediately&lt;/p&gt;
-&lt;p&gt;Children -&amp;gt; parent: parent pass function to children as props/args, be careful to bind "this"!&lt;/p&gt;
-&lt;p&gt;Parent -&amp;gt; children: props/args&lt;/p&gt;
-&lt;p&gt;Child &amp;lt;-&amp;gt; Child: shared context/state&lt;/p&gt;
-&lt;p&gt;The third approach is not recommended&lt;/p&gt;
-&lt;h2&gt;React&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;useState, useEffect, useReducer, when and why?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which will not be executed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
-in other words, react "state" is what render action conditions on.&lt;/p&gt;
-&lt;p&gt;react "state" are not recommended when the next value depends on the previous value.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;suppose&lt;/span&gt; &lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt; &lt;span class="nv"&gt;has&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;state&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;, &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;only&lt;/span&gt; &lt;span class="nv"&gt;actions&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;component&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;state&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;it&lt;/span&gt;, 
-&lt;span class="nv"&gt;A&lt;/span&gt; : 
-&lt;span class="nv"&gt;Invert&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;: &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-
-&lt;span class="nv"&gt;As&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;already&lt;/span&gt; &lt;span class="nv"&gt;know&lt;/span&gt;, &lt;span class="nv"&gt;setBinary&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;executed&lt;/span&gt; &lt;span class="nv"&gt;immediately&lt;/span&gt;, &lt;span class="nv"&gt;instead&lt;/span&gt;, &lt;span class="nv"&gt;they&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;pushed&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;queue&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;order&lt;/span&gt;
-&lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;Binary&lt;/span&gt; &lt;span class="nv"&gt;twice&lt;/span&gt; &lt;span class="nv"&gt;when&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="nv"&gt;what&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;expected&lt;/span&gt; &lt;span class="nv"&gt;finally&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;bianry&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;However&lt;/span&gt;, &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;second&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;happens&lt;/span&gt; &lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;setState&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;first&lt;/span&gt; &lt;span class="nv"&gt;invert&lt;/span&gt; &lt;span class="nv"&gt;been&lt;/span&gt; &lt;span class="nv"&gt;executed&lt;/span&gt;. &lt;span class="k"&gt;Then&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;binary&lt;/span&gt; &lt;span class="nv"&gt;would&lt;/span&gt; &lt;span class="nv"&gt;be&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;, &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="nv"&gt;expected&lt;/span&gt;.
-&lt;/pre&gt;
-&lt;p&gt;To solve the above problem, we should useReducer.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;const binary = {value: 0};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'invert':
-      return {count: state.value^1};
-    default:
-      throw new Error();
-  }
-}
-
-function Inverter() {
-  const [state, dispatch] = useReducer(reducer, 1);
-  return (
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&amp;gt;
-      binary: {state.value}
-      &lt;span class="nt"&gt;&amp;lt;button&lt;/span&gt; &lt;span class="na"&gt;onClick=&lt;/span&gt;&lt;span class="s"&gt;{()&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; dispatch({type: 'invert'})}&amp;gt;invert&lt;span class="nt"&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;/&amp;gt;
-  );
-}
-&lt;/pre&gt;
-&lt;p&gt;the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.&lt;/p&gt;
-&lt;p&gt;Do not useReducer if useState works.&lt;/p&gt;
-&lt;p&gt;in react, useEffect defined what to execute after first render when or react "state" changes.&lt;/p&gt;
-&lt;p&gt;in react, components are organized in a tree structure, each components is a node on the tree.&lt;/p&gt;
-&lt;p&gt;in react, each components have at least one action called render, which listen on render events.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="事件，状态，动作" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222133.png"&gt;
-&lt;img alt="共享状态-组件通信" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405213404.png"&gt;
-&lt;img alt="React树形结构" src="https://dagrons.github.io/images/QQ%E6%88%AA%E5%9B%BE20210405222359.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>js</category><guid>https://dagrons.github.io/posts/components-state-machine-state-events-action/</guid><pubDate>Mon, 05 Apr 2021 12:37:29 GMT</pubDate></item><item><title>一些经验</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
+&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><category>算法，数据结构</category><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item><item><title>一些废话</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;misc&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 &lt;/li&gt;
 &lt;li&gt;层次感，结构感，流程清晰，注释详尽&lt;/li&gt;
@@ -380,7 +360,7 @@ function Inverter() {
 &lt;li&gt;Convention over configuration，除非用户指定，否则使用默认的配置，让组件使用者只关心它关心的接口参数&lt;/li&gt;
 &lt;li&gt;使用树形结构或嵌套结构增强层次感和结构感，隐藏细节&lt;/li&gt;
 &lt;li&gt;框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item><item><title>js中的promise机制</title><link>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Js中的核心机制-Promise&lt;/h2&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item><item><title>js学习-理解promise机制</title><link>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2&gt;Js中的核心机制-Promise&lt;/h2&gt;
 &lt;p&gt;“在异步中实现同步”&lt;/p&gt;
 &lt;p&gt;如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。&lt;/p&gt;
 &lt;p&gt;在前端开发中，相当大的一部分工作是在进行UI渲染和回调处理，这不仅是web独有的特点，而是针对几乎所有前端开发的共有特性，在前端逻辑中，我们经常关注于一个按钮被点击后会发生什么，当我们从服务器中获取数据后要干什么...，于是有了“事件流”的概念，我们将事件流想象成一个队列，主线程从事件流中不断取出事件，并进行处理。&lt;/p&gt;

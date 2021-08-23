@@ -1,5 +1,5 @@
 <!--
-.. title: 一些经验
+.. title: 一些废话
 .. slug: yi-xie-jing-yan
 .. date: 2021-04-01 14:11:48 UTC+08:00
 .. tags: 
