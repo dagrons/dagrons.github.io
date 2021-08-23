@@ -1,5 +1,5 @@
 <!--
-.. title: Python多线程学习
+.. title: Python学习-多线程神器concurrent.futures
 .. slug: pythonduo-xian-cheng-xue-xi
 .. date: 2021-04-13 21:43:08 UTC+08:00
 .. tags: python, 并发

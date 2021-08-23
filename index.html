@@ -13,7 +13,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/goxue-xi-di-yi-tian-gotooling/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -70,7 +70,73 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-yi-tian-gotooling/" class="u-url">Go学习第一天 - GoTooling</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" class="u-url">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-08-21T13:28:23+08:00" itemprop="datePublished" title="2021-08-21 13:28">2021-08-21 13:28</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h3>简介</h3>
+<p>In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated <em>training sessions</em> during which data from a single task is available for learning.
+After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.</p>
+<blockquote>
+<p>在增量学习场景下, 每一轮训练针对一个任务进行训练, 在训练结束后, 要求模型能对前面训练过的所有任务进行完成</p>
+</blockquote>
+<p>The main challenge in incremental learning is to learn from data from the current task in a way that prevents forgetting of previously learned tasks.</p>
+<blockquote>
+<p>增量学习的主要问题就是避免当前训练对以前任务的遗忘</p>
+</blockquote>
+<p>这一点和迁移学习类似但也有所不同, 迁移学习不要求对以前训练任务的知识实现保留</p>
+<p>They aim to exploit knowledge from previous classes to improve learning of new ones(<em>forward transfer</em>), as well as exploiting new data to improve performance on previous tasks(<em>backward transfer</em>)</p>
+<blockquote>
+<p>用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense</p>
+</blockquote>
+<h3>一些常见概念</h3>
+<h4>task-IL vs class-IL</h4>
+<p>task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID</p>
+<p>class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID</p>
+<p>这里还是有些不清楚</p>
+<h4>SIL vs CIL vs FIL</h4>
+<ol>
+<li>SIL</li>
+</ol>
+<p>问题：由于新数据的各种原因，样本的特征值可能会改变，每个类别的比例也会改变。这些都会影响分类的准确率。</p>
+<p>任务：因此，需要确保在现有知识的情况下，通过新样本的增量学习来提取新知识，融合新旧知识以提高分类的准确性。</p>
+<ol>
+<li>
+<p>CIL
+任务：识别新类，并将其加入现有类别的集合中，提升分类的准确性和智能。</p>
+</li>
+<li>
+<p>FIL
+一些新的属性特征能够将分类提升到一个很大的程度，并提升分类准确率。</p>
+</li>
+</ol>
+<p>任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。</p>
+<h3>问题</h3>
+<p>catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即<strong>稳定性-可塑性困境</strong>(stability-plasticity dilemma)</p>
+<p>增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点</p>
+<h3>方法</h3>
+<ol>
+<li>
+<p>正则(regularization)</p>
+</li>
+<li>
+<p>回放(rehearsal)</p>
+</li>
+<li>
+<p>参数隔离(parameter isolation)</p>
+</li>
+</ol>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-yi-tian-gotooling/" class="u-url">Go学习第一天 - GoTooling</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -180,7 +246,7 @@ go clean -cache <span class="c1"># clear build cache </span>
 </ol>
 </div>
                 </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/pythonduo-xian-cheng-xue-xi/" class="u-url">Python多线程学习</a></h1>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/pythonduo-xian-cheng-xue-xi/" class="u-url">Python学习-多线程神器concurrent.futures</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -277,7 +343,7 @@ go clean -cache <span class="c1"># clear build cache </span>
 (见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]</p>
 </div>
                 </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">zwk线段树折磨日记</a></h1>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">算法学习-zwk线段树</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -395,104 +461,7 @@ go clean -cache <span class="c1"># clear build cache </span>
 <p>zwk-《the power of statistics》</p>
 </div>
                 </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/torch/" class="u-url">torch</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
-            <p class="dateline">
-            <a href="posts/torch/" rel="bookmark">
-            <time class="published dt-published" datetime="2021-04-08T22:58:49+08:00" itemprop="datePublished" title="2021-04-08 22:58">2021-04-08 22:58</time></a>
-            </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <p>在这里书写你的文章。</p>
-                </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/components-state-machine-state-events-action/" class="u-url">Components, State machine, state, events, action</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
-            <p class="dateline">
-            <a href="posts/components-state-machine-state-events-action/" rel="bookmark">
-            <time class="published dt-published" datetime="2021-04-05T20:37:29+08:00" itemprop="datePublished" title="2021-04-05 20:37">2021-04-05 20:37</time></a>
-            </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <div>
-<h2>Intro</h2>
-<p>The world is a state machine driven by events</p>
-<p>events are what components listening on</p>
-<p>components responds to different events with different actions</p>
-<p>different components cares only about events they listen on</p>
-<p>state are what the actions condition on</p>
-<p>Event handlers are actions registered on a event</p>
-<p>some components share on some state while some do not</p>
-<p>the actions of one components may affect the states of other components</p>
-<p>the actions of one component can emit events to others.</p>
-<p>It's always a bad practice for one component to emit events to itself.</p>
-<p>in real world, all components runs on different thread, however it's not true in programming</p>
-<h2>Event</h2>
-<p>Understanding the capture phrase and bubble phrase of event passing, we can choose to register our event listener on the capture phrase or bubble phrase with the third optional parameter which is default to false(bubble)</p>
-<p>We can use e.target to refer to the event target component and use e.srcElement to refer to the source component, however there may be no srcElement for some events such as ajax events.</p>
-<p>event can be created with </p>
-<pre class="code literal-block"><span class="nx">event</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Event</span><span class="p">(</span><span class="nx">typeArg</span><span class="p">,</span> <span class="nx">eventInit</span><span class="p">);</span>
-</pre>
-<p>some important APIs for events are stopPropagation and preventDefault </p>
-<h2>ICC (Inter Component Communication)</h2>
-<p>Shared state: If A and B share some same state, it's ok to operate on the state directly</p>
-<p>Function as args: A can pass a encapsulated function for B to call, executed immediately</p>
-<p>Emit a event: A can emit a event to B to trigger B's event listener, not executed immediately</p>
-<p>Children -&gt; parent: parent pass function to children as props/args, be careful to bind "this"!</p>
-<p>Parent -&gt; children: props/args</p>
-<p>Child &lt;-&gt; Child: shared context/state</p>
-<p>The third approach is not recommended</p>
-<h2>React</h2>
-<blockquote>
-<p>useState, useEffect, useReducer, when and why?</p>
-</blockquote>
-<p>in react, "state" are special state do something with ui behaviors, and can only be changed with setState, which will not be executed immediately, but will be changed in order they been pushed into the queue(which is synchronous opeation)
-in other words, react "state" is what render action conditions on.</p>
-<p>react "state" are not recommended when the next value depends on the previous value.</p>
-<pre class="code literal-block"><span class="nv">suppose</span> <span class="nv">A</span> <span class="nv">component</span> <span class="nv">has</span> <span class="nv">a</span> <span class="nv">state</span> <span class="nv">binary</span> <span class="ss">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="ss">)</span>, <span class="k">if</span> <span class="nv">the</span> <span class="nv">only</span> <span class="nv">actions</span> <span class="nv">the</span> <span class="nv">component</span> <span class="k">do</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">state</span> <span class="nv">is</span> <span class="nv">to</span> <span class="nv">invert</span> <span class="nv">it</span>, 
-<span class="nv">A</span> : 
-<span class="nv">Invert</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="nv">binary</span> <span class="o">==</span> <span class="mi">1</span>: <span class="nv">setBinary</span> <span class="ss">(</span><span class="mi">0</span><span class="ss">)</span> <span class="k">else</span> <span class="nv">setBinary</span> <span class="ss">(</span><span class="mi">1</span><span class="ss">)</span>
-
-<span class="nv">As</span> <span class="nv">we</span> <span class="nv">already</span> <span class="nv">know</span>, <span class="nv">setBinary</span> <span class="nv">are</span> <span class="nv">not</span> <span class="nv">executed</span> <span class="nv">immediately</span>, <span class="nv">instead</span>, <span class="nv">they</span> <span class="nv">are</span> <span class="nv">pushed</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">queue</span> <span class="nv">in</span> <span class="nv">order</span>
-<span class="k">If</span> <span class="nv">A</span> <span class="nv">invert</span> <span class="nv">Binary</span> <span class="nv">twice</span> <span class="nv">when</span> <span class="nv">binary</span><span class="o">==</span><span class="mi">1</span>, <span class="nv">what</span> <span class="nv">we</span> <span class="nv">expected</span> <span class="nv">finally</span> <span class="nv">is</span> <span class="nv">bianry</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="nv">However</span>, <span class="k">if</span> <span class="nv">the</span> <span class="nv">second</span> <span class="nv">invert</span> <span class="nv">happens</span> <span class="nv">before</span> <span class="nv">the</span> <span class="nv">setState</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">first</span> <span class="nv">invert</span> <span class="nv">been</span> <span class="nv">executed</span>. <span class="k">Then</span> <span class="nv">the</span> <span class="nv">binary</span> <span class="nv">would</span> <span class="nv">be</span> <span class="mi">0</span> <span class="nv">in</span> <span class="nv">the</span> <span class="k">end</span>, <span class="nv">not</span> <span class="nv">as</span> <span class="nv">we</span> <span class="nv">expected</span>.
-</pre>
-<p>To solve the above problem, we should useReducer.</p>
-<pre class="code literal-block">const binary = {value: 0};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'invert':
-      return {count: state.value^1};
-    default:
-      throw new Error();
-  }
-}
-
-function Inverter() {
-  const [state, dispatch] = useReducer(reducer, 1);
-  return (
-    <span class="err">&lt;</span>&gt;
-      binary: {state.value}
-      <span class="nt">&lt;button</span> <span class="na">onClick=</span><span class="s">{()</span> <span class="err">=</span><span class="nt">&gt;</span> dispatch({type: 'invert'})}&gt;invert<span class="nt">&lt;/button&gt;</span>
-    <span class="err">&lt;</span>/&gt;
-  );
-}
-</pre>
-<p>the dispatched actions are pushed into the queue and ensured to  be executed in FIFO order.</p>
-<p>Do not useReducer if useState works.</p>
-<p>in react, useEffect defined what to execute after first render when or react "state" changes.</p>
-<p>in react, components are organized in a tree structure, each components is a node on the tree.</p>
-<p>in react, each components have at least one action called render, which listen on render events.</p>
-<p><img alt="事件，状态，动作" src="images/QQ%E6%88%AA%E5%9B%BE20210405222133.png"><img alt="共享状态-组件通信" src="images/QQ%E6%88%AA%E5%9B%BE20210405213404.png"><img alt="React树形结构" src="images/QQ%E6%88%AA%E5%9B%BE20210405222359.png"></p>
-</div>
-                </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/yi-xie-jing-yan/" class="u-url">一些经验</a></h1>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/yi-xie-jing-yan/" class="u-url">一些废话</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -537,7 +506,7 @@ function Inverter() {
 </ol>
 </div>
                 </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/jszhong-de-promiseji-zhi/" class="u-url">js中的promise机制</a></h1>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/jszhong-de-promiseji-zhi/" class="u-url">js学习-理解promise机制</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons

@@ -1,5 +1,5 @@
 <!--
-.. title: js中的promise机制
+.. title: js学习-理解promise机制
 .. slug: jszhong-de-promiseji-zhi
 .. date: 2021-03-23 11:18:42 UTC+08:00
 .. tags: js
