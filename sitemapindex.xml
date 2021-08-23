@@ -22,6 +22,14 @@
   <lastmod>2021-08-23T06:38:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://dagrons.github.io/categories/go.xml</loc>
+  <lastmod>2021-08-23T06:41:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://dagrons.github.io/categories/incremental-learning.xml</loc>
+  <lastmod>2021-08-23T06:41:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://dagrons.github.io/categories/js.xml</loc>
   <lastmod>2021-08-23T06:38:00Z</lastmod>
  </sitemap>
@@ -35,10 +43,10 @@
  </sitemap>
  <sitemap>
   <loc>https://dagrons.github.io/rss.xml</loc>
-  <lastmod>2021-08-23T06:38:00Z</lastmod>
+  <lastmod>2021-08-23T06:41:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://dagrons.github.io/sitemap.xml</loc>
-  <lastmod>2021-08-23T06:38:00Z</lastmod>
+  <lastmod>2021-08-23T06:41:00Z</lastmod>
  </sitemap>
 </sitemapindex>

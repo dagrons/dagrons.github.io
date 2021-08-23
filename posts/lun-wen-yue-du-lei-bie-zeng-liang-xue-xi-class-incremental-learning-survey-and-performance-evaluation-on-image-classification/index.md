@@ -2,7 +2,7 @@
 .. title: 论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification
 .. slug: lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification
 .. date: 2021-08-21 13:28:23 UTC+08:00
-.. tags: 
+.. tags: incremental learning
 .. category: 
 .. link: 
 .. description: 

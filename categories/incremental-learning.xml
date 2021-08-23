@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 incremental learning)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/incremental-learning.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 23 Aug 2021 06:41:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3&gt;简介&lt;/h3&gt;
+&lt;p&gt;In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated &lt;em&gt;training sessions&lt;/em&gt; during which data from a single task is available for learning.
+After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在增量学习场景下, 每一轮训练针对一个任务进行训练, 在训练结束后, 要求模型能对前面训练过的所有任务进行完成&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The main challenge in incremental learning is to learn from data from the current task in a way that prevents forgetting of previously learned tasks.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;增量学习的主要问题就是避免当前训练对以前任务的遗忘&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这一点和迁移学习类似但也有所不同, 迁移学习不要求对以前训练任务的知识实现保留&lt;/p&gt;
+&lt;p&gt;They aim to exploit knowledge from previous classes to improve learning of new ones(&lt;em&gt;forward transfer&lt;/em&gt;), as well as exploiting new data to improve performance on previous tasks(&lt;em&gt;backward transfer&lt;/em&gt;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;一些常见概念&lt;/h3&gt;
+&lt;h4&gt;task-IL vs class-IL&lt;/h4&gt;
+&lt;p&gt;task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID&lt;/p&gt;
+&lt;p&gt;class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID&lt;/p&gt;
+&lt;p&gt;这里还是有些不清楚&lt;/p&gt;
+&lt;h4&gt;SIL vs CIL vs FIL&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;SIL&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;问题：由于新数据的各种原因，样本的特征值可能会改变，每个类别的比例也会改变。这些都会影响分类的准确率。&lt;/p&gt;
+&lt;p&gt;任务：因此，需要确保在现有知识的情况下，通过新样本的增量学习来提取新知识，融合新旧知识以提高分类的准确性。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;CIL
+任务：识别新类，并将其加入现有类别的集合中，提升分类的准确性和智能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FIL
+一些新的属性特征能够将分类提升到一个很大的程度，并提升分类准确率。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。&lt;/p&gt;
+&lt;h3&gt;问题&lt;/h3&gt;
+&lt;p&gt;catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即&lt;strong&gt;稳定性-可塑性困境&lt;/strong&gt;(stability-plasticity dilemma)&lt;/p&gt;
+&lt;p&gt;增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点&lt;/p&gt;
+&lt;h3&gt;方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;正则(regularization)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回放(rehearsal)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;参数隔离(parameter isolation)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><category>incremental learning</category><guid>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</guid><pubDate>Sat, 21 Aug 2021 05:28:23 GMT</pubDate></item></channel></rss>
