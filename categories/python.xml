@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 python)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 23 Aug 2021 06:38:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python学习-多线程神器concurrent.futures</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 python)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 24 Aug 2021 06:48:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Python学习-多线程神器concurrent.futures</title><link>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
 &lt;p&gt;理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Intro&lt;/h3&gt;
+&lt;h3 id="intro"&gt;Intro&lt;/h3&gt;
 &lt;p&gt;The concurrent.futures module provides a high-level interface for asynchronously executing callables&lt;/p&gt;
 &lt;p&gt;keyword: callables, high-level&lt;/p&gt;
-&lt;h3&gt;基本框架&lt;/h3&gt;
+&lt;h3 id="_1"&gt;基本框架&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;future&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;concurrent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;futures&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_completed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;future_to_url&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;future_to_url&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;future&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -15,27 +15,27 @@
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s1"&gt; page is &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt; bytes'&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;提交任务&lt;/h3&gt;
+&lt;h3 id="_2"&gt;提交任务&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;executor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;submit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 创建并提交一个任务&lt;/span&gt;
 &lt;span class="n"&gt;executor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;iterables&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 对iterables中每个值都创建并提交一个任务&lt;/span&gt;
 &lt;span class="n"&gt;等价于&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;iterables&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;executor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;submit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;查询任务本身状态？&lt;/h3&gt;
+&lt;h3 id="_3"&gt;查询任务本身状态？&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;future&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;cancel&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;cancelled&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;exception&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;下班&lt;/h3&gt;
+&lt;h3 id="_4"&gt;下班&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;executor&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shutdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wait&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 下班了!&lt;/span&gt;
 &lt;span class="n"&gt;wait&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;True会等待所有工作做完&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;才下班&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;有趣的方法！&lt;/h3&gt;
+&lt;h3 id="_5"&gt;有趣的方法！&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;future&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_done_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;fn的唯一参数为future&lt;/span&gt;
 &lt;/pre&gt;
 &lt;blockquote&gt;
 &lt;p&gt;怀念js，怀念functional&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Executor Objects&lt;/h3&gt;
+&lt;h3 id="executor-objects"&gt;Executor Objects&lt;/h3&gt;
 &lt;p&gt;abstract class: concurrent.futures.Executor(need to be implemented!)
 继承关系：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -44,10 +44,10 @@
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;Executor&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;abstract&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Threadpoolexecutor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_workers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;concrete&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Processpoolexecutor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_workers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;concrete&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;ThreadPool or ProcessPool?&lt;/h3&gt;
+&lt;h3 id="threadpool-or-processpool"&gt;ThreadPool or ProcessPool?&lt;/h3&gt;
 &lt;p&gt;CPU bottleneck? =&amp;gt; ProcessPool（亲测，如果是CPU bottleneck，要比ThreadPool快很多）&lt;/p&gt;
 &lt;p&gt;I/O bottleneck? =&amp;gt; ThreadPool（如果bottleneck不在CPU上，就没必要用ProcessPool了，ThreadPool开销更小）&lt;/p&gt;
-&lt;h3&gt;Module Functions&lt;/h3&gt;
+&lt;h3 id="module-functions"&gt;Module Functions&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;等待所有任务完成？（注意：这会阻塞当前线程）&lt;/li&gt;
 &lt;/ol&gt;
@@ -65,7 +65,7 @@
 &lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;future&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;concurrent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;futures&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_completed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="o"&gt;...&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;Exception Classes&lt;/h3&gt;
+&lt;h3 id="exception-classes"&gt;Exception Classes&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;异常是程序无法语料之事，已经无法继续运行，当异常出现时，可以通过两种方式修补，一是提前预防(pre-process)，一种是通过适当的逻辑进行修补，提前判断和过滤，第二种是亡羊补牢(post-process)，在异常发生后，通过try...except进行捕获与处理.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -76,7 +76,7 @@
 &lt;span class="mf"&gt;5.&lt;/span&gt; &lt;span class="n"&gt;BrokenThreadPool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="kr"&gt;on&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;workers&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;ThreadPoolexecutor&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="n"&gt;initializing&lt;/span&gt;
 &lt;span class="mf"&gt;6.&lt;/span&gt; &lt;span class="n"&gt;BrokenProcessPool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="kr"&gt;on&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;workers&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Processpoolexecutor&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="n"&gt;initializing&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3&gt;FAQ&lt;/h3&gt;
+&lt;h3 id="faq"&gt;FAQ&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;concurrent.futures vs multiprocessing, why concurrent.futures are preferred?&lt;/li&gt;
 &lt;/ol&gt;
