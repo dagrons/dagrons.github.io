@@ -84,17 +84,19 @@
                     <div>
 <div class="toc">
 <ul>
-<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1">简介</a></li>
+<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1">前言</a></li>
+<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2">简介</a></li>
 <li>
-<a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2">一些常见概念</a><ul>
+<a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_3">一些常见概念</a><ul>
 <li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#task-il-vs-class-il">task-IL vs class-IL</a></li>
 <li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#sil-vs-cil-vs-fil">SIL vs CIL vs FIL</a></li>
 </ul>
 </li>
-<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_3">问题</a></li>
-<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_4">方法</a></li>
+<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_4">问题</a></li>
+<li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_5">方法</a></li>
 </ul>
 </div>
+<h3 id="_1">前言</h3>
 <blockquote>
 <p>基于增量学习的恶意代码家族分类
 为什么用增量学习 + 恶意代码家族分类?
@@ -102,7 +104,7 @@
 其次, BODMAS数据集中包含500多个恶意代码家族, 为研究增量学习提供了可能性
 再其次, 增量学习目前发展较慢, 仍存在大量问题, 通过增量学习实现恶意代码家族分类是有意义的, 而针对恶意代码家族分类去研究增量学习也是有意义的</p>
 </blockquote>
-<h3 id="_1">简介</h3>
+<h3 id="_2">简介</h3>
 <p>In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated <em>training sessions</em> during which data from a single task is available for learning.
 After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.</p>
 <blockquote>
@@ -117,7 +119,7 @@ After each training session, the learner should be capable of performing all per
 <blockquote>
 <p>用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense</p>
 </blockquote>
-<h3 id="_2">一些常见概念</h3>
+<h3 id="_3">一些常见概念</h3>
 <h4 id="task-il-vs-class-il">task-IL vs class-IL</h4>
 <p>task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID</p>
 <p>class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID</p>
@@ -139,10 +141,10 @@ After each training session, the learner should be capable of performing all per
 </li>
 </ol>
 <p>任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。</p>
-<h3 id="_3">问题</h3>
+<h3 id="_4">问题</h3>
 <p>catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即<strong>稳定性-可塑性困境</strong>(stability-plasticity dilemma)</p>
 <p>增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点</p>
-<h3 id="_4">方法</h3>
+<h3 id="_5">方法</h3>
 <ol>
 <li>
 <p>正则(regularization)</p>
