@@ -1,10 +1,10 @@
 <blockquote>
 <p>理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架</p>
 </blockquote>
-<h2>Intro</h2>
+<h2 id="intro">Intro</h2>
 <p>The concurrent.futures module provides a high-level interface for asynchronously executing callables</p>
 <p>keyword: callables, high-level</p>
-<h2>基本框架</h2>
+<h2 id="_1">基本框架</h2>
 <pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">future_to_url</span><span class="p">):</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">future_to_url</span><span class="p">[</span><span class="n">future</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
@@ -14,27 +14,27 @@
     <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> page is </span><span class="si">%d</span><span class="s1"> bytes&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
 </pre>
-<h2>提交任务</h2>
+<h2 id="_2">提交任务</h2>
 <pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="c1"># 创建并提交一个任务</span>
 <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">iterables</span><span class="p">)</span> <span class="c1"># 对iterables中每个值都创建并提交一个任务</span>
 <span class="n">等价于</span><span class="p">:</span>
 <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">iterables</span><span class="p">:</span>
     <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
 </pre>
-<h2>查询任务本身状态？</h2>
+<h2 id="_3">查询任务本身状态？</h2>
 <pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="p">[</span><span class="n">cancel</span><span class="p">(),</span> <span class="n">cancelled</span><span class="p">(),</span> <span class="n">running</span><span class="p">(),</span> <span class="n">done</span><span class="p">(),</span> <span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">exception</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)]</span>
 </pre>
-<h2>下班</h2>
+<h2 id="_4">下班</h2>
 <pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 下班了!</span>
 <span class="n">wait</span><span class="o">=</span><span class="n">True会等待所有工作做完</span><span class="err">，</span><span class="n">才下班</span>
 </pre>
-<h2>有趣的方法！</h2>
+<h2 id="_5">有趣的方法！</h2>
 <pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span> <span class="n">fn的唯一参数为future</span>
 </pre>
 <blockquote>
 <p>怀念js，怀念functional</p>
 </blockquote>
-<h2>Executor Objects</h2>
+<h2 id="executor-objects">Executor Objects</h2>
 <p>abstract class: concurrent.futures.Executor(need to be implemented!)
 继承关系：</p>
 <blockquote>
@@ -43,10 +43,10 @@
 <pre class="code literal-block"><span class="n">Executor</span><span class="o">[</span><span class="n">abstract</span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threadpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
 <span class="w">           </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Processpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
 </pre>
-<h2>ThreadPool or ProcessPool?</h2>
+<h2 id="threadpool-or-processpool">ThreadPool or ProcessPool?</h2>
 <p>CPU bottleneck? =&gt; ProcessPool（亲测，如果是CPU bottleneck，要比ThreadPool快很多）</p>
 <p>I/O bottleneck? =&gt; ThreadPool（如果bottleneck不在CPU上，就没必要用ProcessPool了，ThreadPool开销更小）</p>
-<h2>Module Functions</h2>
+<h2 id="module-functions">Module Functions</h2>
 <ol>
 <li>等待所有任务完成？（注意：这会阻塞当前线程）</li>
 </ol>
@@ -64,7 +64,7 @@
 <pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="o">...</span>
 </pre>
-<h2>Exception Classes</h2>
+<h2 id="exception-classes">Exception Classes</h2>
 <blockquote>
 <p>异常是程序无法语料之事，已经无法继续运行，当异常出现时，可以通过两种方式修补，一是提前预防(pre-process)，一种是通过适当的逻辑进行修补，提前判断和过滤，第二种是亡羊补牢(post-process)，在异常发生后，通过try...except进行捕获与处理.</p>
 </blockquote>
@@ -75,7 +75,7 @@
 <span class="mf">5.</span> <span class="n">BrokenThreadPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">a</span> <span class="n">ThreadPoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
 <span class="mf">6.</span> <span class="n">BrokenProcessPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">Processpoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
 </pre>
-<h2>FAQ</h2>
+<h2 id="faq">FAQ</h2>
 <ol>
 <li>concurrent.futures vs multiprocessing, why concurrent.futures are preferred?</li>
 </ol>

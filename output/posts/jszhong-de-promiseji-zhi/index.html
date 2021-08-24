@@ -98,7 +98,7 @@
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <div>
-<h2>Js中的核心机制-Promise</h2>
+<h2 id="js-promise">Js中的核心机制-Promise</h2>
 <p>“在异步中实现同步”</p>
 <p>如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。</p>
 <p>在前端开发中，相当大的一部分工作是在进行UI渲染和回调处理，这不仅是web独有的特点，而是针对几乎所有前端开发的共有特性，在前端逻辑中，我们经常关注于一个按钮被点击后会发生什么，当我们从服务器中获取数据后要干什么...，于是有了“事件流”的概念，我们将事件流想象成一个队列，主线程从事件流中不断取出事件，并进行处理。</p>
@@ -113,17 +113,17 @@
 <p>虽然js是单线程的，但浏览器并非单线程，浏览器只是为每个window开一个js线程，一个UI渲染引擎。</p>
 <p>既然js是单线程的语言，所以要求我们的事件处理函数一定是不能阻塞我们的主线程，其中UI渲染事件会被交给UI渲染引擎进行处理，而fetch和setTimeout,setInterval，以及DOM的各种OnXXX事件，如何保证它们被处理的时候不阻塞呢，答案是：异步/non-blocking</p>
 <p>在js中，异步/non-blocking常与Promise挂钩</p>
-<h3>Promise</h3>
+<h3 id="promise">Promise</h3>
 <p>在js中，异步/non-blocking的含义就是将一个同步的过程分解成几个步骤，使得原来阻塞的处理逻辑变得不阻塞，举个例子：我们想要从server端获取数据，然后进行处理，但从server端获取数据的过程是会产生阻塞的，于是js提出了promise机制，首先它让fetch变成non-blocking的调用，然后允许我们对fetch的返回数据注册处理函数，但是这个处理函数是在fetch的返回数据确定后执行</p>
 <p>所以，什么是Promise机制呢：</p>
-<h4>Promise维护了操作的执行信息</h4>
+<h4 id="promise_1">Promise维护了操作的执行信息</h4>
 <p>用mdn上的话说：</p>
 <blockquote>
 <p>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</p>
 </blockquote>
 <p>也就是说Promise维护了异步操作执行情况的相关信息，pending, fullfilled, rejected</p>
 <p>那除此之外呢？</p>
-<h4>Promise提供了一套描述aysn_ops间执行关系的语言</h4>
+<h4 id="promiseaysn_ops">Promise提供了一套描述aysn_ops间执行关系的语言</h4>
 <p>Promise提供了一套Chain规则，让我们方便地描述异步操作的执行过程</p>
 <p>如下：</p>
 <pre class="code literal-block"><span class="nx">asyn_operations</span><span class="p">()</span>
@@ -169,7 +169,7 @@
 
 <span class="nf">Promise.all</span><span class="p">()</span>
 </pre>
-<h4>那我们如何创建Promise呢</h4>
+<h4 id="promise_2">那我们如何创建Promise呢</h4>
 <p>例如：</p>
 <pre class="code literal-block"><span class="kd">const</span> <span class="nx">wait</span> <span class="o">=</span> <span class="nx">ms</span> <span class="p">=&gt;</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
 </pre>
@@ -179,7 +179,7 @@
 </pre>
 <p>从而创建了一个setTimeout的wrapper.</p>
 <p>总的来说，Promise的主要贡献在于优化了异步回调中臃肿不堪的语法</p>
-<h3>注意事项</h3>
+<h3 id="_1">注意事项</h3>
 <p>注意，Promise如果不进行异常捕获，如果执行过程出错，是不会造成程序终止的。</p>
 </div>
     </div>

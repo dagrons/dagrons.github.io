@@ -9,6 +9,14 @@
 .. type: text
 -->
 
+[TOC]
+
+> 基于增量学习的恶意代码家族分类
+> 为什么用增量学习 + 恶意代码家族分类?
+> 恶意代码家族分类是需要增量学习的典型任务场景, 恶意代码家族不可能预先给定, 不同的恶意代码家族会随着发展不断产生变体, 而在所有数据集上重新训练模型也是难以实现的, 是典型的class-incremental learning场景
+> 其次, BODMAS数据集中包含500多个恶意代码家族, 为研究增量学习提供了可能性
+> 再其次, 增量学习目前发展较慢, 仍存在大量问题, 通过增量学习实现恶意代码家族分类是有意义的, 而针对恶意代码家族分类去研究增量学习也是有意义的
+
 ## 简介
 
 In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated *training sessions* during which data from a single task is available for learning.

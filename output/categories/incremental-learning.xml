@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 incremental learning)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/incremental-learning.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 23 Aug 2021 06:41:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3&gt;简介&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 incremental learning)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/incremental-learning.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 24 Aug 2021 06:48:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1"&gt;简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2"&gt;一些常见概念&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#task-il-vs-class-il"&gt;task-IL vs class-IL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#sil-vs-cil-vs-fil"&gt;SIL vs CIL vs FIL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_3"&gt;问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_4"&gt;方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;基于增量学习的恶意代码家族分类
+为什么用增量学习 + 恶意代码家族分类?
+恶意代码家族分类是需要增量学习的典型任务场景, 恶意代码家族不可能预先给定, 不同的恶意代码家族会随着发展不断产生变体, 而在所有数据集上重新训练模型也是难以实现的, 是典型的class-incremental learning场景
+其次, BODMAS数据集中包含500多个恶意代码家族, 为研究增量学习提供了可能性
+再其次, 增量学习目前发展较慢, 仍存在大量问题, 通过增量学习实现恶意代码家族分类是有意义的, 而针对恶意代码家族分类去研究增量学习也是有意义的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="_1"&gt;简介&lt;/h3&gt;
 &lt;p&gt;In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated &lt;em&gt;training sessions&lt;/em&gt; during which data from a single task is available for learning.
 After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -14,12 +33,12 @@ After each training session, the learner should be capable of performing all per
 &lt;blockquote&gt;
 &lt;p&gt;用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;一些常见概念&lt;/h3&gt;
-&lt;h4&gt;task-IL vs class-IL&lt;/h4&gt;
+&lt;h3 id="_2"&gt;一些常见概念&lt;/h3&gt;
+&lt;h4 id="task-il-vs-class-il"&gt;task-IL vs class-IL&lt;/h4&gt;
 &lt;p&gt;task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID&lt;/p&gt;
 &lt;p&gt;class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID&lt;/p&gt;
 &lt;p&gt;这里还是有些不清楚&lt;/p&gt;
-&lt;h4&gt;SIL vs CIL vs FIL&lt;/h4&gt;
+&lt;h4 id="sil-vs-cil-vs-fil"&gt;SIL vs CIL vs FIL&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;SIL&lt;/li&gt;
 &lt;/ol&gt;
@@ -36,10 +55,10 @@ After each training session, the learner should be capable of performing all per
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。&lt;/p&gt;
-&lt;h3&gt;问题&lt;/h3&gt;
+&lt;h3 id="_3"&gt;问题&lt;/h3&gt;
 &lt;p&gt;catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即&lt;strong&gt;稳定性-可塑性困境&lt;/strong&gt;(stability-plasticity dilemma)&lt;/p&gt;
 &lt;p&gt;增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点&lt;/p&gt;
-&lt;h3&gt;方法&lt;/h3&gt;
+&lt;h3 id="_4"&gt;方法&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;正则(regularization)&lt;/p&gt;
