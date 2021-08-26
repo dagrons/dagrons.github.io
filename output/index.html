@@ -13,7 +13,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -70,7 +70,39 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" class="u-url">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-08-26T21:01:29+08:00" itemprop="datePublished" title="2021-08-26 21:01">2021-08-26 21:01</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h2 id="-">恶意代码分析基础-第一天</h2>
+<p>PE分析工具：PEID, ExecInfo</p>
+<p><a href="https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/">PE结构详解 | Thunder_J (thunderjie.github.io)</a> </p>
+<p><a href="https://www.cnblogs.com/night-ride-depart/p/5776107.html">PE结构分析 | 输入表结构和输入地址表(IAT)</a></p>
+<blockquote>
+<p>HNT和IAT内容相同, 但HNT被载入内存后不再改变, IAT会被覆写从而直接指向API函数地址</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/Cody_Ren/article/details/77815952">IAT导入函数地址表</a> </p>
+<blockquote>
+<p>用实例讲解, 有IAT解析流程</p>
+</blockquote>
+<p>脱壳需要做的两件事: 修复IAT表, 覆写OEP, dump</p>
+<p><strong>为什么要有IAT修复?</strong></p>
+<blockquote>
+<p>程序在脱壳完成进入OEP的时候, IAT已经被覆写了,
+为了让dump出的程序正常运行, 我们需要将IAT进行修复
+从INT重建IAT不靠谱是因为在脱壳过程中, 完全可以毁掉INT, 而原始加壳文件payload被加密, 无法确定INT的位址和内容</p>
+</blockquote>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" class="u-url">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
