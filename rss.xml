@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 24 Aug 2021 06:49:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;div class="toc"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 26 Aug 2021 14:02:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>恶意代码分析基础-第一天</title><link>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="-"&gt;恶意代码分析基础-第一天&lt;/h2&gt;
+&lt;p&gt;PE分析工具：PEID, ExecInfo&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/"&gt;PE结构详解 | Thunder_J (thunderjie.github.io)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.cnblogs.com/night-ride-depart/p/5776107.html"&gt;PE结构分析 | 输入表结构和输入地址表(IAT)&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HNT和IAT内容相同, 但HNT被载入内存后不再改变, IAT会被覆写从而直接指向API函数地址&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/Cody_Ren/article/details/77815952"&gt;IAT导入函数地址表&lt;/a&gt; &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用实例讲解, 有IAT解析流程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;脱壳需要做的两件事: 修复IAT表, 覆写OEP, dump&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为什么要有IAT修复?&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;程序在脱壳完成进入OEP的时候, IAT已经被覆写了,
+为了让dump出的程序正常运行, 我们需要将IAT进行修复
+从INT重建IAT不靠谱是因为在脱壳过程中, 完全可以毁掉INT, 而原始加壳文件payload被加密, 无法确定INT的位址和内容&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</guid><pubDate>Thu, 26 Aug 2021 13:01:29 GMT</pubDate></item><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;div class="toc"&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1"&gt;前言&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2"&gt;简介&lt;/a&gt;&lt;/li&gt;
