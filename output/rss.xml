@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 26 Aug 2021 14:02:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>恶意代码分析基础-第一天</title><link>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="-"&gt;恶意代码分析基础-第一天&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 01 Sep 2021 11:46:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>恶意代码分析基础-第一天</title><link>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="-"&gt;恶意代码分析基础-第一天&lt;/h2&gt;
 &lt;p&gt;PE分析工具：PEID, ExecInfo&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/"&gt;PE结构详解 | Thunder_J (thunderjie.github.io)&lt;/a&gt; &lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.cnblogs.com/night-ride-depart/p/5776107.html"&gt;PE结构分析 | 输入表结构和输入地址表(IAT)&lt;/a&gt;&lt;/p&gt;
@@ -105,6 +105,9 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 &lt;pre class="code literal-block"&gt;rm -rf /usr/local/go &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;:/usr/local/go/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc 
 go version &lt;span class="c1"&gt;# check if installed &lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="_1"&gt;配置代理&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;go env -w &lt;span class="nv"&gt;GOPROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://goproxy.cn,direct
 &lt;/pre&gt;
 &lt;h3 id="go"&gt;创建第一个GO可执行程序&lt;/h3&gt;
 &lt;p&gt;在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:&lt;/p&gt;

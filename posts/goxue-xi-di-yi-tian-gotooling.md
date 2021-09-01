@@ -32,6 +32,10 @@ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 go version # check if installed 
 ```
 
+## 配置代理
+```bash
+go env -w GOPROXY=https://goproxy.cn,direct
+```
 
 ## 创建第一个GO可执行程序
 
@@ -147,3 +151,4 @@ GOOS=windows GOARCH=amd64 go build -o=/tmp/windows_amd64/foo.exe
 1. Go # All in One
 2. code runner # single file execution
 3. git && git history
+
