@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 03 Sep 2021 12:17:15 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 03 Sep 2021 12:17:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
 &lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网&lt;/li&gt;
-&lt;li&gt;为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;记录流程如下：&lt;/p&gt;
 &lt;h2 id="ipetchosts"&gt;先将腾讯云IP加到/etc/hosts&lt;/h2&gt;
