@@ -68,18 +68,36 @@ while true; do
 <p>
 账号IP及GPU使用情况: <a href="http://$ipaddr:8080">入口</a>
 </p>
+<p>update time: $time</p>
 <h1>README</h1>
+<h2>硬件信息</h2>
 <p>
 GPU: 两块3080(公用) <br />
 CPU: Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz <br />
-当服务器重启后IP可能会变, 但这个链接不会变, IP变化后还是可以通过上述入口查看账号信息<br />
 </p>
-update time: $time
+<h2>使用注意</h2>
+<p>
+<ul>
+<li>
+服务器IP在重启后IP可能变化, 但这个链接不会变化, 要是发现服务器登不上, 可以点击上面的账号IP信息入口, 查看自己账号IP是否改变过
+</li>
+<li>
+/share下是公用目录, 建议将数据集放在这(这样别人也可以用), 以及和别人共享文件, 也是这个目录, 显卡驱动安装脚本(rescue.sh)也在这里, 最好不要自己瞎装驱动了, 如果要自己装, 后面加上--no-kernel-module参数
+</li>
+<li>
+账号默认root密码是1205, ssh端口是42502, 最好改一下密码
+</li>
+<li>
+如果要对自己的容器进行一些奇奇怪怪的操作之前, 可以提前让我给你容器创建个备份, 不然可能发生一些不太好的事情
+</li>
+</ul>
+</p>
 <body>
 </html>
 EOF
     sleep 60
 done
+
 ```
 
 # 创建autologin.service文件
