@@ -18,13 +18,13 @@
 <meta property="og:title" content="自动上传实验室服务器信息到腾讯云服务器">
 <meta property="og:url" content="https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/">
 <meta property="og:description" content="因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）
-问题分析：
-1. 服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网
+问题分析
 
+服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网
 为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次
 
 记录流程如下：
-先将腾讯云">
+先将腾讯云IP加到">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2021-09-03T19:31:01+08:00">
 </head>
@@ -103,9 +103,9 @@
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <div>
 <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
-<p>问题分析：
-1. 服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</p>
+<h2 id="_1">问题分析</h2>
 <ol>
+<li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
 <li>为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次</li>
 </ol>
 <p>记录流程如下：</p>
@@ -177,7 +177,7 @@
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </pre>
-<h2 id="_1">启动服务</h2>
+<h2 id="_2">启动服务</h2>
 <pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl start autologin.service
