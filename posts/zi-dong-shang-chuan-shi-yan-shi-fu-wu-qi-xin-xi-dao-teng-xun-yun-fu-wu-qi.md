@@ -17,21 +17,21 @@
 1. 服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网
 2. 为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次
 
-记录流程如下：
+# 记录流程如下：
 
 
-# 先将腾讯云IP加到/etc/hosts
+## 先将腾讯云IP加到/etc/hosts
 ```bash
 echo "120.53.125.30     tencent_cloud" >> /etc/hosts
 ```
 
-# 将ssh-key pubkey加到tencent_cloud的信任列表中
+## 将ssh-key pubkey加到tencent_cloud的信任列表中
 以一步是防止ssh上传ip时要求输入密码
 ```bash
 cat ~/.ssh/id_rsa.pub | ssh ubuntu@tencent_cloud 'cat >> ~/.ssh/authorized_keys' 
 ```
 
-# 检测Internet连接并自动登陆校园网的脚本
+## 检测Internet连接并自动登陆校园网的脚本
 /usr/local/bin/autologin内容如下
 ```bash
 #!/bin/bash
@@ -46,7 +46,7 @@ while true; do
 done
 ```
 
-# 上传ip的脚本
+## 上传ip的脚本
 /usr/local/bin/upload-ip内容如下:
 ```bash
 #!/bin/bash
@@ -64,7 +64,7 @@ EOF
 done
 ```
 
-# 创建autologin.service文件
+## 创建autologin.service文件
 /etc/systemd/system/autologin.service内容如下：
 ```
 [Unit]
@@ -82,7 +82,7 @@ Restart=always
 Wantedby=multi-user.target
 ```
 
-# 创建upload-ip.service文件
+## 创建upload-ip.service文件
 /etc/systemd/system/upload-ip.service内容如下：
 ```
 [Unit]
@@ -100,14 +100,14 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-# 启动服务
+## 启动服务
 ```bash
 sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl start autologin.service
 ```
 
-# 附送systemctl cheatsheet
+## 附送systemctl cheatsheet
 ```
 systemctl daemon-reload # Reload the service files to include the new service
 systemctl start your-service.service # Start your service
