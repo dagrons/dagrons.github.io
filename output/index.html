@@ -13,7 +13,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -70,7 +70,73 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" class="u-url">自动上传实验室服务器信息到腾讯云服务器</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-03T19:31:01+08:00" itemprop="datePublished" title="2021-09-03 19:31">2021-09-03 19:31</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
+<p>记录流程如下：</p>
+<h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
+<pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
+</pre>
+<h2 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h2>
+<p>以一步是防止ssh上传ip时要求输入密码</p>
+<pre class="code literal-block">cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh ubuntu@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
+</pre>
+<h2 id="ip">先创建上传ip的脚本</h2>
+<p>/usr/local/bin/upload-ip内容如下:</p>
+<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+
+<span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+    <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">'inet\ '</span><span class="p">|</span>awk <span class="s1">'{print $2}'</span><span class="k">)</span>
+    <span class="nv">host</span><span class="o">=</span><span class="s2">"实验室服务器3"</span>
+    <span class="nv">time</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
+    cat <span class="s">&lt;&lt;EOF | ssh ubuntu@tencent_cloud 'cat &gt; ~/lab_host3'</span>
+<span class="s">host: $host</span>
+<span class="s">ip: $ipaddr</span>
+<span class="s">update time: $time</span>
+<span class="s">EOF</span>
+    sleep <span class="m">60</span>
+<span class="k">done</span>
+</pre>
+<h2 id="service">创建service文件</h2>
+<p>/etc/systemd/system/upload-ip.service内容如下：</p>
+<pre class="code literal-block"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">dell</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre>
+<h2 id="_1">启动服务</h2>
+<pre class="code literal-block">sudo systemctl deamon-reload
+sudo systemctl start upload-ip.service
+</pre>
+<h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
+<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
+<span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To enable your service on every reboot</span>
+<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
