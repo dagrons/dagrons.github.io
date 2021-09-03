@@ -1,34 +1,18 @@
 <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
-<div class="toc">
-<ul>
-<li><a href="#_1">问题分析</a></li>
-<li><a href="#_2">记录流程如下：</a><ul>
-<li><a href="#ipetchosts">先将腾讯云IP加到/etc/hosts</a></li>
-<li><a href="#ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</a></li>
-<li><a href="#internet">检测Internet连接并自动登陆校园网的脚本</a></li>
-<li><a href="#ip">上传ip的脚本</a></li>
-<li><a href="#autologinservice">创建autologin.service文件</a></li>
-<li><a href="#upload-ipservice">创建upload-ip.service文件</a></li>
-<li><a href="#_3">启动服务</a></li>
-<li><a href="#systemctl-cheatsheet">附送systemctl cheatsheet</a></li>
-</ul>
-</li>
-</ul>
-</div>
 <h1 id="_1">问题分析</h1>
 <ol>
 <li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
 <li>为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次</li>
 </ol>
-<h1 id="_2">记录流程如下：</h1>
-<h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
+<p>记录流程如下：</p>
+<h1 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h1>
 <pre class="code literal-block"><span class="nb">echo</span> <span class="s2">&quot;120.53.125.30     tencent_cloud&quot;</span> &gt;&gt; /etc/hosts
 </pre>
-<h2 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h2>
+<h1 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h1>
 <p>以一步是防止ssh上传ip时要求输入密码</p>
 <pre class="code literal-block">cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh ubuntu@tencent_cloud <span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span> 
 </pre>
-<h2 id="internet">检测Internet连接并自动登陆校园网的脚本</h2>
+<h1 id="internet">检测Internet连接并自动登陆校园网的脚本</h1>
 <p>/usr/local/bin/autologin内容如下</p>
 <pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
@@ -41,7 +25,7 @@
     <span class="k">fi</span>
 <span class="k">done</span>
 </pre>
-<h2 id="ip">上传ip的脚本</h2>
+<h1 id="ip">上传ip的脚本</h1>
 <p>/usr/local/bin/upload-ip内容如下:</p>
 <pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
@@ -57,7 +41,7 @@
     sleep <span class="m">60</span>
 <span class="k">done</span>
 </pre>
-<h2 id="autologinservice">创建autologin.service文件</h2>
+<h1 id="autologinservice">创建autologin.service文件</h1>
 <p>/etc/systemd/system/autologin.service内容如下：</p>
 <pre class="code literal-block"><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span>
@@ -73,7 +57,7 @@
 <span class="k">[Install]</span>
 <span class="na">Wantedby</span><span class="o">=</span><span class="s">multi-user.target</span>
 </pre>
-<h2 id="upload-ipservice">创建upload-ip.service文件</h2>
+<h1 id="upload-ipservice">创建upload-ip.service文件</h1>
 <p>/etc/systemd/system/upload-ip.service内容如下：</p>
 <pre class="code literal-block"><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
@@ -89,12 +73,12 @@
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </pre>
-<h2 id="_3">启动服务</h2>
+<h1 id="_2">启动服务</h1>
 <pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl start autologin.service
 </pre>
-<h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
+<h1 id="systemctl-cheatsheet">附送systemctl cheatsheet</h1>
 <pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
 <span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
 <span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
