@@ -1,4 +1,20 @@
 <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">问题分析</a></li>
+<li><a href="#_2">记录流程如下：</a><ul>
+<li><a href="#ipetchosts">先将腾讯云IP加到/etc/hosts</a></li>
+<li><a href="#ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</a></li>
+<li><a href="#internet">检测Internet连接并自动登陆校园网的脚本</a></li>
+<li><a href="#ip">上传ip的脚本</a></li>
+<li><a href="#autologinservice">创建autologin.service文件</a></li>
+<li><a href="#upload-ipservice">创建upload-ip.service文件</a></li>
+<li><a href="#_3">启动服务</a></li>
+<li><a href="#systemctl-cheatsheet">附送systemctl cheatsheet</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <h1 id="_1">问题分析</h1>
 <ol>
 <li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
