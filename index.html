@@ -84,10 +84,10 @@
                     <div>
 <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
 <h2 id="_1">问题分析</h2>
-<ul>
+<ol>
 <li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
 <li>为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次</li>
-</ul>
+</ol>
 <p>记录流程如下：</p>
 <h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
 <pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
