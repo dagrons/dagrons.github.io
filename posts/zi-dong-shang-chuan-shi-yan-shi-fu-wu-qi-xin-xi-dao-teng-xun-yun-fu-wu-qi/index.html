@@ -136,12 +136,32 @@
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">'inet\ '</span><span class="p">|</span>awk <span class="s1">'{print $2}'</span><span class="k">)</span>
-    <span class="nv">host</span><span class="o">=</span><span class="s2">"实验室服务器3"</span>
     <span class="nv">time</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
     cat <span class="s">&lt;&lt;EOF | ssh ubuntu@tencent_cloud 'cat &gt; ~/lab_host3'</span>
-<span class="s">host: $host</span>
-<span class="s">ip: $ipaddr</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">&lt;head&gt;</span>
+<span class="s">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;</span>
+<span class="s">&lt;/head&gt;</span>
+<span class="s">&lt;body&gt;</span>
+<span class="s">&lt;h1&gt;基础信息&lt;/h1&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">服务器编号： 3</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">服务器IP：$ipaddr</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">账号IP及GPU使用情况: &lt;a href="http://$ipaddr:8080"&gt;入口&lt;/a&gt;</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;h1&gt;README&lt;/h1&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">GPU: 两块3080(公用) &lt;br /&gt;</span>
+<span class="s">CPU: Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz &lt;br /&gt;</span>
+<span class="s">当服务器重启后IP可能会变, 但这个链接不会变, IP变化后还是可以通过上述入口查看账号信息&lt;br /&gt;</span>
+<span class="s">&lt;/p&gt;</span>
 <span class="s">update time: $time</span>
+<span class="s">&lt;body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
 <span class="s">EOF</span>
     sleep <span class="m">60</span>
 <span class="k">done</span>

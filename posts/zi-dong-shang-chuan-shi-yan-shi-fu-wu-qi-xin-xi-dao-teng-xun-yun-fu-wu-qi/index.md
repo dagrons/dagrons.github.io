@@ -51,12 +51,32 @@ done
 
 while true; do
     ipaddr=$(ifconfig br0 |egrep 'inet\ '|awk '{print $2}')
-    host="实验室服务器3"
     time=$(date)
     cat <<EOF | ssh ubuntu@tencent_cloud 'cat > ~/lab_host3'
-host: $host
-ip: $ipaddr
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<h1>基础信息</h1>
+<p>
+服务器编号： 3
+</p>
+<p>
+服务器IP：$ipaddr
+</p>
+<p>
+账号IP及GPU使用情况: <a href="http://$ipaddr:8080">入口</a>
+</p>
+<h1>README</h1>
+<p>
+GPU: 两块3080(公用) <br />
+CPU: Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz <br />
+当服务器重启后IP可能会变, 但这个链接不会变, IP变化后还是可以通过上述入口查看账号信息<br />
+</p>
 update time: $time
+<body>
+</html>
 EOF
     sleep 60
 done
