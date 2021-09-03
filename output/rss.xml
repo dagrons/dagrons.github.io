@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 03 Sep 2021 12:35:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 03 Sep 2021 12:51:37 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>展示服务器GPU使用情况及账号IP</title><link>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中&lt;/li&gt;
+&lt;li&gt;通过one-shot-server创建服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="gpu"&gt;GPU使用情况脚本&lt;/h2&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
+&lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; t &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;nvidia-smi&lt;span class="p"&gt;|&lt;/span&gt;egrep &lt;span class="s1"&gt;'^\|[\ ]{4}[[:digit:]]'&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tr -d &lt;span class="s1"&gt;'|'&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;awk &lt;span class="s1"&gt;'{print $4}'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="c1"&gt;# command substitution&lt;/span&gt;
+    &lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="o"&gt;+=(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;cat /proc/&lt;span class="nv"&gt;$t&lt;/span&gt;/cgroup&lt;span class="p"&gt;|&lt;/span&gt;head -n &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;cut -d &lt;span class="s1"&gt;'.'&lt;/span&gt; -f &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; t &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;nvidia-smi&lt;span class="p"&gt;|&lt;/span&gt;egrep &lt;span class="s1"&gt;'^\|[\ ]{4}[[:digit:]]'&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tr -d &lt;span class="s1"&gt;'|'&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;awk &lt;span class="s1"&gt;'{print $7}'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; 
+
+    &lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="o"&gt;+=(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$t&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="nv"&gt;plen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${#&lt;/span&gt;&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="p"&gt;[@]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="c1"&gt;# parameter expansion&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"usage:"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; 
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i&amp;lt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;plen&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i++&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="c1"&gt;# arithemetic expansion&lt;/span&gt;
+    &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s2"&gt;"%-10s\t | %10s\n"&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="p"&gt;[i]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="p"&gt;[i]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; 
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"update at &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------------------------------"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------------------------------"&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; 
+&lt;/pre&gt;
+&lt;h2 id="ip"&gt;账号IP信息打印&lt;/h2&gt;
+&lt;pre class="code literal-block"&gt;lxc list 
+&lt;/pre&gt;
+&lt;h2 id="crontab"&gt;crontab设置定时任务&lt;/h2&gt;
+&lt;p&gt;定时打印ip和gpu使用信息&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;*/1 * * * * nvidia-smi &amp;gt; /dagongren/share/status
+*/1 * * * * /root/who_is_using_gpu.sh &amp;gt; /dagongren/share/usage
+*/1 * * * * /root/who_is_using_gpu.sh &amp;gt; /dagongren/share/ip &amp;amp;&amp;amp; /snap/bin/lxc list &amp;gt;&amp;gt; /dagongren/share/ip
+&lt;/pre&gt;
+&lt;h2 id="one-shot-server"&gt;one-shot-server脚本&lt;/h2&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;#/bin/bash&lt;/span&gt;
+
+&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8080&lt;/span&gt;
+&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dagongren/share/ip
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
+&lt;span class="k"&gt;then&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"The file &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; does not exist"&lt;/span&gt;
+  &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"The file &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; does exist"&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
+&lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -ne &lt;span class="s2"&gt;"HTTP/1.0 200 OK\r\nContent-Length: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;wc -c &amp;lt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;\r\n\r\n"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; cat &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; nc -l -p &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h2 id="one-shot-server_1"&gt;通过one-shot-server启动服务&lt;/h2&gt;
+&lt;pre class="code literal-block"&gt;nohup bash one_shot_server &amp;gt; /dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</guid><pubDate>Fri, 03 Sep 2021 12:45:38 GMT</pubDate></item><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
 &lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网&lt;/li&gt;

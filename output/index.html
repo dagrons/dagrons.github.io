@@ -13,7 +13,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -70,7 +70,87 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" class="u-url">自动上传实验室服务器信息到腾讯云服务器</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" class="u-url">展示服务器GPU使用情况及账号IP</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-03T20:45:38+08:00" itemprop="datePublished" title="2021-09-03 20:45">2021-09-03 20:45</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h2 id="_1">问题分析：</h2>
+<ol>
+<li>首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中</li>
+<li>通过one-shot-server创建服务</li>
+</ol>
+<h2 id="gpu">GPU使用情况脚本</h2>
+<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+
+<span class="nv">persons</span><span class="o">=()</span>
+<span class="nv">usages</span><span class="o">=()</span>
+
+<span class="k">for</span> t <span class="k">in</span> <span class="k">$(</span>nvidia-smi<span class="p">|</span>egrep <span class="s1">'^\|[\ ]{4}[[:digit:]]'</span> <span class="p">|</span> tr -d <span class="s1">'|'</span><span class="p">|</span>awk <span class="s1">'{print $4}'</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="c1"># command substitution</span>
+    <span class="nv">persons</span><span class="o">+=(</span><span class="s2">"</span><span class="k">$(</span>cat /proc/<span class="nv">$t</span>/cgroup<span class="p">|</span>head -n <span class="m">1</span><span class="p">|</span>cut -d <span class="s1">'.'</span> -f <span class="m">3</span><span class="k">)</span><span class="s2">"</span><span class="o">)</span>
+<span class="k">done</span>
+
+<span class="k">for</span> t <span class="k">in</span> <span class="k">$(</span>nvidia-smi<span class="p">|</span>egrep <span class="s1">'^\|[\ ]{4}[[:digit:]]'</span> <span class="p">|</span> tr -d <span class="s1">'|'</span><span class="p">|</span>awk <span class="s1">'{print $7}'</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> 
+
+    <span class="nv">usages</span><span class="o">+=(</span><span class="s2">"</span><span class="nv">$t</span><span class="s2">"</span><span class="o">)</span>
+<span class="k">done</span>
+
+<span class="nv">plen</span><span class="o">=</span><span class="si">${#</span><span class="nv">persons</span><span class="p">[@]</span><span class="si">}</span> <span class="c1"># parameter expansion</span>
+
+<span class="nb">echo</span> <span class="s2">"------"</span>
+<span class="nb">echo</span> <span class="s2">"usage:"</span>
+<span class="nb">echo</span> <span class="s2">"------"</span>
+<span class="nb">echo</span> 
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span> i&lt;<span class="si">${</span><span class="nv">plen</span><span class="si">}</span><span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span> <span class="c1"># arithemetic expansion</span>
+    <span class="nb">printf</span> <span class="s2">"%-10s\t | %10s\n"</span> <span class="si">${</span><span class="nv">persons</span><span class="p">[i]</span><span class="si">}</span> <span class="si">${</span><span class="nv">usages</span><span class="p">[i]</span><span class="si">}</span>
+<span class="k">done</span>
+<span class="nb">echo</span> 
+<span class="nb">echo</span> <span class="s2">"update at </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"------------------------------"</span>
+<span class="nb">echo</span> <span class="s2">"------------------------------"</span>
+<span class="nb">echo</span>
+<span class="nb">echo</span> 
+</pre>
+<h2 id="ip">账号IP信息打印</h2>
+<pre class="code literal-block">lxc list 
+</pre>
+<h2 id="crontab">crontab设置定时任务</h2>
+<p>定时打印ip和gpu使用信息</p>
+<pre class="code literal-block">*/1 * * * * nvidia-smi &gt; /dagongren/share/status
+*/1 * * * * /root/who_is_using_gpu.sh &gt; /dagongren/share/usage
+*/1 * * * * /root/who_is_using_gpu.sh &gt; /dagongren/share/ip &amp;&amp; /snap/bin/lxc list &gt;&gt; /dagongren/share/ip
+</pre>
+<h2 id="one-shot-server">one-shot-server脚本</h2>
+<pre class="code literal-block"><span class="c1">#/bin/bash</span>
+
+<span class="nv">PORT</span><span class="o">=</span><span class="m">8080</span>
+<span class="nv">FILE</span><span class="o">=</span>/dagongren/share/ip
+
+<span class="k">if</span> <span class="o">[[</span> -z <span class="s2">"</span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">"</span> <span class="o">]]</span>
+<span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">"The file </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2"> does not exist"</span>
+  <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">"The file </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2"> does exist"</span>
+<span class="k">while</span> <span class="o">[[</span> <span class="m">1</span> <span class="o">]]</span>
+<span class="k">do</span>
+  <span class="o">{</span> <span class="nb">echo</span> -ne <span class="s2">"HTTP/1.0 200 OK\r\nContent-Length: </span><span class="k">$(</span>wc -c &lt;<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="k">)</span><span class="s2">\r\n\r\n"</span><span class="p">;</span> cat <span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="p">;</span> <span class="o">}</span> <span class="p">|</span> nc -l -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>
+<span class="k">done</span>
+</pre>
+<h2 id="one-shot-server_1">通过one-shot-server启动服务</h2>
+<pre class="code literal-block">nohup bash one_shot_server &gt; /dev/null <span class="p">&amp;</span> 
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" class="u-url">自动上传实验室服务器信息到腾讯云服务器</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
