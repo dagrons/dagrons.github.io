@@ -173,7 +173,7 @@ for t in $(nvidia-smi|egrep '^\|[\ ]{4}[[:digit:]]' | tr -d '|'|awk '{print $4}'
 <blockquote>
 <p>最好启动两次, 我也不知道为什么</p>
 </blockquote>
-<pre class="code literal-block">nohup bash one_shot_server <span class="m">8080</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
+<pre class="code literal-block">nohup bash ./one_shot_server <span class="m">8080</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
 </pre>
 </div>
     </div>
