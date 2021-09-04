@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sat, 04 Sep 2021 04:53:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>展示服务器GPU使用情况及账号IP</title><link>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析：&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sat, 04 Sep 2021 04:57:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>展示服务器GPU使用情况及账号IP</title><link>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析：&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中&lt;/li&gt;
 &lt;li&gt;通过one-shot-server创建服务&lt;/li&gt;
@@ -47,8 +47,8 @@
 &lt;h2 id="one-shot-server"&gt;one-shot-server脚本&lt;/h2&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;#/bin/bash&lt;/span&gt;
 
-&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8080&lt;/span&gt;
-&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dagongren/share/ip
+&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
 &lt;span class="k"&gt;then&lt;/span&gt;
@@ -63,7 +63,10 @@
 &lt;span class="k"&gt;done&lt;/span&gt;
 &lt;/pre&gt;
 &lt;h2 id="one-shot-server_1"&gt;通过one-shot-server启动服务&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;nohup bash one_shot_server &amp;gt; /dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; 
+&lt;blockquote&gt;
+&lt;p&gt;最好启动两次, 我也不知道为什么&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="code literal-block"&gt;nohup bash one_shot_server &lt;span class="m"&gt;8080&lt;/span&gt; /root/share/ip &amp;gt; /dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</guid><pubDate>Fri, 03 Sep 2021 12:45:38 GMT</pubDate></item><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
 &lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
 &lt;ol&gt;

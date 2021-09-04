@@ -130,8 +130,8 @@
 <h2 id="one-shot-server">one-shot-server脚本</h2>
 <pre class="code literal-block"><span class="c1">#/bin/bash</span>
 
-<span class="nv">PORT</span><span class="o">=</span><span class="m">8080</span>
-<span class="nv">FILE</span><span class="o">=</span>/dagongren/share/ip
+<span class="nv">PORT</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">FILE</span><span class="o">=</span><span class="nv">$2</span>
 
 <span class="k">if</span> <span class="o">[[</span> -z <span class="s2">"</span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">"</span> <span class="o">]]</span>
 <span class="k">then</span>
@@ -146,7 +146,10 @@
 <span class="k">done</span>
 </pre>
 <h2 id="one-shot-server_1">通过one-shot-server启动服务</h2>
-<pre class="code literal-block">nohup bash one_shot_server &gt; /dev/null <span class="p">&amp;</span> 
+<blockquote>
+<p>最好启动两次, 我也不知道为什么</p>
+</blockquote>
+<pre class="code literal-block">nohup bash one_shot_server <span class="m">8080</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
 </pre>
 </div>
                 </div>
