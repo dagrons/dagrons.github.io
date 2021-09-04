@@ -109,7 +109,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=dell
+User=root
 Workingdirectory=/
 ExecStart=/usr/local/bin/autologin
 Restart=always
@@ -127,7 +127,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=dell
+User=root
 WorkingDirectory=/
 ExecStart=/usr/local/bin/upload-ip
 Restart=always
