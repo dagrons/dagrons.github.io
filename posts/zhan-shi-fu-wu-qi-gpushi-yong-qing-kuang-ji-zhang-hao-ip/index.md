@@ -60,7 +60,7 @@ lxc list
 ```
 */1 * * * * nvidia-smi > /dagongren/share/status
 */1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/usage
-*/1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/ip && /snap/bin/lxc list >> /dagongren/share/ip
+*/1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/ip && /snap/bin/lxc list >> /dagongren/share/ip && cp /dagongren/share/ip /var/www/html/ip.html
 ```
 
 # one-shot-server脚本
