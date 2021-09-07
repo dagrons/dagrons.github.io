@@ -140,7 +140,9 @@ WantedBy=multi-user.target
 ```bash
 sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
+sudo systemctl enable upload-ip.service
 sudo systemctl start autologin.service
+sudo systemctl enable autologin.service
 ```
 
 # 附送systemctl cheatsheet

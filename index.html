@@ -280,7 +280,9 @@
 <h2 id="_2">启动服务</h2>
 <pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
+sudo systemctl <span class="nb">enable</span> upload-ip.service
 sudo systemctl start autologin.service
+sudo systemctl <span class="nb">enable</span> autologin.service
 </pre>
 <h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
 <pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
