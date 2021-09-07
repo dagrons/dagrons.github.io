@@ -110,12 +110,12 @@ Wants=network-online.target
 
 [Service]
 User=root
-Workingdirectory=/
+WorkingDirectory=/
 ExecStart=/usr/local/bin/autologin
 Restart=always
 
 [Install]
-Wantedby=multi-user.target
+WantedBy=multi-user.target
 ```
 
 # 创建upload-ip.service文件
