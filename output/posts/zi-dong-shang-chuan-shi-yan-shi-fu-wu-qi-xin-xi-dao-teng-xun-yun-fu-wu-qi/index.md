@@ -52,7 +52,7 @@ done
 while true; do
     ipaddr=$(ifconfig br0 |egrep 'inet\ '|awk '{print $2}')
     time=$(date)
-    cat <<EOF | ssh ubuntu@tencent_cloud 'cat > ~/lab_host3'
+    cat <<EOF | ssh root@tencent_cloud 'cat > /var/www/html/lab_host3.html'
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

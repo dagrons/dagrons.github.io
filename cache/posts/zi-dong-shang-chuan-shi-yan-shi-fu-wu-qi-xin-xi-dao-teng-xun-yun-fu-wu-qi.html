@@ -32,7 +32,7 @@
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">&#39;inet\ &#39;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
     <span class="nv">time</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
-    cat <span class="s">&lt;&lt;EOF | ssh ubuntu@tencent_cloud &#39;cat &gt; ~/lab_host3&#39;</span>
+    cat <span class="s">&lt;&lt;EOF | ssh root@tencent_cloud &#39;cat &gt; /var/www/html/lab_host3.html&#39;</span>
 <span class="s">&lt;html&gt;</span>
 <span class="s">&lt;head&gt;</span>
 <span class="s">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span>
