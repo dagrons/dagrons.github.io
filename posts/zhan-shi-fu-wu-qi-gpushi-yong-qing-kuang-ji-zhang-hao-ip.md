@@ -13,6 +13,7 @@
 
 1. 首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中
 2. 通过one-shot-server创建服务
+3. 或者通过nginx创建服务
 
 
 # GPU使用情况脚本
@@ -90,3 +91,20 @@ done
 nohup bash ./one_shot_server 8080 /root/share/ip > /dev/null & 
 ```
 
+# 通过nginx创建服务
+/etc/nginx/sites-enabled/default内容如下：
+```
+server {
+       listen 1205;
+       location / {
+       		root /var/www/html;
+       		index ip.html;
+       }
+       
+}
+```
+
+然后加载nginx配置
+```bash
+nginx -s reload
+```

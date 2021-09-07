@@ -2,6 +2,7 @@
 <ol>
 <li>首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中</li>
 <li>通过one-shot-server创建服务</li>
+<li>或者通过nginx创建服务</li>
 </ol>
 <h1 id="gpu">GPU使用情况脚本</h1>
 <pre class="code literal-block"><span class="ch">#!/bin/bash</span>
@@ -66,4 +67,18 @@
 <p>最好启动两次, 我也不知道为什么</p>
 </blockquote>
 <pre class="code literal-block">nohup bash ./one_shot_server <span class="m">8080</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
+</pre>
+<h1 id="nginx">通过nginx创建服务</h1>
+<p>/etc/nginx/sites-enabled/default内容如下：</p>
+<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
+       <span class="n">listen</span> <span class="mi">1205</span><span class="p">;</span>
+       <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+            <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span>
+            <span class="n">index</span> <span class="n">ip</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+       <span class="p">}</span>
+
+<span class="p">}</span>
+</pre>
+<p>然后加载nginx配置</p>
+<pre class="code literal-block">nginx -s reload
 </pre>
