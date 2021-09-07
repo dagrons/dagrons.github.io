@@ -254,12 +254,12 @@
 
 <span class="k">[Service]</span>
 <span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">Workingdirectory</span><span class="o">=</span><span class="s">/</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span>
 <span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
 
 <span class="k">[Install]</span>
-<span class="na">Wantedby</span><span class="o">=</span><span class="s">multi-user.target</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </pre>
 <h2 id="upload-ipservice">创建upload-ip.service文件</h2>
 <p>/etc/systemd/system/upload-ip.service内容如下：</p>
