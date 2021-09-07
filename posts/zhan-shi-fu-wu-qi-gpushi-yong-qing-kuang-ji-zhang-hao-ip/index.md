@@ -61,7 +61,7 @@ lxc list
 ```
 */1 * * * * nvidia-smi > /dagongren/share/status
 */1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/usage
-*/1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/ip && /snap/bin/lxc list >> /dagongren/share/ip && cp /dagongren/share/ip /var/www/html/ip.html
+*/1 * * * * /root/who_is_using_gpu.sh > /dagongren/share/ip && /snap/bin/lxc list >> /dagongren/share/ip && cp /dagongren/share/ip /var/www/html/ip.txt
 ```
 
 # one-shot-server脚本
@@ -98,7 +98,7 @@ server {
        listen 1205;
        location / {
        		root /var/www/html;
-       		index ip.html;
+       		index ip.txt;
        }
        
 }
