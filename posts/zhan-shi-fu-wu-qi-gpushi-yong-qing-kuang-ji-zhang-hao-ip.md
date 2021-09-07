@@ -88,7 +88,7 @@ done
 # 通过one-shot-server启动服务
 > 最好启动两次, 我也不知道为什么
 ```bash
-nohup bash ./one_shot_server 8080 /root/share/ip > /dev/null & 
+nohup bash ./one_shot_server 1205 /root/share/ip > /dev/null & 
 ```
 
 # 通过nginx创建服务

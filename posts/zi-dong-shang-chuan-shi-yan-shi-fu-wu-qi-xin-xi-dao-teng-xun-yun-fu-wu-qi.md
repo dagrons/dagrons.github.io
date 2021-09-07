@@ -66,7 +66,7 @@ while true; do
 服务器IP：$ipaddr
 </p>
 <p>
-账号IP及GPU使用情况: <a href="http://$ipaddr:8080">入口</a>
+账号IP及GPU使用情况: <a href="http://$ipaddr:1205">入口</a>
 </p>
 <p>update time: $time</p>
 <h1>README</h1>

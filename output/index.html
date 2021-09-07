@@ -150,7 +150,7 @@
 <blockquote>
 <p>最好启动两次, 我也不知道为什么</p>
 </blockquote>
-<pre class="code literal-block">nohup bash ./one_shot_server <span class="m">8080</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
+<pre class="code literal-block">nohup bash ./one_shot_server <span class="m">1205</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
 </pre>
 <h2 id="nginx">通过nginx创建服务</h2>
 <p>/etc/nginx/sites-enabled/default内容如下：</p>
@@ -228,7 +228,7 @@
 <span class="s">服务器IP：$ipaddr</span>
 <span class="s">&lt;/p&gt;</span>
 <span class="s">&lt;p&gt;</span>
-<span class="s">账号IP及GPU使用情况: &lt;a href="http://$ipaddr:8080"&gt;入口&lt;/a&gt;</span>
+<span class="s">账号IP及GPU使用情况: &lt;a href="http://$ipaddr:1205"&gt;入口&lt;/a&gt;</span>
 <span class="s">&lt;/p&gt;</span>
 <span class="s">&lt;p&gt;update time: $time&lt;/p&gt;</span>
 <span class="s">&lt;h1&gt;README&lt;/h1&gt;</span>
