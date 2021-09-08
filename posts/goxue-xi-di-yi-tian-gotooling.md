@@ -83,6 +83,8 @@ module github.com/dagrons/godw
 go 1.16
 
 require github.com/gin-gonic/gin v1.7.2
+require "mypackage" v0.0.0
+replace "mypackage" => "../mypackage" # 指定本地依赖路径 
 ```
 
 指定了module名, go SDK版本, 以及依赖的第三方库及版本, 

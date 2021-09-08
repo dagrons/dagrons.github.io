@@ -47,6 +47,8 @@ go build github.com/goo/stringutil
 <span class="k">go</span><span class="w"> </span><span class="mf">1.16</span><span class="w"></span>
 
 <span class="n">require</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gin</span><span class="o">-</span><span class="n">gonic</span><span class="o">/</span><span class="n">gin</span><span class="w"> </span><span class="n">v1</span><span class="mf">.7.2</span><span class="w"></span>
+<span class="n">require</span><span class="w"> </span><span class="ss">&quot;mypackage&quot;</span><span class="w"> </span><span class="n">v0</span><span class="mf">.0.0</span><span class="w"></span>
+<span class="nf">replace</span><span class="w"> </span><span class="ss">&quot;mypackage&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;../mypackage&quot;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">指定本地依赖路径</span><span class="w"> </span>
 </pre>
 <p>指定了module名, go SDK版本, 以及依赖的第三方库及版本, </p>
 <p>这种项目依赖管理方式和package.json和Gemfile类似, 更加好用</p>
