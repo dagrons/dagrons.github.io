@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 09 Sep 2021 06:32:01 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>br0没有ip地址解决方案</title><link>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 09 Sep 2021 06:38:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>br0没有ip地址解决方案</title><link>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;br0没有ip，但enp0s31f6有ip&lt;/li&gt;
 &lt;li&gt;lxc list显示容器都没有ip, 推测br0没有正常工作&lt;/li&gt;
@@ -32,7 +32,7 @@
 &lt;pre class="code literal-block"&gt;netplan --debug apply
 &lt;/pre&gt;
 &lt;p&gt;发现br0成功得到ip&lt;/p&gt;
-&lt;p&gt;推测不需要第一步直接重载netplan应该就可以&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</guid><pubDate>Thu, 09 Sep 2021 06:14:32 GMT</pubDate></item><item><title>Go学习第二天-字符串相关</title><link>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="go-"&gt;Go学习第二天-字符串相关&lt;/h2&gt;
+&lt;p&gt;重启后依然生效&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</guid><pubDate>Thu, 09 Sep 2021 06:14:32 GMT</pubDate></item><item><title>Go学习第二天-字符串相关</title><link>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="go-"&gt;Go学习第二天-字符串相关&lt;/h2&gt;
 &lt;p&gt;如果有不确定的地方, 可以在a tour of go上做做小实验&lt;/p&gt;
 &lt;h3 id="byterune"&gt;byte和rune&lt;/h3&gt;
 &lt;blockquote&gt;
