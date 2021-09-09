@@ -51,4 +51,4 @@ netplan --debug apply
 
 发现br0成功得到ip
 
-推测不需要第一步直接重载netplan应该就可以
+重启后依然生效
