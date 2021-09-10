@@ -1516,12 +1516,12 @@ article .title-block h1 a {
         padding: 1.5em;
     }
 
-    /* Use a bigger drop cap */
+    /* Use a bigger drop cap
     .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
         font-size: 121px;
         line-height: 70px;
         margin: 6px 10px 0 -5px;
-    }
+    } */
 
     /* Footer can stretch out a bit */
     .site-footer {
