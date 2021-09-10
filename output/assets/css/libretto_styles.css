@@ -1178,7 +1178,7 @@ a:active {
 }
 
 /* Drop cap and first line */
-.format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
+/* .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
     color: #b7b1a9;
     display: inline-block;
     float: left;
@@ -1195,7 +1195,7 @@ a:active {
     font-family: "Playfair Display SC";
     font-size: 1em;
     font-style: normal !important; /* Cheat to preserve visual sanity */
-    font-weight: bold;
+    /* font-weight: bold;
     letter-spacing: 1px;
 }
 
@@ -1207,7 +1207,7 @@ a:active {
 
 .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type + p {
     clear: left;
-}
+} */ 
 
 .libretto-long-form {
     background: #faf9f5;
