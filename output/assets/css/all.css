@@ -1,557 +1,5 @@
-/* Minimal style sheet for the HTML output of Docutils.                    */
-/*                                                                         */
-/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
-/* :Id: $Id: minimal.css 7952 2016-07-26 18:15:59Z milde $               */
-/* :Copyright: © 2015 Günter Milde.                                        */
-/* :License: Released under the terms of the `2-Clause BSD license`_,      */
-/*    in short:                                                            */
-/*                                                                         */
-/*    Copying and distribution of this file, with or without modification, */
-/*    are permitted in any medium without royalty provided the copyright   */
-/*    notice and this notice are preserved.                                */
-/*                                                                         */
-/*    This file is offered as-is, without any warranty.                    */
-/*                                                                         */
-/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
-
-/* This CSS2.1_ stylesheet defines rules for Docutils elements without    */
-/* HTML equivalent. It is required to make the document semantic visible. */
-/*                                                                        */
-/* .. _CSS2.1: http://www.w3.org/TR/CSS2                                  */
-/* .. _validates: http://jigsaw.w3.org/css-validator/validator$link       */
-
-/* alignment of text and inline objects inside block objects*/
-.align-left   { text-align: left; }
-.align-right  { text-align: right; }
-.align-center { clear: both; text-align: center; }
-.align-top    { vertical-align: top; }
-.align-middle { vertical-align: middle; }
-.align-bottom { vertical-align: bottom; }
-
-/* titles */
-h1.title, p.subtitle {
-  text-align: center;
-}
-p.admonition-title,
-p.topic-title,
-p.sidebar-title,
-p.rubric,
-p.system-message-title {
-  font-weight: bold;
-}
-h1 + p.subtitle,
-h1 + p.section-subtitle {
-  font-size: 1.6em;
-}
-h2 + p.section-subtitle { font-size: 1.28em; }
-p.subtitle,
-p.section-subtitle,
-p.sidebar-subtitle {
-  font-weight: bold;
-  margin-top: -0.5em;
-}
-p.sidebar-title,
-p.rubric {
-  font-size: larger;
-}
-p.rubric { color: maroon; }
-a.toc-backref {
-  color: black;
-  text-decoration: none; }
-
-/* Warnings, Errors */
-div.caution p.admonition-title,
-div.attention p.admonition-title,
-div.danger p.admonition-title,
-div.error p.admonition-title,
-div.warning p.admonition-title,
-div.system-messages h1,
-div.error,
-span.problematic,
-p.system-message-title {
-  color: red;
-}
-
-/* inline literals */
-span.docutils.literal {
-  font-family: monospace;
-  white-space: pre-wrap;
-}
-/* do not wraph at hyphens and similar: */
-.literal > span.pre { white-space: nowrap; }
-
-/* Lists */
-
-/* compact and simple lists: no margin between items */
-.simple  li, .compact li,
-.simple  ul, .compact ul,
-.simple  ol, .compact ol,
-.simple > li p, .compact > li p,
-dl.simple > dd, dl.compact > dd {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* Table of Contents */
-/*div.topic.contents { margin: 0; }*/
-ul.auto-toc {
-  list-style-type: none;
-  padding-left: 1.5em; }
-
-/* Enumerated Lists */
-ol.arabic     { list-style: decimal }
-ol.loweralpha { list-style: lower-alpha }
-ol.upperalpha { list-style: upper-alpha }
-ol.lowerroman { list-style: lower-roman }
-ol.upperroman { list-style: upper-roman }
-
-dt span.classifier { font-style: italic }
-dt span.classifier:before {
-  font-style: normal;
-  margin: 0.5em;
-  content: ":";
-}
-
-/* Field Lists and drivatives */
-/* bold field name, content starts on the same line */
-dl.field-list > dt,
-dl.option-list > dt,
-dl.docinfo > dt,
-dl.footnote > dt,
-dl.citation > dt {
-  font-weight: bold;
-  clear: left;
-  float: left;
-  margin: 0;
-  padding: 0;
-  padding-right: 0.5em;
-}
-/* Offset for field content (corresponds to the --field-name-limit option) */
-dl.field-list > dd,
-dl.option-list > dd,
-dl.docinfo > dd {
-  margin-left:  9em; /* ca. 14 chars in the test examples */
-}
-/* start field-body on a new line after long field names */
-dl.field-list > dd > *:first-child,
-dl.option-list > dd > *:first-child
-{
-  display: inline-block;
-  width: 100%;
-  margin: 0;
-}
-/* field names followed by a colon */
-dl.field-list > dt:after,
-dl.docinfo > dt:after {
-  content: ":";
-}
-
-/* Bibliographic Fields (docinfo) */
-pre.address { font: inherit; }
-dd.authors > p { margin: 0; }
-
-/* Option Lists */
-dl.option-list { margin-left: 40px; }
-dl.option-list > dt { font-weight: normal; }
-span.option { white-space: nowrap; }
-
-/* Footnotes and Citations  */
-dl.footnote.superscript > dd {margin-left: 1em; }
-dl.footnote.brackets > dd {margin-left: 2em; }
-dl > dt.label { font-weight: normal; }
-a.footnote-reference.brackets:before,
-dt.label > span.brackets:before { content: "["; }
-a.footnote-reference.brackets:after,
-dt.label > span.brackets:after { content: "]"; }
-a.footnote-reference.superscript,
-dl.footnote.superscript > dt.label {
-  vertical-align: super;
-  font-size: smaller;
-}
-dt.label > span.fn-backref { margin-left: 0.2em; }
-dt.label > span.fn-backref > a { font-style: italic; }
-
-/* Line Blocks */
-div.line-block { display: block; }
-div.line-block div.line-block {
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 40px;
-}
-
-/* Figures, Images, and Tables */
-.figure.align-left,
-img.align-left,
-object.align-left,
-table.align-left {
-  margin-right: auto;
-}
-.figure.align-center,
-img.align-center,
-object.align-center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-table.align-center {
-  margin-left: auto;
-  margin-right: auto;
-}
-.figure.align-right,
-img.align-right,
-object.align-right,
-table.align-right {
-  margin-left: auto;
-}
-/* reset inner alignment in figures and tables */
-div.align-left, div.align-center, div.align-right,
-table.align-left, table.align-center, table.align-right
-{ text-align: inherit }
-
-/* Admonitions and System Messages */
-div.admonition,
-div.system-message,
-div.sidebar{
-  margin: 40px;
-  border: medium outset;
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-/* Sidebar */
-div.sidebar {
-  width: 30%;
-  max-width: 26em;
-  float: right;
-  clear: right;
-}
-
-/* Text Blocks */
-div.topic,
-pre.literal-block,
-pre.doctest-block,
-pre.math,
-pre.code {
-  margin-right: 40px;
-  margin-left: 40px;
-}
-pre.code .ln { color: gray; } /* line numbers */
-
-/* Tables */
-table.docutils { border-collapse: collapse; }
-table.docutils > td, table.docutils > th {
-  border-style: solid;
-  border-color: silver;
-  padding: 0 1ex;
-  border-width: thin;
-}
-table.docutils > td > p:first-child, table.docutils > th > p:first-child { margin-top: 0; }
-table.docutils > td > p, table.docutils > th > p { margin-bottom: 0; }
-
-table.docutils > caption {
-  text-align: left;
-  margin-bottom: 0.25em
-}
-
-table.borderless td, table.borderless th {
-  border: 0;
-  padding: 0;
-  padding-right: 0.5em /* separate table cells */
-}
-
-/* CSS31_ style sheet for the output of Docutils HTML writers.             */
-/* Rules for easy reading and pre-defined style variants.                  */
-/*                                                                         */
-/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
-/* :Id: $Id: plain.css 7952 2016-07-26 18:15:59Z milde $               */
-/* :Copyright: © 2015 Günter Milde.                                        */
-/* :License: Released under the terms of the `2-Clause BSD license`_,      */
-/*    in short:                                                            */
-/*                                                                         */
-/*    Copying and distribution of this file, with or without modification, */
-/*    are permitted in any medium without royalty provided the copyright   */
-/*    notice and this notice are preserved.                                */
-/*                                                                         */
-/*    This file is offered as-is, without any warranty.                    */
-/*                                                                         */
-/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
-/* .. _CSS3: http://www.w3.org/TR/CSS3                                     */
-
-
-/* Document Structure */
-/* ****************** */
-
-/* Sections */
-
-/* Transitions */
-
-hr.docutils {
-  width: 80%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  clear: both;
-}
-
-/* Paragraphs               */
-/* ==========               */
-
-/* vertical space (parskip) */
-/*p, ol, ul, dl,*/
-/*div.line-block,*/
-/*table{*/
-  /*margin-top: 0.5em;*/
-  /*margin-bottom: 0.5em;*/
-/*}*/
-/*h1, h2, h3, h4, h5, h6, */
-dl > dd {
-  margin-bottom: 0.5em;
-}
-
-/* Lists                    */
-/* ==========               */
-
-/* Definition Lists         */
-
-dl > dd p:first-child { margin-top: 0; }
-/* :last-child is not part of CSS 2.1 (introduced in CSS 3) */
-/* dl > dd p:last-child  { margin-bottom: 0; } */
-
-/* lists nested in definition lists */
-/* :only-child is not part of CSS 2.1 (introduced in CSS 3) */
-dd > ul:only-child, dd > ol:only-child { padding-left: 1em; }
-
-/* Description Lists */
-/* styled like in most dictionaries, encyclopedias etc. */
-dl.description > dt {
-  font-weight: bold;
-  clear: left;
-  float: left;
-  margin: 0;
-  padding: 0;
-  padding-right: 0.5em;
-}
-
-/* Field Lists */
-
-/* example for custom field-name width */
-dl.field-list.narrow > dd {
-  margin-left: 5em;
-}
-/* run-in: start field-body on same line after long field names */
-dl.field-list.run-in > dd p {
-  display: block;
-}
-
-/* Bibliographic Fields */
-
-/* generally, bibliographic fields use special definition list dl.docinfo */
-/* but dedication and abstract are placed into "topic" divs */
-div.abstract p.topic-title {
-  text-align: center;
-}
-div.dedication {
-  margin: 2em 5em;
-  text-align: center;
-  font-style: italic;
-}
-div.dedication p.topic-title {
-  font-style: normal;
-}
-
-/* Citations */
-dl.citation dt.label {
-  font-weight: bold;
-}
-span.fn-backref {
-  font-weight: normal;
-}
-
-/* Text Blocks           */
-/* ============          */
-
-/* Literal Blocks           */
-pre.literal-block, pre.doctest-block,
-pre.math, pre.code {
-  margin-left: 1.5em;
-  margin-right: 1.5em
-}
-
-/* Block Quotes             */
-
-blockquote,
-div.topic {
-  margin-left: 1.5em;
-  margin-right: 1.5em
-}
-blockquote > table,
-div.topic > table {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-blockquote p.attribution,
-div.topic p.attribution {
-  text-align: right;
-  margin-left: 20%;
-}
-
-/* Tables                   */
-/* ======                   */
-
-/* th { vertical-align: bottom; } */
-
-table tr { text-align: left; }
-
-/* "booktabs" style (no vertical lines) */
-table.booktabs {
-  border: 0;
-  border-top: 2px solid;
-  border-bottom: 2px solid;
-  border-collapse: collapse;
-}
-table.booktabs * {
-  border: 0;
-}
-table.booktabs th {
-  border-bottom: thin solid;
-}
-
-/* numbered tables (counter defined in div.document) */
-table.numbered > caption:before {
-  counter-increment: table;
-  content: "Table " counter(table) ": ";
-  font-weight: bold;
-}
-
-/* Explicit Markup Blocks   */
-/* ======================   */
-
-/* Footnotes and Citations  */
-/* -----------------------  */
-
-/* line on the left */
-dl.footnote {
-  padding-left: 1ex;
-  border-left: solid;
-  border-left-width: thin;
-}
-
-/* Directives               */
-/* ----------               */
-
-/* Body Elements            */
-/* ~~~~~~~~~~~~~            */
-
-/* Images and Figures */
-
-/* let content flow to the side of aligned images and figures */
-.figure.align-left,
-img.align-left,
-object.align-left {
-  display: block;
-  clear: left;
-  float: left;
-  margin-right: 1em
-}
-.figure.align-right,
-img.align-right,
-object.align-right {
-  display: block;
-  clear: right;
-  float: right;
-  margin-left: 1em
-}
-
-/* Sidebar */
-
-/* Move into the margin. In a layout with fixed margins, */
-/* it can be moved into the margin completely.           */
-div.sidebar {
-  width: 30%;
-  max-width: 26em;
-  margin-left: 1em;
-  margin-right: -5.5%;
-  background-color: #ffffee ;
-}
-
-div.admonition, div.attention, div.caution, div.danger, div.error,
-div.hint, div.important, div.note, div.tip, div.warning, div.sidebar,
-div.system-message {
-/* stolen from Boostrap 4 (.card) */
-  margin-bottom: 2rem;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  color: #212529;
-  background-clip: border-box;
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
-  padding: 0;
-}
-
-div.attention, div.caution, div.danger, div.error, div.warning {
-  /* stolen from Boostrap 3 (.border-danger) */
-  border-color: #dc3545!important;
-}
-
-div.admonition p, div.hint p,
-div.important p, div.note p,
-div.tip p, div.sidebar p,
-div.attention p, div.caution p,
-div.danger p, div.error p,
-div.warning p, div.system-message p {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-div.admonition p.admonition-title, div.hint p.admonition-title,
-div.important p.admonition-title, div.note p.admonition-title,
-div.tip p.admonition-title, div.sidebar p.sidebar-title,
-div.attention p.admonition-title, div.caution p.admonition-title,
-div.danger p.admonition-title, div.error p.admonition-title,
-div.warning p.admonition-title, div.system-message p.system-message-title {
-/* stolen from Boostrap 4 (.card .card-header) */
-  font-weight: 400;
-  font-size: 1.25rem;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  background-color: rgba(0,0,0,.03);
-  border-bottom: 1px solid rgba(0,0,0,.125);
-}
-
-div.attention p.admonition-title, div.caution p.admonition-title,
-div.danger p.admonition-title, div.error p.admonition-title,
-div.warning p.admonition-title, div.system-message p.system-message-title {
-  /* stolen from Boostrap 4 (.card .card-header .bg-danger) */
-  background-color: #dc3545;
-  color: white;
-}
-
-div.sidebar {
-    margin-right: 0;
-}
-
-/* Improved margin overrides */
-div.topic,
-pre.literal-block,
-pre.doctest-block,
-pre.math,
-pre.code,
-div.code {
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-div.code {
-    margin-bottom: 1rem;
-}
+@import url("rst_base.css");
+@import url("nikola_rst.css");
 
 /* code.css file generated by Nikola */
 pre { line-height: 125%; }
@@ -639,425 +87,262 @@ table.codetable, table.highlighttable { width: 100%;}
 .codetable td.linenos, td.linenos { text-align: right; width: 3.5em; padding-right: 0.5em; background: rgba(127, 127, 127, 0.2) }
 .codetable td.code, td.code { padding-left: 0.5em; }
 
-@charset "UTF-8";
-
-/*
-	Copyright © 2014-2021 Daniel Aleksandersen and others.
-
-	Permission is hereby granted, free of charge, to any
-	person obtaining a copy of this software and associated
-	documentation files (the "Software"), to deal in the
-	Software without restriction, including without limitation
-	the rights to use, copy, modify, merge, publish,
-	distribute, sublicense, and/or sell copies of the
-	Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice
-	shall be included in all copies or substantial portions of
-	the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
-	KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-	WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-	PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
-	OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-	OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
-body {
-	color: #4F5151;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 17px;
-	line-height: 1.4;
-	padding: 1em;
-}
-
-#container {
-	margin: 1em auto;
-	max-width: 770px;
-}
-#menu ul,
-#menu ul li,
-.postpromonav .tags,
-.postpromonav .tags li,
-.pager,
-.pager li,
-#toptranslations ul,
-#toptranslations ul li {
-	list-style: none;
-	padding-left: 0;
-	padding-right: 0;
-}
-
-#toptranslations ul {
-	display: inline;
-}
-
-#menu ul li,
-#toptranslations ul li {
-	display: inline-block;
-	margin-right: 1.5em;
-}
-
-#toptranslations h2 {
-	display: inline;
-	font-size: 1em;
-	margin-right: 1.5em;
-}
-
-html[dir="rtl"] #menu ul li,
-html[dir="rtl"] #toptranslations ul li,
-html[dir="rtl"] #toptranslations h2 {
-	margin-left: 1.5em;
-	margin-right: 0;
-}
-
-#toptranslations {
-	text-align: right;
-	float: right;
-}
-
-html[dir="rtl"] #toptranslations {
-	text-align: left;
-	float: left;
-}
-
-.posttranslations h3, .translationslist h3 {
-	display: inline;
-	font-size: 1em;
-}
-
-.entry-title {
-	font-size: 2em;
-}
-
-.posttranslations h3:last-child, .translationslist h3:last-child {
-	display: none;
-}
-
-.postindex article {
-	border-bottom: 1px solid #4F5151;
-	padding-bottom: 1em;
-}
-#header {
-	border-bottom: 1px solid #4F5151;
-}
-#footer {
-	border-top: 1px solid #4F5151;
-}
-
-/* Tags */
-.postpromonav {
-	border-bottom: 1px solid #4F5151;
-	border-top: 1px solid #4F5151;
-	margin-top: 1em;
-	padding: .5em 0;
-}
-.postpromonav .tags {
+body
+{
+	margin: 0;
+	color: #8c837a;
+	background: #494949;
 	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
 }
-.metadata p:before,
-.postpromonav .tags li:before,
-.postlist .listdate:after,
-.translationslist p:before {
-	content: " — ";
-}
-.postlist li {
-	margin-bottom: .33em;
-}
-.byline a:not(:last-child):after {
-	content: ",";
-}
-
-/* Post and archive pagers */
-.postindexpager .pager .next:before {
-	content: "↓ ";
-}
-.postindexpager .pager .previous:before,
-.archivenav .pager .up:before {
-	content: "↑ ";
-}
-.postpromonav .pager .next:after,
-.archivenav .pager .next:after {
-	content: " →";
-}
-html[dir="rtl"] .postpromonav .pager .previous:after,
-html[dir="rtl"] .archivenav .pager .previous:after {
-	content: " →";
-}
-.postpromonav .pager .previous:before,
-.archivenav .pager .previous:before {
-	content: "← ";
-}
-html[dir="rtl"] .postpromonav .pager .next:before,
-html[dir="rtl"] .archivenav .pager .next:before {
-	content: "← ";
-}
-html[dir="rtl"] .postpromonav .pager .next:after,
-html[dir="rtl"] .archivenav .pager .next:after,
-html[dir="rtl"] .postpromonav .pager .previous:before,
-html[dir="rtl"] .archivenav .pager .previous:before {
-	content: "";
-}
-.metadata p:first-of-type:before,
-.postpromonav .tags li:first-of-type:before,
-.translationslist p:first-of-type:before {
-	content: "";
-}
-.postpromonav .pager {
-	clear: both;
-	height: 1em;
-}
-.postpromonav .tags li,
-.postpromonav .pager li,
-.archivenav .pager li {
-	display: inline-block;
-}
-.archivenav .pager {
-	text-align: center
-}
-.postpromonav .pager .next,
-.archivenav .pager .next {
-	float: right;
-}
-html[dir="rtl"] .postpromonav .pager .next,
-html[dir="rtl"] .archivenav .pager .next {
-	float: left;
-}
-
-.postpromonav .pager .previous,
-.archivenav .pager .previous {
-	float: left;
-}
-html[dir="rtl"] .postpromonav .pager .previous,
-html[dir="rtl"] .archivenav .pager .previous {
-	float: right;
-}
-
-.archivenav .pager .disabled,
-.archivenav .pager .disabled a,
-.archivenav .pager .disabled:link {
-	color: #888;
-	cursor: not-allowed;
-}
-
-.metadata p,
-.translationslist p {
-	display: inline;
-}
-
-#brand {
-	font-size: 3em;
-	line-height: 1;
-}
-
-/* Links */
-:link {
-	color: #1168CC;
+a
+{
+	color: #417ebe;
 	text-decoration: none;
 }
-:visited {
-	color: #6830BB;
+a:hover
+{
+	color: #a7794f;
+	text-decoration: underline;
 }
-:link:hover, :visited:hover {
-	color: #0d53a3;
+hr {
+    border-top: 1px solid #8c837a;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 }
-
-#brand :link,
-#brand :visited {
-	color: inherit;
-}
-
-/* Images */
-img {
+img
+{
 	border: none;
-	line-height: 1;
+    opacity: 0.9;
 }
-
-.postpage img,
-.postpage object,
-.postindex article img,
-.postindex article object {
-	height: auto;
-	max-width: 100%;
+p
+{
+	margin: 10px 0;
 }
-
-/* Comment helpers */
-#disqus_thread {
-	min-height: 325px;
+h1
+{
+	font-size: 17px;
+	font-weight: bold;
+	color: #505050;
+	margin: 0 0 16px 0;
+	text-transform: uppercase;
 }
-
-.breadcrumb {
-	padding: 8px 15px;
-	margin-bottom: 20px;
-	list-style: none;
+.teaser h1 {
+    padding-right: 160px;
+    position: relative;
 }
-
-.breadcrumb > li {
-	display: inline-block;
-	margin-right: 0;
-	margin-left: 0;
+.teaser h1 time {
+    position: absolute;
+    text-align: right;
+	color: #8c837a;
+    top: 1px;
+    right: 0px;
+    font-size: 14px;
 }
-
-.breadcrumb > li:after {
-	content: ' / ';
-	color: #888;
+h2
+{
+	font-size: 16px;
+	font-weight: bold;
+	color: #6d6964;
+	margin: 16px 0 10px 0;
 }
-
-.breadcrumb > li:last-of-type:after {
-	content: '';
-	margin-left: 0;
+h3
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #8c837a;
+	margin: 10px 0 6px 0;
 }
-
-.thumbnails {
-	list-style: none;
+ul
+{
+	margin: 10px 0 10px 20px;
 	padding: 0;
 }
-
-.thumbnails > li {
-	display: inline-block;
-	margin-right: 10px;
+li 
+{
+	background: transparent url(../img/bullet.png) no-repeat 2px 4px;
+	padding: 0 0 0 24px;
+	margin: 6px 0px;
+	list-style: none; 
 }
-
-.thumbnails > li:last-of-type {
-	margin-right: 0;
-}
-
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-	position: static;
-	width: auto;
-	height: auto;
+#wrp
+{
 	margin: 0;
-	overflow: visible;
-	clip: auto;
+	background: #5c5c5c url(../img/wrp.png) repeat top left;
+}
+#cont
+{
+	width: 815px;
+	text-align: left;
+	margin: 0 auto;
+	background: transparent url(../img/cont.png) repeat-y top left;
+}
+#page 
+{
+	position: relative;
+	width: 775px;
+	margin: 0px 20px;
+	background: #fbf7f1 url(../img/page.png) repeat-y top left;
+}
+header
+{
+	height: 248px;
+	background: transparent url(../img/header.jpg) no-repeat top left;
+}
+header h1
+{
+	display: none;
+}
+nav
+{
+    font-size: 20px;
+	border-right: 1px solid #d3c8c4;
+	float: left;
+	width: 50px;
+	margin-left: 18px;
+	display: inline; /* FIX IE double margin bug */
+    opacity: 0.8;
+}
+nav:hover {
+    opacity: 1.0;
+}
+nav ul
+{
+	margin: 0;
+	padding: 10px 0 0 0;
+}
+nav li
+{
+	padding: 0;
+	list-style: none;
+    background: transparent;
+	margin: 0 0 10px 0;
+}
+nav li a {
+    display: block;
+    padding: 0 10px;
+}
+#content
+{
+	margin-left: 130px;
+	width: 610px;
+}
+#ftr
+{
+	position: relative;
+	clear: both;
+	font-size: 11px;
+	height: 47px;
+	background: transparent url(../img/ftr.jpg) no-repeat top left;
 }
 
-pre.code, code {
-	white-space: pre-wrap;
-	word-wrap: normal;
-	overflow: auto;
+footer
+{
+	background: transparent url(../img/footer.png) repeat-x top left;
+	padding: 20px;
+	text-align: left;
+}
+footer small
+{
+	font-size: 10px;
+	color: #606060;
+}
+footer small a
+{
+	color: #606060;
+	text-decoration: none;
 }
 
-/* Set a minimum logo height to ensure .svg are displayed if there is no brand text (#3493) */
-#logo {
-	min-height: 25px;
+ul.pager {
+    margin: 40px 0 0 0;
+}
+ul.pager li {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+ul.pager .next {
+    float: right;
+    width: 300px;
+    text-align: right;
 }
 
-/* SOURCE: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
-@media print {
-	*,
-	*:before,
-	*:after {
-		background: transparent !important;
-		color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
-		box-shadow: none !important;
-		text-shadow: none !important;
-		font-family: Garamond, Junicode, serif;
-	}
-
-	body {
-		font-size: 12pt;
-	}
-
-	a,
-	a:visited {
-		text-decoration: underline;
-	}
-
-	a[href]:after {
-		content: " (" attr(href) ")";
-	}
-
-	abbr[title]:after {
-		content: " (" attr(title) ")";
-	}
-
-	/*
-	 * Don't show links that are fragment identifiers,
-	 * or use the `javascript:` pseudo protocol
-	 */
-
-	a[href^="#"]:after,
-	a[href^="data:"]:after,
-	a[href^="javascript:"]:after {
-		content: "";
-	}
-
-	pre,
-	blockquote {
-		border: 1px solid #999;
-		page-break-inside: avoid;
-	}
-
-	/*
-	 * Printing Tables:
-	 * http://css-discuss.incutio.com/wiki/Printing_Tables
-	 */
-
-	thead {
-		display: table-header-group;
-	}
-
-	tr,
-	img {
-		page-break-inside: avoid;
-	}
-
-	img {
-		max-width: 100% !important;
-	}
-
-	p,
-	h2,
-	h3 {
-		orphans: 3;
-		widows: 3;
-	}
-
-	h2,
-	h3 {
-		page-break-after: avoid;
-	}
-
-	.hidden-print {
-		display: none !important;
-	}
-
-	article .entry-title a[href]:after,
-	article .metadata a[href]:after,
-	article .tags a[href]:after {
-		content: "";
-	}
-
-	article .metadata .sourceline {
-		display: none;
-	}
-
-	article .metadata .linkline a[href]:after {
-		content: " (" attr(href) ")";
-	}
-
-	#header {
-		display: none;
-	}
-
-	.postpromonav {
-		padding: 0;
-	}
+article {
+    margin-bottom: 32px;
+}
+article small {
+    display: block;
+    margin: -10px 0 20px 0;
+}
+img.left {
+    float: left;
+    margin: 0 16px 16px 0;
+    max-height: 140px;
+    max-width: 140px;
+}
+img.center {
+    display: block;
+    margin: 16px auto;
+    max-height: 300px;
+    max-width: 300px;
+}
+.clear {
+    clear: both;
+}
+.option-group .option,
+tt.literal {
+    color: #444;
+}
+dd {
+    margin-left: 2em;
+}
+ul.breadcrumb {
+    margin: 10px 0;
+    padding: 0;
+}
+ul.breadcrumb li {
+    float: left;
+    background: transparent;
+    padding: 0 1em 0 0;
+    margin: 0;
+}
+pre {
+    overflow-x: auto;
 }
 
+@media (max-width: 480px) {
+    #cont {
+        width: 408px;
+        background-size: 100% 1px;
+    }
+    #page {
+        width: 388px;
+        margin: 0 10px;
+        background-size: 100% 217px;
+    }
+    header {
+        height: 124px;
+        background-size: 100% 124px;
+    }
+    nav { margin: 0 16px 16px 0; width: auto; }
+    nav ul { padding: 0; }
+    nav li a { padding: 0 10px 0 16px; }
+    .teaser h1 { padding: 0; }
+    .teaser h1 time { position: static; display: block; }
+    
+    #content {
+        width: auto;
+        margin: 0 16px;
+    }
+    #ftr {
+        height: 25px;
+        background-size: 100% 25px;
+    }
+}
+
+/*!
+ *  Font Awesome 4.0.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */@font-face{font-family:'FontAwesome';src:url('../fonts/fontawesome-webfont.eot?v=4.0.3');src:url('../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'),url('../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'),url('../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'),url('../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}.fa{display:inline-block;font-family:FontAwesome;font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-lg{font-size:1.3333333333333333em;line-height:.75em;vertical-align:-15%}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-fw{width:1.2857142857142858em;text-align:center}.fa-ul{padding-left:0;margin-left:2.142857142857143em;list-style-type:none}.fa-ul>li{position:relative}.fa-li{position:absolute;left:-2.142857142857143em;width:2.142857142857143em;top:.14285714285714285em;text-align:center}.fa-li.fa-lg{left:-1.8571428571428572em}.fa-border{padding:.2em .25em .15em;border:solid .08em #eee;border-radius:.1em}.pull-right{float:right}.pull-left{float:left}.fa.pull-left{margin-right:.3em}.fa.pull-right{margin-left:.3em}.fa-spin{-webkit-animation:spin 2s infinite linear;-moz-animation:spin 2s infinite linear;-o-animation:spin 2s infinite linear;animation:spin 2s infinite linear}@-moz-keyframes spin{0%{-moz-transform:rotate(0deg)}100%{-moz-transform:rotate(359deg)}}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(359deg)}}@-o-keyframes spin{0%{-o-transform:rotate(0deg)}100%{-o-transform:rotate(359deg)}}@-ms-keyframes spin{0%{-ms-transform:rotate(0deg)}100%{-ms-transform:rotate(359deg)}}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}.fa-rotate-90{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-ms-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-ms-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-ms-transform:rotate(270deg);-o-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0,mirror=1);-webkit-transform:scale(-1,1);-moz-transform:scale(-1,1);-ms-transform:scale(-1,1);-o-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2,mirror=1);-webkit-transform:scale(1,-1);-moz-transform:scale(1,-1);-ms-transform:scale(1,-1);-o-transform:scale(1,-1);transform:scale(1,-1)}.fa-stack{position:relative;display:inline-block;width:2em;height:2em;line-height:2em;vertical-align:middle}.fa-stack-1x,.fa-stack-2x{position:absolute;left:0;width:100%;text-align:center}.fa-stack-1x{line-height:inherit}.fa-stack-2x{font-size:2em}.fa-inverse{color:#fff}.fa-glass:before{content:"\f000"}.fa-music:before{content:"\f001"}.fa-search:before{content:"\f002"}.fa-envelope-o:before{content:"\f003"}.fa-heart:before{content:"\f004"}.fa-star:before{content:"\f005"}.fa-star-o:before{content:"\f006"}.fa-user:before{content:"\f007"}.fa-film:before{content:"\f008"}.fa-th-large:before{content:"\f009"}.fa-th:before{content:"\f00a"}.fa-th-list:before{content:"\f00b"}.fa-check:before{content:"\f00c"}.fa-times:before{content:"\f00d"}.fa-search-plus:before{content:"\f00e"}.fa-search-minus:before{content:"\f010"}.fa-power-off:before{content:"\f011"}.fa-signal:before{content:"\f012"}.fa-gear:before,.fa-cog:before{content:"\f013"}.fa-trash-o:before{content:"\f014"}.fa-home:before{content:"\f015"}.fa-file-o:before{content:"\f016"}.fa-clock-o:before{content:"\f017"}.fa-road:before{content:"\f018"}.fa-download:before{content:"\f019"}.fa-arrow-circle-o-down:before{content:"\f01a"}.fa-arrow-circle-o-up:before{content:"\f01b"}.fa-inbox:before{content:"\f01c"}.fa-play-circle-o:before{content:"\f01d"}.fa-rotate-right:before,.fa-repeat:before{content:"\f01e"}.fa-refresh:before{content:"\f021"}.fa-list-alt:before{content:"\f022"}.fa-lock:before{content:"\f023"}.fa-flag:before{content:"\f024"}.fa-headphones:before{content:"\f025"}.fa-volume-off:before{content:"\f026"}.fa-volume-down:before{content:"\f027"}.fa-volume-up:before{content:"\f028"}.fa-qrcode:before{content:"\f029"}.fa-barcode:before{content:"\f02a"}.fa-tag:before{content:"\f02b"}.fa-tags:before{content:"\f02c"}.fa-book:before{content:"\f02d"}.fa-bookmark:before{content:"\f02e"}.fa-print:before{content:"\f02f"}.fa-camera:before{content:"\f030"}.fa-font:before{content:"\f031"}.fa-bold:before{content:"\f032"}.fa-italic:before{content:"\f033"}.fa-text-height:before{content:"\f034"}.fa-text-width:before{content:"\f035"}.fa-align-left:before{content:"\f036"}.fa-align-center:before{content:"\f037"}.fa-align-right:before{content:"\f038"}.fa-align-justify:before{content:"\f039"}.fa-list:before{content:"\f03a"}.fa-dedent:before,.fa-outdent:before{content:"\f03b"}.fa-indent:before{content:"\f03c"}.fa-video-camera:before{content:"\f03d"}.fa-picture-o:before{content:"\f03e"}.fa-pencil:before{content:"\f040"}.fa-map-marker:before{content:"\f041"}.fa-adjust:before{content:"\f042"}.fa-tint:before{content:"\f043"}.fa-edit:before,.fa-pencil-square-o:before{content:"\f044"}.fa-share-square-o:before{content:"\f045"}.fa-check-square-o:before{content:"\f046"}.fa-arrows:before{content:"\f047"}.fa-step-backward:before{content:"\f048"}.fa-fast-backward:before{content:"\f049"}.fa-backward:before{content:"\f04a"}.fa-play:before{content:"\f04b"}.fa-pause:before{content:"\f04c"}.fa-stop:before{content:"\f04d"}.fa-forward:before{content:"\f04e"}.fa-fast-forward:before{content:"\f050"}.fa-step-forward:before{content:"\f051"}.fa-eject:before{content:"\f052"}.fa-chevron-left:before{content:"\f053"}.fa-chevron-right:before{content:"\f054"}.fa-plus-circle:before{content:"\f055"}.fa-minus-circle:before{content:"\f056"}.fa-times-circle:before{content:"\f057"}.fa-check-circle:before{content:"\f058"}.fa-question-circle:before{content:"\f059"}.fa-info-circle:before{content:"\f05a"}.fa-crosshairs:before{content:"\f05b"}.fa-times-circle-o:before{content:"\f05c"}.fa-check-circle-o:before{content:"\f05d"}.fa-ban:before{content:"\f05e"}.fa-arrow-left:before{content:"\f060"}.fa-arrow-right:before{content:"\f061"}.fa-arrow-up:before{content:"\f062"}.fa-arrow-down:before{content:"\f063"}.fa-mail-forward:before,.fa-share:before{content:"\f064"}.fa-expand:before{content:"\f065"}.fa-compress:before{content:"\f066"}.fa-plus:before{content:"\f067"}.fa-minus:before{content:"\f068"}.fa-asterisk:before{content:"\f069"}.fa-exclamation-circle:before{content:"\f06a"}.fa-gift:before{content:"\f06b"}.fa-leaf:before{content:"\f06c"}.fa-fire:before{content:"\f06d"}.fa-eye:before{content:"\f06e"}.fa-eye-slash:before{content:"\f070"}.fa-warning:before,.fa-exclamation-triangle:before{content:"\f071"}.fa-plane:before{content:"\f072"}.fa-calendar:before{content:"\f073"}.fa-random:before{content:"\f074"}.fa-comment:before{content:"\f075"}.fa-magnet:before{content:"\f076"}.fa-chevron-up:before{content:"\f077"}.fa-chevron-down:before{content:"\f078"}.fa-retweet:before{content:"\f079"}.fa-shopping-cart:before{content:"\f07a"}.fa-folder:before{content:"\f07b"}.fa-folder-open:before{content:"\f07c"}.fa-arrows-v:before{content:"\f07d"}.fa-arrows-h:before{content:"\f07e"}.fa-bar-chart-o:before{content:"\f080"}.fa-twitter-square:before{content:"\f081"}.fa-facebook-square:before{content:"\f082"}.fa-camera-retro:before{content:"\f083"}.fa-key:before{content:"\f084"}.fa-gears:before,.fa-cogs:before{content:"\f085"}.fa-comments:before{content:"\f086"}.fa-thumbs-o-up:before{content:"\f087"}.fa-thumbs-o-down:before{content:"\f088"}.fa-star-half:before{content:"\f089"}.fa-heart-o:before{content:"\f08a"}.fa-sign-out:before{content:"\f08b"}.fa-linkedin-square:before{content:"\f08c"}.fa-thumb-tack:before{content:"\f08d"}.fa-external-link:before{content:"\f08e"}.fa-sign-in:before{content:"\f090"}.fa-trophy:before{content:"\f091"}.fa-github-square:before{content:"\f092"}.fa-upload:before{content:"\f093"}.fa-lemon-o:before{content:"\f094"}.fa-phone:before{content:"\f095"}.fa-square-o:before{content:"\f096"}.fa-bookmark-o:before{content:"\f097"}.fa-phone-square:before{content:"\f098"}.fa-twitter:before{content:"\f099"}.fa-facebook:before{content:"\f09a"}.fa-github:before{content:"\f09b"}.fa-unlock:before{content:"\f09c"}.fa-credit-card:before{content:"\f09d"}.fa-rss:before{content:"\f09e"}.fa-hdd-o:before{content:"\f0a0"}.fa-bullhorn:before{content:"\f0a1"}.fa-bell:before{content:"\f0f3"}.fa-certificate:before{content:"\f0a3"}.fa-hand-o-right:before{content:"\f0a4"}.fa-hand-o-left:before{content:"\f0a5"}.fa-hand-o-up:before{content:"\f0a6"}.fa-hand-o-down:before{content:"\f0a7"}.fa-arrow-circle-left:before{content:"\f0a8"}.fa-arrow-circle-right:before{content:"\f0a9"}.fa-arrow-circle-up:before{content:"\f0aa"}.fa-arrow-circle-down:before{content:"\f0ab"}.fa-globe:before{content:"\f0ac"}.fa-wrench:before{content:"\f0ad"}.fa-tasks:before{content:"\f0ae"}.fa-filter:before{content:"\f0b0"}.fa-briefcase:before{content:"\f0b1"}.fa-arrows-alt:before{content:"\f0b2"}.fa-group:before,.fa-users:before{content:"\f0c0"}.fa-chain:before,.fa-link:before{content:"\f0c1"}.fa-cloud:before{content:"\f0c2"}.fa-flask:before{content:"\f0c3"}.fa-cut:before,.fa-scissors:before{content:"\f0c4"}.fa-copy:before,.fa-files-o:before{content:"\f0c5"}.fa-paperclip:before{content:"\f0c6"}.fa-save:before,.fa-floppy-o:before{content:"\f0c7"}.fa-square:before{content:"\f0c8"}.fa-bars:before{content:"\f0c9"}.fa-list-ul:before{content:"\f0ca"}.fa-list-ol:before{content:"\f0cb"}.fa-strikethrough:before{content:"\f0cc"}.fa-underline:before{content:"\f0cd"}.fa-table:before{content:"\f0ce"}.fa-magic:before{content:"\f0d0"}.fa-truck:before{content:"\f0d1"}.fa-pinterest:before{content:"\f0d2"}.fa-pinterest-square:before{content:"\f0d3"}.fa-google-plus-square:before{content:"\f0d4"}.fa-google-plus:before{content:"\f0d5"}.fa-money:before{content:"\f0d6"}.fa-caret-down:before{content:"\f0d7"}.fa-caret-up:before{content:"\f0d8"}.fa-caret-left:before{content:"\f0d9"}.fa-caret-right:before{content:"\f0da"}.fa-columns:before{content:"\f0db"}.fa-unsorted:before,.fa-sort:before{content:"\f0dc"}.fa-sort-down:before,.fa-sort-asc:before{content:"\f0dd"}.fa-sort-up:before,.fa-sort-desc:before{content:"\f0de"}.fa-envelope:before{content:"\f0e0"}.fa-linkedin:before{content:"\f0e1"}.fa-rotate-left:before,.fa-undo:before{content:"\f0e2"}.fa-legal:before,.fa-gavel:before{content:"\f0e3"}.fa-dashboard:before,.fa-tachometer:before{content:"\f0e4"}.fa-comment-o:before{content:"\f0e5"}.fa-comments-o:before{content:"\f0e6"}.fa-flash:before,.fa-bolt:before{content:"\f0e7"}.fa-sitemap:before{content:"\f0e8"}.fa-umbrella:before{content:"\f0e9"}.fa-paste:before,.fa-clipboard:before{content:"\f0ea"}.fa-lightbulb-o:before{content:"\f0eb"}.fa-exchange:before{content:"\f0ec"}.fa-cloud-download:before{content:"\f0ed"}.fa-cloud-upload:before{content:"\f0ee"}.fa-user-md:before{content:"\f0f0"}.fa-stethoscope:before{content:"\f0f1"}.fa-suitcase:before{content:"\f0f2"}.fa-bell-o:before{content:"\f0a2"}.fa-coffee:before{content:"\f0f4"}.fa-cutlery:before{content:"\f0f5"}.fa-file-text-o:before{content:"\f0f6"}.fa-building-o:before{content:"\f0f7"}.fa-hospital-o:before{content:"\f0f8"}.fa-ambulance:before{content:"\f0f9"}.fa-medkit:before{content:"\f0fa"}.fa-fighter-jet:before{content:"\f0fb"}.fa-beer:before{content:"\f0fc"}.fa-h-square:before{content:"\f0fd"}.fa-plus-square:before{content:"\f0fe"}.fa-angle-double-left:before{content:"\f100"}.fa-angle-double-right:before{content:"\f101"}.fa-angle-double-up:before{content:"\f102"}.fa-angle-double-down:before{content:"\f103"}.fa-angle-left:before{content:"\f104"}.fa-angle-right:before{content:"\f105"}.fa-angle-up:before{content:"\f106"}.fa-angle-down:before{content:"\f107"}.fa-desktop:before{content:"\f108"}.fa-laptop:before{content:"\f109"}.fa-tablet:before{content:"\f10a"}.fa-mobile-phone:before,.fa-mobile:before{content:"\f10b"}.fa-circle-o:before{content:"\f10c"}.fa-quote-left:before{content:"\f10d"}.fa-quote-right:before{content:"\f10e"}.fa-spinner:before{content:"\f110"}.fa-circle:before{content:"\f111"}.fa-mail-reply:before,.fa-reply:before{content:"\f112"}.fa-github-alt:before{content:"\f113"}.fa-folder-o:before{content:"\f114"}.fa-folder-open-o:before{content:"\f115"}.fa-smile-o:before{content:"\f118"}.fa-frown-o:before{content:"\f119"}.fa-meh-o:before{content:"\f11a"}.fa-gamepad:before{content:"\f11b"}.fa-keyboard-o:before{content:"\f11c"}.fa-flag-o:before{content:"\f11d"}.fa-flag-checkered:before{content:"\f11e"}.fa-terminal:before{content:"\f120"}.fa-code:before{content:"\f121"}.fa-reply-all:before{content:"\f122"}.fa-mail-reply-all:before{content:"\f122"}.fa-star-half-empty:before,.fa-star-half-full:before,.fa-star-half-o:before{content:"\f123"}.fa-location-arrow:before{content:"\f124"}.fa-crop:before{content:"\f125"}.fa-code-fork:before{content:"\f126"}.fa-unlink:before,.fa-chain-broken:before{content:"\f127"}.fa-question:before{content:"\f128"}.fa-info:before{content:"\f129"}.fa-exclamation:before{content:"\f12a"}.fa-superscript:before{content:"\f12b"}.fa-subscript:before{content:"\f12c"}.fa-eraser:before{content:"\f12d"}.fa-puzzle-piece:before{content:"\f12e"}.fa-microphone:before{content:"\f130"}.fa-microphone-slash:before{content:"\f131"}.fa-shield:before{content:"\f132"}.fa-calendar-o:before{content:"\f133"}.fa-fire-extinguisher:before{content:"\f134"}.fa-rocket:before{content:"\f135"}.fa-maxcdn:before{content:"\f136"}.fa-chevron-circle-left:before{content:"\f137"}.fa-chevron-circle-right:before{content:"\f138"}.fa-chevron-circle-up:before{content:"\f139"}.fa-chevron-circle-down:before{content:"\f13a"}.fa-html5:before{content:"\f13b"}.fa-css3:before{content:"\f13c"}.fa-anchor:before{content:"\f13d"}.fa-unlock-alt:before{content:"\f13e"}.fa-bullseye:before{content:"\f140"}.fa-ellipsis-h:before{content:"\f141"}.fa-ellipsis-v:before{content:"\f142"}.fa-rss-square:before{content:"\f143"}.fa-play-circle:before{content:"\f144"}.fa-ticket:before{content:"\f145"}.fa-minus-square:before{content:"\f146"}.fa-minus-square-o:before{content:"\f147"}.fa-level-up:before{content:"\f148"}.fa-level-down:before{content:"\f149"}.fa-check-square:before{content:"\f14a"}.fa-pencil-square:before{content:"\f14b"}.fa-external-link-square:before{content:"\f14c"}.fa-share-square:before{content:"\f14d"}.fa-compass:before{content:"\f14e"}.fa-toggle-down:before,.fa-caret-square-o-down:before{content:"\f150"}.fa-toggle-up:before,.fa-caret-square-o-up:before{content:"\f151"}.fa-toggle-right:before,.fa-caret-square-o-right:before{content:"\f152"}.fa-euro:before,.fa-eur:before{content:"\f153"}.fa-gbp:before{content:"\f154"}.fa-dollar:before,.fa-usd:before{content:"\f155"}.fa-rupee:before,.fa-inr:before{content:"\f156"}.fa-cny:before,.fa-rmb:before,.fa-yen:before,.fa-jpy:before{content:"\f157"}.fa-ruble:before,.fa-rouble:before,.fa-rub:before{content:"\f158"}.fa-won:before,.fa-krw:before{content:"\f159"}.fa-bitcoin:before,.fa-btc:before{content:"\f15a"}.fa-file:before{content:"\f15b"}.fa-file-text:before{content:"\f15c"}.fa-sort-alpha-asc:before{content:"\f15d"}.fa-sort-alpha-desc:before{content:"\f15e"}.fa-sort-amount-asc:before{content:"\f160"}.fa-sort-amount-desc:before{content:"\f161"}.fa-sort-numeric-asc:before{content:"\f162"}.fa-sort-numeric-desc:before{content:"\f163"}.fa-thumbs-up:before{content:"\f164"}.fa-thumbs-down:before{content:"\f165"}.fa-youtube-square:before{content:"\f166"}.fa-youtube:before{content:"\f167"}.fa-xing:before{content:"\f168"}.fa-xing-square:before{content:"\f169"}.fa-youtube-play:before{content:"\f16a"}.fa-dropbox:before{content:"\f16b"}.fa-stack-overflow:before{content:"\f16c"}.fa-instagram:before{content:"\f16d"}.fa-flickr:before{content:"\f16e"}.fa-adn:before{content:"\f170"}.fa-bitbucket:before{content:"\f171"}.fa-bitbucket-square:before{content:"\f172"}.fa-tumblr:before{content:"\f173"}.fa-tumblr-square:before{content:"\f174"}.fa-long-arrow-down:before{content:"\f175"}.fa-long-arrow-up:before{content:"\f176"}.fa-long-arrow-left:before{content:"\f177"}.fa-long-arrow-right:before{content:"\f178"}.fa-apple:before{content:"\f179"}.fa-windows:before{content:"\f17a"}.fa-android:before{content:"\f17b"}.fa-linux:before{content:"\f17c"}.fa-dribbble:before{content:"\f17d"}.fa-skype:before{content:"\f17e"}.fa-foursquare:before{content:"\f180"}.fa-trello:before{content:"\f181"}.fa-female:before{content:"\f182"}.fa-male:before{content:"\f183"}.fa-gittip:before{content:"\f184"}.fa-sun-o:before{content:"\f185"}.fa-moon-o:before{content:"\f186"}.fa-archive:before{content:"\f187"}.fa-bug:before{content:"\f188"}.fa-vk:before{content:"\f189"}.fa-weibo:before{content:"\f18a"}.fa-renren:before{content:"\f18b"}.fa-pagelines:before{content:"\f18c"}.fa-stack-exchange:before{content:"\f18d"}.fa-arrow-circle-o-right:before{content:"\f18e"}.fa-arrow-circle-o-left:before{content:"\f190"}.fa-toggle-left:before,.fa-caret-square-o-left:before{content:"\f191"}.fa-dot-circle-o:before{content:"\f192"}.fa-wheelchair:before{content:"\f193"}.fa-vimeo-square:before{content:"\f194"}.fa-turkish-lira:before,.fa-try:before{content:"\f195"}.fa-plus-square-o:before{content:"\f196"}

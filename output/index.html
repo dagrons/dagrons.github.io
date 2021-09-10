@@ -1,49 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
-<head>
-<meta charset="UTF-8">
+<html><body>
+<p>{ set_locale(lang) }}
+
+
+</p>
+        <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NuLL</title>
-<style>
-        @font-face {
-            font-family: "libretto-icons";
-            src:url(assets/fonts/libretto-icons.eot);
-            src:url(assets/fonts/libretto-icons.eot#iefix) format("embedded-opentype"),
-            url(assets/fonts/libretto-icons.woff) format("woff"),
-            url(assets/fonts/libretto-icons.ttf) format("truetype"),
-            url(assets/fonts/libretto-icons.svg#libretto-icons) format("svg");
-            font-weight: normal;
-            font-style: normal;
-        }
-    </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono%7CLibre+Baskerville%7CMontserrat%7CPlayfair+Display">
-<link rel="stylesheet" href="assets/css/libretto_styles.css">
-</head>
-<body>
-    <!-- Navigation bar -->
-    <header class="nav-bar"><div class="site-branding">
-            <h1 class="site-title">
-                <a href="https://dagrons.github.io/" title="NuLL" rel="home">NuLL</a>
-            </h1>
-        </div>
-        <nav class="site-navigation" role="navigation"><div class="menu-toggle">
-                <span class="mobile-site-title">NuLL</span>
-            </div>
-            <ul class="menu">
-<li><a href="archive.html">文章归档</a></li>
-                    <li><a href="categories/">标签</a></li>
-                    <li><a href="rss.xml">RSS 源</a></li>
-            </ul></nav></header><div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" rel="bookmark">%B %-9, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/">br0没有ip地址解决方案</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+<meta name="description" content="NuLL">
+<meta name="author" content="dagrons">
+<title>NuLL | NuLL</title>
+<link href="assets/css/all.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<div id="wrp">
+        <div id="cont">
+            <div id="page">
+                <header><h1>
+                        <a href="https://dagrons.github.io/" title="NuLL" rel="home">NuLL</a>
+                    </h1>
+                </header><div id="body">
+                    <nav><ul>
+<li><a href="https://dagrons.github.io/" title="Home" rel="home"><i class="fa fa-fw fa-home"></i></a></li>
+                            <li><a href="https://dagrons.github.io/categories/" title="Tags"><i class="fa fa-fw fa-tags"></i></a></li>
+                            <li><a href="https://dagrons.github.io/rss.xml" title="RSS feed"><i class="fa fa-fw fa-rss"></i></a></li>                            
+                            <li><a href="https://github.com/dagrons" title="My GitHub repo"><i class="fa fa-fw fa-github"></i></a></li>
+                        </ul></nav><div id="content">
+        <article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" class="u-url">br0没有ip地址解决方案</a>
+             <time class="published dt-published" datetime="2021-09-09T14:14:32+08:00">2021-09-09 14:14</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="_1">问题分析</h2>
 <ol>
 <li>br0没有ip，但enp0s31f6有ip</li>
@@ -79,20 +67,14 @@
 <p>发现br0成功得到ip</p>
 <p>重启后依然生效</p>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" rel="bookmark">%B %-8, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/">Go学习第二天-字符串相关</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" class="u-url">Go学习第二天-字符串相关</a>
+             <time class="published dt-published" datetime="2021-09-08T21:06:45+08:00">2021-09-08 21:06</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="go-">Go学习第二天-字符串相关</h2>
 <p>如果有不确定的地方, 可以在a tour of go上做做小实验</p>
 <h3 id="byterune">byte和rune</h3>
@@ -149,20 +131,14 @@ strings.ContainsAny(s, chars string) // chars中的字符是否在s中出现过
 strings.Index(s string, str string) // 返回str在s中第一次出现的位置, 如果不存在返回-1, str为空返回0
 </pre>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" rel="bookmark">%B %-3, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/">展示服务器GPU使用情况及账号IP</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" class="u-url">展示服务器GPU使用情况及账号IP</a>
+             <time class="published dt-published" datetime="2021-09-03T20:45:38+08:00">2021-09-03 20:45</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="_1">问题分析：</h2>
 <ol>
 <li>首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中</li>
@@ -248,20 +224,14 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
 <pre class="code literal-block">nginx -s reload
 </pre>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" rel="bookmark">%B %-3, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/">自动上传实验室服务器信息到腾讯云服务器</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" class="u-url">自动上传实验室服务器信息到腾讯云服务器</a>
+             <time class="published dt-published" datetime="2021-09-03T19:31:01+08:00">2021-09-03 19:31</time>
+</h1>
+        <div class="e-content">
+        <div>
 <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
 <h2 id="_1">问题分析</h2>
 <ol>
@@ -389,20 +359,14 @@ sudo systemctl <span class="nb">enable</span> autologin.service
 <span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
 </pre>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" rel="bookmark">%B %-26, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/">恶意代码分析基础-第一天</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a>
+             <time class="published dt-published" datetime="2021-08-26T21:01:29+08:00">2021-08-26 21:01</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="-">恶意代码分析基础-第一天</h2>
 <p>PE分析工具：PEID, ExecInfo</p>
 <p><a href="https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/">PE结构详解 | Thunder_J (thunderjie.github.io)</a> </p>
@@ -422,20 +386,14 @@ sudo systemctl <span class="nb">enable</span> autologin.service
 从INT重建IAT不靠谱是因为在脱壳过程中, 完全可以毁掉INT, 而原始加壳文件payload被加密, 无法确定INT的位址和内容</p>
 </blockquote>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" rel="bookmark">%B %-21, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" class="u-url">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a>
+             <time class="published dt-published" datetime="2021-08-21T13:28:23+08:00">2021-08-21 13:28</time>
+</h1>
+        <div class="e-content">
+        <div>
 <div class="toc">
 <ul>
 <li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1">前言</a></li>
@@ -511,20 +469,14 @@ After each training session, the learner should be capable of performing all per
 </li>
 </ol>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/goxue-xi-di-yi-tian-gotooling/" rel="bookmark">%B %-20, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/goxue-xi-di-yi-tian-gotooling/">Go学习第一天 - GoTooling</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/goxue-xi-di-yi-tian-gotooling/" class="u-url">Go学习第一天 - GoTooling</a>
+             <time class="published dt-published" datetime="2021-08-20T22:38:06+08:00">2021-08-20 22:38</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="go-gogotooling">Go学习第一天, 从GO安装到GoTooling使用</h2>
 <h3 id="gopath-vs-goroot">GOPATH vs GOROOT</h3>
 <blockquote>
@@ -627,20 +579,14 @@ go clean -cache <span class="c1"># clear build cache </span>
 <li>git &amp;&amp; git history</li>
 </ol>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/pythonduo-xian-cheng-xue-xi/" rel="bookmark">%B %-13, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/pythonduo-xian-cheng-xue-xi/">Python学习-多线程神器concurrent.futures</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/pythonduo-xian-cheng-xue-xi/" class="u-url">Python学习-多线程神器concurrent.futures</a>
+             <time class="published dt-published" datetime="2021-04-13T21:43:08+08:00">2021-04-13 21:43</time>
+</h1>
+        <div class="e-content">
+        <div>
 <blockquote>
 <p>理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架</p>
 </blockquote>
@@ -725,20 +671,14 @@ go clean -cache <span class="c1"># clear build cache </span>
 <p>concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
 (见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]</p>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" rel="bookmark">%B %-11, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/">算法学习-zwk线段树</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">算法学习-zwk线段树</a>
+             <time class="published dt-published" datetime="2021-04-11T14:42:47+08:00">2021-04-11 14:42</time>
+</h1>
+        <div class="e-content">
+        <div>
 <p><strong>前言：我为什么要学线段树</strong></p>
 <blockquote>
 <p>老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！</p>
@@ -844,20 +784,14 @@ go clean -cache <span class="c1"># clear build cache </span>
 <p><strong>参考</strong></p>
 <p>zwk-《the power of statistics》</p>
 </div>
-                </div>
-            </article>
-</div>
-        <div class="site-content">
-            <article class="format-standard libretto-long-form"><div class="title-block post-format-icon-pin">
-                    <div class="entry-meta">
-                        <span class="posted-on">
-                            Posted on <a href="posts/yi-xie-jing-yan/" rel="bookmark">%B %-1, %2021</a>
-                        </span>
-                    </div>
-                    <h1><a href="posts/yi-xie-jing-yan/">一些废话</a></h1>
-                </div>
-                <div class="entry-content">
-                        <div>
+        </div>
+            
+        </article><article class="teaser h-entry post-text"><h1 class="p-name">
+<a href="posts/yi-xie-jing-yan/" class="u-url">一些废话</a>
+             <time class="published dt-published" datetime="2021-04-01T14:11:48+08:00">2021-04-01 14:11</time>
+</h1>
+        <div class="e-content">
+        <div>
 <h2 id="misc">misc</h2>
 <ol>
 <li>用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 </li>
@@ -890,26 +824,25 @@ go clean -cache <span class="c1"># clear build cache </span>
 <li>框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现</li>
 </ol>
 </div>
-                </div>
-            </article>
-</div>
-    <!-- Lower Navigation links -->
-    <nav class="site-content navigation-post" role="navigation"><div class="previous">
-                <a href="index-1.html" rel="prev">
-                    <span class="meta-nav">Older Entries</span>                </a>
-            </div>
-    </nav><!-- Page Footer --><section class="footer-sidebar clear" role="complementary"><div class="widget-block">
-            <aside class="widget"><h2 class="widget-title">NuLL</h2>
-                <div class="widget-text">NuLL</div>
-            </aside>
-</div>
-    </section><!-- Site Attributions --><footer class="site-footer" role="contentinfo"><div class="site-info">
-            <p>Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
-            <p>Powered by <a href="https://getnikola.com/">Nikola</a> using the <a href="https://note2self.abraham-v.com/libretto-theme-for-nikola/">Libretto theme</a>.</p>
         </div>
-        <div class="social">
-            <ul class="menu"></ul>
+            
+        </article><div>
+        <ul class="pager">
+<li class="next">
+                <a href="index-1.html" rel="next">以前的文章 →</a>
+            </li>
+        </ul>
 </div>
-    </footer>
-</body>
-</html>
+
+    
+	
+                    </div>
+                </div>
+                <div id="ftr">
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer><small>Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </small>
+	</footer>
+</body></html>
