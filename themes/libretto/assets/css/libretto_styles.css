@@ -1178,7 +1178,7 @@ a:active {
 }
 
 /* Drop cap and first line */
-/* .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
+.format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
     color: #b7b1a9;
     display: inline-block;
     float: left;
@@ -1195,7 +1195,7 @@ a:active {
     font-family: "Playfair Display SC";
     font-size: 1em;
     font-style: normal !important; /* Cheat to preserve visual sanity */
-    /* font-weight: bold;
+    font-weight: bold;
     letter-spacing: 1px;
 }
 
@@ -1207,7 +1207,7 @@ a:active {
 
 .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type + p {
     clear: left;
-} */ 
+}
 
 .libretto-long-form {
     background: #faf9f5;
@@ -1516,12 +1516,12 @@ article .title-block h1 a {
         padding: 1.5em;
     }
 
-    /* Use a bigger drop cap
+    /* Use a bigger drop cap */
     .format-standard .entry-content div:first-child > p:not(.no-emphasis):first-of-type:first-letter {
         font-size: 121px;
         line-height: 70px;
         margin: 6px 10px 0 -5px;
-    } */
+    }
 
     /* Footer can stretch out a bit */
     .site-footer {
