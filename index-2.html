@@ -72,7 +72,147 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" class="u-url">自动上传实验室服务器信息到腾讯云服务器</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-03T19:31:01+08:00" itemprop="datePublished" title="2021-09-03 19:31">2021-09-03 19:31</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
+<h2 id="_1">问题分析</h2>
+<ol>
+<li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
+<li>为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次</li>
+</ol>
+<p>记录流程如下：</p>
+<h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
+<pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
+</pre>
+<h2 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h2>
+<p>以一步是防止ssh上传ip时要求输入密码</p>
+<pre class="code literal-block">cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh ubuntu@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
+</pre>
+<h2 id="internet">检测Internet连接并自动登陆校园网的脚本</h2>
+<p>/usr/local/bin/autologin内容如下</p>
+<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+
+<span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+    <span class="k">if</span> ping -q -c <span class="m">1</span> -W <span class="m">1</span> <span class="m">8</span>.8.8.8 &gt;/dev/null<span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">"Internet Connection is alive"</span>
+    sleep <span class="m">10</span>
+    <span class="k">else</span>
+    python3 /home/dell/get2internet.py <span class="m">2020110966</span> Daxiahyh1
+    <span class="k">fi</span>
+<span class="k">done</span>
+</pre>
+<h2 id="ip">上传ip的脚本</h2>
+<p>/usr/local/bin/upload-ip内容如下:</p>
+<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+
+<span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+    <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">'inet\ '</span><span class="p">|</span>awk <span class="s1">'{print $2}'</span><span class="k">)</span>
+    <span class="nv">time</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
+    cat <span class="s">&lt;&lt;EOF | ssh root@tencent_cloud 'cat &gt; /var/www/html/lab_host3.html'</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">&lt;head&gt;</span>
+<span class="s">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;</span>
+<span class="s">&lt;/head&gt;</span>
+<span class="s">&lt;body&gt;</span>
+<span class="s">&lt;h1&gt;基础信息&lt;/h1&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">服务器编号： 3</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">服务器IP：$ipaddr</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">账号IP及GPU使用情况: &lt;a href="http://$ipaddr:1205"&gt;入口&lt;/a&gt;</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;p&gt;update time: $time&lt;/p&gt;</span>
+<span class="s">&lt;h1&gt;README&lt;/h1&gt;</span>
+<span class="s">&lt;h2&gt;硬件信息&lt;/h2&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">GPU: 两块3080(公用) &lt;br /&gt;</span>
+<span class="s">CPU: Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz &lt;br /&gt;</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;h2&gt;使用注意&lt;/h2&gt;</span>
+<span class="s">&lt;p&gt;</span>
+<span class="s">&lt;ul&gt;</span>
+<span class="s">&lt;li&gt;</span>
+<span class="s">服务器IP在重启后IP可能变化, 但这个链接不会变化, 要是发现服务器登不上, 可以点击上面的账号IP信息入口, 查看自己账号IP是否改变过</span>
+<span class="s">&lt;/li&gt;</span>
+<span class="s">&lt;li&gt;</span>
+<span class="s">/share下是公用目录, 建议将数据集放在这(这样别人也可以用), 以及和别人共享文件, 也是这个目录, 显卡驱动安装脚本(rescue.sh)也在这里, 最好不要自己瞎装驱动了, 如果要自己装, 后面加上--no-kernel-module参数</span>
+<span class="s">&lt;/li&gt;</span>
+<span class="s">&lt;li&gt;</span>
+<span class="s">账号默认root密码是1205, ssh端口是42502, 最好改一下密码</span>
+<span class="s">&lt;/li&gt;</span>
+<span class="s">&lt;li&gt;</span>
+<span class="s">如果要对自己的容器进行一些奇奇怪怪的操作之前, 可以提前让我给你容器创建个备份, 不然可能发生一些不太好的事情</span>
+<span class="s">&lt;/li&gt;</span>
+<span class="s">&lt;/ul&gt;</span>
+<span class="s">&lt;/p&gt;</span>
+<span class="s">&lt;body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
+<span class="s">EOF</span>
+    sleep <span class="m">60</span>
+<span class="k">done</span>
+</pre>
+<h2 id="autologinservice">创建autologin.service文件</h2>
+<p>/etc/systemd/system/autologin.service内容如下：</p>
+<pre class="code literal-block"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre>
+<h2 id="upload-ipservice">创建upload-ip.service文件</h2>
+<p>/etc/systemd/system/upload-ip.service内容如下：</p>
+<pre class="code literal-block"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre>
+<h2 id="_2">启动服务</h2>
+<pre class="code literal-block">sudo systemctl deamon-reload
+sudo systemctl start upload-ip.service
+sudo systemctl <span class="nb">enable</span> upload-ip.service
+sudo systemctl start autologin.service
+sudo systemctl <span class="nb">enable</span> autologin.service
+</pre>
+<h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
+<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
+<span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To enable your service on every reboot</span>
+<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
