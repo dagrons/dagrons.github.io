@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 10 Sep 2021 08:38:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>br0没有ip地址解决方案</title><link>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 19 Sep 2021 06:11:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>python执行外挂-subprocess</title><link>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="python-subprocess"&gt;python执行外挂-subprocess&lt;/h2&gt;
+&lt;p&gt;相比于os.system, subprocess允许我们直接创建进程, 而非从shell再创建任务, 而且允许我们对创建的进程执行更多的动作&lt;/p&gt;
+&lt;h3 id="import-concepts"&gt;Import Concepts&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A subprocess in Python is a task that a python scripts delegates to the Operating System (OS), That invokes wokring with the standard input &lt;em&gt;stdin&lt;/em&gt;, standard output &lt;em&gt;stdout&lt;/em&gt;, and return codes&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程和程序是存在区别的, 进程是程序的容器, 进程的创建过程如下: 发出进程创建请求, 操作系统创建进程容器, 操作系统为进程配置好输入输出, pid, 环境变量等容器环境, 然后操作系统加载程序到容器中, 进行执行, 在Unix，，这分别是由fork()和exec()完成的&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="popen-object"&gt;Popen Object&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bufsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;executable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;preexec_fn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;close_fds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cwd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;universal_newlines&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;startupinfo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;creationflags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;类似bash&lt;/span&gt; &lt;span class="n"&gt;commands&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;其中args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;为command&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+&lt;span class="n"&gt;executable&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;executable&lt;/span&gt; &lt;span class="n"&gt;program&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;和args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;区别在于command&lt;/span&gt; &lt;span class="n"&gt;name是ps等命令会显示的display&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;而executble是真正的可执行程序&lt;/span&gt;
+
+&lt;span class="n"&gt;close_fds&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;descriptors&lt;/span&gt; &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;closed&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;child&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;executed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;即子进程不会继承当前进程的file&lt;/span&gt; &lt;span class="n"&gt;descriptors&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;除了0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;等价于Popen&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'/bin/sh'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'-c'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="n"&gt;cwd&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="n"&gt;working&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;
+
+&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="n"&gt;defines&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;environment&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="popen-instance-methods-attributes"&gt;Popen Instance Methods &amp;amp; Attributes&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;poll&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# if a child process has terminated&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wait&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# wait a child process to terminated &lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;communicate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# send data to stdin, return (stdoutdata, stderrdata) &lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_signal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;signal&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# send signal to child process&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;terminate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;kill&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pid&lt;/span&gt;
+&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;returncode&lt;/span&gt; &lt;span class="c1"&gt;# None if hasn't terminated yet. -N indicate that the child was terminated by signal N(Unix only)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="popen"&gt;Popen简化版&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;call&lt;/strong&gt;
+Run command with arguments. Wait for command to complete, then return the retcode&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;retcode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;"ls"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"-l"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;check_output&lt;/strong&gt;
+Run command with arguments and return its output as a byte string &lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;"ls"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"-l"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"/dev/null"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;#=&amp;gt; 'crw-rw-rw- 1 root root ... '&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="exceptions"&gt;Exceptions&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;OSError&lt;/strong&gt; errors when trying to execute a non-existent file. Application should prepare for OSError exception&lt;/p&gt;
+&lt;h3 id="cheatsheet"&gt;Cheatsheet&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;output=`mycmd myarg`
+==&amp;gt;
+output = Popen(["mycmd", "myarg"], stdout=PIPE).communicate()[0]
+&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;output&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;dmesg&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;grep&lt;/span&gt; &lt;span class="nv"&gt;hda&lt;/span&gt;`
+&lt;span class="o"&gt;==&amp;gt;&lt;/span&gt;
+&lt;span class="nv"&gt;p1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;Popen&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;[&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;dmesg&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;], &lt;span class="nv"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;PIPE&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;p2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;Popen&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;[&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;grep&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;, &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;hda&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;], &lt;span class="nv"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;p1&lt;/span&gt;.&lt;span class="nv"&gt;stdout&lt;/span&gt;, &lt;span class="nv"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;PIPE&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;p1&lt;/span&gt;.&lt;span class="nv"&gt;stdout&lt;/span&gt;.&lt;span class="nv"&gt;close&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;  # &lt;span class="nv"&gt;Allow&lt;/span&gt; &lt;span class="nv"&gt;p1&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;receive&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;SIGPIPE&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;p2&lt;/span&gt; &lt;span class="nv"&gt;exits&lt;/span&gt;.
+&lt;span class="nv"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;p2&lt;/span&gt;.&lt;span class="nv"&gt;communicate&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;[&lt;span class="mi"&gt;0&lt;/span&gt;]
+&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;sts = os.system("mycmd" + " myarg")
+==&amp;gt;
+p = Popen("mycmd" + " myarg", shell=True)
+sts = os.waitpid(p.pid, 0)[1]
+&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;pid = os.spawnlp(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg")
+==&amp;gt;
+pid = Popen(["/bin/mycmd", "myarg"]).pid
+&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;retcode = os.spawnlp(os.P_WAIT, "/bin/mycmd", "mycmd", "myarg")
+==&amp;gt;
+retcode = call(["/bin/mycmd", "myarg"])
+&lt;/pre&gt;
+&lt;pre class="code literal-block"&gt;os.spawnlpe(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg", env)
+==&amp;gt;
+Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</guid><pubDate>Sun, 19 Sep 2021 05:28:14 GMT</pubDate></item><item><title>br0没有ip地址解决方案</title><link>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;br0没有ip，但enp0s31f6有ip&lt;/li&gt;
 &lt;li&gt;lxc list显示容器都没有ip, 推测br0没有正常工作&lt;/li&gt;
@@ -668,34 +746,4 @@ go clean -cache &lt;span class="c1"&gt;# clear build cache &lt;/span&gt;
 &lt;p&gt;&lt;strong&gt;OK, 完了？&lt;/strong&gt;*&lt;/p&gt;
 &lt;p&gt;完了...&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><category>算法，数据结构</category><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item><item><title>一些废话</title><link>https://dagrons.github.io/posts/yi-xie-jing-yan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="misc"&gt;misc&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 &lt;/li&gt;
-&lt;li&gt;层次感，结构感，流程清晰，注释详尽&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="s"&gt;S端&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;后端开发对于简单事务的路由封装很容易，但涉及到并发，同步，IPC，任务队列，负载均衡，数据库同步，横向扩展就会变得十分麻烦&lt;/li&gt;
-&lt;li&gt;尽量把数据库，虚拟机，docker放在服务器，不然把本地很快就会变得十分卡顿，尤其是涉及到文件读写和HTTP请求时&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="c"&gt;C端&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;对于SPA而，，多用development server + proxy代理进行测，，没必要部署到server，费时费力，而且修改麻烦&lt;/li&gt;
-&lt;li&gt;前端的模型是一棵树，不同的组件挂载到不同的节点，重点是处理路由，组件通信，以及节点本身的状态机模型&lt;/li&gt;
-&lt;li&gt;对于js，应该尽量避免this和class&lt;/li&gt;
-&lt;li&gt;前端和后端有个非常不同的点，就是前端开发应用层的代码逻辑很容易就变得极其复杂，而后端的复杂逻辑主要集中在和业务正交的领域&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="_1"&gt;对抗复杂性的方法&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;封装，对外只暴漏接口和方法&lt;/li&gt;
-&lt;li&gt;多态，对于同一方法，根据类型不同而使用不同的实现&lt;/li&gt;
-&lt;li&gt;继承，包括实现继承和接口继承，两者的目的是不一样的，实现继承是为了代码复用，接口继承并没有复用代码，而是需要自己实现相应的接口函数，接口继承的目的是为了实现抽象，继承响应的接口并实现它们以实现对其他组件的拔插，注意，在支持duck type的语言中，没有显式的接口声明&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class="code literal-block"&gt;&amp;gt;在C++中，使用abstract class对应接口继承，使用class对应实现继承，有的abstract class既有接口继承也有实现继承，其中virtual function对应接口继承，在ruby，python中，由于使用duck type，没有显式的接口声明，而ruby使用class和maxin对应实现继承，python使用class对应实现继承
-&amp;gt;python和C++都有多继承，要注意菱形继承的问题
-&lt;/pre&gt;
-&lt;ol&gt;
-&lt;li&gt;Convention over configuration，除非用户指定，否则使用默认的配置，让组件使用者只关心它关心的接口参数&lt;/li&gt;
-&lt;li&gt;使用树形结构或嵌套结构增强层次感和结构感，隐藏细节&lt;/li&gt;
-&lt;li&gt;框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/yi-xie-jing-yan/</guid><pubDate>Thu, 01 Apr 2021 06:11:48 GMT</pubDate></item></channel></rss>
+&lt;p&gt;zwk-《the power of statistics》&lt;/p&gt;&lt;/div&gt;</description><category>算法，数据结构</category><guid>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</guid><pubDate>Sun, 11 Apr 2021 06:42:47 GMT</pubDate></item></channel></rss>
