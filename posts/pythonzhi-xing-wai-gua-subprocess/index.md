@@ -16,7 +16,7 @@
 ## Import Concepts 
 - A subprocess in Python is a task that a python scripts delegates to the Operating System (OS), That invokes wokring with the standard input *stdin*, standard output *stdout*, and return codes
 
-- 进程和程序是存在区别的, 进程是程序的容器, 进程的创建过程如下: 发出进程创建请求, 操作系统创建进程容器, 操作系统为进程配置好输入输出, pid, 环境变量等容器环境, 然后操作系统加载程序到容器中, 进行执行, 在Unix，，这分别是由fork()和exec()完成的
+- 进程和程序是存在区别的, 进程是程序的容器, 进程的创建过程如下: 发出进程创建请求, 操作系统创建进程容器, 操作系统为进程配置好输入输出, pid, 环境变量等容器环境和资源, 然后操作系统加载程序到容器中, 进行执行, 在Unix，，这分别是由fork()和exec()完成的
 
 ## Popen Object
 ```python

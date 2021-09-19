@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 19 Sep 2021 06:11:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>python执行外挂-subprocess</title><link>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="python-subprocess"&gt;python执行外挂-subprocess&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 19 Sep 2021 16:09:02 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>python执行外挂-subprocess</title><link>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="python-subprocess"&gt;python执行外挂-subprocess&lt;/h2&gt;
 &lt;p&gt;相比于os.system, subprocess允许我们直接创建进程, 而非从shell再创建任务, 而且允许我们对创建的进程执行更多的动作&lt;/p&gt;
 &lt;h3 id="import-concepts"&gt;Import Concepts&lt;/h3&gt;
 &lt;ul&gt;
@@ -7,7 +7,7 @@
 &lt;p&gt;A subprocess in Python is a task that a python scripts delegates to the Operating System (OS), That invokes wokring with the standard input &lt;em&gt;stdin&lt;/em&gt;, standard output &lt;em&gt;stdout&lt;/em&gt;, and return codes&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;进程和程序是存在区别的, 进程是程序的容器, 进程的创建过程如下: 发出进程创建请求, 操作系统创建进程容器, 操作系统为进程配置好输入输出, pid, 环境变量等容器环境, 然后操作系统加载程序到容器中, 进行执行, 在Unix，，这分别是由fork()和exec()完成的&lt;/p&gt;
+&lt;p&gt;进程和程序是存在区别的, 进程是程序的容器, 进程的创建过程如下: 发出进程创建请求, 操作系统创建进程容器, 操作系统为进程配置好输入输出, pid, 环境变量等容器环境和资源, 然后操作系统加载程序到容器中, 进行执行, 在Unix，，这分别是由fork()和exec()完成的&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="popen-object"&gt;Popen Object&lt;/h3&gt;
