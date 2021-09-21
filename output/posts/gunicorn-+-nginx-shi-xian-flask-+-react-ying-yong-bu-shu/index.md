@@ -74,6 +74,7 @@ sudo cp -r build/* /var/www/html/mal_ui
 
 ## nginx配置代理
 将前端代理到 ^/
+
 将后端api代理到 ^/api/v2/
 
 /etc/nginx/sites-available/mal
