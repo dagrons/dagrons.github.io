@@ -1,0 +1,77 @@
+<h1 id="gunicorn-nginx-flask-react">gunicorn + nginx 实现 flask + react 应用部署</h1>
+<h2 id="_1">问题分析</h2>
+<ul>
+<li>用gunicorn作为flask应用的生产环境服务器</li>
+<li>通过nginx实现flask和react的代理连接</li>
+</ul>
+<h2 id="wsgi-axios">wsgi入口文件 + axios配置</h2>
+<p>/home/dell/mal/runserver.py</p>
+<pre class="code literal-block"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">make_app</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">make_app</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre>
+<p>有了上面的wsgi入口文件, 我们就可以通过gunicorn启动服务</p>
+<pre class="code literal-block">gunicorn --bind <span class="m">0</span>.0.0.0:6000 runserver:app
+</pre>
+<p>同时前端对后端api的调用baseURL为"/api/v2"
+axios/index.js</p>
+<pre class="code literal-block">axios.defaults.baseURL = &quot;/api/v2&quot;;
+</pre>
+<h2 id="gunicorn">gunicorn自启动脚本</h2>
+<p>/etc/systemd/system/mal.service</p>
+<pre class="code literal-block"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">malware analysis service backend</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">dell</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">www-data</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/dell/mal</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">&quot;PATH=/home/dell/Envs/mal/bin&quot;</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/dell/Envs/mal/bin/gunicorn --workers 3 --bind unix:mal.sock -m 007 runserver:app</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre>
+<p>然后</p>
+<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">mal</span> 
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mal</span> <span class="c1"># 开机自启动</span>
+</pre>
+<h2 id="react-build">react build</h2>
+<p>生成react部署文件</p>
+<pre class="code literal-block">yarn build 
+</pre>
+<p>将部署文件拷贝到/var/www/html/mal_ui下</p>
+<pre class="code literal-block">sudo cp -r build/* /var/www/html/mal_ui
+</pre>
+<h2 id="nginx">nginx配置代理</h2>
+<p>将前端代理到 ^/
+将后端api代理到 ^/api/v2/</p>
+<p>/etc/nginx/sites-available/mal</p>
+<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
+       <span class="n">listen</span> <span class="mi">5000</span><span class="p">;</span>
+
+       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span> <span class="p">{</span>
+                <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
+                <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+       <span class="p">}</span>
+
+       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span> <span class="p">{</span>
+                <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span>
+                <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+       <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+<p>然后enable该site</p>
+<pre class="code literal-block">sudo ln -s /etc/nginx/sites-available/mal /etc/nginx/sites-enabled/
+</pre>
+<p>检查配置有无语法错误</p>
+<pre class="code literal-block">sudo nginx -t 
+</pre>
+<p>使配置生效</p>
+<pre class="code literal-block"><span class="n">sudo</span> <span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>
+</pre>

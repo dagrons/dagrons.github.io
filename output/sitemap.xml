@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://dagrons.github.io/</loc>
-  <lastmod>2021-09-10T08:36:00Z</lastmod>
+  <lastmod>2021-09-21T06:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/2021/</loc>
@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://dagrons.github.io/archive.html</loc>
-  <lastmod>2021-09-19T06:11:00Z</lastmod>
+  <lastmod>2021-09-21T06:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/</loc>
@@ -63,7 +63,11 @@
  </url>
  <url>
   <loc>https://dagrons.github.io/index-2.html</loc>
-  <lastmod>2021-09-19T06:11:00Z</lastmod>
+  <lastmod>2021-09-21T06:53:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/index-3.html</loc>
+  <lastmod>2021-09-21T06:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</loc>
@@ -80,6 +84,10 @@
  <url>
   <loc>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</loc>
   <lastmod>2021-08-22T02:37:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/</loc>
+  <lastmod>2021-09-21T06:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</loc>

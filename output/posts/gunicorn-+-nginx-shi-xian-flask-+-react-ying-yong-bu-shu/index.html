@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gunicorn + nginx 实现 flask + react 应用部署 | NuLL</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../rss.xml">
+<link rel="canonical" href="https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="dagrons">
+<link rel="prev" href="../pythonzhi-xing-wai-gua-subprocess/" title="python执行外挂-subprocess" type="text/html">
+<meta property="og:site_name" content="NuLL">
+<meta property="og:title" content="gunicorn + nginx 实现 flask + react 应用部署">
+<meta property="og:url" content="https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/">
+<meta property="og:description" content="gunicorn + nginx 实现 flask + react 应用部署
+问题分析
+
+用gunicorn作为flask应用的生产环境服务器
+通过nginx实现flask和react的代理连接
+
+wsgi入口文件 + axios配置
+/home/dell/mal/runserver.py
+from app import make_app
+
+app = make_app()
+
+if __name_">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-09-21T14:05:16+08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
+
+            <span id="blog-title">NuLL</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="../gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/index.md" id="sourcelink" class="nav-link">源文件</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../archive.html" class="nav-link">文章归档</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">标签</a>
+                </li>
+<li class="nav-item">
+<a href="../../rss.xml" class="nav-link">RSS 源</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="../gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/" class="u-url">gunicorn + nginx 实现 flask + react 应用部署</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    dagrons
+            </span></p>
+            <p class="dateline">
+            <a href="../gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-21T14:05:16+08:00" itemprop="datePublished" title="2021-09-21 14:05">2021-09-21 14:05</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="../gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/index.md" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<h2 id="gunicorn-nginx-flask-react">gunicorn + nginx 实现 flask + react 应用部署</h2>
+<h3 id="_1">问题分析</h3>
+<ul>
+<li>用gunicorn作为flask应用的生产环境服务器</li>
+<li>通过nginx实现flask和react的代理连接</li>
+</ul>
+<h3 id="wsgi-axios">wsgi入口文件 + axios配置</h3>
+<p>/home/dell/mal/runserver.py</p>
+<pre class="code literal-block"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">make_app</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">make_app</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre>
+<p>有了上面的wsgi入口文件, 我们就可以通过gunicorn启动服务</p>
+<pre class="code literal-block">gunicorn --bind <span class="m">0</span>.0.0.0:6000 runserver:app
+</pre>
+<p>同时前端对后端api的调用baseURL为"/api/v2"
+axios/index.js</p>
+<pre class="code literal-block">axios.defaults.baseURL = "/api/v2";
+</pre>
+<h3 id="gunicorn">gunicorn自启动脚本</h3>
+<p>/etc/systemd/system/mal.service</p>
+<pre class="code literal-block"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">malware analysis service backend</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">dell</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">www-data</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/dell/mal</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">"PATH=/home/dell/Envs/mal/bin"</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/dell/Envs/mal/bin/gunicorn --workers 3 --bind unix:mal.sock -m 007 runserver:app</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre>
+<p>然后</p>
+<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">mal</span> 
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mal</span> <span class="c1"># 开机自启动</span>
+</pre>
+<h3 id="react-build">react build</h3>
+<p>生成react部署文件</p>
+<pre class="code literal-block">yarn build 
+</pre>
+<p>将部署文件拷贝到/var/www/html/mal_ui下</p>
+<pre class="code literal-block">sudo cp -r build/* /var/www/html/mal_ui
+</pre>
+<h3 id="nginx">nginx配置代理</h3>
+<p>将前端代理到 ^/
+将后端api代理到 ^/api/v2/</p>
+<p>/etc/nginx/sites-available/mal</p>
+<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
+       <span class="n">listen</span> <span class="mi">5000</span><span class="p">;</span>
+
+       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span> <span class="p">{</span>
+                <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
+                <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+       <span class="p">}</span>
+
+       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span> <span class="p">{</span>
+                <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span>
+                <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+       <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+<p>然后enable该site</p>
+<pre class="code literal-block">sudo ln -s /etc/nginx/sites-available/mal /etc/nginx/sites-enabled/
+</pre>
+<p>检查配置有无语法错误</p>
+<pre class="code literal-block">sudo nginx -t 
+</pre>
+<p>使配置生效</p>
+<pre class="code literal-block"><span class="n">sudo</span> <span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>
+</pre>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../pythonzhi-xing-wai-gua-subprocess/" rel="prev" title="python执行外挂-subprocess">上一篇文章</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>
