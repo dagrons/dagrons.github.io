@@ -9,7 +9,6 @@
 .. type: text
 -->
 
-# gunicorn + nginx 实现 flask + react 应用部署
 
 ## 问题分析
 - 用gunicorn作为flask应用的生产环境服务器

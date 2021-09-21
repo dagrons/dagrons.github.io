@@ -17,8 +17,7 @@
 <meta property="og:site_name" content="NuLL">
 <meta property="og:title" content="gunicorn + nginx 实现 flask + react 应用部署">
 <meta property="og:url" content="https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/">
-<meta property="og:description" content="gunicorn + nginx 实现 flask + react 应用部署
-问题分析
+<meta property="og:description" content='问题分析
 
 用gunicorn作为flask应用的生产环境服务器
 通过nginx实现flask和react的代理连接
@@ -29,7 +28,10 @@ from app import make_app
 
 app = make_app()
 
-if __name_">
+if __name__ == "__main__":
+    app.run()
+
+有了上面的ws'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2021-09-21T14:05:16+08:00">
 </head>
@@ -107,7 +109,6 @@ if __name_">
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <div>
-<h2 id="gunicorn-nginx-flask-react">gunicorn + nginx 实现 flask + react 应用部署</h2>
 <h3 id="_1">问题分析</h3>
 <ul>
 <li>用gunicorn作为flask应用的生产环境服务器</li>
