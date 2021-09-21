@@ -46,7 +46,7 @@ After=network.target
 User=dell
 Group=www-data
 WorkingDirectory=/home/dell/mal
-Environment="PATH=/home/dell/Envs/mal/bin"
+Environment="PATH=/home/dell/Envs/mal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ExecStart=/home/dell/Envs/mal/bin/gunicorn --workers 3 --bind unix:mal.sock -m 007 runserver:app
 
 [Install]

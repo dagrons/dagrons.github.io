@@ -72,7 +72,76 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" class="u-url">展示服务器GPU使用情况及账号IP</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" class="u-url">Go学习第二天-字符串相关</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-08T21:06:45+08:00" itemprop="datePublished" title="2021-09-08 21:06">2021-09-08 21:06</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h2 id="go-">Go学习第二天-字符串相关</h2>
+<p>如果有不确定的地方, 可以在a tour of go上做做小实验</p>
+<h3 id="byterune">byte和rune</h3>
+<blockquote>
+<p>Golang has integer types called byte and rune that are aliases for uint8 and int32 data types, repectively.</p>
+</blockquote>
+<p>所以byte和rune本质上就是uint8和uint32, byte用于ASCII编码, rune用于Unicode编码</p>
+<p>除此之外, 在golang中, 没有char类型, 用于byte和rune表示char类型</p>
+<p>值得注意, golang中的int和int32与int64并不是一个类型, <a href="https://golang.org/ref/spec#Numeric_types">int vs int32 vs 34</a>, 因此下面的代码并不合法</p>
+<pre class="code literal-block"><span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">//</span> <span class="n">ok</span>
+<span class="k">var</span> <span class="n">a</span> <span class="nb nb-Type">int</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">//</span> <span class="n">error</span><span class="p">,</span> <span class="n">cannot</span> <span class="n">use</span> <span class="n">a</span> <span class="p">(</span><span class="n">type</span> <span class="n">int32</span><span class="p">)</span> <span class="k">as</span> <span class="n">type</span> <span class="nb nb-Type">int</span> <span class="ow">in</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span>
+</pre>
+<blockquote>
+<p>In Go, Characters are expressed by enclosing them in single quotes like this: 'a'.</p>
+</blockquote>
+<p>在Go中, 用单引号来实现char的literal</p>
+<p>默认情况下, char用rune来存储, 如下: </p>
+<pre class="code literal-block"><span class="kd">var</span> <span class="nx">myLetter</span> <span class="p">=</span> <span class="sc">'a'</span> <span class="c1">// Type inferred as rune</span>
+</pre>
+<p>我们也可以显示声明一个byte存储的char, 如下: </p>
+<pre class="code literal-block"><span class="kd">var</span> <span class="nx">myLetter</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">'a'</span>
+</pre>
+<p>在上述表述中, char不是一个具体的类型</p>
+<h3 id="_1">字符串</h3>
+<p>在golang中, 字符串并不是byte数组或rune数组, 因为byte数组和rune数组都是可变，但字符串不可变(和除了C++以外的其他语言一样), </p>
+<p>除此之外, 还有一个值得注意的是, byte数组和rune数组用fmt.Println()打印出来都是数字, 说明他们本质上仍然是uint8数组和uint32数组, 如果要打印出可读的字符串, 还是需要转成string</p>
+<p>如下:</p>
+<pre class="code literal-block"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+<span class="p">)</span> 
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">a</span> <span class="o">:=</span> <span class="s">"张明阳是傻逼"</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; 张</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; [24352 26126 38451]</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; 张明阳</span>
+<span class="p">}</span>
+</pre>
+<h3 id="bytes-slice-over-string">bytes slice over string?</h3>
+<p>由于string不可变, 因此在刷题时并不实用, 更实用的方法是通过bytes数组进行字符数据存储和操作, 只在需要显示时才将其转化为string</p>
+<h3 id="strings">strings包</h3>
+<p>string是go的内置类型, 而strings是针对string的包, 包含了处理string的诸多方法, 在此我们只列举部分常用函数</p>
+<pre class="code literal-block">strings.Compare(s1, s2 string) int // 字符串比较
+strings.Join([]string, string) // 拼接多个字符串
+strings.Split(s, str string) // 切割字符串
+strings.Fields(s strings) // 按空白字符切割字符串
+strings.Repeat(s string, n int) string // 重复字符串
+strings.Replace("张明阳是傻逼", "傻逼", "纯弱智", -1) // 替换字符串, -1表示替换所有, 如果大于0表示替换几个 // =&gt; 张明阳是纯弱智
+strings.Contains(s, substr string) // 是否存在子串
+strings.ContainsAny(s, chars string) // chars中的字符是否在s中出现过
+strings.Index(s string, str string) // 返回str在s中第一次出现的位置, 如果不存在返回-1, str为空返回0
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" class="u-url">展示服务器GPU使用情况及账号IP</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons

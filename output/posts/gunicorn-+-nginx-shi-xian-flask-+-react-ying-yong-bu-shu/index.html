@@ -14,6 +14,7 @@
 <link rel="canonical" href="https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="dagrons">
 <link rel="prev" href="../pythonzhi-xing-wai-gua-subprocess/" title="python执行外挂-subprocess" type="text/html">
+<link rel="next" href="../nginxpei-zhi-ssl/" title="nginx配置ssl" type="text/html">
 <meta property="og:site_name" content="NuLL">
 <meta property="og:title" content="gunicorn + nginx 实现 flask + react 应用部署">
 <meta property="og:url" content="https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/">
@@ -140,7 +141,7 @@ axios/index.js</p>
 <span class="na">User</span><span class="o">=</span><span class="s">dell</span>
 <span class="na">Group</span><span class="o">=</span><span class="s">www-data</span>
 <span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/dell/mal</span>
-<span class="na">Environment</span><span class="o">=</span><span class="s">"PATH=/home/dell/Envs/mal/bin"</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">"PATH=/home/dell/Envs/mal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/dell/Envs/mal/bin/gunicorn --workers 3 --bind unix:mal.sock -m 007 runserver:app</span>
 
 <span class="k">[Install]</span>
@@ -190,6 +191,9 @@ axios/index.js</p>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
                 <a href="../pythonzhi-xing-wai-gua-subprocess/" rel="prev" title="python执行外挂-subprocess">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../nginxpei-zhi-ssl/" rel="next" title="nginx配置ssl">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
             Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         

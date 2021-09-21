@@ -29,7 +29,7 @@ axios/index.js</p>
 <span class="na">User</span><span class="o">=</span><span class="s">dell</span>
 <span class="na">Group</span><span class="o">=</span><span class="s">www-data</span>
 <span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/dell/mal</span>
-<span class="na">Environment</span><span class="o">=</span><span class="s">&quot;PATH=/home/dell/Envs/mal/bin&quot;</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">&quot;PATH=/home/dell/Envs/mal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;</span>
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/dell/Envs/mal/bin/gunicorn --workers 3 --bind unix:mal.sock -m 007 runserver:app</span>
 
 <span class="k">[Install]</span>
