@@ -72,7 +72,55 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" class="u-url">Go学习第二天-字符串相关</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" class="u-url">br0没有ip地址解决方案</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-09T14:14:32+08:00" itemprop="datePublished" title="2021-09-09 14:14">2021-09-09 14:14</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h2 id="_1">问题分析</h2>
+<ol>
+<li>br0没有ip，但enp0s31f6有ip</li>
+<li>lxc list显示容器都没有ip, 推测br0没有正常工作</li>
+<li>dhclient br0 无法成功</li>
+<li>brctl show br0 在interfaces列没有enp0s31f6</li>
+</ol>
+<h2 id="_2">解决方案</h2>
+<p>首先通过brctl show br0发现没有物理网卡绑定，因此通过</p>
+<pre class="code literal-block">brctl addif br0 enp0s31f6
+</pre>
+<p>手动添加物理网卡, 添加后发现容器可以正常获取ip了</p>
+<p>但host的br0仍然没有ip</p>
+<p>然后重新修改/etc/netplan/01-netcfg.yaml</p>
+<pre class="code literal-block"># <span class="k">For</span> <span class="nv">more</span> <span class="nv">information</span>, <span class="nv">see</span> <span class="nv">netplan</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>.
+<span class="nv">network</span>:
+  <span class="nv">version</span>: <span class="mi">2</span>
+  <span class="nv">renderer</span>: <span class="nv">networkd</span>
+  <span class="nv">ethernets</span>:
+    <span class="nv">enp0s31f6</span>:
+      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
+      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
+  <span class="nv">bridges</span>:
+    <span class="nv">br0</span>:
+      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
+      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
+      <span class="nv">interfaces</span>:
+        <span class="o">-</span> <span class="nv">enp0s31f6</span>
+</pre>
+<p>重新载入配置</p>
+<pre class="code literal-block">netplan --debug apply
+</pre>
+<p>发现br0成功得到ip</p>
+<p>重启后依然生效</p>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" class="u-url">Go学习第二天-字符串相关</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons

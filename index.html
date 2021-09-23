@@ -14,7 +14,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
 <link rel="next" href="index-3.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/nginxpei-zhi-ssl/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/redischu-tan/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -71,7 +71,34 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/nginxpei-zhi-ssl/" class="u-url">nginx配置ssl</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/redischu-tan/" class="u-url">redis初探</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/redischu-tan/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-23T22:36:52+08:00" itemprop="datePublished" title="2021-09-23 22:36">2021-09-23 22:36</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h3 id="redis">redis简介</h3>
+<ul>
+<li>redis是单进程, 单线程, 所以具有很好的同步能力</li>
+<li>redis所有操作都是原子性的, 单个操作是原子性的, 多个操作也支持事务(通过MULTI和EXEC指令), 乍一看redis支持的数据类型也不特殊, 而其灵活性就来源于redis的操作原子性, 借助这个特性我们可以轻易实现分布式锁</li>
+</ul>
+<h3 id="redis_1">redis支持的数据类型</h3>
+<ul>
+<li>string: 最基础的数据类型, 二进制安全字符串, 存储图片等二进制格式需要存储base64编码</li>
+<li>hash: 哈希</li>
+<li>list: 列表</li>
+<li>set: 集合</li>
+<li>zset(sorted set): 有序集合</li>
+</ul>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/nginxpei-zhi-ssl/" class="u-url">nginx配置ssl</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -298,54 +325,6 @@ retcode = call(["/bin/mycmd", "myarg"])
 ==&gt;
 Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
 </pre>
-</div>
-                </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" class="u-url">br0没有ip地址解决方案</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
-            <p class="dateline">
-            <a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" rel="bookmark">
-            <time class="published dt-published" datetime="2021-09-09T14:14:32+08:00" itemprop="datePublished" title="2021-09-09 14:14">2021-09-09 14:14</time></a>
-            </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <div>
-<h2 id="_1">问题分析</h2>
-<ol>
-<li>br0没有ip，但enp0s31f6有ip</li>
-<li>lxc list显示容器都没有ip, 推测br0没有正常工作</li>
-<li>dhclient br0 无法成功</li>
-<li>brctl show br0 在interfaces列没有enp0s31f6</li>
-</ol>
-<h2 id="_2">解决方案</h2>
-<p>首先通过brctl show br0发现没有物理网卡绑定，因此通过</p>
-<pre class="code literal-block">brctl addif br0 enp0s31f6
-</pre>
-<p>手动添加物理网卡, 添加后发现容器可以正常获取ip了</p>
-<p>但host的br0仍然没有ip</p>
-<p>然后重新修改/etc/netplan/01-netcfg.yaml</p>
-<pre class="code literal-block"># <span class="k">For</span> <span class="nv">more</span> <span class="nv">information</span>, <span class="nv">see</span> <span class="nv">netplan</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>.
-<span class="nv">network</span>:
-  <span class="nv">version</span>: <span class="mi">2</span>
-  <span class="nv">renderer</span>: <span class="nv">networkd</span>
-  <span class="nv">ethernets</span>:
-    <span class="nv">enp0s31f6</span>:
-      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
-      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
-  <span class="nv">bridges</span>:
-    <span class="nv">br0</span>:
-      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
-      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
-      <span class="nv">interfaces</span>:
-        <span class="o">-</span> <span class="nv">enp0s31f6</span>
-</pre>
-<p>重新载入配置</p>
-<pre class="code literal-block">netplan --debug apply
-</pre>
-<p>发现br0成功得到ip</p>
-<p>重启后依然生效</p>
 </div>
                 </div>
             </article>
