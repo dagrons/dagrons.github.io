@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://dagrons.github.io/archive.html</loc>
-  <lastmod>2021-09-21T08:42:00Z</lastmod>
+  <lastmod>2021-09-23T15:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/</loc>
@@ -67,7 +67,7 @@
  </url>
  <url>
   <loc>https://dagrons.github.io/index-3.html</loc>
-  <lastmod>2021-09-21T08:42:00Z</lastmod>
+  <lastmod>2021-09-23T15:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</loc>
@@ -108,6 +108,10 @@
  <url>
   <loc>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</loc>
   <lastmod>2021-09-19T06:11:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/posts/redischu-tan/</loc>
+  <lastmod>2021-09-23T15:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/yi-xie-jing-yan/</loc>
