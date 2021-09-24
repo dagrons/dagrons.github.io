@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 24 Sep 2021 03:02:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>redis初探</title><link>https://dagrons.github.io/posts/redischu-tan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="redis"&gt;redis简介&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 24 Sep 2021 03:03:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>redis初探</title><link>https://dagrons.github.io/posts/redischu-tan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="redis"&gt;redis简介&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;redis是单进程, 单线程, 所以具有很好的同步能力&lt;/li&gt;
 &lt;li&gt;redis所有操作都是原子性的, 单个操作是原子性的, 多个操作也支持事务(通过MULTI和EXEC指令), 乍一看redis支持的数据类型也不特殊, 而其灵活性就来源于redis的操作原子性, 借助这个特性我们可以轻易实现分布式锁&lt;/li&gt;
@@ -52,9 +52,7 @@
         &lt;span class="k"&gt;break&lt;/span&gt;
     &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;WatchError&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# 出现该异常, 说明监听的数据被修改了, 重试/取消&lt;/span&gt;
         &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'重试'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h3 id="redis-cheathsheet"&gt;redis cheathsheet&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://www.runoob.com/w3cnote/python-redis-intro.html"&gt;cheatsheet&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/redischu-tan/</guid><pubDate>Thu, 23 Sep 2021 14:36:52 GMT</pubDate></item><item><title>nginx配置ssl</title><link>https://dagrons.github.io/posts/nginxpei-zhi-ssl/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;问题分析&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/redischu-tan/</guid><pubDate>Thu, 23 Sep 2021 14:36:52 GMT</pubDate></item><item><title>nginx配置ssl</title><link>https://dagrons.github.io/posts/nginxpei-zhi-ssl/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;问题分析&lt;/h3&gt;
 &lt;p&gt;在很多时候, 我们需要实现加密通信, 例如对于mal应用而言, 由于要上传恶意软件, 势必会被防火墙拦截, 因此需要配置ssl, 才能绕过这些限制&lt;/p&gt;
 &lt;h3 id="_2"&gt;生成自签名证书&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days &lt;span class="m"&gt;365&lt;/span&gt; -out certificate.pem
