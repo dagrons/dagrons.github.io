@@ -69,6 +69,8 @@ while True:
         print('重试')
 ```
 
-## Cheatsheet 
 
-[runoob python redis](https://www.runoob.com/w3cnote/python-redis-intro.html)
+## redis cheathsheet
+
+[cheatsheet](https://www.runoob.com/w3cnote/python-redis-intro.html)
+
