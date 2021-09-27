@@ -70,8 +70,15 @@ directory = /home/dell/mal_v2
 stdout_logfile = ./.supervisord/celery.logfile
 redirect_stderr = true
 
+[program:flower]
+command = /home/dell/Envs/mal/bin/celery -A app.celery flower --port=5656 --ip=0.0.0.0
+process_name = %(program_name)s
+directory = /home/dell/mal_v2
+stdout_logfile = ./.supervisord/flower.logfile
+redirect_stderr = true
+
 [group:mal]
-programs = flask, celery
+programs = flask, celery, flower
 priority = 999
 
 ```
