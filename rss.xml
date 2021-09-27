@@ -1,5 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 24 Sep 2021 03:03:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>redis初探</title><link>https://dagrons.github.io/posts/redischu-tan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="redis"&gt;redis简介&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 27 Sep 2021 04:27:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>supervisor实现项目部署</title><link>https://dagrons.github.io/posts/supervisorshi-xian-xiang-mu-bu-shu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="supervisor"&gt;supervisor简介&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;相比于systemd, supervisor更适合项目级别的进程管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="supervisor_1"&gt;一个典型的supervisor配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;supervisord指定了logfile等supervisord的进程环境&lt;/li&gt;
+&lt;li&gt;unix_http_server指定了supervisorctl与supervisord的通信方式&lt;/li&gt;
+&lt;li&gt;inet_http_server支持web界面管理进程组&lt;/li&gt;
+&lt;li&gt;supervisorctl指定了supervisorctl相关配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[supervisord]&lt;/span&gt;
+&lt;span class="na"&gt;logfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;./.supervisord/supervisord.logfile&lt;/span&gt;
+&lt;span class="na"&gt;logfile_maxbytes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;50MB&lt;/span&gt;
+&lt;span class="na"&gt;loglevel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;info&lt;/span&gt;
+&lt;span class="na"&gt;pidfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;./.supervisord/supervisord.pid&lt;/span&gt;
+&lt;span class="na"&gt;umask&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;022&lt;/span&gt;
+&lt;span class="na"&gt;environment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;KEY1="value1",KEY2="value2"&lt;/span&gt;
+
+&lt;span class="k"&gt;[unix_http_server]&lt;/span&gt;
+&lt;span class="c1"&gt;; unix socket for supervisorctl to communicate to &lt;/span&gt;
+&lt;span class="na"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/tmp/supervisor.sock&lt;/span&gt;
+&lt;span class="na"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0777&lt;/span&gt;
+&lt;span class="na"&gt;chown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;dell&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;dell&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;daxiahyh&lt;/span&gt;
+
+&lt;span class="k"&gt;[inet_http_server]&lt;/span&gt;
+&lt;span class="c1"&gt;; this enable http web gui&lt;/span&gt;
+&lt;span class="na"&gt;port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;127.0.0.1:9001&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;dell&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;daxiahyh&lt;/span&gt;
+
+&lt;span class="k"&gt;[rpcinterface:supervisor]&lt;/span&gt;
+&lt;span class="na"&gt;supervisor.rpcinterface_factory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;supervisor.rpcinterface:make_main_rpcinterface &lt;/span&gt;
+
+&lt;span class="k"&gt;[supervisorctl]&lt;/span&gt;
+&lt;span class="na"&gt;serverurl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;unix:///tmp/supervisor.sock&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;dell&lt;/span&gt;
+&lt;span class="na"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;daxiahyh&lt;/span&gt;
+&lt;span class="na"&gt;prompt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;mysupervisor&lt;/span&gt;
+
+&lt;span class="k"&gt;[program:flask]&lt;/span&gt;
+&lt;span class="na"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/dell/Envs/mal/bin/gunicorn --workers 4 --bind unix:mal.sock -m 777 runserver:app&lt;/span&gt;
+&lt;span class="na"&gt;process_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;%(program_name)s&lt;/span&gt;
+&lt;span class="na"&gt;numprocs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/dell/mal_v2&lt;/span&gt;
+&lt;span class="na"&gt;environment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;FLASK_APP="app"&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;./.supervisord/mal.logfile&lt;/span&gt;
+&lt;span class="na"&gt;redirect_stderr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+
+&lt;span class="k"&gt;[program:celery]&lt;/span&gt;
+&lt;span class="na"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/dell/Envs/mal/bin/celery -A app.celery worker -c 4 --loglevel info&lt;/span&gt;
+&lt;span class="na"&gt;process_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;%(program_name)s&lt;/span&gt;
+&lt;span class="na"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/dell/mal_v2&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;./.supervisord/celery.logfile&lt;/span&gt;
+&lt;span class="na"&gt;redirect_stderr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+
+&lt;span class="k"&gt;[group:mal]&lt;/span&gt;
+&lt;span class="na"&gt;programs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;flask, celery&lt;/span&gt;
+&lt;span class="na"&gt;priority&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;999&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="nginx"&gt;nginx部署&lt;/h3&gt;
+&lt;p&gt;注意, 这里和之前的mal共享的同一套前端&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;10001&lt;/span&gt; &lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+       &lt;span class="n"&gt;ssl_certificate&lt;/span&gt;  &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certificate&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="n"&gt;ssl_certificate_key&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+       &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="o"&gt;^/&lt;/span&gt;&lt;span class="n"&gt;api&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;include&lt;/span&gt; &lt;span class="n"&gt;proxy_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;proxy_pass&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dell&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mal_v2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="p"&gt;}&lt;/span&gt;
+
+       &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="o"&gt;^/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mal_ui&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3 id="supervisorctl-cheathsheet"&gt;supervisorctl cheathsheet&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="c1"&gt;# print a list of available actions&lt;/span&gt;
+&lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# activates any updates in config for process/group&lt;/span&gt;
+&lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# removes process/group from active config &lt;/span&gt;
+&lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="c1"&gt;# reload config and then add and remove as necessary&lt;/span&gt;
+&lt;span class="n"&gt;clear&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# clear a process’ log files&lt;/span&gt;
+&lt;span class="n"&gt;clear&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# clear multiple process’ log files&lt;/span&gt;
+&lt;span class="n"&gt;clear&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="c1"&gt;# clear all process’ log files&lt;/span&gt;
+&lt;span class="n"&gt;fg&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# connect to a process in foreground mode Press Ctrl+C to exit foreground&lt;/span&gt;
+&lt;span class="n"&gt;pid&lt;/span&gt; &lt;span class="c1"&gt;# get the PID of supervisord&lt;/span&gt;
+&lt;span class="n"&gt;pid&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# get the PID of a single child process by name&lt;/span&gt;
+&lt;span class="n"&gt;pid&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="c1"&gt;# get the PID of every child process, one per line&lt;/span&gt;
+&lt;span class="n"&gt;reload&lt;/span&gt; &lt;span class="c1"&gt;# restarts the remote supervisord&lt;/span&gt;
+&lt;span class="n"&gt;reread&lt;/span&gt; &lt;span class="c1"&gt;# reload the daemon’s config‐uration files, without add/remove (no restarts)&lt;/span&gt;
+&lt;span class="n"&gt;restart&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# restart a process&lt;/span&gt;
+&lt;span class="n"&gt;restart&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;gname&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="c1"&gt;# restart all processes in a group&lt;/span&gt;
+&lt;span class="n"&gt;restart&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# restart multipleprocesses&lt;/span&gt;
+&lt;span class="n"&gt;restart&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="c1"&gt;# restart all processes&lt;/span&gt;
+&lt;span class="k"&gt;signal&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="c1"&gt;# help on signal&lt;/span&gt;
+&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# start a process&lt;/span&gt;
+&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;gname&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="c1"&gt;# start all processes in a group &lt;/span&gt;
+&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# start multiple processes&lt;/span&gt;
+&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="c1"&gt;# start all processes&lt;/span&gt;
+&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="c1"&gt;# get all process status&lt;/span&gt;
+&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# get status on a single process by name &lt;/span&gt;
+&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# get status on multiple named processes&lt;/span&gt;
+&lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# stop a process&lt;/span&gt;
+&lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;gname&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="c1"&gt;# stop all processes in a group&lt;/span&gt;
+&lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# stop multiple processes or groups&lt;/span&gt;
+&lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="c1"&gt;# stop all processes&lt;/span&gt;
+&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# output the last part of process logs&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/supervisorshi-xian-xiang-mu-bu-shu/</guid><pubDate>Mon, 27 Sep 2021 04:15:40 GMT</pubDate></item><item><title>redis初探</title><link>https://dagrons.github.io/posts/redischu-tan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="redis"&gt;redis简介&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;redis是单进程, 单线程, 所以具有很好的同步能力&lt;/li&gt;
 &lt;li&gt;redis所有操作都是原子性的, 单个操作是原子性的, 多个操作也支持事务(通过MULTI和EXEC指令), 乍一看redis支持的数据类型也不特殊, 而其灵活性就来源于redis的操作原子性, 借助这个特性我们可以轻易实现分布式锁&lt;/li&gt;
@@ -548,76 +661,4 @@ sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; autologin.service
 &lt;p&gt;程序在脱壳完成进入OEP的时候, IAT已经被覆写了,
 为了让dump出的程序正常运行, 我们需要将IAT进行修复
 从INT重建IAT不靠谱是因为在脱壳过程中, 完全可以毁掉INT, 而原始加壳文件payload被加密, 无法确定INT的位址和内容&lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</guid><pubDate>Thu, 26 Aug 2021 13:01:29 GMT</pubDate></item><item><title>论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</title><link>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;div class="toc"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1"&gt;前言&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2"&gt;简介&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_3"&gt;一些常见概念&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#task-il-vs-class-il"&gt;task-IL vs class-IL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#sil-vs-cil-vs-fil"&gt;SIL vs CIL vs FIL&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_4"&gt;问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_5"&gt;方法&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;基于增量学习的恶意代码家族分类
-为什么用增量学习 + 恶意代码家族分类?
-恶意代码家族分类是需要增量学习的典型任务场景, 恶意代码家族不可能预先给定, 不同的恶意代码家族会随着发展不断产生变体, 而在所有数据集上重新训练模型也是难以实现的, 是典型的class-incremental learning场景
-其次, BODMAS数据集中包含500多个恶意代码家族, 为研究增量学习提供了可能性
-再其次, 增量学习目前发展较慢, 仍存在大量问题, 通过增量学习实现恶意代码家族分类是有意义的, 而针对恶意代码家族分类去研究增量学习也是有意义的&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="_2"&gt;简介&lt;/h3&gt;
-&lt;p&gt;In most incremental learning scenarios, tasks are presented to a learner in a sequence of delineated &lt;em&gt;training sessions&lt;/em&gt; during which data from a single task is available for learning.
-After each training session, the learner should be capable of performing all perviously seen tasks on unseen data.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在增量学习场景下, 每一轮训练针对一个任务进行训练, 在训练结束后, 要求模型能对前面训练过的所有任务进行完成&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The main challenge in incremental learning is to learn from data from the current task in a way that prevents forgetting of previously learned tasks.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;增量学习的主要问题就是避免当前训练对以前任务的遗忘&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这一点和迁移学习类似但也有所不同, 迁移学习不要求对以前训练任务的知识实现保留&lt;/p&gt;
-&lt;p&gt;They aim to exploit knowledge from previous classes to improve learning of new ones(&lt;em&gt;forward transfer&lt;/em&gt;), as well as exploiting new data to improve performance on previous tasks(&lt;em&gt;backward transfer&lt;/em&gt;)&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;用旧知识帮助学习新知识, 用新知识巩固旧知识, sounds make sense&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="_3"&gt;一些常见概念&lt;/h3&gt;
-&lt;h4 id="task-il-vs-class-il"&gt;task-IL vs class-IL&lt;/h4&gt;
-&lt;p&gt;task-IL: task-incremental learning, 在inference的时候, 会给定样本的task ID&lt;/p&gt;
-&lt;p&gt;class-IL: class-incremental learning, 在inference的时候, 不给定样本的task ID&lt;/p&gt;
-&lt;p&gt;这里还是有些不清楚&lt;/p&gt;
-&lt;h4 id="sil-vs-cil-vs-fil"&gt;SIL vs CIL vs FIL&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;SIL&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;问题：由于新数据的各种原因，样本的特征值可能会改变，每个类别的比例也会改变。这些都会影响分类的准确率。&lt;/p&gt;
-&lt;p&gt;任务：因此，需要确保在现有知识的情况下，通过新样本的增量学习来提取新知识，融合新旧知识以提高分类的准确性。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;CIL
-任务：识别新类，并将其加入现有类别的集合中，提升分类的准确性和智能。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;FIL
-一些新的属性特征能够将分类提升到一个很大的程度，并提升分类准确率。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;任务：在现有特征空间的基础上，加入新的属性特征，构建新的特征空间，提升分类准确率。&lt;/p&gt;
-&lt;h3 id="_4"&gt;问题&lt;/h3&gt;
-&lt;p&gt;catastrophic forgetting(灾难性遗忘), 为了克服灾难性遗忘, 我们一方面希望模型能从新数据中有效学习新知识, 但另一方面又必须防止新输入的数据对已有知识的显著干扰(稳定性), 即&lt;strong&gt;稳定性-可塑性困境&lt;/strong&gt;(stability-plasticity dilemma)&lt;/p&gt;
-&lt;p&gt;增量学习的主要研究目的就是在计算和存储资源有限的条件下, 在稳定性-可塑性困境中寻找最佳平衡点&lt;/p&gt;
-&lt;h3 id="_5"&gt;方法&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;正则(regularization)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;回放(rehearsal)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;参数隔离(parameter isolation)&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><category>incremental learning</category><guid>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</guid><pubDate>Sat, 21 Aug 2021 05:28:23 GMT</pubDate></item></channel></rss>
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</guid><pubDate>Thu, 26 Aug 2021 13:01:29 GMT</pubDate></item></channel></rss>
