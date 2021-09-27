@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docker卷的备份与迁移 | NuLL</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../rss.xml">
+<link rel="canonical" href="https://dagrons.github.io/posts/dockerjuan-de-bei-fen-yu-qian-yi/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="dagrons">
+<link rel="prev" href="../supervisorshi-xian-xiang-mu-bu-shu/" title="supervisor实现项目级别的进程管理" type="text/html">
+<meta property="og:site_name" content="NuLL">
+<meta property="og:title" content="docker卷的备份与迁移">
+<meta property="og:url" content="https://dagrons.github.io/posts/dockerjuan-de-bei-fen-yu-qian-yi/">
+<meta property="og:description" content="起因
+
+docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘
+
+命名卷备份
+docker run --rm \ 
+  --volume [DOCKER_COMPOSE_PREFIX]_[VOLUME_NAME]:/[TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA] \
+  --volume $(pwd):">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-09-27T19:50:02+08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="../../">
+
+            <span id="blog-title">NuLL</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">源文件</a>
+    </li>
+
+
+                    
+            </ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="../../archive.html" class="nav-link">文章归档</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">标签</a>
+                </li>
+<li class="nav-item">
+<a href="../../rss.xml" class="nav-link">RSS 源</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">docker卷的备份与迁移</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    dagrons
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-27T19:50:02+08:00" itemprop="datePublished" title="2021-09-27 19:50">2021-09-27 19:50</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<h3 id="_1">起因</h3>
+<ul>
+<li>docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘</li>
+</ul>
+<h3 id="_2">命名卷备份</h3>
+<pre class="code literal-block">docker run --rm <span class="se">\ </span>
+  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span> <span class="se">\</span>
+  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
+  ubuntu <span class="se">\</span>
+  tar cvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span>
+</pre>
+<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/mongo-data.tar /root/mongo-data
+docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/es-data.tar /root/es-data
+docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/postgres-data.tar /root/postgres-data
+</pre>
+<h3 id="_3">删除之前的命名卷使配置生效</h3>
+<p>需要删除之前的命名卷才能在<code>docker-compose up</code>的时候重新根据docker-compose.yml创建卷</p>
+<pre class="code literal-block">docker volume rm dockercuckoo_mongo-data
+docker volume rm dockercuckoo_es-data
+docker volume rm dockercuckoo_postgres-data
+</pre>
+<p>然后重新up使得配置生效</p>
+<pre class="code literal-block">docker-compose -f docker-compose.vbox.yml up -d 
+</pre>
+<p>关闭容器, 清除因为部分容器应用初始化带来的额外数据(optional)</p>
+<pre class="code literal-block">docker-compose down 
+</pre>
+<h3 id="_4">命名卷数据恢复</h3>
+<pre class="code literal-block">docker run --rm <span class="se">\ </span>
+  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> <span class="se">\</span>
+  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
+  ubuntu <span class="se">\</span>
+  tar xvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar -C /<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> --strip <span class="m">1</span>
+</pre>
+<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/mongo-data.tar -C /root/mongo-data --strip <span class="m">1</span>
+docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/es-data.tar -C /root/es-data --strip <span class="m">1</span>
+docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/postgres-data.tar -C /root/postgres-data --strip <span class="m">1</span>
+</pre>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../supervisorshi-xian-xiang-mu-bu-shu/" rel="prev" title="supervisor实现项目级别的进程管理">上一篇文章</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

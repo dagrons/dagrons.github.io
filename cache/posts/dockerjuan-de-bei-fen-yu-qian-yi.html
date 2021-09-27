@@ -1,0 +1,38 @@
+<h2 id="_1">起因</h2>
+<ul>
+<li>docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘</li>
+</ul>
+<h2 id="_2">命名卷备份</h2>
+<pre class="code literal-block">docker run --rm <span class="se">\ </span>
+  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span> <span class="se">\</span>
+  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
+  ubuntu <span class="se">\</span>
+  tar cvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span>
+</pre>
+<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/mongo-data.tar /root/mongo-data
+docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/es-data.tar /root/es-data
+docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/postgres-data.tar /root/postgres-data
+</pre>
+<h2 id="_3">删除之前的命名卷使配置生效</h2>
+<p>需要删除之前的命名卷才能在<code>docker-compose up</code>的时候重新根据docker-compose.yml创建卷</p>
+<pre class="code literal-block">docker volume rm dockercuckoo_mongo-data
+docker volume rm dockercuckoo_es-data
+docker volume rm dockercuckoo_postgres-data
+</pre>
+<p>然后重新up使得配置生效</p>
+<pre class="code literal-block">docker-compose -f docker-compose.vbox.yml up -d 
+</pre>
+<p>关闭容器, 清除因为部分容器应用初始化带来的额外数据(optional)</p>
+<pre class="code literal-block">docker-compose down 
+</pre>
+<h2 id="_4">命名卷数据恢复</h2>
+<pre class="code literal-block">docker run --rm <span class="se">\ </span>
+  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> <span class="se">\</span>
+  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
+  ubuntu <span class="se">\</span>
+  tar xvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar -C /<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> --strip <span class="m">1</span>
+</pre>
+<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/mongo-data.tar -C /root/mongo-data --strip <span class="m">1</span>
+docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/es-data.tar -C /root/es-data --strip <span class="m">1</span>
+docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/postgres-data.tar -C /root/postgres-data --strip <span class="m">1</span>
+</pre>
