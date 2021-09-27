@@ -1,6 +1,7 @@
 <h2 id="_1">起因</h2>
 <ul>
 <li>docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘</li>
+<li>如果是bind类型的卷(即从host映射的卷), 那直接对相关映射源进行移动就行了</li>
 </ul>
 <h2 id="_2">命名卷备份</h2>
 <pre class="code literal-block">docker run --rm <span class="se">\ </span>
