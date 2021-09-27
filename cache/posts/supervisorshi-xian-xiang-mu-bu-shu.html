@@ -56,8 +56,15 @@
 <span class="na">stdout_logfile</span> <span class="o">=</span> <span class="s">./.supervisord/celery.logfile</span>
 <span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
 
+<span class="k">[program:flower]</span>
+<span class="na">command</span> <span class="o">=</span> <span class="s">/home/dell/Envs/mal/bin/celery -A app.celery flower --port=5656 --ip=0.0.0.0</span>
+<span class="na">process_name</span> <span class="o">=</span> <span class="s">%(program_name)s</span>
+<span class="na">directory</span> <span class="o">=</span> <span class="s">/home/dell/mal_v2</span>
+<span class="na">stdout_logfile</span> <span class="o">=</span> <span class="s">./.supervisord/flower.logfile</span>
+<span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
+
 <span class="k">[group:mal]</span>
-<span class="na">programs</span> <span class="o">=</span> <span class="s">flask, celery</span>
+<span class="na">programs</span> <span class="o">=</span> <span class="s">flask, celery, flower</span>
 <span class="na">priority</span> <span class="o">=</span> <span class="s">999</span>
 </pre>
 <h2 id="nginx">nginx部署</h2>
