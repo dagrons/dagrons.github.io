@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 27 Sep 2021 04:28:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>supervisor实现项目级别的进程管理</title><link>https://dagrons.github.io/posts/supervisorshi-xian-xiang-mu-bu-shu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="supervisor"&gt;supervisor简介&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 27 Sep 2021 04:28:45 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>supervisor实现项目级别的进程管理</title><link>https://dagrons.github.io/posts/supervisorshi-xian-xiang-mu-bu-shu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="supervisor"&gt;supervisor简介&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;相比于systemd, supervisor更适合项目级别的进程管理&lt;/li&gt;
 &lt;/ul&gt;
@@ -81,7 +81,7 @@
        &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;
-&lt;h3 id="supervisorctl-cheathsheet"&gt;supervisorctl cheathsheet&lt;/h3&gt;
+&lt;h3 id="supervisorctl-cheatsheet"&gt;supervisorctl cheatsheet&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="c1"&gt;# print a list of available actions&lt;/span&gt;
 &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# activates any updates in config for process/group&lt;/span&gt;
 &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# removes process/group from active config &lt;/span&gt;

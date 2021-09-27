@@ -100,7 +100,7 @@ server {
 }
 ```
 
-## supervisorctl cheathsheet
+## supervisorctl cheatsheet
 
 ```
 help # print a list of available actions
