@@ -1,5 +1,5 @@
 <!--
-.. title: supervisor实现项目部署
+.. title: supervisor实现项目级别的进程管理
 .. slug: supervisorshi-xian-xiang-mu-bu-shu
 .. date: 2021-09-27 12:15:40 UTC+08:00
 .. tags: 
