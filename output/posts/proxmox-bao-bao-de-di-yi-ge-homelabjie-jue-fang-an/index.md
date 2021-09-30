@@ -64,11 +64,6 @@ systemctl restart networking
 
 总的来说, 这个东西其实提供了一个搭建集群的框架
 
-
-然后, 放张UI图吧
-
-<img src="/images/cloud-storage.png" style="text-align: center" />
-
 几个重要的点:
 
 - Cluster: 这里用来管理集群
