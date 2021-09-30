@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1632973423.8553886
+_modified_time = 1632973528.311696
 _enable_loop = True
 _template_filename = '/home/ubuntu/Envs/nikola/lib/python3.6/site-packages/nikola/data/themes/base/templates/list.tmpl'
 _template_uri = 'list.tmpl'
@@ -37,16 +37,16 @@ def render_body(context,**pageargs):
         _mako_get_namespace(context, 'archive_nav')._populate(_import_ns, ['*'])
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
         has_no_feeds = _import_ns.get('has_no_feeds', context.get('has_no_feeds', UNDEFINED))
         def content():
             return render_content(context._locals(__M_locals))
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        title = _import_ns.get('title', context.get('title', UNDEFINED))
         items = _import_ns.get('items', context.get('items', UNDEFINED))
         archive_nav = _mako_get_namespace(context, 'archive_nav')
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        title = _import_ns.get('title', context.get('title', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -74,9 +74,9 @@ def render_extra_head(context,**pageargs):
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         def extra_head():
             return render_extra_head(context)
-        has_no_feeds = _import_ns.get('has_no_feeds', context.get('has_no_feeds', UNDEFINED))
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        has_no_feeds = _import_ns.get('has_no_feeds', context.get('has_no_feeds', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(feeds_translations.head(kind=kind, rss_override=False, has_no_feeds=has_no_feeds)))
@@ -95,11 +95,11 @@ def render_content(context,**pageargs):
         messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         def content():
             return render_content(context)
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        title = _import_ns.get('title', context.get('title', UNDEFINED))
         items = _import_ns.get('items', context.get('items', UNDEFINED))
         archive_nav = _mako_get_namespace(context, 'archive_nav')
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
+        title = _import_ns.get('title', context.get('title', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
         __M_writer = context.writer()
         __M_writer('\n<article class="listpage">\n    <header>\n        <h1>')
         __M_writer(filters.html_escape(str(title)))
