@@ -18,6 +18,7 @@
 Linux的网络工具架构如下:
 
 ![img](/images/networking.png)
+<img src="/images/networking.png" style="width: 50%; height: 50%; text-align: center">
 
 总的来说, 主要有两套backend, 一个是network-manager, 一个是system-networkd, 
 
