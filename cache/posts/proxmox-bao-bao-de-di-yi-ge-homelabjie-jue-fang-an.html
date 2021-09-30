@@ -1,0 +1,53 @@
+<h2 id="_1">前言</h2>
+<ul>
+<li>
+<p>由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案</p>
+</li>
+<li>
+<p>所以习惯性的算homelab入门吧, "hello, world!"</p>
+</li>
+</ul>
+<h2 id="_2">基础概念扫盲</h2>
+<ul>
+<li>datacenter: 顶级概念, 其实没啥意义</li>
+<li>node: 在pve中指的是一个物理机</li>
+<li>cluster: 在pve中指的是物理机的集合, 组合提供计算资源</li>
+<li>pod: 在k8s中指的是一个基础服务单元</li>
+</ul>
+<h2 id="_3">安装</h2>
+<ul>
+<li>不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定</li>
+</ul>
+<h2 id="_4">网络设置</h2>
+<p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
+<pre class="code literal-block"># /etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+iface enp2s0 inet manual
+
+auto vmbr0
+iface vmbr0 inet dhcp
+        bridge-ports enp2s0
+        bridge-stp off
+        bridge-fd 0
+</pre>
+<p>然后</p>
+<pre class="code literal-block">systemctl restart networking
+</pre>
+<h2 id="_5">概览</h2>
+<p>好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧</p>
+<p>不多说, 先上灵魂画图</p>
+<p><img src="/images/cloud-computing.png" style="text-align: center" /></p>
+<p>总的来说, 这个东西其实提供了一个搭建集群的框架</p>
+<p>然后, 放张UI图吧</p>
+<p><img src="/images/cloud-storage.png" style="width: 50%; height: 50%; text-align: center" /></p>
+<p>几个重要的点:</p>
+<ul>
+<li>Cluster: 这里用来管理集群</li>
+<li>Ceph: 分布式的文件系统</li>
+<li>Storage: 管理所有的文件系统, 包括非分布式文件系统</li>
+</ul>
+<h2 id="_6">其他</h2>
+<p>没有其他了</p>
