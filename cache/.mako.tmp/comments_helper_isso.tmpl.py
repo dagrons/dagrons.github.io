@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1632994395.6205266
+_modified_time = 1632994457.6891148
 _enable_loop = True
 _template_filename = '/home/ubuntu/Envs/nikola/lib/python3.6/site-packages/nikola/data/themes/base/templates/comments_helper_isso.tmpl'
 _template_uri = 'comments_helper_isso.tmpl'
@@ -30,8 +30,8 @@ def render_comment_form(context,url,title,identifier):
     __M_caller = context.caller_stack._push_frame()
     try:
         isso_config = context.get('isso_config', UNDEFINED)
-        lang = context.get('lang', UNDEFINED)
         comment_system_id = context.get('comment_system_id', UNDEFINED)
+        lang = context.get('lang', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if comment_system_id:
@@ -79,8 +79,8 @@ def render_comment_link_script(context):
     __M_caller = context.caller_stack._push_frame()
     try:
         pagekind = context.get('pagekind', UNDEFINED)
-        lang = context.get('lang', UNDEFINED)
         comment_system_id = context.get('comment_system_id', UNDEFINED)
+        lang = context.get('lang', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if comment_system_id and 'index' in pagekind:

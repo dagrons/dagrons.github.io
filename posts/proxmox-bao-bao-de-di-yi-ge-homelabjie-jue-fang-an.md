@@ -59,7 +59,7 @@ systemctl restart networking
 
 不多说, 先上灵魂画图
 
-<img src="/images/cloud-computing.png" style="text-align: center" />
+<img src="/images/cloud-computing.png" style="width: 80%; height: 80%; text-align: center" />
 
 
 总的来说, 这个东西其实提供了一个搭建集群的框架
@@ -67,7 +67,7 @@ systemctl restart networking
 
 然后, 放张UI图吧
 
-<img src="/images/cloud-storage.png" style="width: 50%; height: 50%; text-align: center" />
+<img src="/images/cloud-storage.png" style="width: 80%; height: 80%; text-align: center" />
 
 几个重要的点:
 
