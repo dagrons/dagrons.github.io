@@ -4,7 +4,8 @@
 </ul>
 <h2 id="_2">简介</h2>
 <p>Linux的网络工具架构如下:</p>
-<p><img alt="img" src="/images/networking.png"></p>
+<p><img alt="img" src="/images/networking.png">
+<img src="/images/networking.png" style="width: 50%; height: 50%; text-align: center"></p>
 <p>总的来说, 主要有两套backend, 一个是network-manager, 一个是system-networkd, </p>
 <p><strong>network-manager vs system-networkd</strong>
 network-manager主要用于GUI环境下的网络配置, system-networkd主要用于server环境下的网路配置, 但作用是一样的, 在netplan的术语中, 它们只是render, 即读取配置文件, 将需要配置的网络环境渲染出来</p>
