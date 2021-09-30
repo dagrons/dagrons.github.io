@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 03:45:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 09:31:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;所以习惯性的算homelab入门吧, "hello, world!"&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_2"&gt;基础概念扫盲&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;datacenter: 顶级概念, 其实没啥意义&lt;/li&gt;
+&lt;li&gt;node: 在pve中指的是一个物理机&lt;/li&gt;
+&lt;li&gt;cluster: 在pve中指的是物理机的集合, 组合提供计算资源&lt;/li&gt;
+&lt;li&gt;pod: 在k8s中指的是一个基础服务单元&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_3"&gt;安装&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_4"&gt;网络设置&lt;/h3&gt;
+&lt;p&gt;由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;# /etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+iface enp2s0 inet manual
+
+auto vmbr0
+iface vmbr0 inet dhcp
+        bridge-ports enp2s0
+        bridge-stp off
+        bridge-fd 0
+&lt;/pre&gt;
+&lt;p&gt;然后&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;systemctl restart networking
+&lt;/pre&gt;
+&lt;h3 id="_5"&gt;概览&lt;/h3&gt;
+&lt;p&gt;好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧&lt;/p&gt;
+&lt;p&gt;不多说, 先上灵魂画图&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dagrons.github.io/images/cloud-computing.png" style="text-align: center"&gt;&lt;/p&gt;
+&lt;p&gt;总的来说, 这个东西其实提供了一个搭建集群的框架&lt;/p&gt;
+&lt;p&gt;然后, 放张UI图吧&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dagrons.github.io/images/cloud-storage.png" style="width: 50%; height: 50%; text-align: center"&gt;&lt;/p&gt;
+&lt;p&gt;几个重要的点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cluster: 这里用来管理集群&lt;/li&gt;
+&lt;li&gt;Ceph: 分布式的文件系统&lt;/li&gt;
+&lt;li&gt;Storage: 管理所有的文件系统, 包括非分布式文件系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_6"&gt;其他&lt;/h3&gt;
+&lt;p&gt;没有其他了&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</guid><pubDate>Thu, 30 Sep 2021 09:11:58 GMT</pubDate></item><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;
 &lt;/ul&gt;
@@ -522,87 +574,4 @@ strings.Replace("张明阳是傻逼", "傻逼", "纯弱智", -1) // 替换字符
 strings.Contains(s, substr string) // 是否存在子串
 strings.ContainsAny(s, chars string) // chars中的字符是否在s中出现过
 strings.Index(s string, str string) // 返回str在s中第一次出现的位置, 如果不存在返回-1, str为空返回0
-&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</guid><pubDate>Wed, 08 Sep 2021 13:06:45 GMT</pubDate></item><item><title>展示服务器GPU使用情况及账号IP</title><link>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="_1"&gt;问题分析：&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中&lt;/li&gt;
-&lt;li&gt;通过one-shot-server创建服务&lt;/li&gt;
-&lt;li&gt;或者通过nginx创建服务&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="gpu"&gt;GPU使用情况脚本&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
-&lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; t &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;nvidia-smi&lt;span class="p"&gt;|&lt;/span&gt;egrep &lt;span class="s1"&gt;'^\|[\ ]{4}[[:digit:]]'&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tr -d &lt;span class="s1"&gt;'|'&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;awk &lt;span class="s1"&gt;'{print $4}'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="c1"&gt;# command substitution&lt;/span&gt;
-    &lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="o"&gt;+=(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;cat /proc/&lt;span class="nv"&gt;$t&lt;/span&gt;/cgroup&lt;span class="p"&gt;|&lt;/span&gt;head -n &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;cut -d &lt;span class="s1"&gt;'.'&lt;/span&gt; -f &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; t &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;nvidia-smi&lt;span class="p"&gt;|&lt;/span&gt;egrep &lt;span class="s1"&gt;'^\|[\ ]{4}[[:digit:]]'&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tr -d &lt;span class="s1"&gt;'|'&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;awk &lt;span class="s1"&gt;'{print $7}'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; 
-
-    &lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="o"&gt;+=(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$t&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-
-&lt;span class="nv"&gt;plen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${#&lt;/span&gt;&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="p"&gt;[@]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="c1"&gt;# parameter expansion&lt;/span&gt;
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"usage:"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; 
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i&amp;lt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;plen&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; i++&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="c1"&gt;# arithemetic expansion&lt;/span&gt;
-    &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s2"&gt;"%-10s\t | %10s\n"&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;persons&lt;/span&gt;&lt;span class="p"&gt;[i]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;usages&lt;/span&gt;&lt;span class="p"&gt;[i]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; 
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"update at &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------------------------------"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"------------------------------"&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; 
-&lt;/pre&gt;
-&lt;h2 id="ip"&gt;账号IP信息打印&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;lxc list 
-&lt;/pre&gt;
-&lt;h2 id="crontab"&gt;crontab设置定时任务&lt;/h2&gt;
-&lt;p&gt;定时打印ip和gpu使用信息&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="o"&gt;*/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;smi&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagongren&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;
-&lt;span class="o"&gt;*/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;who_is_using_gpu&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagongren&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usage&lt;/span&gt;
-&lt;span class="o"&gt;*/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;who_is_using_gpu&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagongren&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;snap&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lxc&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagongren&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagongren&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="one-shot-server"&gt;one-shot-server脚本&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;#/bin/bash&lt;/span&gt;
-
-&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
-&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
-&lt;span class="k"&gt;then&lt;/span&gt;
-  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"The file &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; does not exist"&lt;/span&gt;
-  &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="k"&gt;fi&lt;/span&gt;
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"The file &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; does exist"&lt;/span&gt;
-&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;
-&lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -ne &lt;span class="s2"&gt;"HTTP/1.0 200 OK\r\nContent-Length: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;wc -c &amp;lt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;\r\n\r\n"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; cat &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; nc -l -p &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="one-shot-server_1"&gt;通过one-shot-server启动服务&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;最好启动两次, 我也不知道为什么&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class="code literal-block"&gt;nohup bash ./one_shot_server &lt;span class="m"&gt;1205&lt;/span&gt; /root/share/ip &amp;gt; /dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; 
-&lt;/pre&gt;
-&lt;h2 id="nginx"&gt;通过nginx创建服务&lt;/h2&gt;
-&lt;p&gt;/etc/nginx/sites-enabled/default内容如下：&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-       &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;1205&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-       &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-            &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-       &lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;然后加载nginx配置&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;nginx -s reload
-&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</guid><pubDate>Fri, 03 Sep 2021 12:45:38 GMT</pubDate></item></channel></rss>
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</guid><pubDate>Wed, 08 Sep 2021 13:06:45 GMT</pubDate></item></channel></rss>
