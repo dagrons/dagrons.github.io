@@ -72,7 +72,53 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/" class="u-url">gunicorn + nginx 实现 flask + react 应用部署</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/nginxpei-zhi-ssl/" class="u-url">nginx配置ssl</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/nginxpei-zhi-ssl/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-21T16:26:07+08:00" itemprop="datePublished" title="2021-09-21 16:26">2021-09-21 16:26</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h3 id="_1">问题分析</h3>
+<p>在很多时候, 我们需要实现加密通信, 例如对于mal应用而言, 由于要上传恶意软件, 势必会被防火墙拦截, 因此需要配置ssl, 才能绕过这些限制</p>
+<h3 id="_2">生成自签名证书</h3>
+<pre class="code literal-block">openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days <span class="m">365</span> -out certificate.pem
+</pre>
+<h3 id="nginxssl">nginx配置ssl</h3>
+<pre class="code literal-block">sudo mkdir /etc/nginx/cert &amp;&amp; cp *.pem /etc/nginx/cert
+</pre>
+<p>/etc/nginx/sites-enabled/mal</p>
+<pre class="code literal-block"> <span class="n">server</span> <span class="p">{</span>
+          <span class="n">listen</span> <span class="mi">5000</span> <span class="n">ssl</span><span class="p">;</span>
+
+          <span class="n">ssl_certificate</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">certificate</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+          <span class="n">ssl_certificate_key</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+
+          <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span> <span class="p">{</span>
+                   <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
+                  <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+         <span class="p">}</span>
+
+         <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span> <span class="p">{</span>
+                  <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span>
+                  <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+         <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+<p>检查配置</p>
+<pre class="code literal-block">sudo nginx -t
+</pre>
+<p>配置生效</p>
+<pre class="code literal-block"><span class="n">sudo</span> <span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>
+</pre>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/" class="u-url">gunicorn + nginx 实现 flask + react 应用部署</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons

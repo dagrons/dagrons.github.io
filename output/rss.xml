@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Mon, 27 Sep 2021 13:50:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>docker命名卷的备份与迁移</title><link>https://dagrons.github.io/posts/dockerjuan-de-bei-fen-yu-qian-yi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;起因&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 03:17:11 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_2"&gt;简介&lt;/h3&gt;
+&lt;p&gt;Linux的网络工具架构如下:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/images/networking.png"&gt;img&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</guid><pubDate>Thu, 30 Sep 2021 03:13:07 GMT</pubDate></item><item><title>docker命名卷的备份与迁移</title><link>https://dagrons.github.io/posts/dockerjuan-de-bei-fen-yu-qian-yi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;起因&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘&lt;/li&gt;
 &lt;li&gt;如果是bind类型的卷(即从host映射的卷), 那直接对相关映射源进行移动就行了&lt;/li&gt;
@@ -564,129 +570,4 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
 &lt;/pre&gt;
 &lt;p&gt;然后加载nginx配置&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;nginx -s reload
-&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</guid><pubDate>Fri, 03 Sep 2021 12:45:38 GMT</pubDate></item><item><title>自动上传实验室服务器信息到腾讯云服务器</title><link>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;p&gt;因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）&lt;/p&gt;
-&lt;h2 id="_1"&gt;问题分析&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网&lt;/li&gt;
-&lt;li&gt;为了方便，我们选择用ssh协议上传ip信息，并且60秒更新一次&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;记录流程如下：&lt;/p&gt;
-&lt;h2 id="ipetchosts"&gt;先将腾讯云IP加到/etc/hosts&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"120.53.125.30     tencent_cloud"&lt;/span&gt; &amp;gt;&amp;gt; /etc/hosts
-&lt;/pre&gt;
-&lt;h2 id="ssh-key-pubkeytencent_cloud"&gt;将ssh-key pubkey加到tencent_cloud的信任列表中&lt;/h2&gt;
-&lt;p&gt;以一步是防止ssh上传ip时要求输入密码&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;cat ~/.ssh/id_rsa.pub &lt;span class="p"&gt;|&lt;/span&gt; ssh ubuntu@tencent_cloud &lt;span class="s1"&gt;'cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys'&lt;/span&gt; 
-&lt;/pre&gt;
-&lt;h2 id="internet"&gt;检测Internet连接并自动登陆校园网的脚本&lt;/h2&gt;
-&lt;p&gt;/usr/local/bin/autologin内容如下&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class="k"&gt;while&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; ping -q -c &lt;span class="m"&gt;1&lt;/span&gt; -W &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt;.8.8.8 &amp;gt;/dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Internet Connection is alive"&lt;/span&gt;
-    sleep &lt;span class="m"&gt;10&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-    python3 /home/dell/get2internet.py &lt;span class="m"&gt;2020110966&lt;/span&gt; Daxiahyh1
-    &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="ip"&gt;上传ip的脚本&lt;/h2&gt;
-&lt;p&gt;/usr/local/bin/upload-ip内容如下:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class="k"&gt;while&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="nv"&gt;ipaddr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ifconfig br0 &lt;span class="p"&gt;|&lt;/span&gt;egrep &lt;span class="s1"&gt;'inet\ '&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;awk &lt;span class="s1"&gt;'{print $2}'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
-    &lt;span class="nv"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;
-    cat &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF | ssh root@tencent_cloud 'cat &amp;gt; /var/www/html/lab_host3.html'&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;h1&amp;gt;基础信息&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;服务器编号： 3&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;服务器IP：$ipaddr&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;账号IP及GPU使用情况: &amp;lt;a href="http://$ipaddr:1205"&amp;gt;入口&amp;lt;/a&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;update time: $time&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;h1&amp;gt;README&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;h2&amp;gt;硬件信息&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;GPU: 两块3080(公用) &amp;lt;br /&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;CPU: Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz &amp;lt;br /&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;h2&amp;gt;使用注意&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;服务器IP在重启后IP可能变化, 但这个链接不会变化, 要是发现服务器登不上, 可以点击上面的账号IP信息入口, 查看自己账号IP是否改变过&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;/share下是公用目录, 建议将数据集放在这(这样别人也可以用), 以及和别人共享文件, 也是这个目录, 显卡驱动安装脚本(rescue.sh)也在这里, 最好不要自己瞎装驱动了, 如果要自己装, 后面加上--no-kernel-module参数&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;账号默认root密码是1205, ssh端口是42502, 最好改一下密码&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;如果要对自己的容器进行一些奇奇怪怪的操作之前, 可以提前让我给你容器创建个备份, 不然可能发生一些不太好的事情&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;EOF&lt;/span&gt;
-    sleep &lt;span class="m"&gt;60&lt;/span&gt;
-&lt;span class="k"&gt;done&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="autologinservice"&gt;创建autologin.service文件&lt;/h2&gt;
-&lt;p&gt;/etc/systemd/system/autologin.service内容如下：&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
-&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Auto Login for Internet&lt;/span&gt;
-&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network-online.target&lt;/span&gt;
-&lt;span class="na"&gt;Wants&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network-online.target&lt;/span&gt;
-
-&lt;span class="k"&gt;[Service]&lt;/span&gt;
-&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;root&lt;/span&gt;
-&lt;span class="na"&gt;WorkingDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;
-&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/local/bin/autologin&lt;/span&gt;
-&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
-
-&lt;span class="k"&gt;[Install]&lt;/span&gt;
-&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="upload-ipservice"&gt;创建upload-ip.service文件&lt;/h2&gt;
-&lt;p&gt;/etc/systemd/system/upload-ip.service内容如下：&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
-&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Send ip to remote tencent cloud server&lt;/span&gt;
-&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network-online.target&lt;/span&gt;
-&lt;span class="na"&gt;Wants&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network-online.target&lt;/span&gt;
-
-&lt;span class="k"&gt;[Service]&lt;/span&gt;
-&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;root&lt;/span&gt;
-&lt;span class="na"&gt;WorkingDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;
-&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/local/bin/upload-ip&lt;/span&gt;
-&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
-
-&lt;span class="k"&gt;[Install]&lt;/span&gt;
-&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h2 id="_2"&gt;启动服务&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;sudo systemctl deamon-reload
-sudo systemctl start upload-ip.service
-sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; upload-ip.service
-sudo systemctl start autologin.service
-sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; autologin.service
-&lt;/pre&gt;
-&lt;h2 id="systemctl-cheatsheet"&gt;附送systemctl cheatsheet&lt;/h2&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;daemon&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;reload&lt;/span&gt; &lt;span class="c1"&gt;# Reload the service files to include the new service&lt;/span&gt;
-&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="c1"&gt;# Start your service&lt;/span&gt;
-&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="c1"&gt;# To check the status of your service&lt;/span&gt;
-&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="c1"&gt;# To enable your service on every reboot&lt;/span&gt;
-&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="c1"&gt;# To disable your service on every reboot&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</guid><pubDate>Fri, 03 Sep 2021 11:31:01 GMT</pubDate></item></channel></rss>
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</guid><pubDate>Fri, 03 Sep 2021 12:45:38 GMT</pubDate></item></channel></rss>
