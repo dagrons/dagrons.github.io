@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 03:37:16 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 03:39:11 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="_2"&gt;简介&lt;/h3&gt;
 &lt;p&gt;Linux的网络工具架构如下:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://dagrons.github.io/images/networking.png"&gt;img&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="img" src="https://dagrons.github.io/images/networking.png"&gt;&lt;/p&gt;
 &lt;p&gt;总的来说, 主要有两套backend, 一个是network-manager, 一个是system-networkd, &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;network-manager vs system-networkd&lt;/strong&gt;
 network-manager主要用于GUI环境下的网络配置, system-networkd主要用于server环境下的网路配置, 但作用是一样的, 在netplan的术语中, 它们只是render, 即读取配置文件, 将需要配置的网络环境渲染出来&lt;/p&gt;
