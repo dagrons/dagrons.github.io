@@ -17,4 +17,4 @@
 
 Linux的网络工具架构如下:
 
-[img](images/networking.png)
+[img](/images/networking.png)
