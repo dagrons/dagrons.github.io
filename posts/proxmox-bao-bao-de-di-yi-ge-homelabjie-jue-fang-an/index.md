@@ -78,8 +78,11 @@ reboot # 完成后重启
 ```
 
 最后需要设置Power选项,
--  把"Blank screen"和"Automatic suspend"改成"Never", 
-- "When then Powert Button is pressed"改成"Nothing",
+
+- 把"Blank screen"和"Automatic suspend"改成"Never"
+
+- 把"When then Powert Button is pressed"成"Nothing"
+
 - Details > Users 设置免密自动登录
 
 ## 概览
