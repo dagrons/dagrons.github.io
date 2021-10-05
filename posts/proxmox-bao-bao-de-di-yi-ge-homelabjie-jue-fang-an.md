@@ -61,6 +61,22 @@ iface vmbr0 inet dhcp
 systemctl restart networking
 ```
 
+## 添加图形化界面
+
+pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE
+
+```
+tasksel # 然后空格选择kde, tab选择OK
+```
+
+由于debian默认不给root图形化登录, 所以我们创建一个非root用户
+
+```
+useradd -m dell -g root -s /bin/bash -d /home/dell
+passwd dell
+reboot # 完成后重启
+```
+
 ## 概览
 
 好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧

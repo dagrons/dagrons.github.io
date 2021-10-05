@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 05 Oct 2021 06:02:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 05 Oct 2021 06:38:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
@@ -43,7 +43,16 @@ iface vmbr0 inet dhcp
 &lt;p&gt;然后&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;systemctl restart networking
 &lt;/pre&gt;
-&lt;h3 id="_6"&gt;概览&lt;/h3&gt;
+&lt;h3 id="_6"&gt;添加图形化界面&lt;/h3&gt;
+&lt;p&gt;pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;tasksel # 然后空格选择kde, tab选择OK
+&lt;/pre&gt;
+&lt;p&gt;由于debian默认不给root图形化登录, 所以我们创建一个非root用户&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;useradd -m dell -g root -s /bin/bash -d /home/dell
+passwd dell
+reboot # 完成后重启
+&lt;/pre&gt;
+&lt;h3 id="_7"&gt;概览&lt;/h3&gt;
 &lt;p&gt;好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧&lt;/p&gt;
 &lt;p&gt;不多说, 先上灵魂画图&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://dagrons.github.io/images/cloud-computing.png" style="text-align: center"&gt;&lt;/p&gt;
@@ -54,7 +63,7 @@ iface vmbr0 inet dhcp
 &lt;li&gt;Ceph: 分布式的文件系统&lt;/li&gt;
 &lt;li&gt;Storage: 管理所有的文件系统, 包括非分布式文件系统&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="_7"&gt;其他&lt;/h3&gt;
+&lt;h3 id="_8"&gt;其他&lt;/h3&gt;
 &lt;p&gt;没有其他了&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</guid><pubDate>Thu, 30 Sep 2021 09:11:58 GMT</pubDate></item><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;
