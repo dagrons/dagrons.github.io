@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 05 Oct 2021 06:42:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 05 Oct 2021 06:45:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
@@ -52,10 +52,18 @@ iface vmbr0 inet dhcp
 passwd dell
 reboot # 完成后重启
 &lt;/pre&gt;
-&lt;p&gt;最后需要设置Power选项,
--  把"Blank screen"和"Automatic suspend"改成"Never", 
-- "When then Powert Button is pressed"改成"Nothing",
-- Details &amp;gt; Users 设置免密自动登录&lt;/p&gt;
+&lt;p&gt;最后需要设置Power选项,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;把"Blank screen"和"Automatic suspend"改成"Never"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把"When then Powert Button is pressed"成"Nothing"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Details &amp;gt; Users 设置免密自动登录&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id="_7"&gt;概览&lt;/h3&gt;
 &lt;p&gt;好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧&lt;/p&gt;
 &lt;p&gt;不多说, 先上灵魂画图&lt;/p&gt;
