@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Thu, 30 Sep 2021 09:38:07 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 05 Oct 2021 06:02:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
@@ -19,7 +19,13 @@
 &lt;ul&gt;
 &lt;li&gt;不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="_4"&gt;网络设置&lt;/h3&gt;
+&lt;h3 id="_4"&gt;添加非订阅源&lt;/h3&gt;
+&lt;p&gt;由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;rm /etc/apt/sources.list.d/pve-enterprise.list
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'deb http://download.proxmox.com/debian/pve buster pve-no-subscription'&lt;/span&gt; &amp;gt;&amp;gt; /etc/apt/sources.list.d/pve-no-subscription.list
+apt update
+&lt;/pre&gt;
+&lt;h3 id="_5"&gt;网络设置&lt;/h3&gt;
 &lt;p&gt;由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;# /etc/network/interfaces
 
@@ -37,7 +43,7 @@ iface vmbr0 inet dhcp
 &lt;p&gt;然后&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;systemctl restart networking
 &lt;/pre&gt;
-&lt;h3 id="_5"&gt;概览&lt;/h3&gt;
+&lt;h3 id="_6"&gt;概览&lt;/h3&gt;
 &lt;p&gt;好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧&lt;/p&gt;
 &lt;p&gt;不多说, 先上灵魂画图&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://dagrons.github.io/images/cloud-computing.png" style="text-align: center"&gt;&lt;/p&gt;
@@ -48,7 +54,7 @@ iface vmbr0 inet dhcp
 &lt;li&gt;Ceph: 分布式的文件系统&lt;/li&gt;
 &lt;li&gt;Storage: 管理所有的文件系统, 包括非分布式文件系统&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="_6"&gt;其他&lt;/h3&gt;
+&lt;h3 id="_7"&gt;其他&lt;/h3&gt;
 &lt;p&gt;没有其他了&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</guid><pubDate>Thu, 30 Sep 2021 09:11:58 GMT</pubDate></item><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;

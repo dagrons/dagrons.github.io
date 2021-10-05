@@ -103,7 +103,13 @@
 <ul>
 <li>不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定</li>
 </ul>
-<h3 id="_4">网络设置</h3>
+<h3 id="_4">添加非订阅源</h3>
+<p>由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源</p>
+<pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
+<span class="nb">echo</span> <span class="s1">'deb http://download.proxmox.com/debian/pve buster pve-no-subscription'</span> &gt;&gt; /etc/apt/sources.list.d/pve-no-subscription.list
+apt update
+</pre>
+<h3 id="_5">网络设置</h3>
 <p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
 <pre class="code literal-block"># /etc/network/interfaces
 
@@ -121,7 +127,7 @@ iface vmbr0 inet dhcp
 <p>然后</p>
 <pre class="code literal-block">systemctl restart networking
 </pre>
-<h3 id="_5">概览</h3>
+<h3 id="_6">概览</h3>
 <p>好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧</p>
 <p>不多说, 先上灵魂画图</p>
 <p><img src="images/cloud-computing.png" style="text-align: center"></p>
@@ -132,7 +138,7 @@ iface vmbr0 inet dhcp
 <li>Ceph: 分布式的文件系统</li>
 <li>Storage: 管理所有的文件系统, 包括非分布式文件系统</li>
 </ul>
-<h3 id="_6">其他</h3>
+<h3 id="_7">其他</h3>
 <p>没有其他了</p>
 </div>
                 </div>

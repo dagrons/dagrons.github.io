@@ -26,6 +26,15 @@
 
 - 不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定
 
+## 添加非订阅源
+
+由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源
+
+```bash
+rm /etc/apt/sources.list.d/pve-enterprise.list
+echo 'deb http://download.proxmox.com/debian/pve buster pve-no-subscription' >> /etc/apt/sources.list.d/pve-no-subscription.list
+apt update
+```
 
 ## 网络设置
 
