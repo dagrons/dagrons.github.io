@@ -77,6 +77,11 @@ passwd dell
 reboot # 完成后重启
 ```
 
+最后需要设置Power选项,
+-  把"Blank screen"和"Automatic suspend"改成"Never", 
+- "When then Powert Button is pressed"改成"Nothing",
+- Details > Users 设置免密自动登录
+
 ## 概览
 
 好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧
