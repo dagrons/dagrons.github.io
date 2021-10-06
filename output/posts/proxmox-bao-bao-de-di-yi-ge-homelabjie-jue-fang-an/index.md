@@ -19,7 +19,7 @@
 
 - datacenter: 顶级概念, 其实没啥意义
 - node: 在pve中指的是一个物理机
-- cluster: 在pve中指的是物理机的集合, 组合提供计算资源
+- cluster: 在pve中指的是物理机的集合, 和k3s不同, 这里的cluster主要是为了实现多个物理机的vms和cts的pve共同管理和共享资源提出的概念
 - pod: 在k8s中指的是一个基础服务单元
 
 ## 安装
