@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 06 Oct 2021 03:22:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 06 Oct 2021 12:44:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
@@ -76,8 +76,13 @@ reboot # 完成后重启
 &lt;li&gt;Ceph: 分布式的文件系统&lt;/li&gt;
 &lt;li&gt;Storage: 管理所有的文件系统, 包括非分布式文件系统&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="_8"&gt;其他&lt;/h3&gt;
-&lt;p&gt;没有其他了&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</guid><pubDate>Thu, 30 Sep 2021 09:11:58 GMT</pubDate></item><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+&lt;h3 id="_8"&gt;体验&lt;/h3&gt;
+&lt;p&gt;pve给我感觉最强大的地方就是它的wiki非常全, 在google中搜索pve pci passthrough, 第一条就是pve wiki的&lt;a href="https://pve.proxmox.com/wiki/Pci_passthrough"&gt;page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其次, pve对kvm + qemu和lxc进行了抽象, 基于它们而高于它们, 封装好的pve系列工具相比之下更加好用&lt;/p&gt;
+&lt;p&gt;pve的开源性, 社区活跃性都很好&lt;/p&gt;
+&lt;p&gt;有什么不知道的, 在wiki中基本都能得到答案&lt;/p&gt;
+&lt;h3 id="_9"&gt;其他&lt;/h3&gt;
+&lt;p&gt;暂时没有&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</guid><pubDate>Thu, 30 Sep 2021 09:11:58 GMT</pubDate></item><item><title>linux网络配置-我想一次讲清楚</title><link>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好&lt;/li&gt;
 &lt;/ul&gt;
