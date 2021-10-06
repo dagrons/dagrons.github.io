@@ -119,4 +119,4 @@ pve的开源性, 社区活跃性都很好
 
 - What is the exact difference between pct and lxc-xxx?
 
-        pct uses the proxmox libraries and config(storage, network, cluster, firewall) and assembles an lxc command from that
+  *pct uses the proxmox libraries and config(storage, network, cluster, firewall) and assembles an lxc command from that*
