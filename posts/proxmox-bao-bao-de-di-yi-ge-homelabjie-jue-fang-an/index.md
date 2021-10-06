@@ -105,6 +105,16 @@ reboot # 完成后重启
 - Ceph: 分布式的文件系统
 - Storage: 管理所有的文件系统, 包括非分布式文件系统
 
+## 体验
+
+pve给我感觉最强大的地方就是它的wiki非常全, 在google中搜索pve pci passthrough, 第一条就是pve wiki的[page](https://pve.proxmox.com/wiki/Pci_passthrough)
+
+其次, pve对kvm + qemu和lxc进行了抽象, 基于它们而高于它们, 封装好的pve系列工具相比之下更加好用
+
+pve的开源性, 社区活跃性都很好
+
+有什么不知道的, 在wiki中基本都能得到答案
+
 ## 其他
 
-没有其他了
+暂时没有
