@@ -24,10 +24,20 @@ System Settings > Language > add languages > 简体中文
 
 System Settings > startup and shutdown > auto-start > add program > fcitx
 
-## 诊断并注销即可
+## fcitx-diagnose
 
+fcitx-diagnose会检查系统配置, 进行有效诊断, 很多时候看fcitx-diagnose就能解决问题
 ```bash
 fcitx-diagnose
+```
+
+## emacs设置
+
+从fcitx-diagnose可知需要针对emacs进行相关设置
+
+```
+# ~/.bash
+export LC_CTYPE=zh
 ```
 
 然后注销重新登录即可
