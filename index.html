@@ -14,7 +14,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
 <link rel="next" href="index-4.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -71,7 +71,32 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" class="u-url">proxmox-宝宝的第一个homelab解决方案</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" class="u-url">kde桌面环境下的fcitx解决方案</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-10-08T11:29:54+08:00" itemprop="datePublished" title="2021-10-08 11:29">2021-10-08 11:29</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h3 id="fcitx">安装fcitx</h3>
+<pre class="code literal-block">apt install fcitx fcitx-googlepinyin fcitx-table-wbpy fcitx-pinyin fcitx-sunpinyin
+</pre>
+<h3 id="language-support">添加language support</h3>
+<p>System Settings &gt; Language &gt; add languages &gt; 简体中文</p>
+<h3 id="fcitx_1">添加fcitx自启动</h3>
+<p>System Settings &gt; startup and shutdown &gt; auto-start &gt; add program &gt; fcitx</p>
+<h3 id="_1">诊断并注销即可</h3>
+<pre class="code literal-block">fcitx-diagnose
+</pre>
+<p>然后注销重新登录即可</p>
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" class="u-url">proxmox-宝宝的第一个homelab解决方案</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -278,141 +303,6 @@ docker volume rm dockercuckoo_postgres-data
 <pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/mongo-data.tar -C /root/mongo-data --strip <span class="m">1</span>
 docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/es-data.tar -C /root/es-data --strip <span class="m">1</span>
 docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/postgres-data.tar -C /root/postgres-data --strip <span class="m">1</span>
-</pre>
-</div>
-                </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/supervisorshi-xian-xiang-mu-bu-shu/" class="u-url">supervisor实现项目级别的进程管理</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
-            <p class="dateline">
-            <a href="posts/supervisorshi-xian-xiang-mu-bu-shu/" rel="bookmark">
-            <time class="published dt-published" datetime="2021-09-27T12:15:40+08:00" itemprop="datePublished" title="2021-09-27 12:15">2021-09-27 12:15</time></a>
-            </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <div>
-<h3 id="supervisor">supervisor简介</h3>
-<ul>
-<li>相比于systemd, supervisor更适合项目级别的进程管理</li>
-</ul>
-<h3 id="supervisor_1">一个典型的supervisor配置</h3>
-<ul>
-<li>supervisord指定了logfile等supervisord的进程环境</li>
-<li>unix_http_server指定了supervisorctl与supervisord的通信方式</li>
-<li>inet_http_server支持web界面管理进程组</li>
-<li>supervisorctl指定了supervisorctl相关配置</li>
-</ul>
-<pre class="code literal-block"><span class="k">[supervisord]</span>
-<span class="na">logfile</span> <span class="o">=</span> <span class="s">./.supervisord/supervisord.logfile</span>
-<span class="na">logfile_maxbytes</span> <span class="o">=</span> <span class="s">50MB</span>
-<span class="na">loglevel</span> <span class="o">=</span> <span class="s">info</span>
-<span class="na">pidfile</span> <span class="o">=</span> <span class="s">./.supervisord/supervisord.pid</span>
-<span class="na">umask</span> <span class="o">=</span> <span class="s">022</span>
-<span class="na">environment</span> <span class="o">=</span> <span class="s">KEY1="value1",KEY2="value2"</span>
-
-<span class="k">[unix_http_server]</span>
-<span class="c1">; unix socket for supervisorctl to communicate to </span>
-<span class="na">file</span> <span class="o">=</span> <span class="s">/tmp/supervisor.sock</span>
-<span class="na">chmod</span> <span class="o">=</span> <span class="s">0777</span>
-<span class="na">chown</span> <span class="o">=</span> <span class="s">dell</span>
-<span class="na">username</span> <span class="o">=</span> <span class="s">dell</span>
-<span class="na">password</span> <span class="o">=</span> <span class="s">daxiahyh</span>
-
-<span class="k">[inet_http_server]</span>
-<span class="c1">; this enable http web gui</span>
-<span class="na">port</span> <span class="o">=</span> <span class="s">127.0.0.1:9001</span>
-<span class="na">username</span> <span class="o">=</span> <span class="s">dell</span>
-<span class="na">password</span> <span class="o">=</span> <span class="s">daxiahyh</span>
-
-<span class="k">[rpcinterface:supervisor]</span>
-<span class="na">supervisor.rpcinterface_factory</span> <span class="o">=</span> <span class="s">supervisor.rpcinterface:make_main_rpcinterface </span>
-
-<span class="k">[supervisorctl]</span>
-<span class="na">serverurl</span> <span class="o">=</span> <span class="s">unix:///tmp/supervisor.sock</span>
-<span class="na">username</span> <span class="o">=</span> <span class="s">dell</span>
-<span class="na">password</span> <span class="o">=</span> <span class="s">daxiahyh</span>
-<span class="na">prompt</span> <span class="o">=</span> <span class="s">mysupervisor</span>
-
-<span class="k">[program:flask]</span>
-<span class="na">command</span> <span class="o">=</span> <span class="s">/home/dell/Envs/mal/bin/gunicorn --workers 4 --bind unix:mal.sock -m 777 runserver:app</span>
-<span class="na">process_name</span> <span class="o">=</span> <span class="s">%(program_name)s</span>
-<span class="na">numprocs</span> <span class="o">=</span> <span class="s">1</span>
-<span class="na">directory</span> <span class="o">=</span> <span class="s">/home/dell/mal_v2</span>
-<span class="na">environment</span> <span class="o">=</span> <span class="s">FLASK_APP="app"</span>
-<span class="na">stdout_logfile</span> <span class="o">=</span> <span class="s">./.supervisord/mal.logfile</span>
-<span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
-
-<span class="k">[program:celery]</span>
-<span class="na">command</span> <span class="o">=</span> <span class="s">/home/dell/Envs/mal/bin/celery -A app.celery worker -c 4 --loglevel info</span>
-<span class="na">process_name</span> <span class="o">=</span> <span class="s">%(program_name)s</span>
-<span class="na">directory</span> <span class="o">=</span> <span class="s">/home/dell/mal_v2</span>
-<span class="na">stdout_logfile</span> <span class="o">=</span> <span class="s">./.supervisord/celery.logfile</span>
-<span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
-
-<span class="k">[program:flower]</span>
-<span class="na">command</span> <span class="o">=</span> <span class="s">/home/dell/Envs/mal/bin/celery -A app.celery flower --port=5656 --ip=0.0.0.0</span>
-<span class="na">process_name</span> <span class="o">=</span> <span class="s">%(program_name)s</span>
-<span class="na">directory</span> <span class="o">=</span> <span class="s">/home/dell/mal_v2</span>
-<span class="na">stdout_logfile</span> <span class="o">=</span> <span class="s">./.supervisord/flower.logfile</span>
-<span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
-
-<span class="k">[group:mal]</span>
-<span class="na">programs</span> <span class="o">=</span> <span class="s">flask, celery, flower</span>
-<span class="na">priority</span> <span class="o">=</span> <span class="s">999</span>
-</pre>
-<h3 id="nginx">nginx部署</h3>
-<p>注意, 这里和之前的mal共享的同一套前端</p>
-<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
-       <span class="n">listen</span> <span class="mi">10001</span> <span class="n">ssl</span><span class="p">;</span>
-
-       <span class="n">ssl_certificate</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">certificate</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-       <span class="n">ssl_certificate_key</span>      <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-
-
-       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span> <span class="p">{</span>
-                <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
-                <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal_v2</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
-       <span class="p">}</span>
-
-       <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span> <span class="p">{</span>
-                <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span>
-                <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
-       <span class="p">}</span>
-<span class="p">}</span>
-</pre>
-<h3 id="supervisorctl-cheatsheet">supervisorctl cheatsheet</h3>
-<pre class="code literal-block"><span class="n">help</span> <span class="c1"># print a list of available actions</span>
-<span class="n">add</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="c1"># activates any updates in config for process/group</span>
-<span class="n">remove</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="c1"># removes process/group from active config </span>
-<span class="n">update</span> <span class="c1"># reload config and then add and remove as necessary</span>
-<span class="n">clear</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># clear a process’ log files</span>
-<span class="n">clear</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># clear multiple process’ log files</span>
-<span class="n">clear</span> <span class="n">all</span> <span class="c1"># clear all process’ log files</span>
-<span class="n">fg</span> <span class="o">&lt;</span><span class="n">process</span><span class="o">&gt;</span> <span class="c1"># connect to a process in foreground mode Press Ctrl+C to exit foreground</span>
-<span class="n">pid</span> <span class="c1"># get the PID of supervisord</span>
-<span class="n">pid</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># get the PID of a single child process by name</span>
-<span class="n">pid</span> <span class="n">all</span> <span class="c1"># get the PID of every child process, one per line</span>
-<span class="n">reload</span> <span class="c1"># restarts the remote supervisord</span>
-<span class="n">reread</span> <span class="c1"># reload the daemon’s config‐uration files, without add/remove (no restarts)</span>
-<span class="n">restart</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># restart a process</span>
-<span class="n">restart</span> <span class="o">&lt;</span><span class="n">gname</span><span class="o">&gt;</span><span class="p">:</span><span class="o">*</span> <span class="c1"># restart all processes in a group</span>
-<span class="n">restart</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># restart multipleprocesses</span>
-<span class="n">restart</span> <span class="n">all</span> <span class="c1"># restart all processes</span>
-<span class="k">signal</span> <span class="n">No</span> <span class="c1"># help on signal</span>
-<span class="n">start</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># start a process</span>
-<span class="n">start</span> <span class="o">&lt;</span><span class="n">gname</span><span class="o">&gt;</span><span class="p">:</span><span class="o">*</span> <span class="c1"># start all processes in a group </span>
-<span class="n">start</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># start multiple processes</span>
-<span class="n">start</span> <span class="n">all</span> <span class="c1"># start all processes</span>
-<span class="n">status</span> <span class="c1"># get all process status</span>
-<span class="n">status</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># get status on a single process by name </span>
-<span class="n">status</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># get status on multiple named processes</span>
-<span class="n">stop</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># stop a process</span>
-<span class="n">stop</span> <span class="o">&lt;</span><span class="n">gname</span><span class="o">&gt;</span><span class="p">:</span><span class="o">*</span> <span class="c1"># stop all processes in a group</span>
-<span class="n">stop</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="c1"># stop multiple processes or groups</span>
-<span class="n">stop</span> <span class="n">all</span> <span class="c1"># stop all processes</span>
-<span class="n">tail</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">stdout</span><span class="o">|</span><span class="n">stderr</span><span class="p">]</span> <span class="c1"># output the last part of process logs</span>
 </pre>
 </div>
                 </div>

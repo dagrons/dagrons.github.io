@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Wed, 06 Oct 2021 13:08:49 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 08 Oct 2021 03:35:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>kde桌面环境下的fcitx解决方案</title><link>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="fcitx"&gt;安装fcitx&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;apt install fcitx fcitx-googlepinyin fcitx-table-wbpy fcitx-pinyin fcitx-sunpinyin
+&lt;/pre&gt;
+&lt;h3 id="language-support"&gt;添加language support&lt;/h3&gt;
+&lt;p&gt;System Settings &amp;gt; Language &amp;gt; add languages &amp;gt; 简体中文&lt;/p&gt;
+&lt;h3 id="fcitx_1"&gt;添加fcitx自启动&lt;/h3&gt;
+&lt;p&gt;System Settings &amp;gt; startup and shutdown &amp;gt; auto-start &amp;gt; add program &amp;gt; fcitx&lt;/p&gt;
+&lt;h3 id="_1"&gt;诊断并注销即可&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;fcitx-diagnose
+&lt;/pre&gt;
+&lt;p&gt;然后注销重新登录即可&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</guid><pubDate>Fri, 08 Oct 2021 03:29:54 GMT</pubDate></item><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
@@ -554,58 +564,4 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
 &lt;pre class="code literal-block"&gt;netplan --debug apply
 &lt;/pre&gt;
 &lt;p&gt;发现br0成功得到ip&lt;/p&gt;
-&lt;p&gt;重启后依然生效&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</guid><pubDate>Thu, 09 Sep 2021 06:14:32 GMT</pubDate></item><item><title>Go学习第二天-字符串相关</title><link>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="go-"&gt;Go学习第二天-字符串相关&lt;/h2&gt;
-&lt;p&gt;如果有不确定的地方, 可以在a tour of go上做做小实验&lt;/p&gt;
-&lt;h3 id="byterune"&gt;byte和rune&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Golang has integer types called byte and rune that are aliases for uint8 and int32 data types, repectively.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所以byte和rune本质上就是uint8和uint32, byte用于ASCII编码, rune用于Unicode编码&lt;/p&gt;
-&lt;p&gt;除此之外, 在golang中, 没有char类型, 用于byte和rune表示char类型&lt;/p&gt;
-&lt;p&gt;值得注意, golang中的int和int32与int64并不是一个类型, &lt;a href="https://golang.org/ref/spec#Numeric_types"&gt;int vs int32 vs 34&lt;/a&gt;, 因此下面的代码并不合法&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;strconv&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ParseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"123"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;ok&lt;/span&gt;
-&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="nb nb-Type"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
-&lt;span class="n"&gt;strconv&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ParseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"123"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cannot&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="n"&gt;int32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="nb nb-Type"&gt;int&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;argument&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;strconv&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ParseInt&lt;/span&gt;
-&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In Go, Characters are expressed by enclosing them in single quotes like this: 'a'.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在Go中, 用单引号来实现char的literal&lt;/p&gt;
-&lt;p&gt;默认情况下, char用rune来存储, 如下: &lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myLetter&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="sc"&gt;'a'&lt;/span&gt; &lt;span class="c1"&gt;// Type inferred as rune&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;我们也可以显示声明一个byte存储的char, 如下: &lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myLetter&lt;/span&gt; &lt;span class="kt"&gt;byte&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="sc"&gt;'a'&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;在上述表述中, char不是一个具体的类型&lt;/p&gt;
-&lt;h3 id="_1"&gt;字符串&lt;/h3&gt;
-&lt;p&gt;在golang中, 字符串并不是byte数组或rune数组, 因为byte数组和rune数组都是可变，但字符串不可变(和除了C++以外的其他语言一样), &lt;/p&gt;
-&lt;p&gt;除此之外, 还有一个值得注意的是, byte数组和rune数组用fmt.Println()打印出来都是数字, 说明他们本质上仍然是uint8数组和uint32数组, 如果要打印出可读的字符串, 还是需要转成string&lt;/p&gt;
-&lt;p&gt;如下:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="kn"&gt;package&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;
-
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s"&gt;"fmt"&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt; 
-
-&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s"&gt;"张明阳是傻逼"&lt;/span&gt;
-    &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;// =&amp;gt; 张&lt;/span&gt;
-    &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;([]&lt;/span&gt;&lt;span class="nb"&gt;rune&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;// =&amp;gt; [24352 26126 38451]&lt;/span&gt;
-    &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;string&lt;/span&gt;&lt;span class="p"&gt;([]&lt;/span&gt;&lt;span class="nb"&gt;rune&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;// =&amp;gt; 张明阳&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-&lt;h3 id="bytes-slice-over-string"&gt;bytes slice over string?&lt;/h3&gt;
-&lt;p&gt;由于string不可变, 因此在刷题时并不实用, 更实用的方法是通过bytes数组进行字符数据存储和操作, 只在需要显示时才将其转化为string&lt;/p&gt;
-&lt;h3 id="strings"&gt;strings包&lt;/h3&gt;
-&lt;p&gt;string是go的内置类型, 而strings是针对string的包, 包含了处理string的诸多方法, 在此我们只列举部分常用函数&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;strings.Compare(s1, s2 string) int // 字符串比较
-strings.Join([]string, string) // 拼接多个字符串
-strings.Split(s, str string) // 切割字符串
-strings.Fields(s strings) // 按空白字符切割字符串
-strings.Repeat(s string, n int) string // 重复字符串
-strings.Replace("张明阳是傻逼", "傻逼", "纯弱智", -1) // 替换字符串, -1表示替换所有, 如果大于0表示替换几个 // =&amp;gt; 张明阳是纯弱智
-strings.Contains(s, substr string) // 是否存在子串
-strings.ContainsAny(s, chars string) // chars中的字符是否在s中出现过
-strings.Index(s string, str string) // 返回str在s中第一次出现的位置, 如果不存在返回-1, str为空返回0
-&lt;/pre&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</guid><pubDate>Wed, 08 Sep 2021 13:06:45 GMT</pubDate></item></channel></rss>
+&lt;p&gt;重启后依然生效&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</guid><pubDate>Thu, 09 Sep 2021 06:14:32 GMT</pubDate></item></channel></rss>
