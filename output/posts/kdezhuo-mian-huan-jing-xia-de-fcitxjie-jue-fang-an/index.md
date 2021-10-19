@@ -37,13 +37,4 @@ fcitx-diagnose会检查系统配置, 进行有效诊断, 很多时候看fcitx-di
 fcitx-diagnose
 ```
 
-## emacs设置
-
-从fcitx-diagnose可知需要针对emacs进行相关设置
-
-```
-# ~/.bash
-export LC_CTYPE=zh
-```
-
-然后注销重新登录即可
+然后注销重新登录，在右下角fcitx设置中添加Google Pinyin即可
