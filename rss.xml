@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 08 Oct 2021 03:47:18 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>kde桌面环境下的fcitx解决方案</title><link>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;目标环境&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Tue, 19 Oct 2021 12:16:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>kde桌面环境下的fcitx解决方案</title><link>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;目标环境&lt;/h3&gt;
 &lt;pre class="code literal-block"&gt;pve7.0 
 &lt;/pre&gt;
 &lt;h3 id="fcitx"&gt;安装fcitx&lt;/h3&gt;
@@ -13,12 +13,7 @@
 &lt;p&gt;fcitx-diagnose会检查系统配置, 进行有效诊断, 很多时候看fcitx-diagnose就能解决问题&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;fcitx-diagnose
 &lt;/pre&gt;
-&lt;h3 id="emacs"&gt;emacs设置&lt;/h3&gt;
-&lt;p&gt;从fcitx-diagnose可知需要针对emacs进行相关设置&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;# ~/.bash&lt;/span&gt;
-&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="n"&gt;LC_CTYPE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;zh&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;然后注销重新登录即可&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</guid><pubDate>Fri, 08 Oct 2021 03:29:54 GMT</pubDate></item><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
+&lt;p&gt;然后注销重新登录，在右下角fcitx设置中添加Google Pinyin即可&lt;/p&gt;&lt;/div&gt;</description><guid>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</guid><pubDate>Fri, 08 Oct 2021 03:29:54 GMT</pubDate></item><item><title>proxmox-宝宝的第一个homelab解决方案</title><link>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h3 id="_1"&gt;前言&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案&lt;/p&gt;
