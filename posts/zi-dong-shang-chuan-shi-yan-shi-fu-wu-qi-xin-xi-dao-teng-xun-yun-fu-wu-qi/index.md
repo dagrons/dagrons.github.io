@@ -26,7 +26,7 @@ echo "120.53.125.30     tencent_cloud" >> /etc/hosts
 # 将ssh-key pubkey加到tencent_cloud的信任列表中
 以一步是防止ssh上传ip时要求输入密码
 ```bash
-cat ~/.ssh/id_rsa.pub | ssh ubuntu@tencent_cloud 'cat >> ~/.ssh/authorized_keys' 
+cat /root/.ssh/id_rsa.pub | ssh root@tencent_cloud 'cat >> ~/.ssh/authorized_keys' 
 ```
 
 # 检测Internet连接并自动登陆校园网的脚本
