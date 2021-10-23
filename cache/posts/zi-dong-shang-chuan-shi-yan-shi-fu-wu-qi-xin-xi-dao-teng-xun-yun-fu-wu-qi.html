@@ -10,7 +10,7 @@
 </pre>
 <h1 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h1>
 <p>以一步是防止ssh上传ip时要求输入密码</p>
-<pre class="code literal-block">cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh ubuntu@tencent_cloud <span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span> 
+<pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span> 
 </pre>
 <h1 id="internet">检测Internet连接并自动登陆校园网的脚本</h1>
 <p>/usr/local/bin/autologin内容如下</p>
