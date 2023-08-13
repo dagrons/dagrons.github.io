@@ -10,6 +10,7 @@
 -->
 
 JetBrains/IntelliJIdea2022.1/keymaps
+需要将meta替换成alt 
 ```xml
 <keymap version="1" name="Emacs copy" parent="Emacs">
   <action id="AceAction">
