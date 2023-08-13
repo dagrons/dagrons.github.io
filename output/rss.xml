@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2023 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 13 Aug 2023 17:38:36 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Windows开发环境搭建</title><link>https://dagrons.github.io/posts/windowskai-fa-huan-jing-da-jian/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;wsl2本质上是一个和windows高度集成的虚拟机（所以需要hyper-v）&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL</title><link>https://dagrons.github.io/</link><description>NuLL</description><atom:link href="https://dagrons.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2023 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 13 Aug 2023 17:47:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Windows开发环境搭建</title><link>https://dagrons.github.io/posts/windowskai-fa-huan-jing-da-jian/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;wsl2本质上是一个和windows高度集成的虚拟机（所以需要hyper-v）&lt;/p&gt;
 &lt;p&gt;然后安装&lt;a href="https://github.com/badgumby/arch-wsl"&gt;systemd&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;host的网络问题可以配置代理到macos，保证macos没有熄屏才能上网&lt;/p&gt;
 &lt;h3 id="nvm"&gt;配置nvm&lt;/h3&gt;
@@ -19,7 +19,9 @@
   - webpack 
   - ESlint 
   - Debugger for Firefox
-  - Microsoft Edge Tools for VS Code &lt;/p&gt;</description><guid>https://dagrons.github.io/posts/windowskai-fa-huan-jing-da-jian/</guid><pubDate>Sun, 13 Aug 2023 13:53:33 GMT</pubDate></item><item><title>共享配置文件</title><link>https://dagrons.github.io/posts/gong-xiang-pei-zhi-wen-jian/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;JetBrains/IntelliJIdea2022.1/keymaps
+  - Microsoft Edge Tools for VS Code &lt;/p&gt;
+&lt;h3 id="offline-docs"&gt;offline docs&lt;/h3&gt;
+&lt;p&gt;devdocs支持offline data，神器啊&lt;/p&gt;</description><guid>https://dagrons.github.io/posts/windowskai-fa-huan-jing-da-jian/</guid><pubDate>Sun, 13 Aug 2023 13:53:33 GMT</pubDate></item><item><title>共享配置文件</title><link>https://dagrons.github.io/posts/gong-xiang-pei-zhi-wen-jian/</link><dc:creator>dagrons</dc:creator><description>&lt;p&gt;JetBrains/IntelliJIdea2022.1/keymaps
 需要将meta替换成alt &lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;&amp;lt;keymap&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"Emacs copy"&lt;/span&gt; &lt;span class="na"&gt;parent=&lt;/span&gt;&lt;span class="s"&gt;"Emacs"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="nt"&gt;&amp;lt;action&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"AceAction"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;

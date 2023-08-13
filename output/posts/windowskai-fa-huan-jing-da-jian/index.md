@@ -40,4 +40,8 @@ pacman -S jdk-openjdk8
   - Debugger for Firefox
   - Microsoft Edge Tools for VS Code 
 
+## offline docs 
+
+devdocs支持offline data，神器啊
+
 
