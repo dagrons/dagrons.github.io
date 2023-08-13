@@ -29,15 +29,15 @@ pacman -S jdk-openjdk8
 
 ## 配置vsode
 插件：
-    - Awesome Emacs Keymap
-    - Emacs Keymap
-    - Find-Jump 
-    - WSL 
-    - vue
-    - Babel JavaScript 
-    - webpack 
-    - ESlint 
-    - Debugger for Firefox
-    - Microsoft Edge Tools for VS Code 
+  - Awesome Emacs Keymap
+  - Emacs Keymap
+  - Find-Jump 
+  - WSL 
+  - vue
+  - Babel JavaScript 
+  - webpack 
+  - ESlint 
+  - Debugger for Firefox
+  - Microsoft Edge Tools for VS Code 
 
 
