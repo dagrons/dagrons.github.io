@@ -20,13 +20,14 @@
 </ul>
 <h2 id="_4">添加非订阅源</h2>
 <p>由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源</p>
-<pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
+<div class="code"><pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
 <span class="nb">echo</span> <span class="s1">&#39;deb http://download.proxmox.com/debian/pve buster pve-no-subscription&#39;</span> &gt;&gt; /etc/apt/sources.list.d/pve-no-subscription.list
 apt update
-</pre>
+</pre></div>
+
 <h2 id="_5">网络设置</h2>
 <p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
-<pre class="code literal-block"># /etc/network/interfaces
+<div class="code"><pre class="code literal-block"># /etc/network/interfaces
 
 auto lo
 iface lo inet loopback
@@ -38,19 +39,23 @@ iface vmbr0 inet dhcp
         bridge-ports enp2s0
         bridge-stp off
         bridge-fd 0
-</pre>
+</pre></div>
+
 <p>然后</p>
-<pre class="code literal-block">systemctl restart networking
-</pre>
+<div class="code"><pre class="code literal-block">systemctl restart networking
+</pre></div>
+
 <h2 id="_6">添加图形化界面</h2>
 <p>pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE</p>
-<pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
-</pre>
+<div class="code"><pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
+</pre></div>
+
 <p>由于debian默认不给root图形化登录, 所以我们创建一个非root用户</p>
-<pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
+<div class="code"><pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
 passwd dell
 reboot # 完成后重启
-</pre>
+</pre></div>
+
 <p>最后需要设置Power选项,</p>
 <ul>
 <li>

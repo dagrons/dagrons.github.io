@@ -7,150 +7,162 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://dagrons.github.io/</loc>
-  <lastmod>2021-09-27T12:46:00Z</lastmod>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/2021/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/2023/</loc>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/archive.html</loc>
-  <lastmod>2021-10-08T03:35:00Z</lastmod>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/</loc>
-  <lastmod>2021-08-23T06:41:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/bing-fa/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/cat_js/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/cat_python/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/cat_shu-ju-jie-gou/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/go/</loc>
-  <lastmod>2021-08-23T06:41:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/incremental-learning/</loc>
-  <lastmod>2021-08-23T06:41:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/js/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/python/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/categories/suan-fa-shu-ju-jie-gou/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/index-1.html</loc>
-  <lastmod>2021-09-10T08:52:00Z</lastmod>
+  <lastmod>2023-08-13T11:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/index-2.html</loc>
-  <lastmod>2021-10-23T15:14:00Z</lastmod>
+  <lastmod>2023-08-13T11:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/index-3.html</loc>
-  <lastmod>2021-09-27T12:46:00Z</lastmod>
+  <lastmod>2023-08-13T11:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/index-4.html</loc>
-  <lastmod>2021-10-08T03:35:00Z</lastmod>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/index-5.html</loc>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/</loc>
-  <lastmod>2021-09-09T06:32:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/dockerjuan-de-bei-fen-yu-qian-yi/</loc>
-  <lastmod>2021-09-27T12:46:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/</loc>
-  <lastmod>2021-08-26T14:02:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://dagrons.github.io/posts/gong-xiang-pei-zhi-wen-jian/</loc>
+  <lastmod>2023-08-13T11:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/</loc>
-  <lastmod>2021-09-08T14:14:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/</loc>
-  <lastmod>2021-09-21T06:53:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/jszhong-de-promiseji-zhi/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/</loc>
-  <lastmod>2021-10-08T03:35:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/</loc>
-  <lastmod>2021-09-30T03:17:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/</loc>
-  <lastmod>2021-08-23T06:38:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/nginxpei-zhi-ssl/</loc>
-  <lastmod>2021-09-21T08:42:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/</loc>
-  <lastmod>2021-09-30T09:31:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/pythonduo-xian-cheng-xue-xi/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/pythonzhi-xing-wai-gua-subprocess/</loc>
-  <lastmod>2021-09-19T06:11:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/redischu-tan/</loc>
-  <lastmod>2021-09-23T15:00:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/supervisorshi-xian-xiang-mu-bu-shu/</loc>
-  <lastmod>2021-09-27T04:27:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/yi-xie-jing-yan/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/</loc>
-  <lastmod>2021-09-03T12:51:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/zi-dong-shang-chuan-shi-yan-shi-fu-wu-qi-xin-xi-dao-teng-xun-yun-fu-wu-qi/</loc>
-  <lastmod>2021-09-03T11:45:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://dagrons.github.io/posts/zwkxian-duan-shu-zhe-mo-ri-ji/</loc>
-  <lastmod>2021-08-22T02:37:00Z</lastmod>
+  <lastmod>2023-08-13T11:01:00Z</lastmod>
  </url>
 </urlset>

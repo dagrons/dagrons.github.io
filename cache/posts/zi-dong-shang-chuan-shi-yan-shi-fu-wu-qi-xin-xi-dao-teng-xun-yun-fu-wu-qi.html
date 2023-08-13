@@ -6,15 +6,17 @@
 </ol>
 <p>记录流程如下：</p>
 <h1 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h1>
-<pre class="code literal-block"><span class="nb">echo</span> <span class="s2">&quot;120.53.125.30     tencent_cloud&quot;</span> &gt;&gt; /etc/hosts
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nb">echo</span> <span class="s2">&quot;120.53.125.30     tencent_cloud&quot;</span> &gt;&gt; /etc/hosts
+</pre></div>
+
 <h1 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h1>
 <p>以一步是防止ssh上传ip时要求输入密码</p>
-<pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span> 
-</pre>
+<div class="code"><pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span> 
+</pre></div>
+
 <h1 id="internet">检测Internet连接并自动登陆校园网的脚本</h1>
 <p>/usr/local/bin/autologin内容如下</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="k">if</span> ping -q -c <span class="m">1</span> -W <span class="m">1</span> <span class="m">8</span>.8.8.8 &gt;/dev/null<span class="p">;</span> <span class="k">then</span>
@@ -24,10 +26,11 @@
     python3 /home/dell/get2internet.py <span class="m">2020110966</span> Daxiahyh1
     <span class="k">fi</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h1 id="ip">上传ip的脚本</h1>
 <p>/usr/local/bin/upload-ip内容如下:</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">&#39;inet\ &#39;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
@@ -77,50 +80,54 @@
 <span class="s">EOF</span>
     sleep <span class="m">60</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h1 id="autologinservice">创建autologin.service文件</h1>
 <p>/etc/systemd/system/autologin.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h1 id="upload-ipservice">创建upload-ip.service文件</h1>
 <p>/etc/systemd/system/upload-ip.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h1 id="_2">启动服务</h1>
-<pre class="code literal-block">sudo systemctl deamon-reload
+<div class="code"><pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl <span class="nb">enable</span> upload-ip.service
 sudo systemctl start autologin.service
 sudo systemctl <span class="nb">enable</span> autologin.service
-</pre>
+</pre></div>
+
 <h1 id="systemctl-cheatsheet">附送systemctl cheatsheet</h1>
-<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
-<span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
-<span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
-<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To enable your service on every reboot</span>
-<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span><span class="w"> </span><span class="c1"># Reload the service files to include the new service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># Start your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To check the status of your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To enable your service on every reboot</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">disable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To disable your service on every reboot</span><span class="w"></span>
+</pre></div>

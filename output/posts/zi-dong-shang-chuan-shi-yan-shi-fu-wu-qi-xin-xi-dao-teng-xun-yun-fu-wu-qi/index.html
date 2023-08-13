@@ -102,8 +102,7 @@
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
+    <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
 <h2 id="_1">问题分析</h2>
 <ol>
 <li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
@@ -111,15 +110,17 @@
 </ol>
 <p>记录流程如下：</p>
 <h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
-<pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
+</pre></div>
+
 <h2 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h2>
 <p>以一步是防止ssh上传ip时要求输入密码</p>
-<pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
-</pre>
+<div class="code"><pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
+</pre></div>
+
 <h2 id="internet">检测Internet连接并自动登陆校园网的脚本</h2>
 <p>/usr/local/bin/autologin内容如下</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="k">if</span> ping -q -c <span class="m">1</span> -W <span class="m">1</span> <span class="m">8</span>.8.8.8 &gt;/dev/null<span class="p">;</span> <span class="k">then</span>
@@ -129,10 +130,11 @@
     python3 /home/dell/get2internet.py <span class="m">2020110966</span> Daxiahyh1
     <span class="k">fi</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h2 id="ip">上传ip的脚本</h2>
 <p>/usr/local/bin/upload-ip内容如下:</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">'inet\ '</span><span class="p">|</span>awk <span class="s1">'{print $2}'</span><span class="k">)</span>
@@ -182,54 +184,57 @@
 <span class="s">EOF</span>
     sleep <span class="m">60</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h2 id="autologinservice">创建autologin.service文件</h2>
 <p>/etc/systemd/system/autologin.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h2 id="upload-ipservice">创建upload-ip.service文件</h2>
 <p>/etc/systemd/system/upload-ip.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h2 id="_2">启动服务</h2>
-<pre class="code literal-block">sudo systemctl deamon-reload
+<div class="code"><pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl <span class="nb">enable</span> upload-ip.service
 sudo systemctl start autologin.service
 sudo systemctl <span class="nb">enable</span> autologin.service
-</pre>
+</pre></div>
+
 <h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
-<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
-<span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
-<span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
-<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To enable your service on every reboot</span>
-<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
-</pre>
-</div>
+<div class="code"><pre class="code literal-block"><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span><span class="w"> </span><span class="c1"># Reload the service files to include the new service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># Start your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To check the status of your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To enable your service on every reboot</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">disable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To disable your service on every reboot</span><span class="w"></span>
+</pre></div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
@@ -239,7 +244,7 @@ sudo systemctl <span class="nb">enable</span> autologin.service
                 <a href="../zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" rel="next" title="展示服务器GPU使用情况及账号IP">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

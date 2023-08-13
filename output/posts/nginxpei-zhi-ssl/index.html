@@ -23,8 +23,9 @@
 生成自签名证书
 openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
 
+
 nginx配置ssl
-sudo mkdir /">
+sudo mkdir ">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2021-09-21T16:26:07+08:00">
 </head>
@@ -101,40 +102,42 @@ sudo mkdir /">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<h3 id="_1">问题分析</h3>
+    <h3 id="_1">问题分析</h3>
 <p>在很多时候, 我们需要实现加密通信, 例如对于mal应用而言, 由于要上传恶意软件, 势必会被防火墙拦截, 因此需要配置ssl, 才能绕过这些限制</p>
 <h3 id="_2">生成自签名证书</h3>
-<pre class="code literal-block">openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days <span class="m">365</span> -out certificate.pem
-</pre>
+<div class="code"><pre class="code literal-block">openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days <span class="m">365</span> -out certificate.pem
+</pre></div>
+
 <h3 id="nginxssl">nginx配置ssl</h3>
-<pre class="code literal-block">sudo mkdir /etc/nginx/cert &amp;&amp; cp *.pem /etc/nginx/cert
-</pre>
+<div class="code"><pre class="code literal-block">sudo mkdir /etc/nginx/cert &amp;&amp; cp *.pem /etc/nginx/cert
+</pre></div>
+
 <p>/etc/nginx/sites-enabled/mal</p>
-<pre class="code literal-block"> <span class="n">server</span> <span class="p">{</span>
-          <span class="n">listen</span> <span class="mi">5000</span> <span class="n">ssl</span><span class="p">;</span>
+<div class="code"><pre class="code literal-block"><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">listen</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="n">ssl</span><span class="p">;</span><span class="w"></span>
 
-          <span class="n">ssl_certificate</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">certificate</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-          <span class="n">ssl_certificate_key</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+<span class="w">          </span><span class="n">ssl_certificate</span><span class="w">  </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">certificate</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">ssl_certificate_key</span><span class="w">  </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">cert</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span><span class="w"></span>
 
-          <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span> <span class="p">{</span>
-                   <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
-                  <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
-         <span class="p">}</span>
+<span class="w">          </span><span class="n">location</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">^/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                   </span><span class="n">include</span><span class="w"> </span><span class="n">proxy_params</span><span class="p">;</span><span class="w"></span>
+<span class="w">                  </span><span class="n">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dell</span><span class="o">/</span><span class="n">mal</span><span class="o">/</span><span class="n">mal</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
 
-         <span class="n">location</span> <span class="o">~</span> <span class="o">^/</span> <span class="p">{</span>
-                  <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span>
-                  <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
-         <span class="p">}</span>
-<span class="p">}</span>
-</pre>
+<span class="w">         </span><span class="n">location</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">^/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                  </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">mal_ui</span><span class="p">;</span><span class="w"></span>
+<span class="w">                  </span><span class="n">index</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <p>检查配置</p>
-<pre class="code literal-block">sudo nginx -t
-</pre>
+<div class="code"><pre class="code literal-block">sudo nginx -t
+</pre></div>
+
 <p>配置生效</p>
-<pre class="code literal-block"><span class="n">sudo</span> <span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>
-</pre>
-</div>
+<div class="code"><pre class="code literal-block"><span class="n">sudo</span><span class="w"> </span><span class="n">nginx</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="n">reload</span><span class="w"></span>
+</pre></div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
@@ -144,7 +147,7 @@ sudo mkdir /">
                 <a href="../redischu-tan/" rel="next" title="redis初探">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

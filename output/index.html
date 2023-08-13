@@ -13,8 +13,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="rss.xml">
 <link rel="canonical" href="https://dagrons.github.io/">
-<link rel="next" href="index-4.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" type="text/html">
+<link rel="next" href="index-5.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/gong-xiang-pei-zhi-wen-jian/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
@@ -71,7 +71,185 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" class="u-url">kde桌面环境下的fcitx解决方案</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/gong-xiang-pei-zhi-wen-jian/" class="u-url">共享配置文件</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/gong-xiang-pei-zhi-wen-jian/" rel="bookmark">
+            <time class="published dt-published" datetime="2023-08-13T19:10:56+08:00" itemprop="datePublished" title="2023-08-13 19:10">2023-08-13 19:10</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <p>Intellij/keymaps </p>
+<div class="code"><pre class="code literal-block"><span class="nt">&lt;keymap</span> <span class="na">version=</span><span class="s">"1"</span> <span class="na">name=</span><span class="s">"Emacs copy"</span> <span class="na">parent=</span><span class="s">"Emacs"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"AceAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl semicolon"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta enter"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ActivateTerminalToolWindow"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"alt f12"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta j"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Adtui.ZoomInAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Adtui.ZoomOutAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Back"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl alt left"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"button4"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl minus"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"CloseGotItTooltip"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl g"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"CollapseAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"CollapseExpandableComponent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift enter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"CollapseRegion"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"CollapseSelection"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl period"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta period"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Console.Execute.Multiline"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Console.TableResult.EditValue"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"f2"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"enter"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Console.TableResult.NavigateForeignAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl alt g"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="na">second-keystroke=</span><span class="s">"period"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"control button1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta minus"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"meta button1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"DSM.ZoomIn"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"DatabaseView.Tools"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"DirDiffMenu.SynchronizeDiff.All"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Docker.RemoteServers.StartComposeService"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Docker.RemoteServers.StartContainer"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExpandAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExpandExpandableComponent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift enter"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExpandRegion"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExternalSystem.CollapseAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExternalSystem.ExpandAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ExternalSystem.ProjectRefreshAction"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"FileStructurePopup"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl f12"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift meta o"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"FindInPath"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift ctrl f"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift meta f"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"FindNext"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"f3"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"FocusEditor"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl g"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ForceOthersToFollowAction"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Forward"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl alt right"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"button5"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl equals"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Generate"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta g"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"GotoAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="na">second-keystroke=</span><span class="s">"x"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"alt x"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta x"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"GotoDeclaration"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl alt g"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="na">second-keystroke=</span><span class="s">"period"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"control button1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta minus"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"meta button1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"GotoImplementation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta equals"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"meta button1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"GotoTypeDeclaration"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift ctrl b"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;mouse-shortcut</span> <span class="na">keystroke=</span><span class="s">"shift control button1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta 0"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Images.Editor.ZoomIn"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Images.Editor.ZoomOut"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"KotlinShellExecute"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Maven.CollapseAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl subtract"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Maven.ExpandAll"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl add"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"OptimizeImports"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl alt o"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift ctrl o"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Refactorings.QuickListPopupAction"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift ctrl alt t"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta s"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ReformatCode"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift meta period"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"SetShortcutAction"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"SplitChooser.Duplicate"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"StepOver"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"f8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta n"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Terminal.SmartCommandExecution.Run"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"Terminal.SwitchFocusToEditor"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"escape"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl g"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ToggleBookmark"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"f11"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"meta b"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ToggleBookmarkWithMnemonic"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"ctrl f11"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;keyboard-shortcut</span> <span class="na">first-keystroke=</span><span class="s">"shift meta b"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/action&gt;</span>
+  <span class="nt">&lt;action</span> <span class="na">id=</span><span class="s">"ViewSource"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/keymap&gt;</span>
+</pre></div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" class="u-url">kde桌面环境下的fcitx解决方案</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
@@ -82,23 +260,24 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h3 id="_1">目标环境</h3>
-<pre class="code literal-block">pve7.0 
-</pre>
+                    <h3 id="_1">目标环境</h3>
+<div class="code"><pre class="code literal-block">pve7.0 
+</pre></div>
+
 <h3 id="fcitx">安装fcitx</h3>
-<pre class="code literal-block">apt install fcitx fcitx-googlepinyin fcitx-table-wbpy fcitx-pinyin fcitx-sunpinyin
-</pre>
+<div class="code"><pre class="code literal-block">apt install fcitx fcitx-googlepinyin fcitx-table-wbpy fcitx-pinyin fcitx-sunpinyin
+</pre></div>
+
 <h3 id="language-support">添加language support</h3>
 <p>System Settings &gt; Language &gt; add languages &gt; 简体中文</p>
 <h3 id="fcitx_1">添加fcitx自启动</h3>
 <p>System Settings &gt; startup and shutdown &gt; auto-start &gt; add program &gt; fcitx</p>
 <h3 id="fcitx-diagnose">fcitx-diagnose</h3>
 <p>fcitx-diagnose会检查系统配置, 进行有效诊断, 很多时候看fcitx-diagnose就能解决问题</p>
-<pre class="code literal-block">fcitx-diagnose
-</pre>
+<div class="code"><pre class="code literal-block">fcitx-diagnose
+</pre></div>
+
 <p>然后注销重新登录，在右下角fcitx设置中添加Google Pinyin即可</p>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" class="u-url">proxmox-宝宝的第一个homelab解决方案</a></h1>
                 <div class="metadata">
@@ -111,8 +290,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h3 id="_1">前言</h3>
+                    <h3 id="_1">前言</h3>
 <ul>
 <li>
 <p>由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案</p>
@@ -134,13 +312,14 @@
 </ul>
 <h3 id="_4">添加非订阅源</h3>
 <p>由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源</p>
-<pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
+<div class="code"><pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
 <span class="nb">echo</span> <span class="s1">'deb http://download.proxmox.com/debian/pve buster pve-no-subscription'</span> &gt;&gt; /etc/apt/sources.list.d/pve-no-subscription.list
 apt update
-</pre>
+</pre></div>
+
 <h3 id="_5">网络设置</h3>
 <p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
-<pre class="code literal-block"># /etc/network/interfaces
+<div class="code"><pre class="code literal-block"># /etc/network/interfaces
 
 auto lo
 iface lo inet loopback
@@ -152,19 +331,23 @@ iface vmbr0 inet dhcp
         bridge-ports enp2s0
         bridge-stp off
         bridge-fd 0
-</pre>
+</pre></div>
+
 <p>然后</p>
-<pre class="code literal-block">systemctl restart networking
-</pre>
+<div class="code"><pre class="code literal-block">systemctl restart networking
+</pre></div>
+
 <h3 id="_6">添加图形化界面</h3>
 <p>pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE</p>
-<pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
-</pre>
+<div class="code"><pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
+</pre></div>
+
 <p>由于debian默认不给root图形化登录, 所以我们创建一个非root用户</p>
-<pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
+<div class="code"><pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
 passwd dell
 reboot # 完成后重启
-</pre>
+</pre></div>
+
 <p>最后需要设置Power选项,</p>
 <ul>
 <li>
@@ -199,7 +382,6 @@ reboot # 完成后重启
 <li>What is the exact difference between pct and lxc-xxx?</li>
 </ul>
 <p><em>pct uses the proxmox libraries and config(storage, network, cluster, firewall) and assembles an lxc command from that</em></p>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/" class="u-url">linux网络配置-我想一次讲清楚</a></h1>
                 <div class="metadata">
@@ -212,8 +394,7 @@ reboot # 完成后重启
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h3 id="_1">前言</h3>
+                    <h3 id="_1">前言</h3>
 <ul>
 <li>linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好</li>
 </ul>
@@ -226,7 +407,7 @@ network-manager主要用于GUI环境下的网络配置, system-networkd主要用
 <h3 id="_3">配置文件</h3>
 <p><strong>传统配置文件</strong></p>
 <p>/etc/network/interfaces是system-networkd的配置文件, 下面是一个典型的interfaces配置</p>
-<pre class="code literal-block"># lab_host2:/etc/network/interfaces
+<div class="code"><pre class="code literal-block"># lab_host2:/etc/network/interfaces
 auto lo
 iface lo inet loopback
 
@@ -235,89 +416,36 @@ iface br0 inet dhcp
     bridge-ports enp0s31f6    
 
 iface enp0s31f6 inet manual
-</pre>
+</pre></div>
+
 <p>nmcli: 是network-manager的命令行配置工具</p>
 <p><strong>netplan</strong></p>
 <p>netplan的好处在于为system-networkd和network-manager提供了一致的配置文件, 从而避免两个render间的冲突, 在netplan中, 我们可以通过renderer关键词指定renderer, 除此之外的语法都是一致的</p>
 <p>如下, 是一个典型的netplan配置文件, 指定renderer为networkd</p>
-<pre class="code literal-block"><span class="c1"># lab_host3:/etc/netplan/01-netcfg.yaml</span>
-<span class="nt">network</span><span class="p">:</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-  <span class="nt">renderer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networkd</span>
-  <span class="nt">ethernets</span><span class="p">:</span>
-    <span class="nt">enp0s31f6</span><span class="p">:</span>
-      <span class="nt">dhcp4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">dhcp6</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-  <span class="nt">bridges</span><span class="p">:</span>
-    <span class="nt">br0</span><span class="p">:</span>
-      <span class="nt">dhcp4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">dhcp6</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">interfaces</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enp0s31f6</span>
-</pre>
-</div>
-                </div>
-            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/dockerjuan-de-bei-fen-yu-qian-yi/" class="u-url">docker命名卷的备份与迁移</a></h1>
-                <div class="metadata">
-                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                        dagrons
-                    </span></p>
-            <p class="dateline">
-            <a href="posts/dockerjuan-de-bei-fen-yu-qian-yi/" rel="bookmark">
-            <time class="published dt-published" datetime="2021-09-27T19:50:02+08:00" itemprop="datePublished" title="2021-09-27 19:50">2021-09-27 19:50</time></a>
-            </p>
-                </div>
-            </header><div class="e-content entry-content">
-                    <div>
-<h3 id="_1">起因</h3>
-<ul>
-<li>docker中的命名卷之前一直挂载在系统盘下, 但由于系统盘比较小, 所以空间不太够用了, 所以需要迁移到数据盘</li>
-<li>如果是bind类型的卷(即从host映射的卷), 那直接对相关映射源进行移动就行了</li>
-</ul>
-<h3 id="_2">命名卷备份</h3>
-<pre class="code literal-block">docker run --rm <span class="se">\ </span>
-  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span> <span class="se">\</span>
-  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
-  ubuntu <span class="se">\</span>
-  tar cvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_VOLUME_DATA<span class="o">]</span>
-</pre>
-<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/mongo-data.tar /root/mongo-data
-docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/es-data.tar /root/es-data
-docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar cvf /root/backup/postgres-data.tar /root/postgres-data
-</pre>
-<h3 id="_3">删除之前的命名卷使配置生效</h3>
-<p>需要删除之前的命名卷才能在<code>docker-compose up</code>的时候重新根据docker-compose.yml创建卷</p>
-<pre class="code literal-block">docker volume rm dockercuckoo_mongo-data
-docker volume rm dockercuckoo_es-data
-docker volume rm dockercuckoo_postgres-data
-</pre>
-<p>然后重新up使得配置生效</p>
-<pre class="code literal-block">docker-compose -f docker-compose.vbox.yml up -d 
-</pre>
-<p>关闭容器, 清除因为部分容器应用初始化带来的额外数据(optional)</p>
-<pre class="code literal-block">docker-compose down 
-</pre>
-<h3 id="_4">命名卷数据恢复</h3>
-<pre class="code literal-block">docker run --rm <span class="se">\ </span>
-  --volume <span class="o">[</span>DOCKER_COMPOSE_PREFIX<span class="o">]</span>_<span class="o">[</span>VOLUME_NAME<span class="o">]</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> <span class="se">\</span>
-  --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span> <span class="se">\</span>
-  ubuntu <span class="se">\</span>
-  tar xvf /<span class="o">[</span>TEMPORARY_DIRECTORY_TO_STORE_BACKUP_FILE<span class="o">]</span>/<span class="o">[</span>BACKUP_FILENAME<span class="o">]</span>.tar -C /<span class="o">[</span>TEMPORARY_DIRECTORY_STORING_EXTRACTED_BACKUP<span class="o">]</span> --strip <span class="m">1</span>
-</pre>
-<pre class="code literal-block">docker run --rm --volume dockercuckoo_mongo-data:/root/mongo-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/mongo-data.tar -C /root/mongo-data --strip <span class="m">1</span>
-docker run --rm --volume dockercuckoo_es-data:/root/es-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/es-data.tar -C /root/es-data --strip <span class="m">1</span>
-docker run --rm --volume dockercuckoo_postgres-data:/root/postgres-data --volume <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/root/backup ubuntu tar xvf /root/backup/postgres-data.tar -C /root/postgres-data --strip <span class="m">1</span>
-</pre>
-</div>
+<div class="code"><pre class="code literal-block"><span class="c1"># lab_host3:/etc/netplan/01-netcfg.yaml</span><span class="w"></span>
+<span class="nt">network</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networkd</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enp0s31f6</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp6</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bridges</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">br0</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp6</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">interfaces</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enp0s31f6</span><span class="w"></span>
+</pre></div>
                 </div>
             </article>
 </div>
     
         <ul class="pager postindexpager clearfix">
-<li class="next"><a href="index-4.html" rel="next">以前的文章</a></li>
+<li class="next"><a href="index-5.html" rel="next">以前的文章</a></li>
         </ul>
 <!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

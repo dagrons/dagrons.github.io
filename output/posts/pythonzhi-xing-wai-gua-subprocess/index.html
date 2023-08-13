@@ -100,8 +100,7 @@ A subprocess in Python is a task that a python scripts delegates to the Operatin
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<h2 id="python-subprocess">python执行外挂-subprocess</h2>
+    <h2 id="python-subprocess">python执行外挂-subprocess</h2>
 <p>相比于os.system, subprocess允许我们直接创建进程, 而非从shell再创建任务, 而且允许我们对创建的进程执行更多的动作</p>
 <h3 id="import-concepts">Import Concepts</h3>
 <ul>
@@ -113,7 +112,7 @@ A subprocess in Python is a task that a python scripts delegates to the Operatin
 </li>
 </ul>
 <h3 id="popen-object">Popen Object</h3>
-<pre class="code literal-block"><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startupinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creationflags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="code"><pre class="code literal-block"><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startupinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creationflags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">args</span><span class="p">:</span> <span class="n">a</span> <span class="n">string</span> <span class="n">类似bash</span> <span class="n">commands</span><span class="p">,</span> <span class="n">其中args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="n">为command</span> <span class="n">name</span>
 
@@ -126,61 +125,69 @@ A subprocess in Python is a task that a python scripts delegates to the Operatin
 <span class="n">cwd</span><span class="p">:</span> <span class="n">current</span> <span class="n">working</span> <span class="n">directory</span>
 
 <span class="n">env</span><span class="p">:</span> <span class="n">a</span> <span class="n">mapping</span> <span class="n">defines</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">variables</span> <span class="k">for</span> <span class="n">the</span> <span class="n">new</span> <span class="n">process</span>
-</pre>
+</pre></div>
+
 <h3 id="popen-instance-methods-attributes">Popen Instance Methods &amp; Attributes</h3>
-<pre class="code literal-block"><span class="n">Popen</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="c1"># if a child process has terminated</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span> <span class="c1"># wait a child process to terminated </span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">input</span><span class="o">=</span><span class="n">None</span><span class="p">)</span> <span class="c1"># send data to stdin, return (stdoutdata, stderrdata) </span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="k">signal</span><span class="p">)</span> <span class="c1"># send signal to child process</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stdin</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stdout</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stderr</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">pid</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">returncode</span> <span class="c1"># None if hasn't terminated yet. -N indicate that the child was terminated by signal N(Unix only)</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">Popen</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span><span class="w"> </span><span class="c1"># if a child process has terminated</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span><span class="w"> </span><span class="c1"># wait a child process to terminated </span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">input</span><span class="o">=</span><span class="n">None</span><span class="p">)</span><span class="w"> </span><span class="c1"># send data to stdin, return (stdoutdata, stderrdata) </span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="k">signal</span><span class="p">)</span><span class="w"> </span><span class="c1"># send signal to child process</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stdin</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stdout</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stderr</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">pid</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">returncode</span><span class="w"> </span><span class="c1"># None if hasn't terminated yet. -N indicate that the child was terminated by signal N(Unix only)</span><span class="w"></span>
+</pre></div>
+
 <h3 id="popen">Popen简化版</h3>
 <p><strong>call</strong>
 Run command with arguments. Wait for command to complete, then return the retcode</p>
-<pre class="code literal-block"><span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">])</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">])</span>
+</pre></div>
+
 <p><strong>check_output</strong>
 Run command with arguments and return its output as a byte string </p>
-<pre class="code literal-block"><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">,</span> <span class="s2">"/dev/null"</span><span class="p">])</span> <span class="c1">#=&gt; 'crw-rw-rw- 1 root root ... '</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">,</span> <span class="s2">"/dev/null"</span><span class="p">])</span> <span class="c1">#=&gt; 'crw-rw-rw- 1 root root ... '</span>
+</pre></div>
+
 <h3 id="exceptions">Exceptions</h3>
 <p><strong>OSError</strong> errors when trying to execute a non-existent file. Application should prepare for OSError exception</p>
 <h3 id="cheatsheet">Cheatsheet</h3>
-<pre class="code literal-block">output=`mycmd myarg`
+<div class="code"><pre class="code literal-block">output=`mycmd myarg`
 ==&gt;
 output = Popen(["mycmd", "myarg"], stdout=PIPE).communicate()[0]
-</pre>
-<pre class="code literal-block"><span class="nv">output</span><span class="o">=</span>`<span class="nv">dmesg</span> <span class="o">|</span> <span class="nv">grep</span> <span class="nv">hda</span>`
-<span class="o">==&gt;</span>
-<span class="nv">p1</span> <span class="o">=</span> <span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"</span><span class="s">dmesg</span><span class="s2">"</span>], <span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span>
-<span class="nv">p2</span> <span class="o">=</span> <span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"</span><span class="s">grep</span><span class="s2">"</span>, <span class="s2">"</span><span class="s">hda</span><span class="s2">"</span>], <span class="nv">stdin</span><span class="o">=</span><span class="nv">p1</span>.<span class="nv">stdout</span>, <span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span>
-<span class="nv">p1</span>.<span class="nv">stdout</span>.<span class="nv">close</span><span class="ss">()</span>  # <span class="nv">Allow</span> <span class="nv">p1</span> <span class="nv">to</span> <span class="nv">receive</span> <span class="nv">a</span> <span class="nv">SIGPIPE</span> <span class="k">if</span> <span class="nv">p2</span> <span class="nv">exits</span>.
-<span class="nv">output</span> <span class="o">=</span> <span class="nv">p2</span>.<span class="nv">communicate</span><span class="ss">()</span>[<span class="mi">0</span>]
-</pre>
-<pre class="code literal-block">sts = os.system("mycmd" + " myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block"><span class="nv">output</span><span class="o">=</span>`<span class="nv">dmesg</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">grep</span><span class="w"> </span><span class="nv">hda</span>`<span class="w"></span>
+<span class="o">==&gt;</span><span class="w"></span>
+<span class="nv">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"dmesg"</span>],<span class="w"> </span><span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span><span class="w"></span>
+<span class="nv">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"grep"</span>,<span class="w"> </span><span class="s2">"hda"</span>],<span class="w"> </span><span class="nv">stdin</span><span class="o">=</span><span class="nv">p1</span>.<span class="nv">stdout</span>,<span class="w"> </span><span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span><span class="w"></span>
+<span class="nv">p1</span>.<span class="nv">stdout</span>.<span class="nv">close</span><span class="ss">()</span><span class="w">  </span>#<span class="w"> </span><span class="nv">Allow</span><span class="w"> </span><span class="nv">p1</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">receive</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">SIGPIPE</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">p2</span><span class="w"> </span><span class="nv">exits</span>.<span class="w"></span>
+<span class="nv">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">p2</span>.<span class="nv">communicate</span><span class="ss">()</span>[<span class="mi">0</span>]<span class="w"></span>
+</pre></div>
+
+<div class="code"><pre class="code literal-block">sts = os.system("mycmd" + " myarg")
 ==&gt;
 p = Popen("mycmd" + " myarg", shell=True)
 sts = os.waitpid(p.pid, 0)[1]
-</pre>
-<pre class="code literal-block">pid = os.spawnlp(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block">pid = os.spawnlp(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg")
 ==&gt;
 pid = Popen(["/bin/mycmd", "myarg"]).pid
-</pre>
-<pre class="code literal-block">retcode = os.spawnlp(os.P_WAIT, "/bin/mycmd", "mycmd", "myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block">retcode = os.spawnlp(os.P_WAIT, "/bin/mycmd", "mycmd", "myarg")
 ==&gt;
 retcode = call(["/bin/mycmd", "myarg"])
-</pre>
-<pre class="code literal-block">os.spawnlpe(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg", env)
+</pre></div>
+
+<div class="code"><pre class="code literal-block">os.spawnlpe(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg", env)
 ==&gt;
 Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
-</pre>
-</div>
+</pre></div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
@@ -190,7 +197,7 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
                 <a href="../gunicorn-%2B-nginx-shi-xian-flask-%2B-react-ying-yong-bu-shu/" rel="next" title="gunicorn + nginx 实现 flask + react 应用部署">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

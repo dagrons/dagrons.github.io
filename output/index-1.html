@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="description" content="NuLL">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NuLL (旧文章页 1) | NuLL</title>
+<title>NuLL (旧文章，第 1 页) | NuLL</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
@@ -82,15 +82,14 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<blockquote>
+                    <blockquote>
 <p>理解python docs，首先是Executor Objects, Thread/ProcessPoolExecutor, 然后是Module Functions, 最后是Exception classes，不止是学习API，还要了解它的思维框架</p>
 </blockquote>
 <h3 id="intro">Intro</h3>
 <p>The concurrent.futures module provides a high-level interface for asynchronously executing callables</p>
 <p>keyword: callables, high-level</p>
 <h3 id="_1">基本框架</h3>
-<pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">future_to_url</span><span class="p">):</span>
+<div class="code"><pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">future_to_url</span><span class="p">):</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">future_to_url</span><span class="p">[</span><span class="n">future</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
@@ -98,24 +97,29 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%r</span><span class="s1"> generated an exception: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%r</span><span class="s1"> page is </span><span class="si">%d</span><span class="s1"> bytes'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
-</pre>
+</pre></div>
+
 <h3 id="_2">提交任务</h3>
-<pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="c1"># 创建并提交一个任务</span>
+<div class="code"><pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="c1"># 创建并提交一个任务</span>
 <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">iterables</span><span class="p">)</span> <span class="c1"># 对iterables中每个值都创建并提交一个任务</span>
 <span class="n">等价于</span><span class="p">:</span>
 <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">iterables</span><span class="p">:</span>
     <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
-</pre>
+</pre></div>
+
 <h3 id="_3">查询任务本身状态？</h3>
-<pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="p">[</span><span class="n">cancel</span><span class="p">(),</span> <span class="n">cancelled</span><span class="p">(),</span> <span class="n">running</span><span class="p">(),</span> <span class="n">done</span><span class="p">(),</span> <span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">exception</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)]</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="p">[</span><span class="n">cancel</span><span class="p">(),</span> <span class="n">cancelled</span><span class="p">(),</span> <span class="n">running</span><span class="p">(),</span> <span class="n">done</span><span class="p">(),</span> <span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">exception</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)]</span>
+</pre></div>
+
 <h3 id="_4">下班</h3>
-<pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 下班了!</span>
+<div class="code"><pre class="code literal-block"><span class="n">executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 下班了!</span>
 <span class="n">wait</span><span class="o">=</span><span class="n">True会等待所有工作做完</span><span class="err">，</span><span class="n">才下班</span>
-</pre>
+</pre></div>
+
 <h3 id="_5">有趣的方法！</h3>
-<pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span> <span class="n">fn的唯一参数为future</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span> <span class="n">fn的唯一参数为future</span>
+</pre></div>
+
 <blockquote>
 <p>怀念js，怀念functional</p>
 </blockquote>
@@ -125,9 +129,10 @@
 <blockquote>
 <p>继承包含实现继承和接口继承</p>
 </blockquote>
-<pre class="code literal-block"><span class="n">Executor</span><span class="o">[</span><span class="n">abstract</span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threadpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="n">Executor</span><span class="o">[</span><span class="n">abstract</span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threadpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
 <span class="w">           </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Processpoolexecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">concrete</span><span class="o">]</span><span class="w"></span>
-</pre>
+</pre></div>
+
 <h3 id="threadpool-or-processpool">ThreadPool or ProcessPool?</h3>
 <p>CPU bottleneck? =&gt; ProcessPool（亲测，如果是CPU bottleneck，要比ThreadPool快很多）</p>
 <p>I/O bottleneck? =&gt; ThreadPool（如果bottleneck不在CPU上，就没必要用ProcessPool了，ThreadPool开销更小）</p>
@@ -135,38 +140,40 @@
 <ol>
 <li>等待所有任务完成？（注意：这会阻塞当前线程）</li>
 </ol>
-<pre class="code literal-block"><span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_when</span><span class="o">=</span><span class="n">ALL_COMPLETED</span><span class="p">)</span>
+<div class="code"><pre class="code literal-block"><span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_when</span><span class="o">=</span><span class="n">ALL_COMPLETED</span><span class="p">)</span>
 <span class="sd">"""</span>
 <span class="sd">return_when =&gt; </span>
 <span class="sd">FIRST_COMPLETED: any future finishes or is cancelled</span>
 <span class="sd">FIRST_EXCEPTION: any future finishes by raising an exception or all completed</span>
 <span class="sd">ALL_COMPLETED: when all future finishes or cancelled</span>
 <span class="sd">"""</span>
-</pre>
+</pre></div>
+
 <ol>
 <li>获取所有已经完成的任务（或者已经被取消的任务）</li>
 </ol>
-<pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="code"><pre class="code literal-block"><span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="o">...</span>
-</pre>
+</pre></div>
+
 <h3 id="exception-classes">Exception Classes</h3>
 <blockquote>
 <p>异常是程序无法语料之事，已经无法继续运行，当异常出现时，可以通过两种方式修补，一是提前预防(pre-process)，一种是通过适当的逻辑进行修补，提前判断和过滤，第二种是亡羊补牢(post-process)，在异常发生后，通过try...except进行捕获与处理.</p>
 </blockquote>
-<pre class="code literal-block"><span class="mf">1.</span> <span class="n">CancelledError</span><span class="p">:</span> <span class="n">Raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">future</span> <span class="n">is</span> <span class="n">cancelled</span>
-<span class="mf">2.</span> <span class="n">TimeoutError</span><span class="p">:</span> <span class="n">Raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">future</span> <span class="n">operation</span> <span class="n">exceeds</span> <span class="n">the</span> <span class="n">given</span> <span class="n">timeout</span>
-<span class="mf">3.</span> <span class="n">BrokenError</span><span class="p">:</span> <span class="n">Derived</span> <span class="n">from</span> <span class="kr">Run</span><span class="n">timeError</span><span class="p">,</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">a</span> <span class="n">executor</span> <span class="n">is</span> <span class="n">broken</span> <span class="kr">for</span> <span class="n">some</span> <span class="n">reason</span>
-<span class="mf">4.</span> <span class="n">InvalidStateError</span><span class="p">:</span> <span class="n">an</span> <span class="n">operation</span> <span class="n">is</span> <span class="n">performed</span> <span class="kr">on</span> <span class="n">future</span> <span class="n">that</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">allowed</span> <span class="n">in</span> <span class="n">the</span> <span class="n">curren</span> <span class="n">state</span>
-<span class="mf">5.</span> <span class="n">BrokenThreadPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">a</span> <span class="n">ThreadPoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
-<span class="mf">6.</span> <span class="n">BrokenProcessPool</span><span class="p">:</span> <span class="n">when</span> <span class="kr">on</span><span class="n">e</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workers</span> <span class="n">of</span> <span class="n">Processpoolexecutor</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">initializing</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="mf">1.</span><span class="w"> </span><span class="n">CancelledError</span><span class="p">:</span><span class="w"> </span><span class="n">Raised</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">future</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">cancelled</span><span class="w"></span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">TimeoutError</span><span class="p">:</span><span class="w"> </span><span class="n">Raised</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">future</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="n">exceeds</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">given</span><span class="w"> </span><span class="n">timeout</span><span class="w"></span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">BrokenError</span><span class="p">:</span><span class="w"> </span><span class="n">Derived</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="kr">Run</span><span class="n">timeError</span><span class="p">,</span><span class="w"> </span><span class="n">raised</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">broken</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">reason</span><span class="w"></span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">InvalidStateError</span><span class="p">:</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">performed</span><span class="w"> </span><span class="kr">on</span><span class="w"> </span><span class="n">future</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">allowed</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">curren</span><span class="w"> </span><span class="n">state</span><span class="w"></span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">BrokenThreadPool</span><span class="p">:</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="kr">on</span><span class="n">e</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">workers</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">ThreadPoolexecutor</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="n">initializing</span><span class="w"></span>
+<span class="mf">6.</span><span class="w"> </span><span class="n">BrokenProcessPool</span><span class="p">:</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="kr">on</span><span class="n">e</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">workers</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Processpoolexecutor</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="n">initializing</span><span class="w"></span>
+</pre></div>
+
 <h3 id="faq">FAQ</h3>
 <ol>
 <li>concurrent.futures vs multiprocessing, why concurrent.futures are preferred?</li>
 </ol>
 <p>concurrent.futures在threading和multiprocessing上做了封装，以灵活性为代价提供了更简单的接口
 (见)[https://stackoverflow.com/questions/20776189/concurrent-futures-vs-multiprocessing-in-python-3]</p>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zwkxian-duan-shu-zhe-mo-ri-ji/" class="u-url">算法学习-zwk线段树</a></h1>
                 <div class="metadata">
@@ -179,8 +186,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<p><strong>前言：我为什么要学线段树</strong></p>
+                    <p><strong>前言：我为什么要学线段树</strong></p>
 <blockquote>
 <p>老实讲，学线段树只是最近看到了zwk大佬的动态，然后去搜了一下这个人，发现他有个zwk线段树，于是觉得很感兴趣，就下载了他的课件去探究，发现真的和大佬的世界差距太多了，深深感受到智商的碾压！</p>
 </blockquote>
@@ -199,7 +205,7 @@
 <p><strong>那？zwk线段树？</strong></p>
 <p>传统线段树常数较大，实现复杂，而且是Top-down Approach，zwk使用Bottom-up的方式，利用堆式结构进行存储，常数更小</p>
 <p><strong>How?</strong></p>
-<pre class="code literal-block"><span class="c1">// .data</span>
+<div class="code"><pre class="code literal-block"><span class="c1">// .data</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">N</span><span class="p">];</span><span class="w"> </span><span class="c1">// 根节点为1</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="c1">// M为维护的区间大小</span>
 
@@ -227,7 +233,8 @@
 <span class="kt">void</span><span class="w"> </span><span class="nf">modify</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">+=</span><span class="n">m</span><span class="p">]</span><span class="o">=</span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
-</pre>
+</pre></div>
+
 <p><strong>完了吗？</strong></p>
 <p>没有，还有区间修改呢！</p>
 <p><strong>How？</strong></p>
@@ -248,11 +255,12 @@
 <p>那我们如何知道f的最大值究竟是多少呢，应该是(T[f] + T[f&gt;&gt;1] + ... T[1]) + 所有子节点区间相对于f的最大值，对于前者，我们只需要向上遍历即可求出，那对于后者？我们不可能去遍历所有的可能路径吧。。。。</p>
 <p><strong>除非？？？我们在每一次向上修改时，都保证每个节点存储的是子树区间的相对最大值？</strong></p>
 <p><strong>什么意思？</strong></p>
-<pre class="code literal-block"><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">],</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]),</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
 <p>在向上修改的过程中，通过上述操作，我们保证了每一个节点的值都是所有构成子区间的相对最大值！更细的也不好解释了，建议多画画图去体会。。。</p>
 <p><strong>好了，我们来看一下完整的代码</strong></p>
-<pre class="code literal-block"><span class="c1">// 区间修改</span>
+<div class="code"><pre class="code literal-block"><span class="c1">// 区间修改</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">modify</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">M</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="o">^</span><span class="n">t</span><span class="o">^</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -279,12 +287,12 @@
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="n">s</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
-</pre>
+</pre></div>
+
 <p><strong>OK, 完了？</strong>*</p>
 <p>完了...</p>
 <p><strong>参考</strong></p>
 <p>zwk-《the power of statistics》</p>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/yi-xie-jing-yan/" class="u-url">一些废话</a></h1>
                 <div class="metadata">
@@ -297,8 +305,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="misc">misc</h2>
+                    <h2 id="misc">misc</h2>
 <ol>
 <li>用git管理项目，追溯代码的变化，一方面可以回溯，一方面可以检查bug是如何产生的 </li>
 <li>层次感，结构感，流程清晰，注释详尽</li>
@@ -321,16 +328,16 @@
 <li>多态，对于同一方法，根据类型不同而使用不同的实现</li>
 <li>继承，包括实现继承和接口继承，两者的目的是不一样的，实现继承是为了代码复用，接口继承并没有复用代码，而是需要自己实现相应的接口函数，接口继承的目的是为了实现抽象，继承响应的接口并实现它们以实现对其他组件的拔插，注意，在支持duck type的语言中，没有显式的接口声明</li>
 </ol>
-<pre class="code literal-block">&gt;在C++中，使用abstract class对应接口继承，使用class对应实现继承，有的abstract class既有接口继承也有实现继承，其中virtual function对应接口继承，在ruby，python中，由于使用duck type，没有显式的接口声明，而ruby使用class和maxin对应实现继承，python使用class对应实现继承
+<div class="code"><pre class="code literal-block">&gt;在C++中，使用abstract class对应接口继承，使用class对应实现继承，有的abstract class既有接口继承也有实现继承，其中virtual function对应接口继承，在ruby，python中，由于使用duck type，没有显式的接口声明，而ruby使用class和maxin对应实现继承，python使用class对应实现继承
 &gt;python和C++都有多继承，要注意菱形继承的问题
-</pre>
+</pre></div>
+
 <ol>
 <li>Convention over configuration，除非用户指定，否则使用默认的配置，让组件使用者只关心它关心的接口参数</li>
 <li>使用树形结构或嵌套结构增强层次感和结构感，隐藏细节</li>
 <li>框架就是对于某一类任务提供的各种封装好的工具库，接口以及实现</li>
 </ol>
 </div>
-                </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/jszhong-de-promiseji-zhi/" class="u-url">js学习-理解promise机制</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
@@ -342,19 +349,19 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="js-promise">Js中的核心机制-Promise</h2>
+                    <h2 id="js-promise">Js中的核心机制-Promise</h2>
 <p>“在异步中实现同步”</p>
 <p>如果说js中有什么东西造就了他的与众不同，我想，既不是functional programming这种几十年前的老东西，也不是None和undefined这种奇怪的机制，甚至于this的dynamic scope都不足以支撑js成为一门与众不同而独占前端市场的语言，而是他的异步机制，js是专为异步编程设计的语言，不只是体现在语法上，更重要的是其提供的基建。</p>
 <p>在前端开发中，相当大的一部分工作是在进行UI渲染和回调处理，这不仅是web独有的特点，而是针对几乎所有前端开发的共有特性，在前端逻辑中，我们经常关注于一个按钮被点击后会发生什么，当我们从服务器中获取数据后要干什么...，于是有了“事件流”的概念，我们将事件流想象成一个队列，主线程从事件流中不断取出事件，并进行处理。</p>
 <p>这里涉及两个问题，1. 主线程如何根据事件确定相应的处理逻辑？2. 主线程如何确保处理逻辑不会阻塞</p>
 <p>对于问题1，js中提供了相当多的机制，典型的例子就是DOM的事件监听机制，用户在各种事件上注册各种处理函数，从而确定事件对应的处理逻辑，还例如fetch的回调，用于执行fetch返回后的处理逻辑</p>
 <p>对于问题2，主线程如何确保处理逻辑不会阻塞，首先，我们要时刻谨记“js是单线程的”，也就是说，所有的操作都在一个线程内完成，这似乎很难理解，但回到我们之前的事件流模型，就不难发现，整个程序所做的事件不过是：</p>
-<pre class="code literal-block"><span class="k">while</span> <span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nx">size</span><span class="p">())</span> <span class="p">{</span>
-    <span class="nx">event</span> <span class="o">=</span> <span class="nx">q</span><span class="p">.</span><span class="nx">pop_front</span><span class="p">();</span>
-    <span class="nx">handle</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
-<span class="p">}</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nx">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">q</span><span class="p">.</span><span class="nx">pop_front</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="nx">handle</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <p>虽然js是单线程的，但浏览器并非单线程，浏览器只是为每个window开一个js线程，一个UI渲染引擎。</p>
 <p>既然js是单线程的语言，所以要求我们的事件处理函数一定是不能阻塞我们的主线程，其中UI渲染事件会被交给UI渲染引擎进行处理，而fetch和setTimeout,setInterval，以及DOM的各种OnXXX事件，如何保证它们被处理的时候不阻塞呢，答案是：异步/non-blocking</p>
 <p>在js中，异步/non-blocking常与Promise挂钩</p>
@@ -371,62 +378,66 @@
 <h4 id="promiseaysn_ops">Promise提供了一套描述aysn_ops间执行关系的语言</h4>
 <p>Promise提供了一套Chain规则，让我们方便地描述异步操作的执行过程</p>
 <p>如下：</p>
-<pre class="code literal-block"><span class="nx">asyn_operations</span><span class="p">()</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(...)</span>
-<span class="p">...</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">)</span>
+<div class="code"><pre class="code literal-block"><span class="nx">asyn_operations</span><span class="p">()</span><span class="w"></span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span><span class="w"> </span><span class="nx">failureCallback</span><span class="p">)</span><span class="w"></span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span><span class="w"> </span><span class="nx">failureCallback</span><span class="p">)</span><span class="w"></span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(...)</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">failureCallback</span><span class="p">)</span><span class="w"></span>
 
-<span class="nx">注意</span><span class="err">：</span><span class="nx">其中</span>
-<span class="mf">1.</span> <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)=&gt;{},</span> <span class="kc">null</span><span class="p">)</span><span class="nx">简记为</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)=&gt;{})</span>
-<span class="mf">2.</span> <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)=&gt;{})</span><span class="nx">简记为</span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)=&gt;{})</span>
-<span class="mf">3.</span> <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">val</span> <span class="o">=</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span> <span class="c1">// returns a already resolved promise</span>
-    <span class="c1">// likewise, Promise.reject(reason) returns a already rejected promise</span>
-<span class="p">})</span>
-<span class="nx">简记为</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">val</span> <span class="o">=</span> <span class="nx">doSomething</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
-<span class="p">})</span>
-<span class="nx">所以</span><span class="err">：</span><span class="k">return</span> <span class="nx">val</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="k">return</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span>
-</pre>
+<span class="nx">注意</span><span class="err">：</span><span class="nx">其中</span><span class="w"></span>
+<span class="mf">1.</span><span class="w"> </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)=&gt;{},</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="nx">简记为</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)=&gt;{})</span><span class="w"></span>
+<span class="mf">2.</span><span class="w"> </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)=&gt;{})</span><span class="nx">简记为</span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)=&gt;{})</span><span class="w"></span>
+<span class="mf">3.</span><span class="w"> </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns a already resolved promise</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// likewise, Promise.reject(reason) returns a already rejected promise</span><span class="w"></span>
+<span class="p">})</span><span class="w"></span>
+<span class="nx">简记为</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="p">;</span><span class="w"></span>
+<span class="p">})</span><span class="w"></span>
+<span class="nx">所以</span><span class="err">：</span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span><span class="w"></span>
+</pre></div>
+
 <p>在ECMAScript 2017中，提供了更简洁的写法：（本质上是对上述写法的语法糖）</p>
-<pre class="code literal-block"><span class="k">async</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">async_operations</span><span class="p">();</span>
-        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">sync_or_async_ops</span><span class="p">(</span><span class="nx">reuslt</span><span class="p">);</span> 
-        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">sync_or_async_ops</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> 
-    <span class="p">}</span>
-    <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">failureCallback</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">async_operations</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">sync_or_async_ops</span><span class="p">(</span><span class="nx">reuslt</span><span class="p">);</span><span class="w"> </span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">sync_or_async_ops</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">failureCallback</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <p>除了.then规则，还有.all和.any, .race...本质上都是对<strong>各个操作间同步关系的描述</strong></p>
 <p>例如：</p>
-<pre class="code literal-block"><span class="nf">Promise.all</span><span class="p">([</span><span class="no">fn1</span><span class="p">,</span> <span class="no">fn2</span><span class="p">,</span> <span class="no">fn3</span><span class="p">,</span> <span class="no">fn4</span><span class="p">])</span>
-<span class="na">.then</span><span class="p">(([</span><span class="no">res1</span><span class="p">,</span> <span class="no">res2</span><span class="p">,</span> <span class="no">res3</span><span class="p">,</span> <span class="no">res4</span><span class="p">])</span> <span class="err">=&gt;</span> <span class="err">{</span>
-    <span class="nf">do</span> <span class="no">something</span>
-<span class="err">})</span>
+<div class="code"><pre class="code literal-block"><span class="nf">Promise.all</span><span class="p">([</span><span class="no">fn1</span><span class="p">,</span><span class="w"> </span><span class="no">fn2</span><span class="p">,</span><span class="w"> </span><span class="no">fn3</span><span class="p">,</span><span class="w"> </span><span class="no">fn4</span><span class="p">])</span><span class="w"></span>
+<span class="na">.then</span><span class="p">(([</span><span class="no">res1</span><span class="p">,</span><span class="w"> </span><span class="no">res2</span><span class="p">,</span><span class="w"> </span><span class="no">res3</span><span class="p">,</span><span class="w"> </span><span class="no">res4</span><span class="p">])</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="nf">do</span><span class="w"> </span><span class="no">something</span><span class="w"></span>
+<span class="err">})</span><span class="w"></span>
 
-<span class="nf">Promise.all</span><span class="p">()</span>
-</pre>
+<span class="nf">Promise.all</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+
 <h4 id="promise_2">那我们如何创建Promise呢</h4>
 <p>例如：</p>
-<pre class="code literal-block"><span class="kd">const</span> <span class="nx">wait</span> <span class="o">=</span> <span class="nx">ms</span> <span class="p">=&gt;</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="kd">const</span><span class="w"> </span><span class="nx">wait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ms</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">ms</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+
 <p>上述定义了一个wait的函数，该函数接受一个ms参数，返回一个Promise对象，其中Promise维护了操作"resolve =&gt; setTimeout(resolve, ms)"的执行情况，</p>
 <p>当我们使用wait时，即</p>
-<pre class="code literal-block"><span class="nx">wait</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="ow">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">,</span> <span class="nx">ms</span><span class="p">))</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nx">wait</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">doSomething</span><span class="p">,</span><span class="w"> </span><span class="nx">ms</span><span class="p">))</span><span class="w"></span>
+</pre></div>
+
 <p>从而创建了一个setTimeout的wrapper.</p>
 <p>总的来说，Promise的主要贡献在于优化了异步回调中臃肿不堪的语法</p>
 <h3 id="_1">注意事项</h3>
 <p>注意，Promise如果不进行异常捕获，如果执行过程出错，是不会造成程序终止的。</p>
-</div>
                 </div>
             </article>
 </div>
@@ -435,7 +446,7 @@
 <li class="previous"><a href="index-2.html" rel="prev">较新的文章</a></li>
         </ul>
 <!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

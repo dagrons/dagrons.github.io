@@ -5,7 +5,7 @@
 <li>或者通过nginx创建服务</li>
 </ol>
 <h1 id="gpu">GPU使用情况脚本</h1>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="nv">persons</span><span class="o">=()</span>
 <span class="nv">usages</span><span class="o">=()</span>
@@ -34,18 +34,21 @@
 <span class="nb">echo</span> <span class="s2">&quot;------------------------------&quot;</span>
 <span class="nb">echo</span>
 <span class="nb">echo</span> 
-</pre>
+</pre></div>
+
 <h1 id="ip">账号IP信息打印</h1>
-<pre class="code literal-block">lxc list 
-</pre>
+<div class="code"><pre class="code literal-block">lxc list 
+</pre></div>
+
 <h1 id="crontab">crontab设置定时任务</h1>
 <p>定时打印ip和gpu使用信息</p>
-<pre class="code literal-block"><span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">status</span>
-<span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">usage</span>
-<span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">&amp;&amp;</span> <span class="o">/</span><span class="n">snap</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">lxc</span> <span class="n">list</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">&amp;&amp;</span> <span class="n">cp</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">status</span><span class="w"></span>
+<span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">usage</span><span class="w"></span>
+<span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">/</span><span class="n">snap</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">lxc</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="w"></span>
+</pre></div>
+
 <h1 id="one-shot-server">one-shot-server脚本</h1>
-<pre class="code literal-block"><span class="c1">#/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="c1">#/bin/bash</span>
 
 <span class="nv">PORT</span><span class="o">=</span><span class="nv">$1</span>
 <span class="nv">FILE</span><span class="o">=</span><span class="nv">$2</span>
@@ -61,24 +64,27 @@
 <span class="k">do</span>
   <span class="o">{</span> <span class="nb">echo</span> -ne <span class="s2">&quot;HTTP/1.0 200 OK\r\nContent-Length: </span><span class="k">$(</span>wc -c &lt;<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="k">)</span><span class="s2">\r\n\r\n&quot;</span><span class="p">;</span> cat <span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="p">;</span> <span class="o">}</span> <span class="p">|</span> nc -l -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h1 id="one-shot-server_1">通过one-shot-server启动服务</h1>
 <blockquote>
 <p>最好启动两次, 我也不知道为什么</p>
 </blockquote>
-<pre class="code literal-block">nohup bash ./one_shot_server <span class="m">1205</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
-</pre>
+<div class="code"><pre class="code literal-block">nohup bash ./one_shot_server <span class="m">1205</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
+</pre></div>
+
 <h1 id="nginx">通过nginx创建服务</h1>
 <p>/etc/nginx/sites-enabled/default内容如下：</p>
-<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
-       <span class="n">listen</span> <span class="mi">1205</span><span class="p">;</span>
-       <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-            <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span>
-            <span class="n">index</span> <span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="p">;</span>
-       <span class="p">}</span>
+<div class="code"><pre class="code literal-block"><span class="n">server</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">       </span><span class="n">listen</span><span class="w"> </span><span class="mi">1205</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">index</span><span class="w"> </span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>
-</pre>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <p>然后加载nginx配置</p>
-<pre class="code literal-block">nginx -s reload
-</pre>
+<div class="code"><pre class="code literal-block">nginx -s reload
+</pre></div>

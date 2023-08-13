@@ -99,8 +99,7 @@ The GOPATH environment variable lists places to look for Go code. On Unix, the v
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<h2 id="go-gogotooling">Go学习第一天, 从GO安装到GoTooling使用</h2>
+    <h2 id="go-gogotooling">Go学习第一天, 从GO安装到GoTooling使用</h2>
 <h3 id="gopath-vs-goroot">GOPATH vs GOROOT</h3>
 <blockquote>
 <p>The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
@@ -114,87 +113,102 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 <li>下载安装包</li>
 <li>如下</li>
 </ol>
-<pre class="code literal-block">rm -rf /usr/local/go <span class="o">&amp;&amp;</span> tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+<div class="code"><pre class="code literal-block">rm -rf /usr/local/go <span class="o">&amp;&amp;</span> tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
 <span class="nb">echo</span> <span class="s2">"export PATH=</span><span class="nv">$PATH</span><span class="s2">:/usr/local/go/bin"</span> &gt;&gt; ~/.bashrc 
 go version <span class="c1"># check if installed </span>
-</pre>
+</pre></div>
+
 <h3 id="_1">配置代理</h3>
-<pre class="code literal-block">go env -w <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
-</pre>
+<div class="code"><pre class="code literal-block">go env -w <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+</pre></div>
+
 <h3 id="go">创建第一个GO可执行程序</h3>
 <p>在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:</p>
-<pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
-</pre>
+<div class="code"><pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
+</pre></div>
+
 <p>在编译go项目后, 可以通过go install进行安装, 会将项目安装在"$GOPATH/bin/"下:</p>
-<pre class="code literal-block"><span class="k">go</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">binary</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">go</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">binary</span><span class="w"></span>
 <span class="err">$</span><span class="n">GOPATH</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">it</span><span class="w"></span>
-</pre>
+</pre></div>
+
 <p>如果将GOPATH加入到了PATH中, 可以直接运行</p>
-<pre class="code literal-block">hello
-</pre>
+<div class="code"><pre class="code literal-block">hello
+</pre></div>
+
 <h3 id="go-module">创建第一个GO module</h3>
 <p>大致流程和创建GO程序差不多, 但和GO程序的区别在于GO包编译并不会生成可执行文件, 因此我们并不需要使用"go install"命令进行安装, 
 在完成后, 使用"go build"测试一下包能够通过编译即可</p>
-<pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
+<div class="code"><pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
 go build github.com/goo/stringutil
-</pre>
+</pre></div>
+
 <h3 id="go-module_1">更好的go module创建方式</h3>
 <p>在go1.2后, 通过go.mod, 我们不再需要在$GOPATH/src/下进行项目开发了, 相应的, 我们可以通过定义go.mod来创建module</p>
 <p>首先执行go init生成用于管理的go.mod和go.sum文件</p>
-<pre class="code literal-block">go mod init github.com/foo 
-</pre>
+<div class="code"><pre class="code literal-block">go mod init github.com/foo 
+</pre></div>
+
 <p>一个典型的go.mod如下, </p>
-<pre class="code literal-block"><span class="k">module</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">dagrons</span><span class="o">/</span><span class="n">godw</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">module</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">dagrons</span><span class="o">/</span><span class="n">godw</span><span class="w"></span>
 
 <span class="k">go</span><span class="w"> </span><span class="mf">1.16</span><span class="w"></span>
 
 <span class="n">require</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gin</span><span class="o">-</span><span class="n">gonic</span><span class="o">/</span><span class="n">gin</span><span class="w"> </span><span class="n">v1</span><span class="mf">.7.2</span><span class="w"></span>
 <span class="n">require</span><span class="w"> </span><span class="ss">"mypackage"</span><span class="w"> </span><span class="n">v0</span><span class="mf">.0.0</span><span class="w"></span>
 <span class="nf">replace</span><span class="w"> </span><span class="ss">"mypackage"</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">"../mypackage"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">指定本地依赖路径</span><span class="w"> </span>
-</pre>
+</pre></div>
+
 <p>指定了module名, go SDK版本, 以及依赖的第三方库及版本, </p>
 <p>这种项目依赖管理方式和package.json和Gemfile类似, 更加好用</p>
 <p>在go.mod编写完成后, 需要通过"go tidy mod"进行依赖解析, 会下载并解析好所有的依赖关系</p>
-<pre class="code literal-block">go mod tidy
-</pre>
+<div class="code"><pre class="code literal-block">go mod tidy
+</pre></div>
+
 <h3 id="go-tooling">其他常见的GO Tooling命令</h3>
 <p>GO环境变量</p>
-<pre class="code literal-block">go env <span class="c1"># list all go envs</span>
+<div class="code"><pre class="code literal-block">go env <span class="c1"># list all go envs</span>
 <span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>&lt;XXXX&gt; <span class="c1"># go env 会读取环境变量, 因此我们在环境变量中设置相应的变量即可, 上一种方法可能会失效</span>
 <span class="nb">export</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
-</pre>
+</pre></div>
+
 <p>执行GO程序</p>
-<pre class="code literal-block">go run ./acwing/qsort 
+<div class="code"><pre class="code literal-block">go run ./acwing/qsort 
 go run github.com/dagrons/god/acwing/qsort <span class="c1"># the two are equivalent</span>
-</pre>
+</pre></div>
+
 <p>依赖解析</p>
-<pre class="code literal-block">go get -u golang.org/x/tools/... <span class="c1"># 获取某个依赖</span>
+<div class="code"><pre class="code literal-block">go get -u golang.org/x/tools/... <span class="c1"># 获取某个依赖</span>
 go mod tidy <span class="c1"># 项目整体依赖解析</span>
 go mod edit -replace<span class="o">=</span>github.com/axe/argonid<span class="o">=</span>/home/axe/argonid <span class="c1"># create the replace rule # 会将远程依赖代理到本地依赖</span>
 go mod edit -dropreplace<span class="o">=</span>github.com/axe/argonid <span class="c1"># 取消代理规则</span>
 go list -m all <span class="c1"># list all dependencies</span>
 go clean -modcache <span class="c1"># clean module cache</span>
-</pre>
+</pre></div>
+
 <p>测试</p>
-<pre class="code literal-block">go <span class="nb">test</span> all <span class="c1"># test all dependencies including SDK libraries</span>
+<div class="code"><pre class="code literal-block">go <span class="nb">test</span> all <span class="c1"># test all dependencies including SDK libraries</span>
 go <span class="nb">test</span> ./acwing/qsort <span class="c1"># test a single file</span>
 go <span class="nb">test</span> ./... <span class="c1"># test all # ./...表示所有文件</span>
 go <span class="nb">test</span> -cover ./... <span class="c1"># cover展示测试覆盖情况, 因为有的函数不一定有测试</span>
-</pre>
+</pre></div>
+
 <p>文档</p>
-<pre class="code literal-block">go doc leetcode/l51 <span class="c1"># 展示文档部分</span>
+<div class="code"><pre class="code literal-block">go doc leetcode/l51 <span class="c1"># 展示文档部分</span>
 go doc -all leetcode/l52 <span class="c1"># 优化显示</span>
 go doc -all leetcode/l52.SolveNQueens <span class="c1"># 函数文档</span>
 go doc -src leetcode/l52.SolveNQueens <span class="c1"># 显示源码</span>
-</pre>
+</pre></div>
+
 <p>构建与部署</p>
-<pre class="code literal-block">go build -o<span class="o">=</span>/tmp/foo <span class="c1"># compile current package into /tmp/foo</span>
+<div class="code"><pre class="code literal-block">go build -o<span class="o">=</span>/tmp/foo <span class="c1"># compile current package into /tmp/foo</span>
 go build -o<span class="o">=</span>/tmp/foo ./cmd/foo <span class="c1"># compile ./cmd/foo into /tmp/foo</span>
 go build -a -o<span class="o">=</span>/tmp/foo . <span class="c1"># force all packages to be rebuilt</span>
 go clean -cache <span class="c1"># clear build cache </span>
 <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/linux_amd64/foo . <span class="c1"># cross-platform compilation specified with GOOS and GOARCH</span>
 <span class="nv">GOOS</span><span class="o">=</span>windows <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/windows_amd64/foo.exe 
-</pre>
+</pre></div>
+
 <h3 id="vscode">必备VSCode插件</h3>
 <ol>
 <li>Go # All in One</li>
@@ -202,7 +216,6 @@ go clean -cache <span class="c1"># clear build cache </span>
 <li>git &amp;&amp; git history</li>
 </ol>
 </div>
-    </div>
     <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
 <li><a class="tag p-category" href="../../categories/go/" rel="tag">go</a></li>
         </ul>
@@ -214,7 +227,7 @@ go clean -cache <span class="c1"># clear build cache </span>
                 <a href="../lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" rel="next" title="论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>
