@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="description" content="NuLL">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NuLL (旧文章页 3) | NuLL</title>
+<title>NuLL (旧文章，第 3 页) | NuLL</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
@@ -83,8 +83,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="python-subprocess">python执行外挂-subprocess</h2>
+                    <h2 id="python-subprocess">python执行外挂-subprocess</h2>
 <p>相比于os.system, subprocess允许我们直接创建进程, 而非从shell再创建任务, 而且允许我们对创建的进程执行更多的动作</p>
 <h3 id="import-concepts">Import Concepts</h3>
 <ul>
@@ -96,7 +95,7 @@
 </li>
 </ul>
 <h3 id="popen-object">Popen Object</h3>
-<pre class="code literal-block"><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startupinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creationflags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="code"><pre class="code literal-block"><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startupinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creationflags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">args</span><span class="p">:</span> <span class="n">a</span> <span class="n">string</span> <span class="n">类似bash</span> <span class="n">commands</span><span class="p">,</span> <span class="n">其中args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="n">为command</span> <span class="n">name</span>
 
@@ -109,61 +108,69 @@
 <span class="n">cwd</span><span class="p">:</span> <span class="n">current</span> <span class="n">working</span> <span class="n">directory</span>
 
 <span class="n">env</span><span class="p">:</span> <span class="n">a</span> <span class="n">mapping</span> <span class="n">defines</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">variables</span> <span class="k">for</span> <span class="n">the</span> <span class="n">new</span> <span class="n">process</span>
-</pre>
+</pre></div>
+
 <h3 id="popen-instance-methods-attributes">Popen Instance Methods &amp; Attributes</h3>
-<pre class="code literal-block"><span class="n">Popen</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="c1"># if a child process has terminated</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span> <span class="c1"># wait a child process to terminated </span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">input</span><span class="o">=</span><span class="n">None</span><span class="p">)</span> <span class="c1"># send data to stdin, return (stdoutdata, stderrdata) </span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="k">signal</span><span class="p">)</span> <span class="c1"># send signal to child process</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stdin</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stdout</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">stderr</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">pid</span>
-<span class="n">Popen</span><span class="o">.</span><span class="n">returncode</span> <span class="c1"># None if hasn't terminated yet. -N indicate that the child was terminated by signal N(Unix only)</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">Popen</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span><span class="w"> </span><span class="c1"># if a child process has terminated</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span><span class="w"> </span><span class="c1"># wait a child process to terminated </span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">input</span><span class="o">=</span><span class="n">None</span><span class="p">)</span><span class="w"> </span><span class="c1"># send data to stdin, return (stdoutdata, stderrdata) </span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">send_signal</span><span class="p">(</span><span class="k">signal</span><span class="p">)</span><span class="w"> </span><span class="c1"># send signal to child process</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stdin</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stdout</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">stderr</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">pid</span><span class="w"></span>
+<span class="n">Popen</span><span class="o">.</span><span class="n">returncode</span><span class="w"> </span><span class="c1"># None if hasn't terminated yet. -N indicate that the child was terminated by signal N(Unix only)</span><span class="w"></span>
+</pre></div>
+
 <h3 id="popen">Popen简化版</h3>
 <p><strong>call</strong>
 Run command with arguments. Wait for command to complete, then return the retcode</p>
-<pre class="code literal-block"><span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">])</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">retcode</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">])</span>
+</pre></div>
+
 <p><strong>check_output</strong>
 Run command with arguments and return its output as a byte string </p>
-<pre class="code literal-block"><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">,</span> <span class="s2">"/dev/null"</span><span class="p">])</span> <span class="c1">#=&gt; 'crw-rw-rw- 1 root root ... '</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s2">"ls"</span><span class="p">,</span> <span class="s2">"-l"</span><span class="p">,</span> <span class="s2">"/dev/null"</span><span class="p">])</span> <span class="c1">#=&gt; 'crw-rw-rw- 1 root root ... '</span>
+</pre></div>
+
 <h3 id="exceptions">Exceptions</h3>
 <p><strong>OSError</strong> errors when trying to execute a non-existent file. Application should prepare for OSError exception</p>
 <h3 id="cheatsheet">Cheatsheet</h3>
-<pre class="code literal-block">output=`mycmd myarg`
+<div class="code"><pre class="code literal-block">output=`mycmd myarg`
 ==&gt;
 output = Popen(["mycmd", "myarg"], stdout=PIPE).communicate()[0]
-</pre>
-<pre class="code literal-block"><span class="nv">output</span><span class="o">=</span>`<span class="nv">dmesg</span> <span class="o">|</span> <span class="nv">grep</span> <span class="nv">hda</span>`
-<span class="o">==&gt;</span>
-<span class="nv">p1</span> <span class="o">=</span> <span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"</span><span class="s">dmesg</span><span class="s2">"</span>], <span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span>
-<span class="nv">p2</span> <span class="o">=</span> <span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"</span><span class="s">grep</span><span class="s2">"</span>, <span class="s2">"</span><span class="s">hda</span><span class="s2">"</span>], <span class="nv">stdin</span><span class="o">=</span><span class="nv">p1</span>.<span class="nv">stdout</span>, <span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span>
-<span class="nv">p1</span>.<span class="nv">stdout</span>.<span class="nv">close</span><span class="ss">()</span>  # <span class="nv">Allow</span> <span class="nv">p1</span> <span class="nv">to</span> <span class="nv">receive</span> <span class="nv">a</span> <span class="nv">SIGPIPE</span> <span class="k">if</span> <span class="nv">p2</span> <span class="nv">exits</span>.
-<span class="nv">output</span> <span class="o">=</span> <span class="nv">p2</span>.<span class="nv">communicate</span><span class="ss">()</span>[<span class="mi">0</span>]
-</pre>
-<pre class="code literal-block">sts = os.system("mycmd" + " myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block"><span class="nv">output</span><span class="o">=</span>`<span class="nv">dmesg</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">grep</span><span class="w"> </span><span class="nv">hda</span>`<span class="w"></span>
+<span class="o">==&gt;</span><span class="w"></span>
+<span class="nv">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"dmesg"</span>],<span class="w"> </span><span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span><span class="w"></span>
+<span class="nv">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Popen</span><span class="ss">(</span>[<span class="s2">"grep"</span>,<span class="w"> </span><span class="s2">"hda"</span>],<span class="w"> </span><span class="nv">stdin</span><span class="o">=</span><span class="nv">p1</span>.<span class="nv">stdout</span>,<span class="w"> </span><span class="nv">stdout</span><span class="o">=</span><span class="nv">PIPE</span><span class="ss">)</span><span class="w"></span>
+<span class="nv">p1</span>.<span class="nv">stdout</span>.<span class="nv">close</span><span class="ss">()</span><span class="w">  </span>#<span class="w"> </span><span class="nv">Allow</span><span class="w"> </span><span class="nv">p1</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">receive</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">SIGPIPE</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">p2</span><span class="w"> </span><span class="nv">exits</span>.<span class="w"></span>
+<span class="nv">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">p2</span>.<span class="nv">communicate</span><span class="ss">()</span>[<span class="mi">0</span>]<span class="w"></span>
+</pre></div>
+
+<div class="code"><pre class="code literal-block">sts = os.system("mycmd" + " myarg")
 ==&gt;
 p = Popen("mycmd" + " myarg", shell=True)
 sts = os.waitpid(p.pid, 0)[1]
-</pre>
-<pre class="code literal-block">pid = os.spawnlp(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block">pid = os.spawnlp(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg")
 ==&gt;
 pid = Popen(["/bin/mycmd", "myarg"]).pid
-</pre>
-<pre class="code literal-block">retcode = os.spawnlp(os.P_WAIT, "/bin/mycmd", "mycmd", "myarg")
+</pre></div>
+
+<div class="code"><pre class="code literal-block">retcode = os.spawnlp(os.P_WAIT, "/bin/mycmd", "mycmd", "myarg")
 ==&gt;
 retcode = call(["/bin/mycmd", "myarg"])
-</pre>
-<pre class="code literal-block">os.spawnlpe(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg", env)
+</pre></div>
+
+<div class="code"><pre class="code literal-block">os.spawnlpe(os.P_NOWAIT, "/bin/mycmd", "mycmd", "myarg", env)
 ==&gt;
 Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
-</pre>
-</div>
+</pre></div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/br0mei-you-ipdi-zhi-jie-jue-fang-an/" class="u-url">br0没有ip地址解决方案</a></h1>
                 <div class="metadata">
@@ -176,8 +183,7 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="_1">问题分析</h2>
+                    <h2 id="_1">问题分析</h2>
 <ol>
 <li>br0没有ip，但enp0s31f6有ip</li>
 <li>lxc list显示容器都没有ip, 推测br0没有正常工作</li>
@@ -186,32 +192,34 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
 </ol>
 <h2 id="_2">解决方案</h2>
 <p>首先通过brctl show br0发现没有物理网卡绑定，因此通过</p>
-<pre class="code literal-block">brctl addif br0 enp0s31f6
-</pre>
+<div class="code"><pre class="code literal-block">brctl addif br0 enp0s31f6
+</pre></div>
+
 <p>手动添加物理网卡, 添加后发现容器可以正常获取ip了</p>
 <p>但host的br0仍然没有ip</p>
 <p>然后重新修改/etc/netplan/01-netcfg.yaml</p>
-<pre class="code literal-block"># <span class="k">For</span> <span class="nv">more</span> <span class="nv">information</span>, <span class="nv">see</span> <span class="nv">netplan</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>.
-<span class="nv">network</span>:
-  <span class="nv">version</span>: <span class="mi">2</span>
-  <span class="nv">renderer</span>: <span class="nv">networkd</span>
-  <span class="nv">ethernets</span>:
-    <span class="nv">enp0s31f6</span>:
-      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
-      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
-  <span class="nv">bridges</span>:
-    <span class="nv">br0</span>:
-      <span class="nv">dhcp4</span>: <span class="nv">yes</span>
-      <span class="nv">dhcp6</span>: <span class="nv">yes</span>
-      <span class="nv">interfaces</span>:
-        <span class="o">-</span> <span class="nv">enp0s31f6</span>
-</pre>
+<div class="code"><pre class="code literal-block">#<span class="w"> </span><span class="k">For</span><span class="w"> </span><span class="nv">more</span><span class="w"> </span><span class="nv">information</span>,<span class="w"> </span><span class="nv">see</span><span class="w"> </span><span class="nv">netplan</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>.<span class="w"></span>
+<span class="nv">network</span>:<span class="w"></span>
+<span class="w">  </span><span class="nv">version</span>:<span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">  </span><span class="nv">renderer</span>:<span class="w"> </span><span class="nv">networkd</span><span class="w"></span>
+<span class="w">  </span><span class="nv">ethernets</span>:<span class="w"></span>
+<span class="w">    </span><span class="nv">enp0s31f6</span>:<span class="w"></span>
+<span class="w">      </span><span class="nv">dhcp4</span>:<span class="w"> </span><span class="nv">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nv">dhcp6</span>:<span class="w"> </span><span class="nv">yes</span><span class="w"></span>
+<span class="w">  </span><span class="nv">bridges</span>:<span class="w"></span>
+<span class="w">    </span><span class="nv">br0</span>:<span class="w"></span>
+<span class="w">      </span><span class="nv">dhcp4</span>:<span class="w"> </span><span class="nv">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nv">dhcp6</span>:<span class="w"> </span><span class="nv">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nv">interfaces</span>:<span class="w"></span>
+<span class="w">        </span><span class="o">-</span><span class="w"> </span><span class="nv">enp0s31f6</span><span class="w"></span>
+</pre></div>
+
 <p>重新载入配置</p>
-<pre class="code literal-block">netplan --debug apply
-</pre>
+<div class="code"><pre class="code literal-block">netplan --debug apply
+</pre></div>
+
 <p>发现br0成功得到ip</p>
 <p>重启后依然生效</p>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-er-tian-zi-fu-chuan-xiang-guan/" class="u-url">Go学习第二天-字符串相关</a></h1>
                 <div class="metadata">
@@ -224,8 +232,7 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="go-">Go学习第二天-字符串相关</h2>
+                    <h2 id="go-">Go学习第二天-字符串相关</h2>
 <p>如果有不确定的地方, 可以在a tour of go上做做小实验</p>
 <h3 id="byterune">byte和rune</h3>
 <blockquote>
@@ -234,43 +241,47 @@ Popen(["/bin/mycmd", "myarg"], env={"PATH": "/usr/bin"})
 <p>所以byte和rune本质上就是uint8和uint32, byte用于ASCII编码, rune用于Unicode编码</p>
 <p>除此之外, 在golang中, 没有char类型, 用于byte和rune表示char类型</p>
 <p>值得注意, golang中的int和int32与int64并不是一个类型, <a href="https://golang.org/ref/spec#Numeric_types">int vs int32 vs 34</a>, 因此下面的代码并不合法</p>
-<pre class="code literal-block"><span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">//</span> <span class="n">ok</span>
-<span class="k">var</span> <span class="n">a</span> <span class="nb nb-Type">int</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">//</span> <span class="n">error</span><span class="p">,</span> <span class="n">cannot</span> <span class="n">use</span> <span class="n">a</span> <span class="p">(</span><span class="n">type</span> <span class="n">int32</span><span class="p">)</span> <span class="k">as</span> <span class="n">type</span> <span class="nb nb-Type">int</span> <span class="ow">in</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">ok</span><span class="w"></span>
+<span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="n">int32</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="w"></span>
+</pre></div>
+
 <blockquote>
 <p>In Go, Characters are expressed by enclosing them in single quotes like this: 'a'.</p>
 </blockquote>
 <p>在Go中, 用单引号来实现char的literal</p>
 <p>默认情况下, char用rune来存储, 如下: </p>
-<pre class="code literal-block"><span class="kd">var</span> <span class="nx">myLetter</span> <span class="p">=</span> <span class="sc">'a'</span> <span class="c1">// Type inferred as rune</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="kd">var</span><span class="w"> </span><span class="nx">myLetter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">'a'</span><span class="w"> </span><span class="c1">// Type inferred as rune</span><span class="w"></span>
+</pre></div>
+
 <p>我们也可以显示声明一个byte存储的char, 如下: </p>
-<pre class="code literal-block"><span class="kd">var</span> <span class="nx">myLetter</span> <span class="kt">byte</span> <span class="p">=</span> <span class="sc">'a'</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="kd">var</span><span class="w"> </span><span class="nx">myLetter</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">'a'</span><span class="w"></span>
+</pre></div>
+
 <p>在上述表述中, char不是一个具体的类型</p>
 <h3 id="_1">字符串</h3>
 <p>在golang中, 字符串并不是byte数组或rune数组, 因为byte数组和rune数组都是可变，但字符串不可变(和除了C++以外的其他语言一样), </p>
 <p>除此之外, 还有一个值得注意的是, byte数组和rune数组用fmt.Println()打印出来都是数字, 说明他们本质上仍然是uint8数组和uint32数组, 如果要打印出可读的字符串, 还是需要转成string</p>
 <p>如下:</p>
-<pre class="code literal-block"><span class="kn">package</span> <span class="nx">main</span>
+<div class="code"><pre class="code literal-block"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w"></span>
 
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">"fmt"</span>
-<span class="p">)</span> 
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">"fmt"</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span>
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">a</span> <span class="o">:=</span> <span class="s">"张明阳是傻逼"</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; 张</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; [24352 26126 38451]</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">// =&gt; 张明阳</span>
-<span class="p">}</span>
-</pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">"张明阳是傻逼"</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="c1">// =&gt; 张</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="c1">// =&gt; [24352 26126 38451]</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">a</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="c1">// =&gt; 张明阳</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <h3 id="bytes-slice-over-string">bytes slice over string?</h3>
 <p>由于string不可变, 因此在刷题时并不实用, 更实用的方法是通过bytes数组进行字符数据存储和操作, 只在需要显示时才将其转化为string</p>
 <h3 id="strings">strings包</h3>
 <p>string是go的内置类型, 而strings是针对string的包, 包含了处理string的诸多方法, 在此我们只列举部分常用函数</p>
-<pre class="code literal-block">strings.Compare(s1, s2 string) int // 字符串比较
+<div class="code"><pre class="code literal-block">strings.Compare(s1, s2 string) int // 字符串比较
 strings.Join([]string, string) // 拼接多个字符串
 strings.Split(s, str string) // 切割字符串
 strings.Fields(s strings) // 按空白字符切割字符串
@@ -279,8 +290,7 @@ strings.Replace("张明阳是傻逼", "傻逼", "纯弱智", -1) // 替换字符
 strings.Contains(s, substr string) // 是否存在子串
 strings.ContainsAny(s, chars string) // chars中的字符是否在s中出现过
 strings.Index(s string, str string) // 返回str在s中第一次出现的位置, 如果不存在返回-1, str为空返回0
-</pre>
-</div>
+</pre></div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/zhan-shi-fu-wu-qi-gpushi-yong-qing-kuang-ji-zhang-hao-ip/" class="u-url">展示服务器GPU使用情况及账号IP</a></h1>
                 <div class="metadata">
@@ -293,15 +303,14 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="_1">问题分析：</h2>
+                    <h2 id="_1">问题分析：</h2>
 <ol>
 <li>首先通过crontab设置定时任务，将ip信息和gpu使用情况定时打到某文件中</li>
 <li>通过one-shot-server创建服务</li>
 <li>或者通过nginx创建服务</li>
 </ol>
 <h2 id="gpu">GPU使用情况脚本</h2>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="nv">persons</span><span class="o">=()</span>
 <span class="nv">usages</span><span class="o">=()</span>
@@ -330,18 +339,21 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
 <span class="nb">echo</span> <span class="s2">"------------------------------"</span>
 <span class="nb">echo</span>
 <span class="nb">echo</span> 
-</pre>
+</pre></div>
+
 <h2 id="ip">账号IP信息打印</h2>
-<pre class="code literal-block">lxc list 
-</pre>
+<div class="code"><pre class="code literal-block">lxc list 
+</pre></div>
+
 <h2 id="crontab">crontab设置定时任务</h2>
 <p>定时打印ip和gpu使用信息</p>
-<pre class="code literal-block"><span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">status</span>
-<span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">usage</span>
-<span class="o">*/</span><span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">&amp;&amp;</span> <span class="o">/</span><span class="n">snap</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">lxc</span> <span class="n">list</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">&amp;&amp;</span> <span class="n">cp</span> <span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">status</span><span class="w"></span>
+<span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">usage</span><span class="w"></span>
+<span class="o">*/</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">who_is_using_gpu</span><span class="o">.</span><span class="n">sh</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">/</span><span class="n">snap</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">lxc</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">/</span><span class="n">dagongren</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">ip</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="w"></span>
+</pre></div>
+
 <h2 id="one-shot-server">one-shot-server脚本</h2>
-<pre class="code literal-block"><span class="c1">#/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="c1">#/bin/bash</span>
 
 <span class="nv">PORT</span><span class="o">=</span><span class="nv">$1</span>
 <span class="nv">FILE</span><span class="o">=</span><span class="nv">$2</span>
@@ -357,28 +369,30 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
 <span class="k">do</span>
   <span class="o">{</span> <span class="nb">echo</span> -ne <span class="s2">"HTTP/1.0 200 OK\r\nContent-Length: </span><span class="k">$(</span>wc -c &lt;<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="k">)</span><span class="s2">\r\n\r\n"</span><span class="p">;</span> cat <span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="p">;</span> <span class="o">}</span> <span class="p">|</span> nc -l -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h2 id="one-shot-server_1">通过one-shot-server启动服务</h2>
 <blockquote>
 <p>最好启动两次, 我也不知道为什么</p>
 </blockquote>
-<pre class="code literal-block">nohup bash ./one_shot_server <span class="m">1205</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
-</pre>
+<div class="code"><pre class="code literal-block">nohup bash ./one_shot_server <span class="m">1205</span> /root/share/ip &gt; /dev/null <span class="p">&amp;</span> 
+</pre></div>
+
 <h2 id="nginx">通过nginx创建服务</h2>
 <p>/etc/nginx/sites-enabled/default内容如下：</p>
-<pre class="code literal-block"><span class="n">server</span> <span class="p">{</span>
-       <span class="n">listen</span> <span class="mi">1205</span><span class="p">;</span>
-       <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-            <span class="n">root</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span>
-            <span class="n">index</span> <span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="p">;</span>
-       <span class="p">}</span>
+<div class="code"><pre class="code literal-block"><span class="n">server</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">       </span><span class="n">listen</span><span class="w"> </span><span class="mi">1205</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">index</span><span class="w"> </span><span class="n">ip</span><span class="o">.</span><span class="n">txt</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>
-</pre>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+
 <p>然后加载nginx配置</p>
-<pre class="code literal-block">nginx -s reload
-</pre>
-</div>
+<div class="code"><pre class="code literal-block">nginx -s reload
+</pre></div>
                 </div>
             </article>
 </div>
@@ -388,7 +402,7 @@ strings.Index(s string, str string) // 返回str在s中第一次出现的位置,
             <li class="next"><a href="index-2.html" rel="next">以前的文章</a></li>
         </ul>
 <!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

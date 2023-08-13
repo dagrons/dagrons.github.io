@@ -104,8 +104,7 @@ network-manager主要用于GUI环境下的网络配置, sy">
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<h3 id="_1">前言</h3>
+    <h3 id="_1">前言</h3>
 <ul>
 <li>linux网络配置复杂, 配置文件繁多, 因此经常产生困扰, 所以我想在这里一次性梳理好</li>
 </ul>
@@ -118,7 +117,7 @@ network-manager主要用于GUI环境下的网络配置, system-networkd主要用
 <h3 id="_3">配置文件</h3>
 <p><strong>传统配置文件</strong></p>
 <p>/etc/network/interfaces是system-networkd的配置文件, 下面是一个典型的interfaces配置</p>
-<pre class="code literal-block"># lab_host2:/etc/network/interfaces
+<div class="code"><pre class="code literal-block"># lab_host2:/etc/network/interfaces
 auto lo
 iface lo inet loopback
 
@@ -127,27 +126,27 @@ iface br0 inet dhcp
     bridge-ports enp0s31f6    
 
 iface enp0s31f6 inet manual
-</pre>
+</pre></div>
+
 <p>nmcli: 是network-manager的命令行配置工具</p>
 <p><strong>netplan</strong></p>
 <p>netplan的好处在于为system-networkd和network-manager提供了一致的配置文件, 从而避免两个render间的冲突, 在netplan中, 我们可以通过renderer关键词指定renderer, 除此之外的语法都是一致的</p>
 <p>如下, 是一个典型的netplan配置文件, 指定renderer为networkd</p>
-<pre class="code literal-block"><span class="c1"># lab_host3:/etc/netplan/01-netcfg.yaml</span>
-<span class="nt">network</span><span class="p">:</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-  <span class="nt">renderer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networkd</span>
-  <span class="nt">ethernets</span><span class="p">:</span>
-    <span class="nt">enp0s31f6</span><span class="p">:</span>
-      <span class="nt">dhcp4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">dhcp6</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-  <span class="nt">bridges</span><span class="p">:</span>
-    <span class="nt">br0</span><span class="p">:</span>
-      <span class="nt">dhcp4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">dhcp6</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-      <span class="nt">interfaces</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enp0s31f6</span>
-</pre>
-</div>
+<div class="code"><pre class="code literal-block"><span class="c1"># lab_host3:/etc/netplan/01-netcfg.yaml</span><span class="w"></span>
+<span class="nt">network</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networkd</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enp0s31f6</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp6</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bridges</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">br0</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dhcp6</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"></span>
+<span class="w">      </span><span class="nt">interfaces</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enp0s31f6</span><span class="w"></span>
+</pre></div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
@@ -157,7 +156,7 @@ iface enp0s31f6 inet manual
                 <a href="../proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" rel="next" title="proxmox-宝宝的第一个homelab解决方案">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

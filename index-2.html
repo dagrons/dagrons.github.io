@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="description" content="NuLL">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NuLL (旧文章页 2) | NuLL</title>
+<title>NuLL (旧文章，第 2 页) | NuLL</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
@@ -83,8 +83,7 @@
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
+                    <p>因为实验室服务器每次重启IP都可能改变，因此需要服务器重启后自动将IP上传到腾讯云服务器上，这样就不用每次连显示器去查询IP（十分麻烦）</p>
 <h2 id="_1">问题分析</h2>
 <ol>
 <li>服务器无法自动连接到Internet，就无法连接到腾讯云，所以需要一个服务监听Internet连接状态，在没有Internet连接时，自动登陆校园网</li>
@@ -92,15 +91,17 @@
 </ol>
 <p>记录流程如下：</p>
 <h2 id="ipetchosts">先将腾讯云IP加到/etc/hosts</h2>
-<pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nb">echo</span> <span class="s2">"120.53.125.30     tencent_cloud"</span> &gt;&gt; /etc/hosts
+</pre></div>
+
 <h2 id="ssh-key-pubkeytencent_cloud">将ssh-key pubkey加到tencent_cloud的信任列表中</h2>
 <p>以一步是防止ssh上传ip时要求输入密码</p>
-<pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
-</pre>
+<div class="code"><pre class="code literal-block">cat /root/.ssh/id_rsa.pub <span class="p">|</span> ssh root@tencent_cloud <span class="s1">'cat &gt;&gt; ~/.ssh/authorized_keys'</span> 
+</pre></div>
+
 <h2 id="internet">检测Internet连接并自动登陆校园网的脚本</h2>
 <p>/usr/local/bin/autologin内容如下</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="k">if</span> ping -q -c <span class="m">1</span> -W <span class="m">1</span> <span class="m">8</span>.8.8.8 &gt;/dev/null<span class="p">;</span> <span class="k">then</span>
@@ -110,10 +111,11 @@
     python3 /home/dell/get2internet.py <span class="m">2020110966</span> Daxiahyh1
     <span class="k">fi</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h2 id="ip">上传ip的脚本</h2>
 <p>/usr/local/bin/upload-ip内容如下:</p>
-<pre class="code literal-block"><span class="ch">#!/bin/bash</span>
+<div class="code"><pre class="code literal-block"><span class="ch">#!/bin/bash</span>
 
 <span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
     <span class="nv">ipaddr</span><span class="o">=</span><span class="k">$(</span>ifconfig br0 <span class="p">|</span>egrep <span class="s1">'inet\ '</span><span class="p">|</span>awk <span class="s1">'{print $2}'</span><span class="k">)</span>
@@ -163,54 +165,57 @@
 <span class="s">EOF</span>
     sleep <span class="m">60</span>
 <span class="k">done</span>
-</pre>
+</pre></div>
+
 <h2 id="autologinservice">创建autologin.service文件</h2>
 <p>/etc/systemd/system/autologin.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Auto Login for Internet</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/autologin</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h2 id="upload-ipservice">创建upload-ip.service文件</h2>
 <p>/etc/systemd/system/upload-ip.service内容如下：</p>
-<pre class="code literal-block"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
-<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+<div class="code"><pre class="code literal-block"><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Send ip to remote tencent cloud server</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
+<span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span><span class="w"></span>
 
-<span class="k">[Service]</span>
-<span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">User</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/</span><span class="w"></span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/upload-ip</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span><span class="w"></span>
 
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre>
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
+</pre></div>
+
 <h2 id="_2">启动服务</h2>
-<pre class="code literal-block">sudo systemctl deamon-reload
+<div class="code"><pre class="code literal-block">sudo systemctl deamon-reload
 sudo systemctl start upload-ip.service
 sudo systemctl <span class="nb">enable</span> upload-ip.service
 sudo systemctl start autologin.service
 sudo systemctl <span class="nb">enable</span> autologin.service
-</pre>
+</pre></div>
+
 <h2 id="systemctl-cheatsheet">附送systemctl cheatsheet</h2>
-<pre class="code literal-block"><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="c1"># Reload the service files to include the new service</span>
-<span class="n">systemctl</span> <span class="n">start</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># Start your service</span>
-<span class="n">systemctl</span> <span class="n">status</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To check the status of your service</span>
-<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To enable your service on every reboot</span>
-<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span> <span class="c1"># To disable your service on every reboot</span>
-</pre>
-</div>
+<div class="code"><pre class="code literal-block"><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span><span class="w"> </span><span class="c1"># Reload the service files to include the new service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># Start your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To check the status of your service</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To enable your service on every reboot</span><span class="w"></span>
+<span class="n">systemctl</span><span class="w"> </span><span class="n">disable</span><span class="w"> </span><span class="n">your</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">service</span><span class="w"> </span><span class="c1"># To disable your service on every reboot</span><span class="w"></span>
+</pre></div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/e-yi-dai-ma-fen-xi-ji-chu-di-yi-tian/" class="u-url">恶意代码分析基础-第一天</a></h1>
                 <div class="metadata">
@@ -223,8 +228,7 @@ sudo systemctl <span class="nb">enable</span> autologin.service
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="-">恶意代码分析基础-第一天</h2>
+                    <h2 id="-">恶意代码分析基础-第一天</h2>
 <p>PE分析工具：PEID, ExecInfo</p>
 <p><a href="https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/">PE结构详解 | Thunder_J (thunderjie.github.io)</a> </p>
 <p><a href="https://www.cnblogs.com/night-ride-depart/p/5776107.html">PE结构分析 | 输入表结构和输入地址表(IAT)</a></p>
@@ -242,7 +246,6 @@ sudo systemctl <span class="nb">enable</span> autologin.service
 为了让dump出的程序正常运行, 我们需要将IAT进行修复
 从INT重建IAT不靠谱是因为在脱壳过程中, 完全可以毁掉INT, 而原始加壳文件payload被加密, 无法确定INT的位址和内容</p>
 </blockquote>
-</div>
                 </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/" class="u-url">论文阅读-类别增量学习-Class-incremental learning: survey and performance evaluation on image classification</a></h1>
                 <div class="metadata">
@@ -255,8 +258,7 @@ sudo systemctl <span class="nb">enable</span> autologin.service
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<div class="toc">
+                    <div class="toc">
 <ul>
 <li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_1">前言</a></li>
 <li><a href="posts/lun-wen-yue-du-lei-bie-zeng-liang-xue-xi-class-incremental-learning-survey-and-performance-evaluation-on-image-classification/#_2">简介</a></li>
@@ -331,7 +333,6 @@ After each training session, the learner should be capable of performing all per
 </li>
 </ol>
 </div>
-                </div>
             </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/goxue-xi-di-yi-tian-gotooling/" class="u-url">Go学习第一天 - GoTooling</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
@@ -343,8 +344,7 @@ After each training session, the learner should be capable of performing all per
             </p>
                 </div>
             </header><div class="e-content entry-content">
-                    <div>
-<h2 id="go-gogotooling">Go学习第一天, 从GO安装到GoTooling使用</h2>
+                    <h2 id="go-gogotooling">Go学习第一天, 从GO安装到GoTooling使用</h2>
 <h3 id="gopath-vs-goroot">GOPATH vs GOROOT</h3>
 <blockquote>
 <p>The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
@@ -358,87 +358,102 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 <li>下载安装包</li>
 <li>如下</li>
 </ol>
-<pre class="code literal-block">rm -rf /usr/local/go <span class="o">&amp;&amp;</span> tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+<div class="code"><pre class="code literal-block">rm -rf /usr/local/go <span class="o">&amp;&amp;</span> tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
 <span class="nb">echo</span> <span class="s2">"export PATH=</span><span class="nv">$PATH</span><span class="s2">:/usr/local/go/bin"</span> &gt;&gt; ~/.bashrc 
 go version <span class="c1"># check if installed </span>
-</pre>
+</pre></div>
+
 <h3 id="_1">配置代理</h3>
-<pre class="code literal-block">go env -w <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
-</pre>
+<div class="code"><pre class="code literal-block">go env -w <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+</pre></div>
+
 <h3 id="go">创建第一个GO可执行程序</h3>
 <p>在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:</p>
-<pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
-</pre>
+<div class="code"><pre class="code literal-block">mkdir -p <span class="nv">$GOPATH</span>/src/github.com/foo
+</pre></div>
+
 <p>在编译go项目后, 可以通过go install进行安装, 会将项目安装在"$GOPATH/bin/"下:</p>
-<pre class="code literal-block"><span class="k">go</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">binary</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">go</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">binary</span><span class="w"></span>
 <span class="err">$</span><span class="n">GOPATH</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">hello</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">it</span><span class="w"></span>
-</pre>
+</pre></div>
+
 <p>如果将GOPATH加入到了PATH中, 可以直接运行</p>
-<pre class="code literal-block">hello
-</pre>
+<div class="code"><pre class="code literal-block">hello
+</pre></div>
+
 <h3 id="go-module">创建第一个GO module</h3>
 <p>大致流程和创建GO程序差不多, 但和GO程序的区别在于GO包编译并不会生成可执行文件, 因此我们并不需要使用"go install"命令进行安装, 
 在完成后, 使用"go build"测试一下包能够通过编译即可</p>
-<pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
+<div class="code"><pre class="code literal-block">mkdir <span class="nv">$GOPATH</span>/src/github.com/foo/stringutil
 go build github.com/goo/stringutil
-</pre>
+</pre></div>
+
 <h3 id="go-module_1">更好的go module创建方式</h3>
 <p>在go1.2后, 通过go.mod, 我们不再需要在$GOPATH/src/下进行项目开发了, 相应的, 我们可以通过定义go.mod来创建module</p>
 <p>首先执行go init生成用于管理的go.mod和go.sum文件</p>
-<pre class="code literal-block">go mod init github.com/foo 
-</pre>
+<div class="code"><pre class="code literal-block">go mod init github.com/foo 
+</pre></div>
+
 <p>一个典型的go.mod如下, </p>
-<pre class="code literal-block"><span class="k">module</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">dagrons</span><span class="o">/</span><span class="n">godw</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">module</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">dagrons</span><span class="o">/</span><span class="n">godw</span><span class="w"></span>
 
 <span class="k">go</span><span class="w"> </span><span class="mf">1.16</span><span class="w"></span>
 
 <span class="n">require</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gin</span><span class="o">-</span><span class="n">gonic</span><span class="o">/</span><span class="n">gin</span><span class="w"> </span><span class="n">v1</span><span class="mf">.7.2</span><span class="w"></span>
 <span class="n">require</span><span class="w"> </span><span class="ss">"mypackage"</span><span class="w"> </span><span class="n">v0</span><span class="mf">.0.0</span><span class="w"></span>
 <span class="nf">replace</span><span class="w"> </span><span class="ss">"mypackage"</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">"../mypackage"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">指定本地依赖路径</span><span class="w"> </span>
-</pre>
+</pre></div>
+
 <p>指定了module名, go SDK版本, 以及依赖的第三方库及版本, </p>
 <p>这种项目依赖管理方式和package.json和Gemfile类似, 更加好用</p>
 <p>在go.mod编写完成后, 需要通过"go tidy mod"进行依赖解析, 会下载并解析好所有的依赖关系</p>
-<pre class="code literal-block">go mod tidy
-</pre>
+<div class="code"><pre class="code literal-block">go mod tidy
+</pre></div>
+
 <h3 id="go-tooling">其他常见的GO Tooling命令</h3>
 <p>GO环境变量</p>
-<pre class="code literal-block">go env <span class="c1"># list all go envs</span>
+<div class="code"><pre class="code literal-block">go env <span class="c1"># list all go envs</span>
 <span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>&lt;XXXX&gt; <span class="c1"># go env 会读取环境变量, 因此我们在环境变量中设置相应的变量即可, 上一种方法可能会失效</span>
 <span class="nb">export</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
-</pre>
+</pre></div>
+
 <p>执行GO程序</p>
-<pre class="code literal-block">go run ./acwing/qsort 
+<div class="code"><pre class="code literal-block">go run ./acwing/qsort 
 go run github.com/dagrons/god/acwing/qsort <span class="c1"># the two are equivalent</span>
-</pre>
+</pre></div>
+
 <p>依赖解析</p>
-<pre class="code literal-block">go get -u golang.org/x/tools/... <span class="c1"># 获取某个依赖</span>
+<div class="code"><pre class="code literal-block">go get -u golang.org/x/tools/... <span class="c1"># 获取某个依赖</span>
 go mod tidy <span class="c1"># 项目整体依赖解析</span>
 go mod edit -replace<span class="o">=</span>github.com/axe/argonid<span class="o">=</span>/home/axe/argonid <span class="c1"># create the replace rule # 会将远程依赖代理到本地依赖</span>
 go mod edit -dropreplace<span class="o">=</span>github.com/axe/argonid <span class="c1"># 取消代理规则</span>
 go list -m all <span class="c1"># list all dependencies</span>
 go clean -modcache <span class="c1"># clean module cache</span>
-</pre>
+</pre></div>
+
 <p>测试</p>
-<pre class="code literal-block">go <span class="nb">test</span> all <span class="c1"># test all dependencies including SDK libraries</span>
+<div class="code"><pre class="code literal-block">go <span class="nb">test</span> all <span class="c1"># test all dependencies including SDK libraries</span>
 go <span class="nb">test</span> ./acwing/qsort <span class="c1"># test a single file</span>
 go <span class="nb">test</span> ./... <span class="c1"># test all # ./...表示所有文件</span>
 go <span class="nb">test</span> -cover ./... <span class="c1"># cover展示测试覆盖情况, 因为有的函数不一定有测试</span>
-</pre>
+</pre></div>
+
 <p>文档</p>
-<pre class="code literal-block">go doc leetcode/l51 <span class="c1"># 展示文档部分</span>
+<div class="code"><pre class="code literal-block">go doc leetcode/l51 <span class="c1"># 展示文档部分</span>
 go doc -all leetcode/l52 <span class="c1"># 优化显示</span>
 go doc -all leetcode/l52.SolveNQueens <span class="c1"># 函数文档</span>
 go doc -src leetcode/l52.SolveNQueens <span class="c1"># 显示源码</span>
-</pre>
+</pre></div>
+
 <p>构建与部署</p>
-<pre class="code literal-block">go build -o<span class="o">=</span>/tmp/foo <span class="c1"># compile current package into /tmp/foo</span>
+<div class="code"><pre class="code literal-block">go build -o<span class="o">=</span>/tmp/foo <span class="c1"># compile current package into /tmp/foo</span>
 go build -o<span class="o">=</span>/tmp/foo ./cmd/foo <span class="c1"># compile ./cmd/foo into /tmp/foo</span>
 go build -a -o<span class="o">=</span>/tmp/foo . <span class="c1"># force all packages to be rebuilt</span>
 go clean -cache <span class="c1"># clear build cache </span>
 <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/linux_amd64/foo . <span class="c1"># cross-platform compilation specified with GOOS and GOARCH</span>
 <span class="nv">GOOS</span><span class="o">=</span>windows <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o<span class="o">=</span>/tmp/windows_amd64/foo.exe 
-</pre>
+</pre></div>
+
 <h3 id="vscode">必备VSCode插件</h3>
 <ol>
 <li>Go # All in One</li>
@@ -446,7 +461,6 @@ go clean -cache <span class="c1"># clear build cache </span>
 <li>git &amp;&amp; git history</li>
 </ol>
 </div>
-                </div>
             </article>
 </div>
     
@@ -455,7 +469,7 @@ go clean -cache <span class="c1"># clear build cache </span>
             <li class="next"><a href="index-1.html" rel="next">以前的文章</a></li>
         </ul>
 <!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>

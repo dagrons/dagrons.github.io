@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于文章 go)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/go.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Fri, 10 Sep 2021 08:38:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Go学习第一天 - GoTooling</title><link>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</link><dc:creator>dagrons</dc:creator><description>&lt;div&gt;&lt;h2 id="go-gogotooling"&gt;Go学习第一天, 从GO安装到GoTooling使用&lt;/h2&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NuLL (关于 go 的文章)</title><link>https://dagrons.github.io/</link><description></description><atom:link href="https://dagrons.github.io/categories/go.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2023 &lt;a href="mailto:heyuehuii@126.com"&gt;dagrons&lt;/a&gt; </copyright><lastBuildDate>Sun, 13 Aug 2023 11:08:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Go学习第一天 - GoTooling</title><link>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</link><dc:creator>dagrons</dc:creator><description>&lt;h2 id="go-gogotooling"&gt;Go学习第一天, 从GO安装到GoTooling使用&lt;/h2&gt;
 &lt;h3 id="gopath-vs-goroot"&gt;GOPATH vs GOROOT&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The GOPATH environment variable lists places to look for Go code. On Unix, the value is a colon-separated string, On Windows, the value is a semicolon-separated string, On Plan9, the value is a list
@@ -13,90 +13,105 @@ GOPATH must be set to get, build and install packages outside the standard Go Tr
 &lt;li&gt;下载安装包&lt;/li&gt;
 &lt;li&gt;如下&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre class="code literal-block"&gt;rm -rf /usr/local/go &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;rm -rf /usr/local/go &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;:/usr/local/go/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc 
 go version &lt;span class="c1"&gt;# check if installed &lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="_1"&gt;配置代理&lt;/h3&gt;
-&lt;pre class="code literal-block"&gt;go env -w &lt;span class="nv"&gt;GOPROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://goproxy.cn,direct
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go env -w &lt;span class="nv"&gt;GOPROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://goproxy.cn,direct
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="go"&gt;创建第一个GO可执行程序&lt;/h3&gt;
 &lt;p&gt;在go1.2以前, 如果要创建一个命名类似于"github.com/foo"的包的话, 需要在"$GOPATH/src/github.com"下创建, 流程如下:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;mkdir -p &lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/src/github.com/foo
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;mkdir -p &lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/src/github.com/foo
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;在编译go项目后, 可以通过go install进行安装, 会将项目安装在"$GOPATH/bin/"下:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;binary&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;binary&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;GOPATH&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;如果将GOPATH加入到了PATH中, 可以直接运行&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;hello
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;hello
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="go-module"&gt;创建第一个GO module&lt;/h3&gt;
 &lt;p&gt;大致流程和创建GO程序差不多, 但和GO程序的区别在于GO包编译并不会生成可执行文件, 因此我们并不需要使用"go install"命令进行安装, 
 在完成后, 使用"go build"测试一下包能够通过编译即可&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;mkdir &lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/src/github.com/foo/stringutil
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;mkdir &lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/src/github.com/foo/stringutil
 go build github.com/goo/stringutil
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="go-module_1"&gt;更好的go module创建方式&lt;/h3&gt;
 &lt;p&gt;在go1.2后, 通过go.mod, 我们不再需要在$GOPATH/src/下进行项目开发了, 相应的, 我们可以通过定义go.mod来创建module&lt;/p&gt;
 &lt;p&gt;首先执行go init生成用于管理的go.mod和go.sum文件&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go mod init github.com/foo 
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go mod init github.com/foo 
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;一个典型的go.mod如下, &lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagrons&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;godw&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dagrons&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;godw&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.16&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gonic&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="mf"&gt;.7.2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="n"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"mypackage"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.0.0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="nf"&gt;replace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"mypackage"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"../mypackage"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;指定本地依赖路径&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;指定了module名, go SDK版本, 以及依赖的第三方库及版本, &lt;/p&gt;
 &lt;p&gt;这种项目依赖管理方式和package.json和Gemfile类似, 更加好用&lt;/p&gt;
 &lt;p&gt;在go.mod编写完成后, 需要通过"go tidy mod"进行依赖解析, 会下载并解析好所有的依赖关系&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go mod tidy
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go mod tidy
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="go-tooling"&gt;其他常见的GO Tooling命令&lt;/h3&gt;
 &lt;p&gt;GO环境变量&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go env &lt;span class="c1"&gt;# list all go envs&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go env &lt;span class="c1"&gt;# list all go envs&lt;/span&gt;
 &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;XXXX&amp;gt; &lt;span class="c1"&gt;# go env 会读取环境变量, 因此我们在环境变量中设置相应的变量即可, 上一种方法可能会失效&lt;/span&gt;
 &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOPROXY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://goproxy.cn,direct
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;执行GO程序&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go run ./acwing/qsort 
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go run ./acwing/qsort 
 go run github.com/dagrons/god/acwing/qsort &lt;span class="c1"&gt;# the two are equivalent&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;依赖解析&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go get -u golang.org/x/tools/... &lt;span class="c1"&gt;# 获取某个依赖&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go get -u golang.org/x/tools/... &lt;span class="c1"&gt;# 获取某个依赖&lt;/span&gt;
 go mod tidy &lt;span class="c1"&gt;# 项目整体依赖解析&lt;/span&gt;
 go mod edit -replace&lt;span class="o"&gt;=&lt;/span&gt;github.com/axe/argonid&lt;span class="o"&gt;=&lt;/span&gt;/home/axe/argonid &lt;span class="c1"&gt;# create the replace rule # 会将远程依赖代理到本地依赖&lt;/span&gt;
 go mod edit -dropreplace&lt;span class="o"&gt;=&lt;/span&gt;github.com/axe/argonid &lt;span class="c1"&gt;# 取消代理规则&lt;/span&gt;
 go list -m all &lt;span class="c1"&gt;# list all dependencies&lt;/span&gt;
 go clean -modcache &lt;span class="c1"&gt;# clean module cache&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;测试&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go &lt;span class="nb"&gt;test&lt;/span&gt; all &lt;span class="c1"&gt;# test all dependencies including SDK libraries&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go &lt;span class="nb"&gt;test&lt;/span&gt; all &lt;span class="c1"&gt;# test all dependencies including SDK libraries&lt;/span&gt;
 go &lt;span class="nb"&gt;test&lt;/span&gt; ./acwing/qsort &lt;span class="c1"&gt;# test a single file&lt;/span&gt;
 go &lt;span class="nb"&gt;test&lt;/span&gt; ./... &lt;span class="c1"&gt;# test all # ./...表示所有文件&lt;/span&gt;
 go &lt;span class="nb"&gt;test&lt;/span&gt; -cover ./... &lt;span class="c1"&gt;# cover展示测试覆盖情况, 因为有的函数不一定有测试&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;文档&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go doc leetcode/l51 &lt;span class="c1"&gt;# 展示文档部分&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go doc leetcode/l51 &lt;span class="c1"&gt;# 展示文档部分&lt;/span&gt;
 go doc -all leetcode/l52 &lt;span class="c1"&gt;# 优化显示&lt;/span&gt;
 go doc -all leetcode/l52.SolveNQueens &lt;span class="c1"&gt;# 函数文档&lt;/span&gt;
 go doc -src leetcode/l52.SolveNQueens &lt;span class="c1"&gt;# 显示源码&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;构建与部署&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;go build -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/foo &lt;span class="c1"&gt;# compile current package into /tmp/foo&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;go build -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/foo &lt;span class="c1"&gt;# compile current package into /tmp/foo&lt;/span&gt;
 go build -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/foo ./cmd/foo &lt;span class="c1"&gt;# compile ./cmd/foo into /tmp/foo&lt;/span&gt;
 go build -a -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/foo . &lt;span class="c1"&gt;# force all packages to be rebuilt&lt;/span&gt;
 go clean -cache &lt;span class="c1"&gt;# clear build cache &lt;/span&gt;
 &lt;span class="nv"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;linux &lt;span class="nv"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;amd64 go build -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/linux_amd64/foo . &lt;span class="c1"&gt;# cross-platform compilation specified with GOOS and GOARCH&lt;/span&gt;
 &lt;span class="nv"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;windows &lt;span class="nv"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;amd64 go build -o&lt;span class="o"&gt;=&lt;/span&gt;/tmp/windows_amd64/foo.exe 
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id="vscode"&gt;必备VSCode插件&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Go # All in One&lt;/li&gt;
 &lt;li&gt;code runner # single file execution&lt;/li&gt;
 &lt;li&gt;git &amp;amp;&amp;amp; git history&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><category>go</category><guid>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</guid><pubDate>Fri, 20 Aug 2021 14:38:06 GMT</pubDate></item></channel></rss>
+&lt;/ol&gt;</description><category>go</category><guid>https://dagrons.github.io/posts/goxue-xi-di-yi-tian-gotooling/</guid><pubDate>Fri, 20 Aug 2021 14:38:06 GMT</pubDate></item></channel></rss>

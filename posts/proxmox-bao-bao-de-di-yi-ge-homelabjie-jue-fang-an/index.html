@@ -107,8 +107,7 @@ n'>
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<h3 id="_1">前言</h3>
+    <h3 id="_1">前言</h3>
 <ul>
 <li>
 <p>由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案</p>
@@ -130,13 +129,14 @@ n'>
 </ul>
 <h3 id="_4">添加非订阅源</h3>
 <p>由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源</p>
-<pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
+<div class="code"><pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
 <span class="nb">echo</span> <span class="s1">'deb http://download.proxmox.com/debian/pve buster pve-no-subscription'</span> &gt;&gt; /etc/apt/sources.list.d/pve-no-subscription.list
 apt update
-</pre>
+</pre></div>
+
 <h3 id="_5">网络设置</h3>
 <p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
-<pre class="code literal-block"># /etc/network/interfaces
+<div class="code"><pre class="code literal-block"># /etc/network/interfaces
 
 auto lo
 iface lo inet loopback
@@ -148,19 +148,23 @@ iface vmbr0 inet dhcp
         bridge-ports enp2s0
         bridge-stp off
         bridge-fd 0
-</pre>
+</pre></div>
+
 <p>然后</p>
-<pre class="code literal-block">systemctl restart networking
-</pre>
+<div class="code"><pre class="code literal-block">systemctl restart networking
+</pre></div>
+
 <h3 id="_6">添加图形化界面</h3>
 <p>pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE</p>
-<pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
-</pre>
+<div class="code"><pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
+</pre></div>
+
 <p>由于debian默认不给root图形化登录, 所以我们创建一个非root用户</p>
-<pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
+<div class="code"><pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
 passwd dell
 reboot # 完成后重启
-</pre>
+</pre></div>
+
 <p>最后需要设置Power选项,</p>
 <ul>
 <li>
@@ -195,7 +199,6 @@ reboot # 完成后重启
 <li>What is the exact difference between pct and lxc-xxx?</li>
 </ul>
 <p><em>pct uses the proxmox libraries and config(storage, network, cluster, firewall) and assembles an lxc command from that</em></p>
-</div>
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
@@ -205,7 +208,7 @@ reboot # 完成后重启
                 <a href="../kdezhuo-mian-huan-jing-xia-de-fcitxjie-jue-fang-an/" rel="next" title="kde桌面环境下的fcitx解决方案">下一篇文章</a>
             </li>
         </ul></nav></aside></article><!--End of body content--><footer id="footer">
-            Contents © 2021         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2023         <a href="mailto:heyuehuii@126.com">dagrons</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
             
         </footer>
