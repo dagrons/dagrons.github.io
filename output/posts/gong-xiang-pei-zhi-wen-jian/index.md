@@ -9,7 +9,7 @@
 .. type: text
 -->
 
-Intellij/keymaps 
+JetBrains/IntelliJIdea2022.1/keymaps
 ```xml
 <keymap version="1" name="Emacs copy" parent="Emacs">
   <action id="AceAction">
