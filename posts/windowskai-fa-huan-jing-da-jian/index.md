@@ -40,8 +40,28 @@ pacman -S jdk-openjdk8
   - Debugger for Firefox
   - Microsoft Edge Tools for VS Code 
 
+快捷键
+
+| Action                  | ShortCut      |
+| ----------------------- | ------------- |
+| Organize Imports        | Ctrl,Shift,O  |
+| Goto Symbol In Editor   | Shift,Alt,O   |
+| Go Forward              | Ctrl, =       |
+| Go Back                 | Ctrl, -       |
+| Find Jump               | Alt, Enter    |
+| Quick Fix               | Ctrl, Enter   |
+| Toggle Panel Visibility | Alt, j        |
+| Find in Files           | Shift, Alt, F |
+| Goto Definition         | Alt, =        |
+| Goto Reference          | Alt, -        |
+| Remove Find in Files    | Ctrl, P       |
+| Remove New File         | Ctrl, N       |
+
 ## offline docs 
 
 devdocs支持offline data，神器啊
+
+然后再配上一个devhints.io就完美了
+
 
 
