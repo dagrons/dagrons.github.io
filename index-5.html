@@ -72,7 +72,111 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/" class="u-url">linux网络配置-我想一次讲清楚</a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" class="u-url">proxmox-宝宝的第一个homelab解决方案</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        dagrons
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/proxmox-bao-bao-de-di-yi-ge-homelabjie-jue-fang-an/" rel="bookmark">
+            <time class="published dt-published" datetime="2021-09-30T17:11:58+08:00" itemprop="datePublished" title="2021-09-30 17:11">2021-09-30 17:11</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <h3 id="_1">前言</h3>
+<ul>
+<li>
+<p>由于之前接触linux比较多, 然后又听yxc大佬说云计算是趋势, 然后机缘巧合接触了lxc这种, 在所有东西水到渠成之后, 好像发现自己已经走向了homelab玩家的道路, 索性就上promox(pve), 一个完备的homelab解决方案</p>
+</li>
+<li>
+<p>所以习惯性的算homelab入门吧, "hello, world!"</p>
+</li>
+</ul>
+<h3 id="_2">基础概念扫盲</h3>
+<ul>
+<li>datacenter: 顶级概念, 其实没啥意义</li>
+<li>node: 在pve中指的是一个物理机</li>
+<li>cluster: 在pve中指的是物理机的集合, 和k3s不同, 这里的cluster主要是为了实现多个物理机的vms和cts的pve共同管理和共享资源提出的概念</li>
+<li>pod: 在k8s中指的是一个基础服务单元</li>
+</ul>
+<h3 id="_3">安装</h3>
+<ul>
+<li>不对安装过程做介绍了, 太小白了, proxmox iso + balenaEtcher搞定</li>
+</ul>
+<h3 id="_4">添加非订阅源</h3>
+<p>由于没有订阅, 所以无法使用官方的订阅源, 所以我们需要删除原来的订阅源, 添加免费源</p>
+<div class="code"><pre class="code literal-block">rm /etc/apt/sources.list.d/pve-enterprise.list
+<span class="nb">echo</span> <span class="s1">'deb http://download.proxmox.com/debian/pve buster pve-no-subscription'</span> &gt;&gt; /etc/apt/sources.list.d/pve-no-subscription.list
+apt update
+</pre></div>
+
+<h3 id="_5">网络设置</h3>
+<p>由于初始填写的ip是非法的, 然后又不能选dhcp, 所以需要先对网络进行一定设置, 选择dhcp</p>
+<div class="code"><pre class="code literal-block"># /etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+iface enp2s0 inet manual
+
+auto vmbr0
+iface vmbr0 inet dhcp
+        bridge-ports enp2s0
+        bridge-stp off
+        bridge-fd 0
+</pre></div>
+
+<p>然后</p>
+<div class="code"><pre class="code literal-block">systemctl restart networking
+</pre></div>
+
+<h3 id="_6">添加图形化界面</h3>
+<p>pve默认没有图形化界面, 我们需要通过tasksel选择安装图形化界面, 这里选择了KDE</p>
+<div class="code"><pre class="code literal-block">tasksel # 然后空格选择kde, tab选择OK
+</pre></div>
+
+<p>由于debian默认不给root图形化登录, 所以我们创建一个非root用户</p>
+<div class="code"><pre class="code literal-block">useradd -m dell -g root -s /bin/bash -d /home/dell
+passwd dell
+reboot # 完成后重启
+</pre></div>
+
+<p>最后需要设置Power选项,</p>
+<ul>
+<li>
+<p>把"Blank screen"和"Automatic suspend"改成"Never"</p>
+</li>
+<li>
+<p>把"When then Powert Button is pressed"成"Nothing"</p>
+</li>
+<li>
+<p>Details &gt; Users 设置免密自动登录</p>
+</li>
+</ul>
+<p><strong>值得注意</strong>, 2k的KDE视频输出显示器需要插显卡的hdmi口, 否则无法正常显示</p>
+<h3 id="_7">概览</h3>
+<p>好多东西可能需要以后慢慢填, 所以在这里介绍一下proxmox到底是个什么吧</p>
+<p>不多说, 先上灵魂画图</p>
+<p><img src="images/cloud-computing.png" style="text-align: center"></p>
+<p>总的来说, 这个东西其实提供了一个搭建集群的框架</p>
+<p>几个重要的点:</p>
+<ul>
+<li>Cluster: 这里用来管理集群</li>
+<li>Ceph: 分布式的文件系统</li>
+<li>Storage: 管理所有的文件系统, 包括非分布式文件系统</li>
+</ul>
+<h3 id="_8">体验</h3>
+<p>pve给我感觉最强大的地方就是它的wiki非常全, 在google中搜索pve pci passthrough, 第一条就是pve wiki的<a href="https://pve.proxmox.com/wiki/Pci_passthrough">page</a></p>
+<p>其次, pve对kvm + qemu和lxc进行了抽象, 基于它们而高于它们, 封装好的pve系列工具相比之下更加好用</p>
+<p>pve的开源性, 社区活跃性都很好</p>
+<p>有什么不知道的, 在wiki中基本都能得到答案</p>
+<h3 id="_9">其他</h3>
+<ul>
+<li>What is the exact difference between pct and lxc-xxx?</li>
+</ul>
+<p><em>pct uses the proxmox libraries and config(storage, network, cluster, firewall) and assembles an lxc command from that</em></p>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/linuxwang-luo-pei-zhi-wo-xiang-yi-ci-jiang-qing-chu/" class="u-url">linux网络配置-我想一次讲清楚</a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         dagrons
