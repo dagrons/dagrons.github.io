@@ -1,5 +1,5 @@
 <!--
-.. title: 共享配置文件
+.. title: windows-intellij-keymap
 .. slug: gong-xiang-pei-zhi-wen-jian
 .. date: 2023-08-13 19:10:56 UTC+08:00
 .. tags: 
@@ -10,16 +10,15 @@
 -->
 
 JetBrains/IntelliJIdea2022.1/keymaps
-需要将meta替换成alt 
-```xml
+
+```
 <keymap version="1" name="Emacs copy" parent="Emacs">
   <action id="AceAction">
-    <keyboard-shortcut first-keystroke="ctrl semicolon" />
-    <keyboard-shortcut first-keystroke="meta enter" />
+    <keyboard-shortcut first-keystroke="alt enter" />
   </action>
   <action id="ActivateTerminalToolWindow">
     <keyboard-shortcut first-keystroke="alt f12" />
-    <keyboard-shortcut first-keystroke="meta j" />
+    <keyboard-shortcut first-keystroke="alt j" />
   </action>
   <action id="Adtui.ZoomInAction">
     <keyboard-shortcut first-keystroke="ctrl add" />
@@ -48,7 +47,7 @@ JetBrains/IntelliJIdea2022.1/keymaps
   </action>
   <action id="CollapseSelection">
     <keyboard-shortcut first-keystroke="ctrl period" />
-    <keyboard-shortcut first-keystroke="meta period" />
+    <keyboard-shortcut first-keystroke="alt period" />
   </action>
   <action id="Console.Execute.Multiline" />
   <action id="Console.TableResult.EditValue">
@@ -59,8 +58,8 @@ JetBrains/IntelliJIdea2022.1/keymaps
     <keyboard-shortcut first-keystroke="ctrl alt g" />
     <keyboard-shortcut first-keystroke="escape" second-keystroke="period" />
     <mouse-shortcut keystroke="control button1" />
-    <keyboard-shortcut first-keystroke="meta minus" />
-    <mouse-shortcut keystroke="meta button1" />
+    <keyboard-shortcut first-keystroke="alt minus" />
+    <mouse-shortcut keystroke="alt button1" />
   </action>
   <action id="DSM.ZoomIn">
     <keyboard-shortcut first-keystroke="ctrl add" />
@@ -69,6 +68,10 @@ JetBrains/IntelliJIdea2022.1/keymaps
   <action id="DirDiffMenu.SynchronizeDiff.All" />
   <action id="Docker.RemoteServers.StartComposeService" />
   <action id="Docker.RemoteServers.StartContainer" />
+  <action id="EditorCutLineBackward" />
+  <action id="EditorToggleStickySelection">
+    <keyboard-shortcut first-keystroke="ctrl semicolon" />
+  </action>
   <action id="ExpandAll">
     <keyboard-shortcut first-keystroke="ctrl add" />
   </action>
@@ -88,11 +91,11 @@ JetBrains/IntelliJIdea2022.1/keymaps
   <action id="ExternalSystem.ProjectRefreshAction" />
   <action id="FileStructurePopup">
     <keyboard-shortcut first-keystroke="ctrl f12" />
-    <keyboard-shortcut first-keystroke="shift meta o" />
+    <keyboard-shortcut first-keystroke="shift alt o" />
   </action>
   <action id="FindInPath">
     <keyboard-shortcut first-keystroke="shift ctrl f" />
-    <keyboard-shortcut first-keystroke="shift meta f" />
+    <keyboard-shortcut first-keystroke="shift alt f" />
   </action>
   <action id="FindNext">
     <keyboard-shortcut first-keystroke="f3" />
@@ -108,28 +111,34 @@ JetBrains/IntelliJIdea2022.1/keymaps
     <keyboard-shortcut first-keystroke="ctrl equals" />
   </action>
   <action id="Generate">
-    <keyboard-shortcut first-keystroke="meta g" />
+    <keyboard-shortcut first-keystroke="alt g" />
   </action>
   <action id="GotoAction">
     <keyboard-shortcut first-keystroke="escape" second-keystroke="x" />
     <keyboard-shortcut first-keystroke="alt x" />
-    <keyboard-shortcut first-keystroke="meta x" />
+    <keyboard-shortcut first-keystroke="alt x" />
   </action>
   <action id="GotoDeclaration">
     <keyboard-shortcut first-keystroke="ctrl alt g" />
     <keyboard-shortcut first-keystroke="escape" second-keystroke="period" />
     <mouse-shortcut keystroke="control button1" />
-    <keyboard-shortcut first-keystroke="meta minus" />
-    <mouse-shortcut keystroke="meta button1" />
+    <keyboard-shortcut first-keystroke="alt minus" />
+    <mouse-shortcut keystroke="alt button1" />
   </action>
   <action id="GotoImplementation">
-    <keyboard-shortcut first-keystroke="meta equals" />
-    <mouse-shortcut keystroke="meta button1" />
+    <keyboard-shortcut first-keystroke="alt equals" />
+    <mouse-shortcut keystroke="alt button1" />
   </action>
   <action id="GotoTypeDeclaration">
     <keyboard-shortcut first-keystroke="shift ctrl b" />
     <mouse-shortcut keystroke="shift control button1" />
-    <keyboard-shortcut first-keystroke="meta 0" />
+    <keyboard-shortcut first-keystroke="alt 0" />
+  </action>
+  <action id="Graph.ActualSize">
+    <keyboard-shortcut first-keystroke="ctrl divide" />
+  </action>
+  <action id="Images.Editor.ActualSize">
+    <keyboard-shortcut first-keystroke="ctrl divide" />
   </action>
   <action id="Images.Editor.ZoomIn">
     <keyboard-shortcut first-keystroke="ctrl add" />
@@ -150,16 +159,21 @@ JetBrains/IntelliJIdea2022.1/keymaps
   </action>
   <action id="Refactorings.QuickListPopupAction">
     <keyboard-shortcut first-keystroke="shift ctrl alt t" />
-    <keyboard-shortcut first-keystroke="meta s" />
+    <keyboard-shortcut first-keystroke="alt s" />
   </action>
   <action id="ReformatCode">
-    <keyboard-shortcut first-keystroke="shift meta period" />
+    <keyboard-shortcut first-keystroke="shift alt period" />
   </action>
+  <action id="SelectNextOccurrence" />
   <action id="SetShortcutAction" />
+  <action id="ShowIntentionActions">
+    <keyboard-shortcut first-keystroke="alt space" />
+    <keyboard-shortcut first-keystroke="ctrl enter" />
+  </action>
   <action id="SplitChooser.Duplicate" />
   <action id="StepOver">
     <keyboard-shortcut first-keystroke="f8" />
-    <keyboard-shortcut first-keystroke="meta n" />
+    <keyboard-shortcut first-keystroke="alt n" />
   </action>
   <action id="Terminal.SmartCommandExecution.Run" />
   <action id="Terminal.SwitchFocusToEditor">
@@ -168,12 +182,13 @@ JetBrains/IntelliJIdea2022.1/keymaps
   </action>
   <action id="ToggleBookmark">
     <keyboard-shortcut first-keystroke="f11" />
-    <keyboard-shortcut first-keystroke="meta b" />
+    <keyboard-shortcut first-keystroke="alt b" />
   </action>
   <action id="ToggleBookmarkWithMnemonic">
     <keyboard-shortcut first-keystroke="ctrl f11" />
-    <keyboard-shortcut first-keystroke="shift meta b" />
+    <keyboard-shortcut first-keystroke="shift alt b" />
   </action>
+  <action id="Uml.NodeIntentions" />
   <action id="ViewSource" />
 </keymap>
 ```
